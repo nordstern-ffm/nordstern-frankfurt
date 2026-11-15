@@ -18,3 +18,6 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 - **Bundle ohne HEAD** · `git clone` des Bundles meldete „remote HEAD refers to nonexistent ref“, Branch `master` leer · Bundle nur mit `main` erstellt, ohne `HEAD` · Workaround beim Nutzer: `git checkout main` · Lehre: Bundles immer mit `git bundle create X.bundle HEAD main` erzeugen und vorher `git clone X.bundle test` testen.
 - **Befehle beim Einfügen in Git Bash verstümmelt** · `~` und `@` gingen verloren (`~/Downloads` → `/Downloads` = `C:/Program Files/Git/Downloads`) · Anleitungen mit `"$HOME/..."` und `git config credential.username` statt `user@host` · Lehre: Für den Nutzer keine `~`/`@` in Kopier-Befehlen, jede Zeile einzeln.
 - **Neues GitHub-Konto (nordstern-ffm)** · Gefahr, dass Git die gespeicherte Anmeldung des alten Kontos nutzt · `git config credential.username nordstern-ffm` vor dem ersten Push · Push am 15.11.2026 erfolgreich.
+
+## 15.11.2026 – Phase 2, Aufgabe 1 (Bildrechte-Prüfung)
+- **test_check.py brach mit UnicodeDecodeError ab** · check.py als Unterprozess schreibt unter Windows in cp1252 („geprüft“ → Byte 0xFC), Test las UTF-8 · `PYTHONIOENCODING=utf-8` für den Unterprozess setzen · Lehre: Unterprozess-Ausgabe auf Windows immer mit fester Kodierung lesen.

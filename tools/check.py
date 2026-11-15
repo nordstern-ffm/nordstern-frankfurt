@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 fehler, warn = [], []
 site = json.load(open(os.path.join(ROOT, "data/site.json"), encoding="utf-8"))
 links = json.load(open(os.path.join(ROOT, "data/links.json"), encoding="utf-8"))["links"]
+bilder = json.load(open(os.path.join(ROOT, "data/bilder.json"), encoding="utf-8"))["bilder"]
 pages = sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
 
 for p in pages:
@@ -26,6 +27,7 @@ for p in pages:
             fehler.append(f"{p}: toter Link {m}")
     # 3. Externe Links nur, wenn in links.json bestätigt oder ausdrücklich erlaubt
     ok = {l["url"] for l in links.values() if l.get("bestaetigt")} | {site["verein"]["website"]}
+    ok |= {b[k] for b in bilder if b.get("geprueft") for k in ("quelle_url", "lizenz_url") if b.get(k)}
     for m in re.findall(r'href="(https?://[^"]+)"', t):
         zahlung = m.startswith("https://buy.stripe.com/") or re.match(r"https://[a-z0-9-]+\.gumroad\.com/", m)
         if m not in ok and "openpetition" not in m and not zahlung:
@@ -37,6 +39,43 @@ for p in pages:
         fehler.append(f"{p}: Platzhaltertext")
     if 'name="robots" content="noindex' not in t and not (site["launch"] and site["domain_bestaetigt"]):
         fehler.append(f"{p}: Vorschau ohne noindex")
+
+# 5. Bildrechte – Null-Fehler-Regel (docs/UX-KONZEPT.md Abschnitt 4)
+BILD_PFLICHT = ("datei", "titel", "autor", "quelle_url", "lizenz", "lizenz_url", "geaendert", "geprueft", "alt")
+BILD_ENDUNGEN = (".webp", ".avif", ".jpg", ".jpeg", ".png", ".gif", ".svg")
+komplett = set()
+for i, b in enumerate(bilder):
+    name = b.get("datei") or f"Eintrag {i + 1}"
+    fehlt = [k for k in BILD_PFLICHT if not str(b.get(k, "")).strip()]
+    if fehlt:
+        fehler.append(f"bilder.json: {name} – Pflichtfeld fehlt: {', '.join(fehlt)}")
+    if b.get("geprueft") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", b["geprueft"]):
+        fehler.append(f"bilder.json: {name} – geprueft muss JJJJ-MM-TT sein")
+    for k in ("quelle_url", "lizenz_url"):
+        if b.get(k) and not b[k].startswith("https://"):
+            fehler.append(f"bilder.json: {name} – {k} muss mit https:// beginnen")
+    if b.get("datei") and not os.path.isfile(os.path.join(ROOT, b["datei"])):
+        fehler.append(f"bilder.json: {name} – Datei existiert nicht")
+    if not fehlt:
+        komplett.add(b["datei"])
+img_dir = os.path.join(ROOT, "img")
+if os.path.isdir(img_dir):
+    for wurzel, _, dateien in os.walk(img_dir):
+        for d in dateien:
+            rel = os.path.relpath(os.path.join(wurzel, d), ROOT).replace(os.sep, "/")
+            if d.lower().endswith(BILD_ENDUNGEN) and rel not in komplett:
+                fehler.append(f"{rel}: Bilddatei ohne vollständigen Eintrag in data/bilder.json")
+for p in pages:
+    t = open(os.path.join(ROOT, p), encoding="utf-8").read()
+    for tag in re.findall(r"<img\b[^>]*>", t):
+        src = re.search(r'\bsrc="([^"]*)"', tag)
+        src = src.group(1) if src else ""
+        if src.startswith(("http://", "https://", "//")):
+            fehler.append(f"{p}: externes Bild {src} (Fremdabruf)")
+        elif src not in komplett:
+            fehler.append(f"{p}: <img src=\"{src}\"> ohne vollständigen Eintrag in data/bilder.json")
+        if not re.search(r'\balt="[^"]+"', tag):
+            fehler.append(f"{p}: <img src=\"{src}\"> ohne Alt-Text")
 
 if "--launch" in sys.argv:
     b = site["betreiber"]

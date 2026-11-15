@@ -23,6 +23,7 @@ PET = load("petitionen.json")
 STAND = load("standpunkte.json")
 LINKS = load("links.json")["links"]
 ZAHLUNG = load("zahlung.json")
+BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -47,6 +48,25 @@ def link(key):
     if l.get("bestaetigt"):
         return f'<a href="{E(l["url"])}" rel="noopener">{E(l["titel"])}</a>'
     return f'{E(l["titel"])} <span class="small">(Link wird nach Prüfung ergänzt)</span>'
+
+
+def nachweis(b):
+    """Bildnachweis nach TULLU: Titel, Urheber, Lizenz (Link), Quelle (Link), Änderungen."""
+    t = f'<a href="{E(b["quelle_url"])}" rel="noopener">{E(b["titel"])}</a> · {E(b["autor"])} · '
+    t += f'<a href="{E(b["lizenz_url"])}" rel="noopener license">{E(b["lizenz"])}</a>'
+    if b["geaendert"] != "nein":
+        t += f' · geändert: {E(b["geaendert"])}'
+    return t
+
+
+def bild(datei, cls=""):
+    """Bild nur mit Eintrag in data/bilder.json – fehlt er, bricht der Build ab."""
+    if datei not in BILDER:
+        raise SystemExit(f"FEHLER: {datei} fehlt in data/bilder.json – Bild nicht eingebunden.")
+    b = BILDER[datei]
+    c = f' class="{cls}"' if cls else ""
+    return (f'<figure{c}><img src="{E(datei)}" alt="{E(b["alt"])}" loading="lazy" decoding="async">'
+            f'<figcaption class="small">{nachweis(b)}</figcaption></figure>')
 
 
 def kontakt_zeile():
@@ -91,7 +111,7 @@ def page(path, title, desc, body):
 <div class="wrap">
 <p><strong>{E(SITE["marke"])}</strong> – {E(SITE["claim"])}</p>
 <p>Betrieben von {E(B["name"])} · {E(B["firma"])}. Der Verein „{E(SITE["verein"]["name"])}“ ist eigenständig und parteipolitisch neutral.</p>
-<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · Stand: {E(SITE["stand"])}</p>
+<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="bildnachweise.html">Bildnachweise</a> · Stand: {E(SITE["stand"])}</p>
 <p class="small">Ohne Tracker, ohne Cookies, ohne Fremd-Schriften. Keine Rechts- oder Steuerberatung.</p>
 </div>
 </footer>
@@ -273,6 +293,26 @@ page("datenschutz.html", "Datenschutz", "Datenschutzerklärung von Nordstern Fra
 <h2>Ihre Rechte</h2><p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit.</p>
 """)
 
+if BILDER:
+    zeilen = "".join(
+        f'<tr><td><a href="{E(d)}">{E(b["titel"])}</a></td><td>{E(b["autor"])}</td>'
+        f'<td><a href="{E(b["lizenz_url"])}" rel="noopener license">{E(b["lizenz"])}</a></td>'
+        f'<td><a href="{E(b["quelle_url"])}" rel="noopener">Original</a></td>'
+        f'<td>{E(b["geaendert"])}</td><td>{E(b["geprueft"])}</td></tr>'
+        for d, b in sorted(BILDER.items()))
+    bn = ('<div class="table-wrap"><table><caption class="small">Alle Bilder und Grafiken dieser Website</caption>'
+          '<thead><tr><th scope="col">Titel</th><th scope="col">Urheber</th><th scope="col">Lizenz</th>'
+          '<th scope="col">Quelle</th><th scope="col">Änderungen</th><th scope="col">Lizenz geprüft</th></tr></thead>'
+          f'<tbody>{zeilen}</tbody></table></div>')
+else:
+    bn = '<p class="notice">Derzeit verwendet diese Website keine Fotos oder fremden Grafiken. Stern-Symbol und Gestaltung sind eigene Arbeit.</p>'
+page("bildnachweise.html", "Bildnachweise", "Urheber, Lizenzen und Quellen aller Bilder auf Nordstern Frankfurt.", f"""
+<h1>Bildnachweise</h1>
+<p class="lead">Jedes Bild steht hier mit Urheber, Lizenz und Quelle. Die Lizenz wurde jeweils am Original geprüft.</p>
+{bn}
+<p class="small">Schriften: Fraunces und Atkinson Hyperlegible, lokal eingebunden unter der SIL Open Font License (Lizenztexte im Ordner <code>fonts/</code>).</p>
+""")
+
 page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist kein Stern.</h1><p><a class="btn btn-primary" href="index.html">Zur Startseite</a></p>')
 
 # -------------------------------------------------- Launch-Dateien
@@ -284,4 +324,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 3} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 4} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")

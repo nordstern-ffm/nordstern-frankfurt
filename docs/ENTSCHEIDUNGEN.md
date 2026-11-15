@@ -51,3 +51,12 @@ Wichtig: eigenes Stripe-Konto für die Agentur (nicht das von Gumroad verwaltete
 
 ## E9 · Verknüpfung mit BanglaHilfe und wege-nach-frankfurt
 **Gewählt:** Nordstern verlinkt beide auf Start („Nordstern-Familie“) und Frankfurt-Info; Links am 15.11.2026 erreichbar geprüft (HTTP 200). **Rückverlinkung** aus beiden Repos erst nach Domain-Start (sonst zeigen sie auf eine `noindex`-Vorschau). Repos bleiben eigenständig – kein Zusammenlegen, damit sie einzeln verkaufbar bleiben (Repo-Verkauf).
+
+## E10 · Bildrechte technisch erzwingen (Phase 2, Aufgabe 1)
+**Gewählt:** Doppelte Sperre. `build.py` bindet Bilder nur über `bild(datei)` ein und bricht ab, wenn `data/bilder.json` keinen Eintrag hat. `check.py` prüft zusätzlich jede Datei unter `img/` und jedes `<img src>` in allen HTML-Seiten auf einen vollständigen Eintrag (9 Pflichtfelder, Datum JJJJ-MM-TT, https-Links, Datei vorhanden, Alt-Text, kein externes Bild). Beleg: `tools/test_check.py` (8 Fälle).
+| Alternative | Nutzen | Sicherheit | Ergebnis |
+| --- | --- | --- | --- |
+| Nur Prüfung in check.py | einfacher | Bild fällt erst nach dem Build auf | ergänzt, nicht ersetzt |
+| Nur Bildnachweis-Seite, keine Unterschrift | ruhigere Optik | CC BY/BY-SA verlangt Nennung „in angemessener Weise“ – unter dem Bild ist der sichere Weg | verworfen |
+| Bild-Links in `data/links.json` doppeln | eine Link-Liste | doppelte Pflege, Fehlerquelle | verworfen: `quelle_url`/`lizenz_url` aus `bilder.json` gelten mit `geprueft`-Datum als bestätigt |
+Inline-SVGs (Stern, später Icons/Illustrationen) sind keine Dateien unter `img/`; ihre Herkunft wird in Aufgabe 2/7 über Lizenzdatei bzw. eigenen Eintrag nachgewiesen.
