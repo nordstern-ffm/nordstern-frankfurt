@@ -44,7 +44,7 @@ Gestrichelte Rahmen + Nummern = Zonen. Claude Code baut daraus wiederverwendbare
 Pro Niveau 10 Diktate als Lernweg (Zone A). Je Diktat: Szene + Kann-Satz (B), Audio + Transkript (C), Lückentext mit Selbstprüfung und Fehlererklärung + Link zur passenden Grammatik-Karte (D), Wortkarten mit Artikel-Farben **plus** Text (E), druckbare QR-Karte für den Kursraum, lokal erzeugt (F), Frankfurt-Moment (G), interne Links (H), Lehrkraft-Ecke mit Kursplan 10 Sitzungen + Einstiegs-/Abschlusstest (I).
 Material aus Sousse (Französisch) wird **nicht** übernommen – nur Ablauf und Didaktik.
 
-### Entscheidung E11 (vorgeschlagen, André bestätigt)
+### Entscheidung E12 (vorgeschlagen, André bestätigt) – siehe docs/ENTSCHEIDUNGEN.md
 Sofort-Prüfung im Lückentext braucht JavaScript. Vorschlag: **eine** kleine lokale Datei `assets/uebung.js` nur auf Sprachraum-Seiten, ohne Bibliotheken, ohne Datenspeicherung, Seite funktioniert vollständig ohne (Lösungen per `<details>`). Alternative „nur `<details>`“: sicherer, aber weniger motivierend. → in `docs/ENTSCHEIDUNGEN.md` mit Ergebnis eintragen.
 
 ## 6 · SEO + KI-Lesbarkeit (Ergänzung zu SEO-RICHTLINIE)
@@ -61,4 +61,4 @@ Sofort-Prüfung im Lückentext braucht JavaScript. Vorschlag: **eine** kleine lo
 | V2 | Verlinkungs-Prüfungen aus Abschnitt 2 in check.py + Tests | verwaiste Seite → Fehler (Testfall) |
 | V3 | `data/anzeigen.json` + Regeln Abschnitt 3 (Seiten-Ausschluss, Ablaufdatum, Kennzeichnung) | Anzeige auf Vereinsseite → check-Fehler (Testfall) |
 | V4 | `data/kultur.json` + Kultur-Moment je Woche (Build wählt nach Datum) | jeder Eintrag mit Quelle + Prüfdatum |
-| V5 | Sprachraum-Diktatweg nach `sprachraum-diktatweg.html`, E11 nach Andrés Entscheidung | 2 Beispiel-Diktate A1 vollständig, Lehrkraft prüft |
+| V5 | Sprachraum-Diktatweg nach `sprachraum-diktatweg.html`, E12 (von André freigegeben) | 2 Beispiel-Diktate A1 vollständig, Lehrkraft prüft |

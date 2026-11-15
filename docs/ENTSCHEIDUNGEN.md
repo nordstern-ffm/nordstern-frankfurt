@@ -71,7 +71,18 @@ Inline-SVGs (Stern, später Icons/Illustrationen) sind keine Dateien unter `img/
 | Emoji | null Aufwand | je Gerät anders, auf alten Android-Geräten teils Kästchen | verworfen |
 Barrierefreiheit: Icons neben Text sind Deko (`aria-hidden="true"`, `focusable="false"`); `icon(name, label)` setzt `role="img"` + `aria-label`, falls ein Icon einmal allein steht. `check.py` erzwingt das sowie Icon in jeder Karte und jedem Menüpunkt.
 
-## E12 · Kennzahlen (Phase 2, Aufgabe 3)
+## E12 · Lokale Skripte für Lern- und Spiel-Elemente (André, 15.11.2026: JA)
+**Ursprung (Nachtrag 15.11.2026):** Lückentext-Sofortprüfung im Sprachraum – eine kleine lokale Datei `assets/uebung.js`, nur auf Sprachraum-Seiten, ohne Bibliotheken, ohne Datenspeicherung; Seite funktioniert vollständig ohne Skript (Lösungen per `<details>`). Alternative „nur `<details>`“ verworfen: weniger motivierend. (In `PHASE3B-VISUELL-LINKS-ANZEIGEN.md` stand dafür zunächst „E11“ – korrigiert auf E12.)
+**Erweitert (André, 15.11.2026: JA):** Die lokale Skript-Regel gilt für alle Lern- und Spiel-Elemente: Lückentext-Sofortprüfung, Quiz („Wie gut kennst du Frankfurt?“, „Welche Sprache ist das?“), Wort-Memory und Zuordnen.
+**Bedingungen (unverändert):** lokale Dateien unter `assets/`, keine Bibliotheken, kein CDN, nichts wird gespeichert (kein `localStorage`, keine Cookies), jede Seite funktioniert vollständig ohne Skript (Lösungen per `<details>`).
+**Prüfung:** `check.py` prüft: Skripte nur aus `assets/`, nur auf Sprachraum- und Quiz-Seiten. Stand heute verbietet `check.py` noch jedes `<script src>` (strenger als E12). Die Freigabe samt Prüfung (Liste der erlaubten Seiten, Verbot von `localStorage`/`document.cookie`, Testfälle) wird mit der ersten Sprachraum- bzw. Quiz-Seite gebaut (P3/W4), weil die Seitennamen erst dann feststehen.
+| Alternative | Nutzen | Sicherheit | Ergebnis |
+| --- | --- | --- | --- |
+| Nur `<details>` ohne Skript | null Risiko | weniger motivierend, keine Sofortrückmeldung | verworfen (André) |
+| Lern-Bibliothek / Quiz-Dienst | schneller gebaut | Fremdabruf, Tracking-Risiko, gegen E4 | verworfen |
+| **Kleine lokale Skripte mit Fallback** | Sofortrückmeldung, kein Datenabfluss | Seite bleibt ohne Skript vollständig | **gewählt** |
+
+## E13 · Kennzahlen (Phase 2, Aufgabe 3)
 **Gewählt:** `data/zahlen.json` mit Wert, Text, Quelle, `link` (Schlüssel in `links.json`), wörtlicher Fundstelle, Stand und Prüfdatum. Kacheln über `kacheln([...])` in build.py; jede zeigt „Quelle · Stand“. Start: Einwohner Preungesheim, Einwohner Frankfurt, Entlastungsbetrag. Nachbarschaft: Preungesheim, Entlastungsbetrag.
 | Alternative | Nutzen | Sicherheit | Ergebnis |
 | --- | --- | --- | --- |

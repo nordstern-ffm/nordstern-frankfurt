@@ -3,13 +3,49 @@
 Wer: **A** = André · **CC** = Claude Code · **Chat** = Claude im Chat (Recherche, Texte, Prüfung).
 P0 = vor dem öffentlichen Start · P1 = vor dem ersten Geld · P2 = Ausbau · P3 = später.
 
+## Reihenfolge Claude Code (festgelegt von André, 15.11.2026)
+Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im jeweiligen Dokument.
+| # | Block | Aufgabe | Quelle | Status |
+| --- | --- | --- | --- | --- |
+| 1 | Phase 2 | Aufgaben 1–3: Bildrechte, Icons, Kennzahlen (+ Kontrast Hellmodus) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt (Branch ux-phase2) |
+| 2 | Phase 2 | **4** Ablauf-Diagramme + Zeitleiste (`steps()`/`timeline()`) | CLAUDE-CODE-AUFTRAG.md | ◐ in Arbeit |
+| 3 | Phase 2 | **5** Schaubild „Wer entscheidet in Frankfurt?“ (Inline-SVG + Text-Alternative, Quellen HGO/frankfurt.de) | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 4 | Phase 2 | **6** Schema-Karte Ortsbezirk 10 (eigenes SVG, ODbL-Hinweis) | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 5 | Phase 2 | **7** Hero-Illustrationen je Seite (eigene SVG) | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 6 | Phase 2 | **8** 3–6 Fotos Wikimedia Commons (WebP ≤ 150 KB, Lizenz am Original) | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 7 | Phase 2 | **9** Vermittlung: Filter-Chips ohne JS, Dienst-Karten mit Icon | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 8 | Phase 2 | **10** Abnahme: Screenshots 390/1280 hell/dunkel (Emulation, nicht `--window-size`), Kontrast, Lighthouse → `docs/ABNAHME-PHASE2.md` | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 9 | Ergänzung 1 | **S1** SEO-Prüfungen in check.py + Fehl-/Gut-Tests | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 10 | Ergänzung 1 | **S2** Meta/OG/JSON-LD je Seite, `sitemap.xml` nur bei Launch | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 11 | Ergänzung 1 | **R1** Beitragssystem `data/beitraege/*.md` → Rubrik-Seiten, `Article`-JSON-LD | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 12 | Ergänzung 1 | **R2** Rubriken-Startseiten, Leerzustand, max. 7 Hauptpunkte | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 13 | Ergänzung 1 | **R3** Baustein „Kurz durchatmen“ ohne JS | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 14 | Ergänzung 1 | **R4** Erste Ratgeber Stufe A neu schreiben, je Fakt Primärquelle; Freigabe durch André | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 15 | Phase 3 | **P1** Mehrsprachigkeit: `lang`, `hreflang`, Sprachumschalter, Noto-Schriften lokal | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 16 | Phase 3 | **P2** Lektions-System `data/lektionen/*.md`, 2 Beispiel-Lektionen | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 17 | Phase 3 | **P3** Sprachraum-Start + Niveau-Seiten A1/A2/B1 (hier: E12-Freigabe in check.py bauen) | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 18 | Phase 3 | **P4** Wissen-Hub `/ankommen/wissen/`, Freigabe durch André | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 19 | Phase 3 | **P5** Geschichten/Länder aus wege-nach-frankfurt, Einwilligung je Person | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 20 | Phase 3 | **P6** Weiterleitungsseiten alte URLs (aktiv erst nach Domain-Start) | PHASE3-ANKOMMEN-SPRACHRAUM.md | ☐ |
+| 21 | Phase 3b | **V1** Bausteine aus `seitenanatomie.html` als build.py-Funktionen | PHASE3B-VISUELL-LINKS-ANZEIGEN.md | ☐ |
+| 22 | Phase 3b | **V2** Verlinkungs-Prüfungen + Tests (verwaiste Seite → Fehler) | PHASE3B-VISUELL-LINKS-ANZEIGEN.md | ☐ |
+| 23 | Phase 3b | **V3** `data/anzeigen.json` + Regeln (Anzeige auf Vereinsseite → Fehler) | PHASE3B-VISUELL-LINKS-ANZEIGEN.md | ☐ |
+| 24 | Phase 3b | **V4** `data/kultur.json` + Kultur-Moment je Woche; Quellen-Links vorher in `links.json` bestätigen | PHASE3B-VISUELL-LINKS-ANZEIGEN.md | ☐ |
+| 25 | Phase 3b | **V5** Sprachraum-Diktatweg, E12 (freigegeben), 2 Beispiel-Diktate A1 | PHASE3B-VISUELL-LINKS-ANZEIGEN.md | ☐ |
+| 26 | Weltstadt | **W1** Lesbarkeitsprüfung in check.py + Tests | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 27 | Weltstadt | **W2** Kennzahl „179 Länder · 31,7 % (Ende 2023)“ – Zahlen vor Einbau an der Primärquelle prüfen (Stand Ende 2025 vorhanden?) | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 28 | Weltstadt | **W3** Rubrik „Frankfurt spricht“, Beispielbeitrag als Entwurf | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 29 | Weltstadt | **W4** Quiz-Baustein aus `quiz.json` – **jetzt freigegeben (E12 erweitert, André 15.11.2026)**; Quiz-Fragen vor Übernahme auf Quellen prüfen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 30 | Weltstadt | **W5** „Dein Wort für Frankfurt“ (mailto + Zustimmungstext), Datenschutzerklärung ergänzen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 31 | Weltstadt | **W6** Druck-Extras als eigene SVG, in `bilder.json` als „eigen“ | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+
 ## P0 – vor dem Start (Domain, noindex weg)
 | ✓ | Aufgabe | Wer |
 | --- | --- | --- |
 | ☐ | **Zwei-Faktor-Anmeldung** für GitHub-Konto nordstern-ffm aktivieren (neues Konto, Hauptschutz des Projekts) | A |
 | ☐ | Impressum-Daten: Anschrift, E-Mail, Telefon → `data/site.json` | A |
 | ☐ | Domain kaufen (nur Domain), DNS nach `docs/DOMAIN-SETUP.md`, Zwei-Faktor beim Registrar | A |
-| ☐ | Phase 2 (Aufgaben 1–10) abnehmen, PR `ux-phase2 → main` prüfen und mergen | A + CC |
+| ☐ | Phase 2 (Aufgaben 1–10) abnehmen, PR `ux-phase2 → main` prüfen und mergen (1–3 erledigt, siehe Reihenfolge oben) | A + CC |
 | ☐ | Datenschutzerklärung an alle neuen Funktionen anpassen (Audio, lokale Skripte E12, E-Mail-Einsendungen, Anzeigen/UTM, externe Links) | CC + Chat prüft |
 | ☐ | Erklärung zur Barrierefreiheit (Seite) + Prüfung, ob das Barrierefreiheitsstärkungsgesetz für die bezahlten Angebote gilt (Ausnahme für Kleinstunternehmen prüfen) | Chat recherchiert, CC baut |
 | ☐ | Link-Check aller externen Links im Browser, Ergebnis in `data/links.json` | A + CC |
@@ -36,7 +72,7 @@ P0 = vor dem öffentlichen Start · P1 = vor dem ersten Geld · P2 = Ausbau · P
 | ☐ | Ergänzung 1 (SEO S1–S2, Redaktion R1–R4) | CC |
 | ☐ | Phase 3 Ankommen + Sprachraum (P1–P6), Namen festlegen | A entscheidet, CC baut |
 | ☐ | Phase 3b Bausteine, Verlinkung, Anzeigen, Kultur (V1–V5) | CC |
-| ☐ | Weltstadt/Lesbarkeit/Interaktion (W1–W6), Entscheidung Quiz-Skripte | A + CC |
+| ☐ | Weltstadt/Lesbarkeit/Interaktion (W1–W6) – Entscheidung Quiz-Skripte ✓ (E12 erweitert, 15.11.2026) | CC |
 | ☐ | **Prüfer-Netzwerk** Übersetzungen: Lao (Moni?), Bangla (Amir?), Tigrinya, Thai, Englisch – schriftliche Zusage + Nutzungsrechte | A |
 | ☐ | **Einwilligungen** dokumentieren: Personen in Geschichten/Fotos, Sprecher für Audio, Gastautoren, Übersetzer (`docs/EINWILLIGUNGEN.md`, ohne Kontaktdaten) | A |
 | ☐ | Festkalender 2027 per Deep Research (Oktober) | Chat |
