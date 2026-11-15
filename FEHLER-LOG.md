@@ -40,3 +40,9 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 ## 15.11.2026 – Phase 2, Aufgabe 4 (Abläufe, Zeitleiste)
 - **Geklärt: „390 px abgeschnitten“ (Aufgabe 2) war ein Messfehler** · Edge headless erzwingt eine Mindest-Fensterbreite (~500 px), Screenshot schnitt rechts ab · Seite in einem `<iframe width="390">` rendern → echtes 390-px-Layout, nichts abgeschnitten · Lehre: Mobil-Screenshots per iframe oder Geräte-Emulation, nie per `--window-size` unter 500.
 - **Entwurfstext behauptete mehr als belegt** · „Keine Pflege“ im Nachbarschafts-Ablauf stand nirgends auf der Seite; „220“ fest im Text widersprach E3 · ersetzt durch vorhandene Aussage (keine Strom-, Gas-, Wasserinstallation) und `{ziel}`-Platzhalter · Lehre: Ablauftexte Satz für Satz gegen bestehende Seiteninhalte prüfen.
+
+## 15.11.2026 – Gesamtprüfung (Inhalt + Sicherheit)
+- **check.py prüfte nur die 11 Hauptseiten** · `docs/mockups/*.html` (aus Andrés Patch) werden über Pages ebenfalls veröffentlicht, waren aber ungeprüft; außerdem fand die alte Regel nur `<script src>`, keine Inline-Skripte, Handler oder `javascript:`-Links · neue Abschnitte 8–10 in check.py für alle HTML/CSS + 12 Testfälle · Lehre: Prüfungen am Veröffentlichungsumfang ausrichten, nicht an der Build-Ausgabe.
+- **Überschriften-Sprung h1 → h3 auf 4 Seiten** (Nachbarschaft, Frankfurt-Info, Vermittlung, Agentur) · Kartenraster direkt nach der h1 · je eine h2 ergänzt, check.py prüft Sprünge · Lehre: Struktur-Regeln (WCAG 1.3.1) automatisch prüfen, Screenshots zeigen das nicht.
+- **Interne Notizen sind öffentlich** · Repo `nordstern-ffm/nordstern-frankfurt` ist öffentlich, Pages veröffentlicht mit `.nojekyll` alles (geprüft: `/data/dienste.json` und `/FEHLER-LOG.md` liefern HTTP 200) · E7 sagt „nicht öffentlich“ – stimmt nicht · Entscheidung bei André (docs/OFFEN.md) · Lehre: „intern“ heißt bei öffentlichem Repo: gar nicht ins Repo.
+- **Mockup nannte noch „Entscheidung E11“** · auf E12 korrigiert.

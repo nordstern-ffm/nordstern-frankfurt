@@ -145,6 +145,8 @@ def page(path, title, desc, body):
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{E(title)} – {E(SITE["marke"])}</title>
 <meta name="description" content="{E(desc)}">
@@ -223,6 +225,7 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 <p class="lead">Wir ersetzen niemanden. Wir übernehmen die praktische Hilfe zu Hause, die es in Preungesheim noch nicht gibt.</p>
 <p><span class="badge">Verein in Gründung</span></p>
 {kacheln(["einwohner_preungesheim", "entlastungsbetrag"])}
+<h2>Auf einen Blick</h2>
 <div class="grid">
 {card("shopping-basket", "Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
 {card("user-search", "Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
@@ -238,6 +241,7 @@ page("frankfurt.html", "Frankfurt-Info",
      f"""
 <h1>Frankfurt verstehen</h1>
 <p class="lead">Wer entscheidet was in unserer Stadt – und wo kann ich mitreden?</p>
+<h2>Stadt, Ortsbeirat, Beteiligung</h2>
 <div class="grid">
 {card("building-2", "Stadtverordnetenversammlung", "<p>Das Parlament der Stadt. Es beschließt Haushalt, Satzungen und große Vorhaben. Gewählt bei der Kommunalwahl, zuletzt am 15. März 2026, für fünf Jahre.</p>")}
 {card("map-pinned", "Ortsbeiräte", "<p>Frankfurt hat 16 Ortsbeiräte. Sie beraten über alles, was den eigenen Stadtteil betrifft – Verkehr, Spielplätze, Grünflächen. Preungesheim gehört zum Ortsbezirk 10. Die Sitzungen sind öffentlich, Bürgerinnen und Bürger dürfen in der Bürgerfragestunde sprechen.</p>")}
@@ -285,6 +289,7 @@ page("dienste.html", "Vermittlung",
      f"""
 <h1>Vermittlung im kleinen Kreis</h1>
 <p class="lead">Kein Portal, kein Algorithmus. Wir kennen die Menschen, die wir empfehlen.</p>
+<h2>Was wir vermitteln</h2>
 <div class="grid">{dienst_html}</div>
 {kontakt_zeile()}
 <p class="small">Gewerbliches Angebot von {E(B["firma"])}. Nicht Teil des Vereins. Wir befördern, beherbergen und behandeln nicht selbst, sondern vermitteln an Fachbetriebe und Fachkräfte.</p>
@@ -322,6 +327,7 @@ page("agentur.html", "Für Vereine & Firmen",
      f"""
 <h1>Diese Seite gibt es auch für Ihren Stadtteil</h1>
 <p class="lead">Nordstern ist unser Schaufenster. {E(B["firma"])} baut so etwas für Vereine, Initiativen und kleine Betriebe – schnell, barrierearm, ohne Tracker.</p>
+<h2>Was wir anbieten</h2>
 <div class="grid">
 {card("layout-template", "Stadtteil-Seite", "<p>Info-Seite für Verein oder Initiative: Inhalte aus einer Datei, Pflege ohne Programmierkenntnisse, Hosting fast kostenlos.</p>")}
 {card("pen-line", "Texte, die ankommen", "<p>Websites, Anträge, Flyer, Bewerbungen und politische Texte – klar, prüfbar, in einfacher Sprache auf Wunsch.</p>")}

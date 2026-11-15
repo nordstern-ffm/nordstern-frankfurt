@@ -113,6 +113,79 @@ for p in pages:
         if "Quelle:" not in s or "Stand:" not in s:
             fehler.append(f"{p}: Kennzahl ohne Quelle/Stand: {re.sub('<[^>]+>', ' ', s)[:40]}")
 
+# 8. Sicherheit für ALLE veröffentlichten Dateien (GitHub Pages + .nojekyll veröffentlicht das ganze Repo,
+#    auch docs/mockups/*.html): keine Skripte (E12-Freigabe kommt mit P3/W4), keine Fremdabrufe, keine Formulare
+alle_html, alle_css = [], []
+for wurzel, ordner, dateien in os.walk(ROOT):
+    ordner[:] = [o for o in ordner if o != ".git"]
+    for d in dateien:
+        rel = os.path.relpath(os.path.join(wurzel, d), ROOT).replace(os.sep, "/")
+        if d.endswith(".html"):
+            alle_html.append(rel)
+        elif d.endswith(".css"):
+            alle_css.append(rel)
+for p in sorted(alle_html):
+    t = open(os.path.join(ROOT, p), encoding="utf-8").read()
+    if re.search(r"<script\b", t, re.I):
+        fehler.append(f"{p}: <script> gefunden (kein JavaScript, E4/E12)")
+    if re.search(r"<[a-z][^>]*\son[a-z]+\s*=", t, re.I):
+        fehler.append(f"{p}: Inline-Event-Handler (on…=) gefunden")
+    if re.search(r'(?:href|src|action)\s*=\s*"\s*javascript:', t, re.I):
+        fehler.append(f"{p}: javascript:-Link gefunden")
+    for tag in ("iframe", "object", "embed", "form", "base"):
+        if re.search(rf"<{tag}\b", t, re.I):
+            fehler.append(f"{p}: <{tag}> nicht erlaubt (Datenschutz/Sicherheit)")
+    for tag in re.findall(r"<(?!a\b)[a-z]+\b[^>]*>", t, re.I):
+        if re.search(r'rel="(?:canonical|alternate)"', tag):
+            continue  # Verweis, kein Abruf
+        for m in re.findall(r'\b(?:src|href|srcset|poster|data)\s*=\s*"((?:https?:)?//[^"]+)"', tag, re.I):
+            fehler.append(f"{p}: Fremdabruf {m}")
+    for tag in re.findall(r"<a\b[^>]*>", t, re.I):
+        if 'target="_blank"' in tag and "noopener" not in tag:
+            fehler.append(f"{p}: target=_blank ohne rel=noopener")
+for c in sorted(alle_css):
+    t = open(os.path.join(ROOT, c), encoding="utf-8").read()
+    if re.search(r"@import|url\(\s*['\"]?(?:https?:)?//", t, re.I):
+        fehler.append(f"{c}: externer Abruf in CSS (@import/url)")
+
+# 9. Seitenstruktur der Hauptseiten: CSP, Referrer, Sprache, Titel, genau eine H1, keine Ebenen-Sprünge,
+#    eindeutige IDs, Sprungmarken mit Ziel
+CSP = "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
+for p in pages:
+    t = open(os.path.join(ROOT, p), encoding="utf-8").read()
+    if f'http-equiv="Content-Security-Policy" content="{CSP}"' not in t:
+        fehler.append(f"{p}: Content-Security-Policy fehlt oder weicht ab")
+    if '<meta name="referrer" content="no-referrer">' not in t:
+        fehler.append(f"{p}: Referrer-Policy fehlt")
+    if not re.search(r'<html lang="[a-z]{2}', t):
+        fehler.append(f"{p}: <html lang> fehlt")
+    if not re.search(r"<title>[^<]+</title>", t):
+        fehler.append(f"{p}: <title> fehlt")
+    ebenen = [int(h) for h in re.findall(r"<h([1-6])\b", t)]
+    if ebenen.count(1) != 1:
+        fehler.append(f"{p}: {ebenen.count(1)}× <h1> (genau 1 erwartet)")
+    for a, b in zip(ebenen, ebenen[1:]):
+        if b > a + 1:
+            fehler.append(f"{p}: Überschriften-Sprung h{a} → h{b}")
+            break
+    ids = re.findall(r'\bid="([^"]+)"', t)
+    for i in sorted({i for i in ids if ids.count(i) > 1}):
+        fehler.append(f"{p}: doppelte id „{i}“")
+    for m in set(re.findall(r'href="#([^"]+)"', t)):
+        if m not in ids:
+            fehler.append(f"{p}: Sprungmarke #{m} ohne Ziel")
+
+# 10. Alle Datendateien sind gültiges JSON, alle Links in links.json sind https
+for d in sorted(os.listdir(os.path.join(ROOT, "data"))):
+    if d.endswith(".json"):
+        try:
+            json.load(open(os.path.join(ROOT, "data", d), encoding="utf-8"))
+        except ValueError as e:
+            fehler.append(f"data/{d}: ungültiges JSON ({e})")
+for k, l in links.items():
+    if not l["url"].startswith("https://"):
+        fehler.append(f"links.json: {k} – URL muss mit https:// beginnen")
+
 if "--launch" in sys.argv:
     b = site["betreiber"]
     for k in ("anschrift", "email", "telefon"):
@@ -127,5 +200,5 @@ for w in warn:
     print("WARNUNG", w)
 for f in fehler:
     print("FEHLER ", f)
-print(f"{len(pages)} Seiten geprüft · {len(fehler)} Fehler · {len(warn)} Warnungen")
+print(f"{len(pages)} Seiten + {len(alle_html) - len(pages)} weitere HTML, {len(alle_css)} CSS geprüft · {len(fehler)} Fehler · {len(warn)} Warnungen")
 sys.exit(1 if fehler else 0)

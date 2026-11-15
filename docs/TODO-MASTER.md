@@ -43,6 +43,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ✓ | Aufgabe | Wer |
 | --- | --- | --- |
 | ☐ | **Zwei-Faktor-Anmeldung** für GitHub-Konto nordstern-ffm aktivieren (neues Konto, Hauptschutz des Projekts) | A |
+| ☐ | **Interne Notizen sind öffentlich** (Repo + Pages): `pruefen`-Felder und Vornamen Dritter aus dem Repo nehmen – Optionen in `docs/OFFEN.md` | A entscheidet, CC setzt um |
 | ☐ | Impressum-Daten: Anschrift, E-Mail, Telefon → `data/site.json` | A |
 | ☐ | Domain kaufen (nur Domain), DNS nach `docs/DOMAIN-SETUP.md`, Zwei-Faktor beim Registrar | A |
 | ☐ | Phase 2 (Aufgaben 1–10) abnehmen, PR `ux-phase2 → main` prüfen und mergen (1–3 erledigt, siehe Reihenfolge oben) | A + CC |

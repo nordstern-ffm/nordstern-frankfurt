@@ -2,6 +2,7 @@
 
 ## Aktueller Auftrag
 **Phase 2 (visuelles Redesign): siehe `CLAUDE-CODE-AUFTRAG.md` und `docs/UX-KONZEPT.md`.**
+Stand und Übergabe: `docs/STAND.md` · Reihenfolge: `docs/TODO-MASTER.md` · Tests: `python tools/test_check.py`.
 Umgebung des Nutzers: Windows + Git Bash (dort `python` statt `python3`), unterwegs Termux.
 
 ## Ziel

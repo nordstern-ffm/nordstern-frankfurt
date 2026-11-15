@@ -100,3 +100,13 @@ Quellen-Links in `links.json` am 15.11.2026 per Abruf mit Inhaltsprüfung bestä
 | CSS-Zähler statt Nummer im HTML | weniger Markup | manche Screenreader lesen `::before`-Inhalt doppelt | verworfen |
 | Zeitleiste mit geschätzten Monaten | lebendiger | erfundene Termine (Auftrag Regel 4) | verworfen |
 Nachbarschafts-Ablauf ist ausdrücklich als „geplant“ gekennzeichnet (Verein in Gründung).
+
+## E15 · Content-Security-Policy, Referrer-Policy und Sicherheitsprüfung über das ganze Repo (15.11.2026)
+**Gewählt:** Jede Hauptseite trägt `<meta http-equiv="Content-Security-Policy">` mit `default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'` und `<meta name="referrer" content="no-referrer">`. Im Browser geprüft: alle Abrufe nur eigene Domain, keine Verstöße im Normalbetrieb, eingeschleustes Inline-Skript wird blockiert. `check.py` prüft Sicherheitsregeln jetzt in **allen** HTML/CSS-Dateien (auch `docs/mockups/`), weil GitHub Pages mit `.nojekyll` das ganze Repo veröffentlicht.
+| Alternative | Nutzen | Sicherheit / Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| CSP als HTTP-Header | auch `frame-ancestors` (Schutz vor Einbettung) möglich | GitHub Pages erlaubt keine eigenen Header | später beim EU-Hoster (TODO P1) |
+| Keine CSP, nur check.py | einfacher | schützt nicht, falls doch einmal Fremdcode ins HTML gerät | verworfen – zwei Sperren |
+| `style-src 'self'` ohne `'unsafe-inline'` | strenger | Fortschrittsbalken der Petitionen nutzt `style="width:…"` | `'unsafe-inline'` nur für Stile; ohne Skripte geringes Risiko |
+| Referrer `strict-origin-when-cross-origin` (Standard) | Zielseiten sehen Herkunft | verrät besuchte Seite an ffm.de usw. | `no-referrer` gewählt (Datensparsamkeit) |
+**Bei E12 (Lern-Skripte) beachten:** dort `script-src 'self'` nur auf den freigegebenen Seiten, check.py-Liste anpassen.

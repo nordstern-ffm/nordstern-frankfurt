@@ -17,3 +17,11 @@ Regel (CLAUDE-CODE-AUFTRAG.md, Punkt 4): Jede Zahl, Rechtsaussage und jeder Link
 
 ## Barrierefreiheit
 Erledigt am 15.11.2026: Hellmodus-Kontrast von `--gold-soft` (siehe FEHLER-LOG, Aufgabe 3).
+
+## Sicherheit / Datenschutz – Entscheidung André
+**Öffentliches Repo + GitHub Pages veröffentlichen alles.** Abrufbar sind u. a. `data/dienste.json` (Feld `pruefen`: Arbeitgeber-Konflikt Hotel, Projekt STAFF, Status der Näherinnen, TeleSon-Vertragsform), `docs/*` (Vornamen möglicher Übersetzer in TODO-MASTER und FESTKALENDER-RECHERCHE), `FEHLER-LOG.md`, `CLAUDE.md`. Auch die Git-Historie bleibt öffentlich. Geprüft: keine Passwörter, Schlüssel, Telefonnummern in Dateien oder Historie.
+Optionen:
+1. Interne Notizen (`pruefen`, Personen-Vornamen) aus dem Repo nehmen → lokale Datei, per `.gitignore` ausgeschlossen. Bisheriger Stand bleibt in der Historie sichtbar.
+2. Repo privat stellen – GitHub Pages aus privatem Repo braucht einen bezahlten Plan; ohne ihn geht die Vorschau offline.
+3. Bei Umzug zum EU-Hoster (TODO P1) nur den Build-Ordner hochladen statt des ganzen Repos.
+Empfehlung Claude Code: 1 sofort (Vornamen + `pruefen` entfernen), 3 beim Hoster-Umzug.
