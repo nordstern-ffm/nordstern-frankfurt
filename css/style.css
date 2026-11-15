@@ -114,3 +114,14 @@ h2[id]{scroll-margin-top:1rem}
 .rubrik h2 .card-icon{margin-top:0}
 .geplant{list-style:none;padding:0} .geplant li{margin:.4rem 0}
 .geplant .status{display:inline-block;margin-right:.4rem;padding:0 .5rem;border:1px solid var(--line);border-radius:.4rem}
+/* Schaubild „Wer entscheidet?“ (Inline-SVG, Farben aus den Themen-Variablen → hell und dunkel) */
+.schaubild-rahmen{margin:1rem 0}
+.schaubild{display:block;width:100%;max-width:30rem;height:auto;margin:0 auto}
+.sb-box{fill:var(--card);stroke:var(--line);stroke-width:2}
+.sb-oben{stroke:var(--gold)} .sb-unten{fill:var(--callout);stroke:var(--gold)}
+.sb-titel{fill:var(--text);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:17px}
+.sb-text{fill:var(--text);font-size:14px}
+.sb-label{fill:var(--muted);font-size:13px;font-weight:700}
+.sb-linie{stroke:var(--gold);stroke-width:2.5}
+.sb-spitze{fill:var(--gold)}
+.sb-lang{font-size:15px}

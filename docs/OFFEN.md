@@ -12,8 +12,8 @@ Regel (CLAUDE-CODE-AUFTRAG.md, Punkt 4): Jede Zahl, Rechtsaussage und jeder Link
 ## Bestehende Aussagen ohne verlinkte Primärquelle (schon vor Phase 2 auf der Seite)
 | Seite | Aussage | Was fehlt |
 | --- | --- | --- |
-| frankfurt.html | „Frankfurt hat 16 Ortsbeiräte“, „Preungesheim gehört zum Ortsbezirk 10“ | frankfurt.de blockt Skript-Abrufe (403) → im Browser prüfen und als Link in `links.json` eintragen. |
-| frankfurt.html | Kommunalwahl „zuletzt am 15. März 2026, für fünf Jahre“ | Quelle: Wahlamt Frankfurt / HKWG § 2 im Browser prüfen. |
+| frankfurt.html | ~~16 Ortsbeiräte, Ortsbezirk 10~~ | **erledigt** (Aufgabe 5): Broschüre StVV, Stand Mai 2025 |
+| frankfurt.html | Kommunalwahl „zuletzt am 15. März 2026“ | Satz entfernt (Aufgabe 5); Wahltermin erst mit Quelle (Wahlamt) wieder nennen. Wahlzeit 5 Jahre ist über die StVV-Broschüre belegt. |
 
 ## Barrierefreiheit
 Erledigt am 15.11.2026: Hellmodus-Kontrast von `--gold-soft` (siehe FEHLER-LOG, Aufgabe 3).
@@ -28,3 +28,8 @@ Erledigt am 15.11.2026 (E16): interne Prüfnotizen, Vornamen Dritter und das Rep
 - Ob die Gewerbeanzeige in Frankfurt beim Ordnungsamt/Gewerbeamt liegt und online geht: auf frankfurt.de im Browser prüfen (Skript-Abruf 403).
 - Bundesagentur: offizielle Seite zum Programm für Pflegekräfte aus dem Ausland suchen und als Link ergänzen (Leser sollen sich direkt informieren können).
 - BanglaHilfe (anderes Repo): Google Fonts lokal einbinden; Mindestlohn 12,82 €/h und Finanznachweis 11.904 € auf Stand 2026 prüfen; `bangla-hilfe.de` nicht erreichbar.
+
+## Aufgabe 5 – Schaubild (15.11.2026)
+- **Zahlen nach der Kommunalwahl 2026:** 93 Stadtverordnete folgt aus § 38 Abs. 1 HGO (Frankfurt > 500 000 Einwohner) – gilt weiter, solange die Hauptsatzung die Zahl nicht senkt (§ 38 Abs. 2). 284 Ortsbeiratsmitglieder: Stand Mai 2025, nach der Wahl am 15.03.2026 auf stvv.frankfurt.de prüfen.
+- **Ausländerbeirat / KAV:** Hat Frankfurt eine Kommunale Ausländer- und Ausländerinnenvertretung (Ausländerbeirat nach § 84 HGO) oder eine Integrations-Kommission (§ 89)? Primärquelle (stvv.frankfurt.de / Wahlamt) suchen, dann ins Schaubild.
+- **Zahl der Stadträtinnen und Stadträte:** Broschüre widersprüchlich (OB + 11 / 12 hauptamtliche / OB + Bürgermeister + 9) → nicht verwenden, bis die Magistratsseite der Stadt geprüft ist.

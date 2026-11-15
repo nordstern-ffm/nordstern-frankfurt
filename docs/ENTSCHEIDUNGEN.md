@@ -126,3 +126,13 @@ Die Git-Historie enthält die alten Fassungen weiterhin (siehe `docs/OFFEN.md`).
 | Beiträge als JSON | einfach zu prüfen | schlecht zu schreiben | verworfen |
 | Flache Dateien `blog-slug.html` | keine `../`-Logik | widerspricht R1 (`/<rubrik>/<slug>/`), spätere URL-Änderung kostet Suchmaschinen-Ranking | verworfen |
 Abweichung von REDAKTION.md: `quellen` als Komma-Liste von `links.json`-Schlüsseln statt YAML-Liste mit URL – so gibt es nur eine Link-Liste. JSON-LD (`Article`) folgt mit S2; dafür muss check.py `<script type="application/ld+json">` gezielt erlauben (wird nicht ausgeführt, CSP bleibt `script-src 'none'`).
+
+## E19 · Schaubild „Wer entscheidet in Frankfurt?“ (Phase 2, Aufgabe 5)
+**Gewählt:** Inline-SVG hochkant (viewBox 360 × 660, Schrift ab 390 px lesbar), Farben aus CSS-Variablen (hell/dunkel), `role="img"` mit Kurzbeschreibung + vollständige Tabelle als Text-Alternative. Inhalte in `data/schaubild.json`. Ersetzt die alten Karten „Stadtverordnetenversammlung“ und „Ortsbeiräte“, deren Angaben teils unbelegt waren.
+**Belege:** HGO (Bürgerservice Hessenrecht, abgerufen 15.11.2026): § 9 Abs. 1/2 (oberstes Organ; Bezeichnungen Stadtverordnetenversammlung/Magistrat), § 38 Abs. 1 (93 bei 500 001–1 000 000 Einwohnern), § 39 (Direktwahl), § 82 Abs. 1/3 (Wahl und Vorschlagsrecht der Ortsbeiräte). Broschüre „Kommunalpolitik einfach erklärt“, Büro der StVV, Stand Mai 2025: 93 Mitglieder, 16 Ortsbeiräte mit 284 Mitgliedern, Wahlzeiten 5/6 Jahre, Stadträte von der StVV gewählt, Ortsbezirk 10 = Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim.
+**Abweichungen von der Chat-Recherche:** Bezeichnungen stehen in **§ 9** HGO (nicht § 49). Keine Stadtrats-Zahlen im Schaubild – die Broschüre nennt an verschiedenen Stellen unterschiedliche Zahlen hauptamtlicher Mitglieder. Ausländerbeirat/KAV nicht im Schaubild: Die HGO lässt statt eines Ausländerbeirats auch eine Integrations-Kommission zu (§ 84 Satz 3); welche Form Frankfurt hat, ist noch nicht an einer Primärquelle geprüft.
+| Alternative | Nutzen | Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| Querformat-Schaubild | übersichtlich am Desktop | auf 390 px Schrift unter 10 px | verworfen |
+| Nur Tabelle | barrierefrei | kein „Bild vor Text“ (UX-Prinzip 2) | ergänzt, nicht ersetzt |
+| Grafik als Bilddatei | einfacher | Farben fix, kein Dunkelmodus, Text nicht durchsuchbar | verworfen |

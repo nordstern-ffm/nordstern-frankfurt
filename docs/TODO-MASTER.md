@@ -9,7 +9,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | --- | --- | --- | --- | --- |
 | 1 | Phase 2 | Aufgaben 1–3: Bildrechte, Icons, Kennzahlen (+ Kontrast Hellmodus) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt (Branch ux-phase2) |
 | 2 | Phase 2 | **4** Ablauf-Diagramme + Zeitleiste (`steps()`/`timeline()`) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt |
-| 3 | Phase 2 | **5** Schaubild „Wer entscheidet in Frankfurt?“ (Inline-SVG + Text-Alternative, Quellen HGO/frankfurt.de) | CLAUDE-CODE-AUFTRAG.md | ☐ |
+| 3 | Phase 2 | **5** Schaubild „Wer entscheidet in Frankfurt?“ (Inline-SVG + Text-Alternative, Quellen HGO/frankfurt.de) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt (E19), KAV offen |
 | 4 | Phase 2 | **6** Schema-Karte Ortsbezirk 10 (eigenes SVG, ODbL-Hinweis) | CLAUDE-CODE-AUFTRAG.md | ☐ |
 | 5 | Phase 2 | **7** Hero-Illustrationen je Seite (eigene SVG) | CLAUDE-CODE-AUFTRAG.md | ☐ |
 | 6 | Phase 2 | **8** 3–6 Fotos Wikimedia Commons (WebP ≤ 150 KB, Lizenz am Original) | CLAUDE-CODE-AUFTRAG.md | ☐ |

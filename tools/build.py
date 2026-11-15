@@ -248,15 +248,61 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 """)
 
 # -------------------------------------------------------------- Frankfurt
+SB = load("schaubild.json")
+
+
+def schaubild():
+    """Schaubild „Wer entscheidet?“ als Inline-SVG (hochkant, lesbar ab 390 px) + Tabelle als Text-Alternative (Aufgabe 5)."""
+    k, pf = SB["kasten"], SB["pfeile"]
+
+    def kasten(x, y, w, zeilen, cls=""):
+        h = 30 + 20 * len(zeilen)
+        t = "".join(f'<text x="{x + 14}" y="{y + 30 + 20 * i}" class="{("sb-titel sb-lang" if len(z) > 20 else "sb-titel") if i == 0 else "sb-text"}">{E(z)}</text>'
+                    for i, z in enumerate(zeilen))
+        return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" class="sb-box {cls}"/>{t}'
+
+    def pfeil(x, y1, y2, label, lx, ly, drehen=False):
+        t = "".join(f'<tspan x="{lx}" dy="{0 if i == 0 else 16}">{E(z)}</tspan>' for i, z in enumerate(label))
+        dreh = f' transform="rotate(-90 {lx} {ly})"' if drehen else ""
+        return (f'<line x1="{x}" y1="{y1}" x2="{x}" y2="{y2 + 8}" class="sb-linie" marker-end="url(#sb-spitze)"/>'
+                f'<text x="{lx}" y="{ly}" class="sb-label"{dreh}>{t}</text>')
+
+    svg = ('<svg class="schaubild" viewBox="0 0 360 660" role="img" aria-label="Schaubild: Die Bürgerinnen und Bürger wählen '
+           'Stadtverordnetenversammlung, Ortsbeiräte und Oberbürgermeister/in. Die Stadtverordnetenversammlung wählt die Stadträte '
+           'und kontrolliert den Magistrat. Die Ortsbeiräte machen Vorschläge. Details in der Tabelle darunter.">'
+           '<defs><marker id="sb-spitze" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
+           '<path d="M0 0 L10 5 L0 10 z" class="sb-spitze"/></marker></defs>'
+           + kasten(20, 20, 320, k["magistrat"], "sb-oben")
+           + kasten(60, 200, 280, k["stvv"])
+           + kasten(185, 380, 155, k["ortsbeiraete"])
+           + kasten(20, 540, 320, k["buerger"], "sb-unten")
+           + pfeil(210, 200, 130, pf["stvv_magistrat"], 218, 158)
+           + pfeil(265, 380, 310, pf["ortsbeirat_stvv"], 273, 352)
+           + pfeil(125, 540, 310, pf["buerger_stvv"], 133, 440)
+           + pfeil(265, 540, 490, pf["buerger_ortsbeirat"], 273, 520)
+           + pfeil(40, 540, 130, pf["buerger_ob"], 33, 400, drehen=True)
+           + '</svg>')
+    zeilen = "".join(f'<tr><th scope="row">{E(r["organ"])}</th><td>{E(r["wer"])}</td><td>{E(r["wahl"])}</td>'
+                     f'<td>{E(r["aufgabe"])}</td><td>{E(r["beleg"])}</td></tr>' for r in SB["tabelle"])
+    quellen = " · ".join(link(q) for q in SB["quellen"])
+    return (f'<section aria-labelledby="h-schaubild"><h2 id="h-schaubild">{E(SB["titel"])}</h2>'
+            f'<figure class="schaubild-rahmen">{svg}<figcaption class="small">Vereinfachte Darstellung. {E(SB["stand"])}.</figcaption></figure>'
+            '<div class="table-wrap"><table><caption class="small">Das Schaubild als Tabelle</caption>'
+            '<thead><tr><th scope="col">Organ</th><th scope="col">Wer gehört dazu</th><th scope="col">Wie gewählt</th>'
+            f'<th scope="col">Aufgabe</th><th scope="col">Beleg</th></tr></thead><tbody>{zeilen}</tbody></table></div>'
+            f'<p class="small">Quellen: {quellen}</p></section>')
+
+
 page("frankfurt.html", "Frankfurt-Info",
      "Frankfurt einfach erklärt: Stadtverordnete, Ortsbeiräte, Bürgerbeteiligung und wo Bürger welche Hilfe finden.",
      f"""
 <h1>Frankfurt verstehen</h1>
 <p class="lead">Wer entscheidet was in unserer Stadt – und wo kann ich mitreden?</p>
-<h2>Stadt, Ortsbeirat, Beteiligung</h2>
+{schaubild()}
+<h2>Mitreden</h2>
 <div class="grid">
-{card("building-2", "Stadtverordnetenversammlung", "<p>Das Parlament der Stadt. Es beschließt Haushalt, Satzungen und große Vorhaben. Gewählt bei der Kommunalwahl, zuletzt am 15. März 2026, für fünf Jahre.</p>")}
-{card("map-pinned", "Ortsbeiräte", "<p>Frankfurt hat 16 Ortsbeiräte. Sie beraten über alles, was den eigenen Stadtteil betrifft – Verkehr, Spielplätze, Grünflächen. Preungesheim gehört zum Ortsbezirk 10. Die Sitzungen sind öffentlich, Bürgerinnen und Bürger dürfen in der Bürgerfragestunde sprechen.</p>")}
+{card("map-pinned", "Ortsbezirk 10", f"<p>{E(SB['ortsbezirk10']['text'])}</p><p class='small'>Quelle: {link('stvv_broschuere')}</p>")}
+{card("users", "Bürgerfragestunde", f"<p>In der Bürgerfragestunde einer Ortsbeiratssitzung können Bürgerinnen und Bürger Fragen, Wünsche und Beschwerden direkt vorbringen.</p><p class='small'>Quelle: {link('stvv_broschuere')}</p>")}
 {card("laptop", "Beteiligung online", f"<p>{link('ffm_start')}: Mängel melden, Ideen einreichen, Vorhaben unterstützen.</p>")}
 </div>
 <h2>Was Bürgerinnen und Bürger brauchen</h2>

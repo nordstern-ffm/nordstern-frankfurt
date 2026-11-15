@@ -26,4 +26,5 @@ Bilder mit Nachweis und Alt-Text · Icons vorhanden und korrekt versteckt · Ken
 - **Repo ist öffentlich und Pages veröffentlicht das ganze Repo** (`.nojekyll`). Interna nur in `docs/intern/` und `data/intern/` (ignoriert). Alte Fassungen stecken noch in der Git-Historie (siehe `docs/OFFEN.md`).
 - E12-Freigabe für Skripte erst mit der ersten Sprachraum-/Quiz-Seite in check.py einbauen (Seitenliste + CSP `script-src 'self'` nur dort).
 - frankfurt.de / ffm.de blocken Skript-Abrufe (403) → solche Quellen im Browser prüfen.
-- Nächste Aufgabe: Phase 2 / 5 „Wer entscheidet in Frankfurt?“ (Quellen: HGO, frankfurt.de).
+- Nächste Aufgabe: Phase 2 / 6 Schema-Karte Ortsbezirk 10 (Stadtteile laut StVV-Broschüre, ODbL-Hinweis).
+- Erledigt seit Erststand: Datenschutz-Bereinigung (E16), Blog-Reiter (E17), Beitragssystem + Artikel Personalvermittlung als Entwurf (E18), Schaubild (E19).
