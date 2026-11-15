@@ -97,6 +97,22 @@ for p in pages:
         if a.count("<li>") != a.count('class="icon"'):
             fehler.append(f"{p}: Menüpunkt ohne Icon")
 
+# 7. Kennzahlen (data/zahlen.json): Primärquelle über bestätigten Link, Fundstelle, Stand, Prüfdatum
+zahlen = json.load(open(os.path.join(ROOT, "data/zahlen.json"), encoding="utf-8"))["zahlen"]
+for k, z in zahlen.items():
+    fehlt = [f for f in ("wert", "text", "quelle", "link", "fundstelle", "stand", "geprueft") if not str(z.get(f, "")).strip()]
+    if fehlt:
+        fehler.append(f"zahlen.json: {k} – Pflichtfeld fehlt: {', '.join(fehlt)}")
+    if z.get("link") and not links.get(z["link"], {}).get("bestaetigt"):
+        fehler.append(f"zahlen.json: {k} – Quelle „{z['link']}“ fehlt in links.json oder ist unbestätigt")
+    if z.get("geprueft") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", z["geprueft"]):
+        fehler.append(f"zahlen.json: {k} – geprueft muss JJJJ-MM-TT sein")
+for p in pages:
+    t = open(os.path.join(ROOT, p), encoding="utf-8").read()
+    for s in re.findall(r'<li class="stat">.*?</li>', t, re.S):
+        if "Quelle:" not in s or "Stand:" not in s:
+            fehler.append(f"{p}: Kennzahl ohne Quelle/Stand: {re.sub('<[^>]+>', ' ', s)[:40]}")
+
 if "--launch" in sys.argv:
     b = site["betreiber"]
     for k in ("anschrift", "email", "telefon"):

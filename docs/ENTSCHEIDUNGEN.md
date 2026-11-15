@@ -70,3 +70,13 @@ Inline-SVGs (Stern, später Icons/Illustrationen) sind keine Dateien unter `img/
 | Icon-Font | ein Abruf | schlecht für Screenreader, unscharf, Fremdformat | verworfen |
 | Emoji | null Aufwand | je Gerät anders, auf alten Android-Geräten teils Kästchen | verworfen |
 Barrierefreiheit: Icons neben Text sind Deko (`aria-hidden="true"`, `focusable="false"`); `icon(name, label)` setzt `role="img"` + `aria-label`, falls ein Icon einmal allein steht. `check.py` erzwingt das sowie Icon in jeder Karte und jedem Menüpunkt.
+
+## E12 · Kennzahlen (Phase 2, Aufgabe 3)
+**Gewählt:** `data/zahlen.json` mit Wert, Text, Quelle, `link` (Schlüssel in `links.json`), wörtlicher Fundstelle, Stand und Prüfdatum. Kacheln über `kacheln([...])` in build.py; jede zeigt „Quelle · Stand“. Start: Einwohner Preungesheim, Einwohner Frankfurt, Entlastungsbetrag. Nachbarschaft: Preungesheim, Entlastungsbetrag.
+| Alternative | Nutzen | Sicherheit | Ergebnis |
+| --- | --- | --- | --- |
+| Quell-URL direkt in zahlen.json | eine Datei | zweite Link-Liste neben links.json | verworfen – ein Ort für Links |
+| Einwohnerzahl Ende 2024 (15.770) | im UX-Konzept vorgesehen | nur über Aggregator auffindbar, älter | verworfen – 15.896 (Ende 2025) direkt von der Stadt |
+| „16 Ortsbeiräte“ als dritte Kachel | thematisch passend | Primärquelle nicht abrufbar (frankfurt.de 403) | in docs/OFFEN.md |
+Wortlaut eng an der Quelle: „Einwohnerinnen und Einwohner“ (Statistik) und „bis 131 €“ (Gesetz: „bis zu 131 Euro monatlich“). Kein Hinweis, dass Nachbarschaftshilfe über den Entlastungsbetrag abgerechnet werden kann – das setzt eine Anerkennung nach Landesrecht voraus und ist nicht belegt.
+Quellen-Links in `links.json` am 15.11.2026 per Abruf mit Inhaltsprüfung bestätigt (nicht im Browser des Nutzers) – vor Launch einmal im Browser öffnen.

@@ -81,3 +81,10 @@ nav a{gap:.4rem} nav a .icon{width:1.1em;height:1.1em}
 .btn .icon{margin-right:.5rem}
 .card-icon{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;margin-top:.9rem;border-radius:50%;background:var(--bg2);color:var(--gold)}
 .card-icon .icon{width:1.5rem;height:1.5rem}
+/* Kennzahl-Kacheln (data/zahlen.json): Zahl groß, Quelle + Stand klein darunter */
+.stats{list-style:none;margin:1.5rem 0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.stat{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:1rem;padding:1rem 1.2rem}
+.stat-wert{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:2.4rem;line-height:1.1;color:var(--gold-soft)}
+.stat-text{font-weight:700;margin:.3rem 0 .6rem}
+.stat-quelle{margin-top:auto;font-size:.85rem;color:var(--muted)}
+@media (prefers-color-scheme:light){.stat-wert{color:var(--gold)}} /* gold-soft auf Weiß nur 2,98:1, gold 5,06:1 */

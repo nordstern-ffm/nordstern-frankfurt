@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Testet die Bildrechte- und Icon-Prüfung in check.py an einer Kopie des Repos.
+"""Testet Bildrechte-, Icon- und Kennzahl-Prüfung in check.py an einer Kopie des Repos.
 
 Aufruf im Repo-Hauptordner:  python3 tools/test_check.py
 Das echte Repo wird nicht verändert.
@@ -54,6 +54,8 @@ FAELLE = [
     ("Deko-SVG ohne aria-hidden", 1, "<svg> ohne aria-hidden",
      {"seite": '<svg class="icon"><use href="assets/icons.svg#house"/></svg>'}),
     ("Karte ohne Icon", 1, "Karte ohne Icon", {"seite": '<article class="card"><h3>Test</h3></article>'}),
+    ("Kennzahl ohne Stand", 1, "Kennzahl ohne Quelle/Stand",
+     {"seite": '<li class="stat"><span class="stat-wert">1</span> Quelle: X</li>'}),
     ("vollständig", 0, "0 Fehler",
      {"datei": True, "bilder": [EINTRAG], "seite": '<img src="img/test.webp" alt="Testbild">'}),
 ]

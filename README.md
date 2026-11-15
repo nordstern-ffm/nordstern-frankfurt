@@ -22,6 +22,7 @@ Lokal ansehen: `python3 -m http.server 8000` → http://localhost:8000
 | `data/standpunkte.json` | FW-Positionen, nur `freigegeben: true` wird gezeigt |
 | `data/zahlung.json` | Agentur-Pakete mit Stripe-/Gumroad-Zahlungslink (erst sichtbar mit Preis + Link) |
 | `data/links.json` | Nur im Browser bestätigte externe Links |
+| `data/zahlen.json` | Kennzahlen nur mit Primärquelle, Fundstelle und Stand (Unbelegtes → `docs/OFFEN.md`) |
 | `data/bilder.json` | Pflicht-Nachweis für jedes Bild (Urheber, Lizenz, Quelle, Prüfdatum, Alt-Text) → `bildnachweise.html` |
 | `tools/build.py`, `tools/check.py`, `tools/test_check.py` | Generator, Prüfung, Test der Prüfung |
 | `css/`, `fonts/` | Gestaltung, lokale Schriften (SIL OFL) |

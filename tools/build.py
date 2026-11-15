@@ -24,6 +24,7 @@ STAND = load("standpunkte.json")
 LINKS = load("links.json")["links"]
 ZAHLUNG = load("zahlung.json")
 BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
+ZAHLEN = load("zahlen.json")["zahlen"]
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -79,6 +80,18 @@ def bild(datei, cls=""):
     c = f' class="{cls}"' if cls else ""
     return (f'<figure{c}><img src="{E(datei)}" alt="{E(b["alt"])}" loading="lazy" decoding="async">'
             f'<figcaption class="small">{nachweis(b)}</figcaption></figure>')
+
+
+def kacheln(ids, titel="Zahlen, die zählen"):
+    """Kennzahl-Kacheln aus data/zahlen.json – jede mit Quelle (Link nur wenn bestätigt) und Stand."""
+    li = ""
+    for k in ids:
+        z = ZAHLEN[k]
+        l = LINKS[z["link"]]
+        q = f'<a href="{E(l["url"])}" rel="noopener">{E(z["quelle"])}</a>' if l.get("bestaetigt") else E(z["quelle"])
+        li += (f'<li class="stat"><span class="stat-wert">{E(z["wert"])}</span> <span class="stat-text">{E(z["text"])}</span>'
+               f'<span class="stat-quelle">Quelle: {q} · Stand: {E(z["stand"])}</span></li>')
+    return f'<section aria-label="{E(titel)}"><ul class="stats">{li}</ul></section>'
 
 
 def kontakt_zeile():
@@ -155,6 +168,7 @@ page("index.html", "Start",
 <p class="lead">Nordstern verbindet Nachbarschaftshilfe, verständliche Infos über unsere Stadt und kurze Wege zu Menschen, die anpacken.</p>
 <div class="buttons"><a class="btn btn-primary" href="nachbarschaft.html">Hilfe &amp; Mitmachen</a><a class="btn" href="mitmachen.html">Mangel melden</a></div>
 </section>
+{kacheln(["einwohner_preungesheim", "einwohner_frankfurt", "entlastungsbetrag"])}
 <section aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
 <section aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
 {card("languages", link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
@@ -174,6 +188,7 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 <h1>Nachbarschaftshilfe im Frankfurter Norden</h1>
 <p class="lead">Wir ersetzen niemanden. Wir übernehmen die praktische Hilfe zu Hause, die es in Preungesheim noch nicht gibt.</p>
 <p><span class="badge">Verein in Gründung</span></p>
+{kacheln(["einwohner_preungesheim", "entlastungsbetrag"])}
 <div class="grid">
 {card("shopping-basket", "Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
 {card("user-search", "Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}

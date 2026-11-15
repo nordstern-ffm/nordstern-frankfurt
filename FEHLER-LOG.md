@@ -25,3 +25,8 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 ## 15.11.2026 – Phase 2, Aufgabe 2 (Icons)
 - **tools/icons.py brach bei der Ausgabe ab (UnicodeEncodeError „→“)** · `python -I` ignoriert `PYTHONIOENCODING`, Windows-Konsole ist cp1252 · Ausgabe nur ASCII · Lehre: Konsolen-Ausgaben von Werkzeugen ohne Sonderzeichen außerhalb Latin-1.
 - **Edge headless hing beim dritten Screenshot** (Befehl lief in den 2-Minuten-Timeout) · vermutlich Kopplung an das laufende Edge-Profil · bei Screenshots eigenes `--user-data-dir` und Zeitlimit je Aufruf verwenden · 390-px-Aufnahmen von Edge headless wirken rechts abgeschnitten (Mindest-Fensterbreite) → für die Abnahme (Aufgabe 10) Gerätemodus/Emulation nutzen, nicht `--window-size`.
+
+## 15.11.2026 – Phase 2, Aufgabe 3 (Kennzahlen)
+- **Beispielzahl im UX-Konzept war veraltet und nicht aus Primärquelle** · „15.770 Einwohner Preungesheim“ = Stand 31.12.2024 laut citypopulation.de · amtlich gefunden: 15.896 (Ende 2025, statistik.aktuell 04/2026) · Lehre: Zahlen aus Konzepten nie übernehmen, immer neu an der Primärquelle prüfen.
+- **Statistik-Seiten der Stadt: WebFetch schneidet ab, PDF ist rechte-verschlüsselt** · Werte stecken als JSON in der Karte der HTML-Seite (7 MB) · Seite per curl laden und mit Python durchsuchen; `grep -o` mit langen Mustern auf einzeiligen 7-MB-Dateien hängt (2-Minuten-Timeout) · Lehre: große Einzeiler mit Python durchsuchen. Plausibilität geprüft: weiblich + männlich und deutsch + EU + Nicht-EU ergeben jeweils die Summe.
+- **Kontrast: Gold-Soft im Hellmodus fällt durch (2,98:1 auf Weiß)** · neue Kennzahl nutzt im Hellmodus `--gold` (5,06:1) · bestehende Stellen in docs/OFFEN.md · Lehre: jede neue Farbe vor dem Einbau rechnen, nicht schätzen.
