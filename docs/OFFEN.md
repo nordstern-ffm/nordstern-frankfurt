@@ -15,5 +15,5 @@ Regel (CLAUDE-CODE-AUFTRAG.md, Punkt 4): Jede Zahl, Rechtsaussage und jeder Link
 | frankfurt.html | „Frankfurt hat 16 Ortsbeiräte“, „Preungesheim gehört zum Ortsbezirk 10“ | frankfurt.de blockt Skript-Abrufe (403) → im Browser prüfen und als Link in `links.json` eintragen. |
 | frankfurt.html | Kommunalwahl „zuletzt am 15. März 2026, für fünf Jahre“ | Quelle: Wahlamt Frankfurt / HKWG § 2 im Browser prüfen. |
 
-## Barrierefreiheit (gefunden in Aufgabe 3, betrifft bestehendes CSS)
-Hellmodus, Kontrast unter 4,5:1 (WCAG 2.1 AA): Karten-Überschriften `--gold-soft` auf Weiß 2,98:1 · zweite H1-Zeile und Eyebrow `--gold-soft` auf `--bg` 2,68:1. Vorschlag: im Hellmodus `--gold-soft` auf `#8A6A10` (5,06:1 auf Weiß) – Entscheidung beim Nutzer, spätestens Abnahme Aufgabe 10.
+## Barrierefreiheit
+Erledigt am 15.11.2026: Hellmodus-Kontrast von `--gold-soft` (siehe FEHLER-LOG, Aufgabe 3).

@@ -12,7 +12,7 @@
 }
 @media (prefers-color-scheme:light){
   :root{--bg:#F5F3EC; --bg2:#E9E4D4; --text:#0F1E3D; --muted:#3A4A6B; --card:#FFFFFF; --line:#CFC7AE;
-    --gold:#8A6A10; --gold-soft:#B8901E; --link:#1F4E91; --btn-bg:#132A4E; --btn-text:#FFFFFF; --callout:#FFF6DA; --focus:#1F4E91}
+    --gold:#8A6A10; --gold-soft:#8A6A10; --link:#1F4E91; --btn-bg:#132A4E; --btn-text:#FFFFFF; --callout:#FFF6DA; --focus:#1F4E91}
 }
 *{box-sizing:border-box}
 html{font-size:112.5%}
@@ -87,4 +87,5 @@ nav a{gap:.4rem} nav a .icon{width:1.1em;height:1.1em}
 .stat-wert{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:2.4rem;line-height:1.1;color:var(--gold-soft)}
 .stat-text{font-weight:700;margin:.3rem 0 .6rem}
 .stat-quelle{margin-top:auto;font-size:.85rem;color:var(--muted)}
-@media (prefers-color-scheme:light){.stat-wert{color:var(--gold)}} /* gold-soft auf Weiß nur 2,98:1, gold 5,06:1 */
+/* Hellmodus: gold-soft = #8A6A10 (5,06:1 auf Weiß, 4,56:1 auf --bg); früher #B8901E nur 2,68–2,98:1. Stern-Inneres bleibt hell (Deko). */
+@media (prefers-color-scheme:light){.star-inner{fill:#B8901E}}
