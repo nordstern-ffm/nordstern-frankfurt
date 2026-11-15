@@ -49,7 +49,8 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ✓ | Blog-Reiter mit Stadtpolitik, Politik, KI & Stadt, Ratgeber (E17) | CC |
 | ◐ | Artikel „Personalvermittlung gründen“ – Entwurf, Freigabe offen | A |
 | ☐ | KI-Bilder nach `docs/BILD-PROMPTS.md` erzeugen, dann Feld `ki` in build/check einbauen | A erzeugt, CC baut ein |
-| ☐ | KI & Stadt: erste Recherche (KI-Ampeln, digitales Rathaus) – was hat Frankfurt schon? | Chat recherchiert, CC prüft Quellen |
+| ☐ | **Beitrag 1:** „Zebrastreifen, die auffallen“ (3D/LED/Solar) – Rohstoff aus eigenem Portfolio, Anträge in PARLIS prüfen, parteineutral (Plan lokal in `docs/intern/`) | CC, Freigabe A |
+| ☐ | **Beitrag 2:** „Das digitale Rathaus“ – neutral im Blog; FW-Position nur als gekennzeichneter Standpunkt-Check nach Vorstandsfreigabe | CC, Freigabe A |
 
 ## P0 – vor dem Start (Domain, noindex weg)
 | ✓ | Aufgabe | Wer |
