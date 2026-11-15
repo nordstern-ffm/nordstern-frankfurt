@@ -38,6 +38,10 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | 29 | Weltstadt | **W4** Quiz-Baustein aus `quiz.json` – **jetzt freigegeben (E12 erweitert, André 15.11.2026)**; Quiz-Fragen vor Übernahme auf Quellen prüfen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
 | 30 | Weltstadt | **W5** „Dein Wort für Frankfurt“ (mailto + Zustimmungstext), Datenschutzerklärung ergänzen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
 | 31 | Weltstadt | **W6** Druck-Extras als eigene SVG, in `bilder.json` als „eigen“ | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+| 32 | Suche & KI | **G1** Glossar `data/glossar.json` → `glossar.html`, Auto-Links in Beiträgen | KONZEPT-SUCHE-KI.md | ☐ nach allen Inhaltsaufgaben |
+| 33 | Suche & KI | **G2** Seitensuche mit lokalem Index (Entscheidung E12-Erweiterung) | KONZEPT-SUCHE-KI.md | ☐ |
+| 34 | Suche & KI | **G3** `llms.txt` + Kurzfassungen für KI-Assistenten | KONZEPT-SUCHE-KI.md | ☐ |
+| 35 | Suche & KI | **G4** KI-Chat nur aus eigenen Inhalten, erst nach EU-Hoster + Datenschutzprüfung | KONZEPT-SUCHE-KI.md | ☐ |
 
 ## Neu (André, 15.11.2026)
 | ✓ | Aufgabe | Wer |
