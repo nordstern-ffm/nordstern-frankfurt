@@ -60,3 +60,13 @@ Wichtig: eigenes Stripe-Konto für die Agentur (nicht das von Gumroad verwaltete
 | Nur Bildnachweis-Seite, keine Unterschrift | ruhigere Optik | CC BY/BY-SA verlangt Nennung „in angemessener Weise“ – unter dem Bild ist der sichere Weg | verworfen |
 | Bild-Links in `data/links.json` doppeln | eine Link-Liste | doppelte Pflege, Fehlerquelle | verworfen: `quelle_url`/`lizenz_url` aus `bilder.json` gelten mit `geprueft`-Datum als bestätigt |
 Inline-SVGs (Stern, später Icons/Illustrationen) sind keine Dateien unter `img/`; ihre Herkunft wird in Aufgabe 2/7 über Lizenzdatei bzw. eigenen Eintrag nachgewiesen.
+
+## E11 · Icon-System (Phase 2, Aufgabe 2)
+**Gewählt:** Lucide v1.73.0 (ISC), nur 26 benötigte Symbole als `<symbol>` in `assets/icons.svg` (6,4 KB), eingebunden per `<svg><use href="assets/icons.svg#name"></use></svg>`. Lizenz in `assets/LICENSE-icons.txt`. Neue Icons über `tools/icons.py` (übernimmt aus Downloads nur Geometrie, keine Skripte/Links). Icon-Namen der Dienste stehen in `data/dienste.json` → `icon`.
+| Alternative | Nutzen | Sicherheit / Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| Tabler Icons (MIT) | größere Auswahl | gleichwertig; Lucide hat ruhigere Linien, passt zu Atkinson | verworfen |
+| Icons inline in jede Seite kopieren | funktioniert auch per `file://` | jede Seite schwerer, kein Browser-Cache | verworfen – lokal ansehen nur über `python -m http.server` |
+| Icon-Font | ein Abruf | schlecht für Screenreader, unscharf, Fremdformat | verworfen |
+| Emoji | null Aufwand | je Gerät anders, auf alten Android-Geräten teils Kästchen | verworfen |
+Barrierefreiheit: Icons neben Text sind Deko (`aria-hidden="true"`, `focusable="false"`); `icon(name, label)` setzt `role="img"` + `aria-label`, falls ein Icon einmal allein steht. `check.py` erzwingt das sowie Icon in jeder Karte und jedem Menüpunkt.

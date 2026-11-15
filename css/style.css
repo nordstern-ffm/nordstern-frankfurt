@@ -75,3 +75,9 @@ figcaption{margin-top:.4rem}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:Fraunces,Georgia,serif}
+/* Icons: Lucide-Sprite assets/icons.svg, Strichstärke wie Original, Farbe erbt vom Text */
+.icon{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav a{gap:.4rem} nav a .icon{width:1.1em;height:1.1em}
+.btn .icon{margin-right:.5rem}
+.card-icon{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;margin-top:.9rem;border-radius:50%;background:var(--bg2);color:var(--gold)}
+.card-icon .icon{width:1.5rem;height:1.5rem}

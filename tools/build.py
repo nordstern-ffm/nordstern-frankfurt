@@ -6,7 +6,7 @@ Danach immer:                 python3 tools/check.py
 Kein Framework, kein npm, kein JavaScript, keine externen Abrufe.
 Läuft in Termux (python3) und Git Bash gleich.
 """
-import html, json, os
+import html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
@@ -28,18 +28,30 @@ LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
 NAV = [
-    ("index.html", "Start"),
-    ("nachbarschaft.html", "Nachbarschaft"),
-    ("frankfurt.html", "Frankfurt-Info"),
-    ("mitmachen.html", "Melden & Petitionen"),
-    ("dienste.html", "Vermittlung"),
-    ("standpunkte.html", "Standpunkte"),
-    ("agentur.html", "Für Vereine & Firmen"),
+    ("index.html", "Start", "house"),
+    ("nachbarschaft.html", "Nachbarschaft", "hand-heart"),
+    ("frankfurt.html", "Frankfurt-Info", "landmark"),
+    ("mitmachen.html", "Melden & Petitionen", "megaphone"),
+    ("dienste.html", "Vermittlung", "handshake"),
+    ("standpunkte.html", "Standpunkte", "flag"),
+    ("agentur.html", "Für Vereine & Firmen", "briefcase"),
 ]
 
 STAR = ('<svg class="star" viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
         '<path d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/>'
         '<path class="star-inner" d="M32 14 L35 29 L50 32 L35 35 L32 50 L29 35 L14 32 L29 29 Z"/></svg>')
+
+
+with open(os.path.join(ROOT, "assets", "icons.svg"), encoding="utf-8") as f:
+    ICONS = set(re.findall(r'<symbol id="([a-z0-9-]+)"', f.read()))
+
+
+def icon(name, label=""):
+    """Lucide-Icon aus assets/icons.svg. Ohne label = Deko (aria-hidden), mit label = Bild mit Namen."""
+    if name not in ICONS:
+        raise SystemExit(f"FEHLER: Icon „{name}“ fehlt in assets/icons.svg – in tools/icons.py ergänzen.")
+    a = f'role="img" aria-label="{E(label)}"' if label else 'aria-hidden="true" focusable="false"'
+    return f'<svg class="icon" {a}><use href="assets/icons.svg#{name}"/></svg>'
 
 
 def link(key):
@@ -71,15 +83,15 @@ def bild(datei, cls=""):
 
 def kontakt_zeile():
     if B["email"]:
-        return f'<a class="btn btn-primary" href="mailto:{E(B["email"])}">E-Mail schreiben</a>'
+        return f'<a class="btn btn-primary" href="mailto:{E(B["email"])}">{icon("mail")}E-Mail schreiben</a>'
     return '<p class="notice">Kontaktadresse wird vor dem Start ergänzt.</p>'
 
 
 def page(path, title, desc, body):
     cur = ' aria-current="page"'
     nav = "".join(
-        f'<li><a href="{h}"{cur if h == path else ""}>{l}</a></li>'
-        for h, l in NAV)
+        f'<li><a href="{h}"{cur if h == path else ""}>{icon(i)}<span>{l}</span></a></li>'
+        for h, l, i in NAV)
     robots = "" if LIVE else '<meta name="robots" content="noindex, nofollow">\n'
     canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{"" if path == "index.html" else path}">\n' if LIVE else ""
     entwurf = "" if LIVE else '<div class="draft" role="note">Vorschau – noch nicht offiziell gestartet.</div>'
@@ -122,16 +134,17 @@ def page(path, title, desc, body):
         f.write(doc)
 
 
-def card(t, body, extra=""):
-    return f'<article class="card{extra}"><h3>{t}</h3>{body}</article>'
+def card(ico, t, body, extra=""):
+    """Karte mit Deko-Icon als visuellem Anker (UX-KONZEPT: Bild vor Text)."""
+    return f'<article class="card{extra}"><span class="card-icon">{icon(ico)}</span><h3>{t}</h3>{body}</article>'
 
 
 # ------------------------------------------------------------------ Start
-pillars = "".join(card(f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for h, t, d in [
-    ("nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
-    ("frankfurt.html", "Frankfurt verstehen", "Wie Stadt und Ortsbeirat funktionieren, wo man was meldet und was Bürgerinnen und Bürger wirklich brauchen."),
-    ("mitmachen.html", "Melden & bewegen", "Mängel direkt an die Stadt melden. Anliegen bündeln – Ziel: 220 Unterstützer je Projekt."),
-    ("dienste.html", "Vermittlung", "Personal, Hotel, Taxi, Massage, Nähen: Wir vermitteln an Menschen und Betriebe, die wir kennen."),
+pillars = "".join(card(i, f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for i, h, t, d in [
+    ("hand-heart", "nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
+    ("landmark", "frankfurt.html", "Frankfurt verstehen", "Wie Stadt und Ortsbeirat funktionieren, wo man was meldet und was Bürgerinnen und Bürger wirklich brauchen."),
+    ("megaphone", "mitmachen.html", "Melden & bewegen", "Mängel direkt an die Stadt melden. Anliegen bündeln – Ziel: 220 Unterstützer je Projekt."),
+    ("handshake", "dienste.html", "Vermittlung", "Personal, Hotel, Taxi, Massage, Nähen: Wir vermitteln an Menschen und Betriebe, die wir kennen."),
 ])
 page("index.html", "Start",
      "Nordstern Frankfurt: Nachbarschaftshilfe, Stadt-Infos, Mängelmelder und Petitionen für den Frankfurter Norden – plus persönliche Vermittlung.",
@@ -144,9 +157,9 @@ page("index.html", "Start",
 </section>
 <section aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
 <section aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
-{card(link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
-{card(link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
-{card(f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
+{card("languages", link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
+{card("route", link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
+{card("users", f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
 </div></section>
 <section class="callout"><h2>So arbeiten wir</h2>
 <ul><li><strong>Ehrlich:</strong> Was noch in Planung ist, steht auch so da.</li>
@@ -162,8 +175,8 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 <p class="lead">Wir ersetzen niemanden. Wir übernehmen die praktische Hilfe zu Hause, die es in Preungesheim noch nicht gibt.</p>
 <p><span class="badge">Verein in Gründung</span></p>
 <div class="grid">
-{card("Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
-{card("Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
+{card("shopping-basket", "Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
+{card("user-search", "Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
 </div>
 <p>Alle Details, Fachkraft-Ausschreibung und Blog: <a href="{E(SITE["verein"]["website"])}" rel="noopener">Website der Initiative</a>.</p>
 <div class="callout"><h2>Warum hier getrennt?</h2><p>Der Verein soll gemeinnützig werden. Gemeinnützige Vereine dürfen keine Partei unterstützen und kein Geschäft für Dritte machen. Darum hat der Verein eine eigene Seite, und Nordstern verlinkt nur dorthin.</p></div>
@@ -176,9 +189,9 @@ page("frankfurt.html", "Frankfurt-Info",
 <h1>Frankfurt verstehen</h1>
 <p class="lead">Wer entscheidet was in unserer Stadt – und wo kann ich mitreden?</p>
 <div class="grid">
-{card("Stadtverordnetenversammlung", "<p>Das Parlament der Stadt. Es beschließt Haushalt, Satzungen und große Vorhaben. Gewählt bei der Kommunalwahl, zuletzt am 15. März 2026, für fünf Jahre.</p>")}
-{card("Ortsbeiräte", "<p>Frankfurt hat 16 Ortsbeiräte. Sie beraten über alles, was den eigenen Stadtteil betrifft – Verkehr, Spielplätze, Grünflächen. Preungesheim gehört zum Ortsbezirk 10. Die Sitzungen sind öffentlich, Bürgerinnen und Bürger dürfen in der Bürgerfragestunde sprechen.</p>")}
-{card("Beteiligung online", f"<p>{link('ffm_start')}: Mängel melden, Ideen einreichen, Vorhaben unterstützen.</p>")}
+{card("building-2", "Stadtverordnetenversammlung", "<p>Das Parlament der Stadt. Es beschließt Haushalt, Satzungen und große Vorhaben. Gewählt bei der Kommunalwahl, zuletzt am 15. März 2026, für fünf Jahre.</p>")}
+{card("map-pinned", "Ortsbeiräte", "<p>Frankfurt hat 16 Ortsbeiräte. Sie beraten über alles, was den eigenen Stadtteil betrifft – Verkehr, Spielplätze, Grünflächen. Preungesheim gehört zum Ortsbezirk 10. Die Sitzungen sind öffentlich, Bürgerinnen und Bürger dürfen in der Bürgerfragestunde sprechen.</p>")}
+{card("laptop", "Beteiligung online", f"<p>{link('ffm_start')}: Mängel melden, Ideen einreichen, Vorhaben unterstützen.</p>")}
 </div>
 <h2>Was Bürgerinnen und Bürger brauchen</h2>
 <p>Unsere Themen, über die wir hier regelmäßig schreiben:</p>
@@ -191,7 +204,7 @@ pets = [p for p in PET["eintraege"] if p["veroeffentlicht"]]
 ziel = PET["ziel_unterstuetzer"]
 if pets:
     pet_html = '<div class="grid">' + "".join(card(
-        E(p["titel"]),
+        "megaphone", E(p["titel"]),
         f'<p>{E(p["anliegen"])}</p><p class="small">{E(p["stadtteil"])}</p>'
         f'<div class="meter" role="img" aria-label="{p["unterstuetzer"]} von {ziel} Unterstützern">'
         f'<span style="width:{min(100, round(p["unterstuetzer"] * 100 / ziel))}%"></span></div>'
@@ -216,7 +229,7 @@ page("mitmachen.html", "Melden & Petitionen",
 """)
 
 # ---------------------------------------------------------- Vermittlung
-dienst_html = "".join(card(E(d["titel"]), f'<p>{E(d["kurz"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["punkte"]) + "</ul>") for d in DIENSTE)
+dienst_html = "".join(card(d["icon"], E(d["titel"]), f'<p>{E(d["kurz"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["punkte"]) + "</ul>") for d in DIENSTE)
 page("dienste.html", "Vermittlung",
      "Persönliche Vermittlung in Frankfurt: Personal, Hotelzimmer, Taxi, Massage und Nähen – im kleinen Kreis.",
      f"""
@@ -230,7 +243,7 @@ page("dienste.html", "Vermittlung",
 # ---------------------------------------------------------- Standpunkte
 frei = [s for s in STAND["eintraege"] if s.get("freigegeben")]
 if frei:
-    sp = '<div class="grid">' + "".join(card(E(s["titel"]), f'<p>{E(s["teaser"])}</p><p class="small">Quelle: {E(s["quelle"])}</p>') for s in frei) + "</div>"
+    sp = '<div class="grid">' + "".join(card("flag", E(s["titel"]), f'<p>{E(s["teaser"])}</p><p class="small">Quelle: {E(s["quelle"])}</p>') for s in frei) + "</div>"
 else:
     sp = f'<p class="notice">{len(STAND["eintraege"])} Positionen sind vorbereitet und erscheinen nach Freigabe durch den Vorstand der {E(STAND["herausgeber"])}.</p>'
 page("standpunkte.html", "Standpunkte",
@@ -248,7 +261,7 @@ def pakete_html():
     ps = [p for p in ZAHLUNG["pakete"] if p["aktiv"] and p["preis"] and p["zahl_link"]]
     if not ps:
         return ""
-    return '<h2>Pakete</h2><div class="grid">' + "".join(card(E(p["titel"]),
+    return '<h2>Pakete</h2><div class="grid">' + "".join(card("package", E(p["titel"]),
         f'<p class="small">Für {E(p["fuer"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in p["leistung"])
         + f'</ul><p><strong>{E(p["preis"])}</strong></p><a class="btn btn-primary" href="{E(p["zahl_link"])}" rel="noopener">Jetzt buchen</a>')
         for p in ps) + '</div><p class="small">Die Zahlung läuft über eine gesicherte Zahlungsseite unseres Zahlungsdienstleisters. Wir sehen keine Kartendaten.</p>'
@@ -260,9 +273,9 @@ page("agentur.html", "Für Vereine & Firmen",
 <h1>Diese Seite gibt es auch für Ihren Stadtteil</h1>
 <p class="lead">Nordstern ist unser Schaufenster. {E(B["firma"])} baut so etwas für Vereine, Initiativen und kleine Betriebe – schnell, barrierearm, ohne Tracker.</p>
 <div class="grid">
-{card("Stadtteil-Seite", "<p>Info-Seite für Verein oder Initiative: Inhalte aus einer Datei, Pflege ohne Programmierkenntnisse, Hosting fast kostenlos.</p>")}
-{card("Texte, die ankommen", "<p>Websites, Anträge, Flyer, Bewerbungen und politische Texte – klar, prüfbar, in einfacher Sprache auf Wunsch.</p>")}
-{card("Digitale Werkzeuge", "<p>Koordinations-Apps für Nachbarschaftshilfe, Hotel-Werkzeuge, mehrsprachige Info-Portale. Rechte bleiben klar geregelt.</p>")}
+{card("layout-template", "Stadtteil-Seite", "<p>Info-Seite für Verein oder Initiative: Inhalte aus einer Datei, Pflege ohne Programmierkenntnisse, Hosting fast kostenlos.</p>")}
+{card("pen-line", "Texte, die ankommen", "<p>Websites, Anträge, Flyer, Bewerbungen und politische Texte – klar, prüfbar, in einfacher Sprache auf Wunsch.</p>")}
+{card("wrench", "Digitale Werkzeuge", "<p>Koordinations-Apps für Nachbarschaftshilfe, Hotel-Werkzeuge, mehrsprachige Info-Portale. Rechte bleiben klar geregelt.</p>")}
 </div>
 {pakete_html()}
 <h2>Referenzen aus eigener Arbeit</h2>

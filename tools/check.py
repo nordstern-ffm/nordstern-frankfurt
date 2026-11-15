@@ -77,6 +77,26 @@ for p in pages:
         if not re.search(r'\balt="[^"]+"', tag):
             fehler.append(f"{p}: <img src=\"{src}\"> ohne Alt-Text")
 
+# 6. Icons (assets/icons.svg, Lucide ISC): Verweis existiert, Deko versteckt, jede Karte/Navi mit Icon
+sprite = os.path.join(ROOT, "assets/icons.svg")
+symbole = set(re.findall(r'<symbol id="([a-z0-9-]+)"', open(sprite, encoding="utf-8").read())) if os.path.isfile(sprite) else set()
+if not os.path.isfile(os.path.join(ROOT, "assets/LICENSE-icons.txt")):
+    fehler.append("assets/LICENSE-icons.txt fehlt (Lizenzpflicht für Icons)")
+for p in pages:
+    t = open(os.path.join(ROOT, p), encoding="utf-8").read()
+    for m in re.findall(r'<use href="assets/icons\.svg#([^"]+)"', t):
+        if m not in symbole:
+            fehler.append(f"{p}: Icon „{m}“ fehlt in assets/icons.svg")
+    for tag in re.findall(r"<svg\b[^>]*>", t):
+        if 'aria-hidden="true"' not in tag and not ('role="img"' in tag and re.search(r'aria-label="[^"]+"', tag)):
+            fehler.append(f"{p}: <svg> ohne aria-hidden bzw. role=img + aria-label")
+    for k in re.findall(r'<article class="card.*?</h3>', t, re.S):
+        if 'class="card-icon"' not in k:
+            fehler.append(f"{p}: Karte ohne Icon: {re.sub('<[^>]+>', '', k)[:40]}")
+    for a in re.findall(r"<nav\b.*?</nav>", t, re.S):
+        if a.count("<li>") != a.count('class="icon"'):
+            fehler.append(f"{p}: Menüpunkt ohne Icon")
+
 if "--launch" in sys.argv:
     b = site["betreiber"]
     for k in ("anschrift", "email", "telefon"):

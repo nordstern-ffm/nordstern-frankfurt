@@ -4,6 +4,7 @@
     {
       "id": "personal",
       "titel": "Personalvermittlung",
+      "icon": "users",
       "kurz": "Wir bringen Frankfurter Betriebe mit Menschen zusammen, die wir persönlich kennen: Rezeption, Housekeeping, Service, Helfer- und Einstiegsjobs.",
       "punkte": [
         "Persönliches Erstgespräch statt Massen-Bewerbung",
@@ -16,6 +17,7 @@
     {
       "id": "hotel",
       "titel": "Hotel & Gäste",
+      "icon": "bed-double",
       "kurz": "Zimmer für Monteure, Messegäste und Besuch von Familie: Wir kennen die Häuser und fragen für Sie an.",
       "punkte": [
         "Anfrage bei Partnerhäusern in Frankfurt",
@@ -28,6 +30,7 @@
     {
       "id": "taxi",
       "titel": "Taxi & Fahrten",
+      "icon": "car-taxi-front",
       "kurz": "Feste Fahrten zum Arzt, zum Flughafen oder für Gäste – vermittelt an konzessionierte Frankfurter Taxiunternehmen.",
       "punkte": [
         "Nur konzessionierte Unternehmen",
@@ -40,6 +43,7 @@
     {
       "id": "massage",
       "titel": "Massage & Wellness",
+      "icon": "sparkles",
       "kurz": "Entspannungs- und Sportmassage durch ausgebildete Masseur:innen und Physiotherapeut:innen – mobil oder in der Praxis.",
       "punkte": [
         "Nur Fachpersonal mit Berufsnachweis",
@@ -52,6 +56,7 @@
     {
       "id": "naehen",
       "titel": "Nähen & Ändern",
+      "icon": "scissors",
       "kurz": "Hosen kürzen, Reißverschluss tauschen, Vorhänge nähen – von Näherinnen aus der Nachbarschaft.",
       "punkte": [
         "Abholung im Frankfurter Norden möglich",
@@ -65,6 +70,7 @@
       "id": "energie",
       "aktiv": false,
       "titel": "Strom & Gas",
+      "icon": "zap",
       "kurz": "Wir prüfen Ihren Strom- und Gastarif und vermitteln einen passenden Vertrag – auf Wunsch zu Hause erklärt.",
       "punkte": [
         "Tarifvergleich mit Ihrer letzten Abrechnung",
@@ -78,6 +84,7 @@
       "id": "amway",
       "aktiv": false,
       "titel": "Gesundheit & Haushalt (Amway)",
+      "icon": "shopping-bag",
       "kurz": "Produkte für Ernährung, Körperpflege und Haushalt – persönlich beraten von einem unabhängigen Amway-Geschäftspartner.",
       "punkte": [
         "Beratung und Bestellung ohne Abo-Zwang",
