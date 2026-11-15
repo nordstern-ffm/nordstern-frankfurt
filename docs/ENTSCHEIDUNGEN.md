@@ -136,3 +136,12 @@ Abweichung von REDAKTION.md: `quellen` als Komma-Liste von `links.json`-Schlüss
 | Querformat-Schaubild | übersichtlich am Desktop | auf 390 px Schrift unter 10 px | verworfen |
 | Nur Tabelle | barrierefrei | kein „Bild vor Text“ (UX-Prinzip 2) | ergänzt, nicht ersetzt |
 | Grafik als Bilddatei | einfacher | Farben fix, kein Dunkelmodus, Text nicht durchsuchbar | verworfen |
+
+## E20 · Suche ja, KI-Chat nein, Glossar viersprachig (André, 15.11.2026)
+**Gewählt:** Lokale Seitensuche mit einfacher Interaktion im Repo-Stil (`/`, Live-Treffer, Pfeiltasten, Filter-Chips); E12 gilt damit auch für die Suche: Skript nur aus `assets/`, ohne Bibliothek, speichert nichts, CSP `script-src 'self'` nur auf den Seiten mit Suchfeld, ohne Skript A–Z-Verzeichnis. Kein KI-Chat. Glossar in Deutsch (Referenz), Englisch, Spanisch, Französisch; Übersetzungen nur mit Prüfvermerk.
+| Alternative | Nutzen | Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| KI-Chat aus eigenen Inhalten | Fragen in Alltagssprache | Server, laufende Kosten, Art.-9-Daten, Vertrag mit KI-Anbieter | verworfen (André) |
+| Suche über externe Suchmaschine | kein eigener Code | jede Suchanfrage geht an Dritte | verworfen |
+| Nur A–Z-Verzeichnis | null Skript | langsam bei vielen Beiträgen | bleibt als Fallback |
+Umsetzung nach Abschluss aller Inhaltsaufgaben (TODO-MASTER G1–G3).
