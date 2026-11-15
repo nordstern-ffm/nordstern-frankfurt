@@ -6,7 +6,7 @@ Danach immer:                 python3 tools/check.py
 Kein Framework, kein npm, kein JavaScript, keine externen Abrufe.
 Läuft in Termux (python3) und Git Bash gleich.
 """
-import html, json, os, re
+import html, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
@@ -27,6 +27,9 @@ BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
 ZAHLEN = load("zahlen.json")["zahlen"]
 ABL = load("ablaeufe.json")
 BLOG = load("blog.json")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import beitraege  # noqa: E402  (liegt neben build.py)
+BEITRAEGE = beitraege.alle(ROOT)
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -134,13 +137,17 @@ def kontakt_zeile():
     return '<p class="notice">Kontaktadresse wird vor dem Start ergänzt.</p>'
 
 
-def page(path, title, desc, body):
+def page(path, title, desc, body, aktiv=None):
+    """Schreibt eine Seite. Links im HTML sind vom Hauptordner aus gedacht; für Seiten in Unterordnern
+    (Blog-Beiträge) werden alle relativen href/src am Ende mit ../ ergänzt. aktiv = markierter Menüpunkt."""
+    aktiv = aktiv or path
     cur = ' aria-current="page"'
     nav = "".join(
-        f'<li><a href="{h}"{cur if h == path else ""}>{icon(i)}<span>{l}</span></a></li>'
+        f'<li><a href="{h}"{cur if h == aktiv else ""}>{icon(i)}<span>{l}</span></a></li>'
         for h, l, i in NAV)
     robots = "" if LIVE else '<meta name="robots" content="noindex, nofollow">\n'
-    canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{"" if path == "index.html" else path}">\n' if LIVE else ""
+    url = re.sub(r"(^|/)index\.html$", r"\1", path)
+    canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{url}">\n' if LIVE else ""
     entwurf = "" if LIVE else '<div class="draft" role="note">Vorschau – noch nicht offiziell gestartet.</div>'
     doc = f"""<!DOCTYPE html>
 <html lang="de">
@@ -179,6 +186,10 @@ def page(path, title, desc, body):
 </body>
 </html>
 """
+    tiefe = path.count("/")
+    if tiefe:
+        doc = re.sub(r'\b(href|src)="(?!https?:|mailto:|data:|#|/)', lambda m: f'{m.group(1)}="' + "../" * tiefe, doc)
+        os.makedirs(os.path.dirname(os.path.join(ROOT, path)), exist_ok=True)
     with open(os.path.join(ROOT, path), "w", encoding="utf-8") as f:
         f.write(doc)
 
@@ -297,19 +308,62 @@ page("dienste.html", "Vermittlung",
 """)
 
 # ----------------------------------------------------------------- Blog
+def datum_de(iso):
+    j, m, t = iso.split("-")
+    return f"{t}.{m}.{j}"
+
+
+def beitrag_link(schluessel, text):
+    """Externe Links in Beiträgen nur über data/links.json (bestätigt) – sonst bricht der Build ab."""
+    l = LINKS.get(schluessel)
+    if not l or not l.get("bestaetigt"):
+        raise SystemExit(f"FEHLER: Link „{schluessel}“ fehlt in data/links.json oder ist unbestätigt.")
+    return f'<a href="{E(l["url"])}" rel="noopener">{text}</a>'
+
+
+def beitrag_seite(k, text):
+    rub = {r["id"]: r for r in BLOG["rubriken"]}[k["rubrik"]]
+    minuten = max(1, round(len(re.findall(r"\w+", text)) / 200))
+    entwurf = ("" if k["freigegeben"] == "ja" else
+               '<p class="notice">Entwurf – noch nicht redaktionell freigegeben. Bitte noch nicht teilen.</p>')
+    quellen = "".join(f'<li>{beitrag_link(q, E(LINKS[q]["titel"]))} · abgerufen am {datum_de(LINKS[q]["bestaetigt"])}</li>'
+                      for q in k["quellen"])
+    body = f"""
+<p class="small brotkrumen"><a href="blog.html">Blog</a> › <a href="blog.html#{E(rub["id"])}">{E(rub["titel"])}</a></p>
+<h1>{E(k["titel"])}</h1>
+<p class="small">{E(rub["titel"])} · Stand: {datum_de(k["stand"])} · {minuten} Min. Lesezeit</p>
+{entwurf}
+{bild(k["bild"], "titelbild")}
+<p class="lead">{E(k["beschreibung"])}</p>
+<div class="artikel">
+{beitraege.html_aus(text, beitrag_link, bild)}
+</div>
+<section aria-labelledby="h-quellen"><h2 id="h-quellen">Quellen</h2><ul>{quellen}</ul></section>
+<p class="small">Information, keine Rechtsberatung. Gesetze ändern sich – maßgeblich ist der aktuelle Gesetzestext. Stand: {datum_de(k["stand"])}.</p>
+"""
+    page(beitraege.ziel(k), k["titel"], k["beschreibung"], body, aktiv="blog.html")
+
+
+for _datei, _kopf, _text in BEITRAEGE:
+    beitrag_seite(_kopf, _text)
+
+
 def blog_html():
     """Rubriken mit Sprungmarken-Chips (ohne JS), Leerzustand und geplanten Themen als Fragen (E17)."""
     rub = BLOG["rubriken"]
     chips = "".join(f'<li><a href="#{E(r["id"])}">{icon(r["icon"])}<span>{E(r["titel"])}</span></a></li>' for r in rub)
     teile = [f'<nav aria-label="Rubriken"><ul class="chips">{chips}</ul></nav>']
     for r in rub:
-        posts = [b for b in BLOG["beitraege"] if b.get("rubrik") == r["id"]]
-        liste = ('<ul>' + "".join(f'<li><a href="{E(b["url"])}">{E(b["titel"])}</a> <span class="small">Stand: {E(b["stand"])}</span></li>' for b in posts) + '</ul>'
+        posts = [k for _, k, _ in BEITRAEGE if k["rubrik"] == r["id"]]
+        liste = ('<ul class="beitraege">' + "".join(
+                     f'<li><a href="{E(k["rubrik"])}/{E(k["slug"])}/">{E(k["titel"])}</a>'
+                     f'<span class="small">{E(k["beschreibung"])} · Stand: {datum_de(k["stand"])}'
+                     f'{"" if k["freigegeben"] == "ja" else " · Entwurf"}</span></li>' for k in posts) + '</ul>'
                  if posts else '<p class="notice">Erster Beitrag kommt bald.</p>')
         geplant = "".join(f'<li><span class="status">geplant</span> {E(g)}</li>' for g in r["geplant"])
         teile.append(f'<section class="rubrik" aria-labelledby="{E(r["id"])}"><h2 id="{E(r["id"])}"><span class="card-icon">{icon(r["icon"])}</span>{E(r["titel"])}</h2>'
                      f'<p>{E(r["kurz"])}</p><p class="small">{E(r["umfasst"])}</p>{liste}'
-                     f'<h3>Geplante Themen</h3><ul class="geplant">{geplant}</ul></section>')
+                     + (f'<h3>Geplante Themen</h3><ul class="geplant">{geplant}</ul>' if geplant else "") + '</section>')
     return "\n".join(teile)
 
 
@@ -420,4 +474,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 5} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 5 + len(BEITRAEGE)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")

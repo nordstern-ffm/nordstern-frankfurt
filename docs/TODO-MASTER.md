@@ -17,7 +17,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | 8 | Phase 2 | **10** Abnahme: Screenshots 390/1280 hell/dunkel (Emulation, nicht `--window-size`), Kontrast, Lighthouse → `docs/ABNAHME-PHASE2.md` | CLAUDE-CODE-AUFTRAG.md | ☐ |
 | 9 | Ergänzung 1 | **S1** SEO-Prüfungen in check.py + Fehl-/Gut-Tests | AUFTRAG-ERGAENZUNG-1.md | ☐ |
 | 10 | Ergänzung 1 | **S2** Meta/OG/JSON-LD je Seite, `sitemap.xml` nur bei Launch | AUFTRAG-ERGAENZUNG-1.md | ☐ |
-| 11 | Ergänzung 1 | **R1** Beitragssystem `data/beitraege/*.md` → Rubrik-Seiten, `Article`-JSON-LD | AUFTRAG-ERGAENZUNG-1.md | ☐ |
+| 11 | Ergänzung 1 | **R1** Beitragssystem `data/beitraege/*.md` → Rubrik-Seiten, `Article`-JSON-LD | AUFTRAG-ERGAENZUNG-1.md | ◐ Grundsystem steht (E18), JSON-LD folgt mit S2 |
 | 12 | Ergänzung 1 | **R2** Rubriken-Startseiten, Leerzustand, max. 7 Hauptpunkte | AUFTRAG-ERGAENZUNG-1.md | ☐ |
 | 13 | Ergänzung 1 | **R3** Baustein „Kurz durchatmen“ ohne JS | AUFTRAG-ERGAENZUNG-1.md | ☐ |
 | 14 | Ergänzung 1 | **R4** Erste Ratgeber Stufe A neu schreiben, je Fakt Primärquelle; Freigabe durch André | AUFTRAG-ERGAENZUNG-1.md | ☐ |
@@ -38,6 +38,14 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | 29 | Weltstadt | **W4** Quiz-Baustein aus `quiz.json` – **jetzt freigegeben (E12 erweitert, André 15.11.2026)**; Quiz-Fragen vor Übernahme auf Quellen prüfen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
 | 30 | Weltstadt | **W5** „Dein Wort für Frankfurt“ (mailto + Zustimmungstext), Datenschutzerklärung ergänzen | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
 | 31 | Weltstadt | **W6** Druck-Extras als eigene SVG, in `bilder.json` als „eigen“ | WELTSTADT-LESBARKEIT-VERWEILEN.md | ☐ |
+
+## Neu (André, 15.11.2026)
+| ✓ | Aufgabe | Wer |
+| --- | --- | --- |
+| ✓ | Blog-Reiter mit Stadtpolitik, Politik, KI & Stadt, Ratgeber (E17) | CC |
+| ◐ | Artikel „Personalvermittlung gründen“ – Entwurf, Freigabe offen | A |
+| ☐ | KI-Bilder nach `docs/BILD-PROMPTS.md` erzeugen, dann Feld `ki` in build/check einbauen | A erzeugt, CC baut ein |
+| ☐ | KI & Stadt: erste Recherche (KI-Ampeln, digitales Rathaus) – was hat Frankfurt schon? | Chat recherchiert, CC prüft Quellen |
 
 ## P0 – vor dem Start (Domain, noindex weg)
 | ✓ | Aufgabe | Wer |

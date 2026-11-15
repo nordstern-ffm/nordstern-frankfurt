@@ -117,3 +117,12 @@ Die Git-Historie enthält die alten Fassungen weiterhin (siehe `docs/OFFEN.md`).
 ## E17 · Blog-Reiter mit Rubriken Stadtpolitik, Politik, KI & Stadt (André, 15.11.2026)
 **Gewählt:** Eigener Menüpunkt „Blog“ (`blog.html`, Daten `data/blog.json`). Stadtpolitik bündelt „Aus dem Römer“, „Aus dem Ortsbeirat 10“, „Bürgerdialog“ (REDAKTION.md); Politik = Land/Bund/Europa aus Frankfurter Sicht; KI & Stadt = Beispiele aus anderen Städten nach festem Muster (Beispiel mit Quelle · Funktionsweise · Kosten laut Quelle · Stand in Frankfurt · was Frankfurt bräuchte). Alle Rubriken parteiunabhängig; Parteipositionen nur unter Standpunkte. Rubrik-Chips als Sprungmarken (ohne JS). Geplante Themen stehen als Fragen ohne Tatsachenbehauptung da.
 **Navigation:** Damit es bei höchstens 7 Hauptpunkten bleibt (R2), ist „Standpunkte“ in den Footer gewandert (deutlich als „gekennzeichneter Partei-Bereich“). Alternative: „Für Vereine & Firmen“ in den Footer – verworfen, weil die neutralen Bereiche und das Angebot sichtbar bleiben sollen und der Partei-Bereich nicht im Hauptmenü neben dem Verein stehen muss. Umkehrbar in `NAV` (build.py).
+
+## E18 · Blog-Beiträge als Markdown, Seiten in Unterordnern (R1, schlanke Fassung, 15.11.2026)
+**Gewählt:** `data/beitraege/*.md` mit Kopf (titel, beschreibung, rubrik, slug, stand, freigegeben, bild, quellen) und kleinem Markdown; `tools/beitraege.py` (ohne Fremdpakete) wandelt um, build.py schreibt `/<rubrik>/<slug>/index.html`. `page()` setzt für Unterordner `../` vor alle relativen Links. Externe Links im Text nur als `[Text](link:schluessel)` aus `links.json` (bestätigt), sonst bricht der Build ab; HTML im Text ist verboten. Entwürfe (`freigegeben: nein`) zeigen einen Hinweis; check.py warnt, bei `--launch` Fehler.
+| Alternative | Nutzen | Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| Python-Paket `markdown` | vollständiges Markdown | Fremdpaket, auf Termux zusätzliche Installation, erlaubt Roh-HTML | verworfen |
+| Beiträge als JSON | einfach zu prüfen | schlecht zu schreiben | verworfen |
+| Flache Dateien `blog-slug.html` | keine `../`-Logik | widerspricht R1 (`/<rubrik>/<slug>/`), spätere URL-Änderung kostet Suchmaschinen-Ranking | verworfen |
+Abweichung von REDAKTION.md: `quellen` als Komma-Liste von `links.json`-Schlüsseln statt YAML-Liste mit URL – so gibt es nur eine Link-Liste. JSON-LD (`Article`) folgt mit S2; dafür muss check.py `<script type="application/ld+json">` gezielt erlauben (wird nicht ausgeführt, CSP bleibt `script-src 'none'`).

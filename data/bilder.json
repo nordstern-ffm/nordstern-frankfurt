@@ -1,4 +1,49 @@
 {
   "_hinweis": "Jede Datei unter img/ und jedes <img src> braucht hier einen vollständigen Eintrag (Pflichtfelder siehe tools/check.py BILD_PFLICHT, Regeln docs/UX-KONZEPT.md Abschnitt 4). Lizenz immer am Original prüfen. 'geprueft' = Datum JJJJ-MM-TT. Eigene Werke: autor = eigener Name, quelle_url = Repo-Pfad oder Projektseite, lizenz z. B. 'CC BY 4.0'. Keine Änderung: geaendert = 'nein'.",
-  "bilder": []
+  "bilder": [
+    {
+      "datei": "img/blog/skyline-frankfurt.webp",
+      "titel": "Skyline Frankfurt am Main 2015",
+      "autor": "Christian Wolf (www.c-w-design.de)",
+      "quelle_url": "https://commons.wikimedia.org/wiki/File:Skyline_Frankfurt_am_Main_2015.jpg",
+      "lizenz": "CC BY-SA 3.0 DE",
+      "lizenz_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.de",
+      "geaendert": "verkleinert, WebP",
+      "geprueft": "2026-11-15",
+      "alt": "Frankfurter Skyline mit Hochhäusern hinter dem Main und einer grünen Brücke an einem sonnigen Tag"
+    },
+    {
+      "datei": "img/blog/neue-boerse-ihk.webp",
+      "titel": "Neue Börse am Börsenplatz (Sitz der IHK Frankfurt am Main)",
+      "autor": "Tilman AB",
+      "quelle_url": "https://commons.wikimedia.org/wiki/File:Frankfurt_B%C3%B6rse_IHK.jpg",
+      "lizenz": "CC0 1.0",
+      "lizenz_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.de",
+      "geaendert": "unterer Bildteil abgeschnitten (keine Personen), verkleinert, WebP",
+      "geprueft": "2026-11-15",
+      "alt": "Säulenfassade der Neuen Börse in Frankfurt mit Fahnen, eine davon mit IHK-Schriftzug"
+    },
+    {
+      "datei": "img/blog/hauptbahnhof-halle.webp",
+      "titel": "Bahnsteighalle Frankfurt am Main Hauptbahnhof",
+      "autor": "L.Willms",
+      "quelle_url": "https://commons.wikimedia.org/wiki/File:Frankfurt_Hbf_Halle_0491.jpg",
+      "lizenz": "CC BY-SA 3.0",
+      "lizenz_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.de",
+      "geaendert": "verkleinert, WebP",
+      "geprueft": "2026-11-15",
+      "alt": "Hohe Stahl-Glas-Halle des Frankfurter Hauptbahnhofs mit einem ICE am Bahnsteig"
+    },
+    {
+      "datei": "img/blog/taunusanlage-buerohaus.webp",
+      "titel": "Frankfurt, Taunusanlage 20",
+      "autor": "Karsten Ratzke",
+      "quelle_url": "https://commons.wikimedia.org/wiki/File:Frankfurt,_Taunusanlage_20.JPG",
+      "lizenz": "CC0 1.0",
+      "lizenz_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.de",
+      "geaendert": "verkleinert, WebP",
+      "geprueft": "2026-11-15",
+      "alt": "Historisches Bürogebäude aus Sandstein mit Säulen an der Taunusanlage, davor Bäume und Straße"
+    }
+  ]
 }

@@ -1,6 +1,14 @@
 {
-  "_regel": "Blog-Rubriken (E17). Parteiunabhängig: Wertungen von Parteien nur unter standpunkte.html. 'geplant' = Themen als Frage, ohne Tatsachenbehauptung, bis ein Beitrag mit Primärquelle und 'stand' existiert. Beiträge selbst kommen mit R1 nach data/beitraege/*.md. Redaktionsregeln: docs/REDAKTION.md.",
+  "_regel": "Blog-Rubriken (E17). Parteiunabhängig: Wertungen von Parteien nur unter standpunkte.html. 'geplant' = Themen als Frage, ohne Tatsachenbehauptung, bis ein Beitrag mit Primärquelle und 'stand' existiert. Beiträge selbst kommen mit R1 nach data/beitraege/*.md. Redaktionsregeln: docs/REDAKTION.md. Beiträge: data/beitraege/*.md (Vorlage docs/REDAKTION.md), gebaut nach /<rubrik>/<slug>/.",
   "rubriken": [
+    {
+      "id": "ratgeber",
+      "titel": "Ratgeber",
+      "icon": "briefcase",
+      "kurz": "Schritt für Schritt: Arbeit, Gründen, Behörden – mit Gesetzestext, Quelle und Stand.",
+      "umfasst": "Arbeit & Vermittlung · Gründen · Ankommen in Frankfurt",
+      "geplant": []
+    },
     {
       "id": "stadtpolitik",
       "titel": "Stadtpolitik",

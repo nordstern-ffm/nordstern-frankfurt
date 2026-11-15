@@ -11,7 +11,22 @@ fehler, warn = [], []
 site = json.load(open(os.path.join(ROOT, "data/site.json"), encoding="utf-8"))
 links = json.load(open(os.path.join(ROOT, "data/links.json"), encoding="utf-8"))["links"]
 bilder = json.load(open(os.path.join(ROOT, "data/bilder.json"), encoding="utf-8"))["bilder"]
-pages = sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
+# Erzeugte Seiten = alle HTML außer docs/ (Blog-Beiträge liegen in Unterordnern wie ratgeber/<slug>/)
+pages = []
+for _w, _o, _d in os.walk(ROOT):
+    _o[:] = [o for o in _o if o not in (".git", "docs")]
+    pages += [os.path.relpath(os.path.join(_w, f), ROOT).replace(os.sep, "/") for f in _d if f.endswith(".html")]
+pages.sort()
+
+
+def aufloesen(seite, url):
+    """Relativen Link einer Seite in einen Pfad ab Hauptordner umrechnen (ohne #, Ordner → index.html)."""
+    pfad = url.split("#")[0]
+    if not pfad:
+        return None
+    ziel = os.path.normpath(os.path.join(os.path.dirname(seite), pfad)).replace(os.sep, "/")
+    return ziel + "/index.html" if pfad.endswith("/") else ziel
+
 
 for p in pages:
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
@@ -21,9 +36,10 @@ for p in pages:
             fehler.append(f"{p}: externes Stylesheet {m}")
     if re.search(r"<script[^>]+src=", t) or "fonts.googleapis" in t:
         fehler.append(f"{p}: externes Skript/Google Fonts")
-    # 2. Interne Links existieren
-    for m in re.findall(r'href="([a-z0-9\-]+\.html)', t):
-        if m not in pages:
+    # 2. Interne Links und Dateien existieren (auch aus Unterordnern, ../ wird aufgelöst)
+    for m in re.findall(r'(?:href|src)="(?!https?:|mailto:|data:|#)([^"]+)"', t):
+        z = aufloesen(p, m)
+        if z and (z.startswith("..") or not os.path.isfile(os.path.join(ROOT, z))):
             fehler.append(f"{p}: toter Link {m}")
     # 3. Externe Links nur, wenn in links.json bestätigt oder ausdrücklich erlaubt
     ok = {l["url"] for l in links.values() if l.get("bestaetigt")} | {site["verein"]["website"]}
@@ -72,7 +88,7 @@ for p in pages:
         src = src.group(1) if src else ""
         if src.startswith(("http://", "https://", "//")):
             fehler.append(f"{p}: externes Bild {src} (Fremdabruf)")
-        elif src not in komplett:
+        elif aufloesen(p, src) not in komplett:
             fehler.append(f"{p}: <img src=\"{src}\"> ohne vollständigen Eintrag in data/bilder.json")
         if not re.search(r'\balt="[^"]+"', tag):
             fehler.append(f"{p}: <img src=\"{src}\"> ohne Alt-Text")
@@ -84,7 +100,7 @@ if not os.path.isfile(os.path.join(ROOT, "assets/LICENSE-icons.txt")):
     fehler.append("assets/LICENSE-icons.txt fehlt (Lizenzpflicht für Icons)")
 for p in pages:
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
-    for m in re.findall(r'<use href="assets/icons\.svg#([^"]+)"', t):
+    for m in re.findall(r'<use href="(?:\.\./)*assets/icons\.svg#([^"]+)"', t):
         if m not in symbole:
             fehler.append(f"{p}: Icon „{m}“ fehlt in assets/icons.svg")
     for tag in re.findall(r"<svg\b[^>]*>", t):
@@ -207,6 +223,35 @@ ignore = open(os.path.join(ROOT, ".gitignore"), encoding="utf-8").read() if os.p
 for o in ("docs/intern/", "data/intern/"):
     if o not in ignore.split():
         fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E16)")
+
+# 12. Blog-Beiträge (data/beitraege/*.md, R1): Pflichtfelder, Quellen über bestätigte Links, Bild mit Nachweis
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import beitraege  # noqa: E402
+blog_rubriken = {r["id"] for r in json.load(open(os.path.join(ROOT, "data/blog.json"), encoding="utf-8"))["rubriken"]}
+entwuerfe = []
+for datei, kopf, text in beitraege.alle(ROOT):
+    n = f"data/beitraege/{datei}"
+    fehlt = [k for k in beitraege.PFLICHT if not kopf.get(k)]
+    if fehlt:
+        fehler.append(f"{n}: Pflichtfeld fehlt: {', '.join(fehlt)}")
+        continue
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", kopf["stand"]):
+        fehler.append(f"{n}: stand muss JJJJ-MM-TT sein")
+    if kopf["rubrik"] not in blog_rubriken:
+        fehler.append(f"{n}: Rubrik „{kopf['rubrik']}“ fehlt in data/blog.json")
+    if kopf["bild"] not in komplett:
+        fehler.append(f"{n}: Titelbild ohne vollständigen Eintrag in data/bilder.json")
+    for q in kopf["quellen"] + re.findall(r"\]\(link:([^)]+)\)", text):
+        if not links.get(q, {}).get("bestaetigt"):
+            fehler.append(f"{n}: Quelle/Link „{q}“ fehlt in links.json oder ist unbestätigt")
+    if re.search(r"<[a-z/!]", text, re.I):
+        fehler.append(f"{n}: HTML im Beitragstext (nur Markdown erlaubt)")
+    if not os.path.isfile(os.path.join(ROOT, beitraege.ziel(kopf))):
+        fehler.append(f"{n}: Seite {beitraege.ziel(kopf)} fehlt – build.py laufen lassen")
+    if kopf["freigegeben"] != "ja":
+        entwuerfe.append(n)
+for n in entwuerfe:
+    (fehler if "--launch" in sys.argv else warn).append(f"{n}: Entwurf – vor Merge auf main von André freigeben (R4)")
 
 if "--launch" in sys.argv:
     b = site["betreiber"]

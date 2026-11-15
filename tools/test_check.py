@@ -7,6 +7,7 @@ Das echte Repo wird nicht verändert.
 import json, os, shutil, subprocess, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ECHTE_BILDER = json.load(open(os.path.join(ROOT, "data", "bilder.json"), encoding="utf-8"))["bilder"]
 WEBP = b"RIFF\x1a\x00\x00\x00WEBPVP8L\x0d\x00\x00\x00\x2f\x00\x00\x00\x10\x07\x10\x11\x11\x88\x88\xfe\x07\x00"
 EINTRAG = {"datei": "img/test.webp", "titel": "Testbild", "autor": "Testautor",
            "quelle_url": "https://commons.wikimedia.org/wiki/File:Test.webp", "lizenz": "CC0 1.0",
@@ -21,14 +22,15 @@ SEITE = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
 
 def lauf(tmp, bilder=None, datei=False, seite=None, roh=None, extra=None):
     """Setzt den Testzustand in der Kopie und gibt (Exit-Code, Ausgabe) von check.py zurück."""
-    img = os.path.join(tmp, "img")
-    shutil.rmtree(img, ignore_errors=True)
+    testbild = os.path.join(tmp, "img", "test.webp")  # nur das eigene Testbild, echte Bilder bleiben
+    if os.path.exists(testbild):
+        os.remove(testbild)
     if datei:
-        os.makedirs(img)
-        with open(os.path.join(img, "test.webp"), "wb") as f:
+        os.makedirs(os.path.dirname(testbild), exist_ok=True)
+        with open(testbild, "wb") as f:
             f.write(WEBP)
     with open(os.path.join(tmp, "data", "bilder.json"), "w", encoding="utf-8") as f:
-        json.dump({"bilder": bilder or []}, f)
+        json.dump({"bilder": ECHTE_BILDER + (bilder or [])}, f)  # echte Einträge bleiben, Testbild kommt dazu
     t = os.path.join(tmp, "zz-test.html")
     if seite or roh:
         with open(t, "w", encoding="utf-8") as f:
@@ -85,6 +87,16 @@ FAELLE = [
     # Datenschutz (E16)
     ("internes Feld in Daten", 1, "internes Feld (pruefen/intern)",
      {"extra": {"data/zz.json": '{"dienste": [{"id": "x", "pruefen": "intern"}]}'}}),
+    # Blog-Beiträge (R1) und Seiten in Unterordnern
+    ("Beitrag mit unbestätigtem Link", 1, "„gibt-es-nicht“ fehlt in links.json",
+     {"extra": {"data/beitraege/zz-test.md": "---\ntitel: T\nbeschreibung: B\nrubrik: ratgeber\nslug: zz\n"
+                "stand: 2026-11-15\nfreigegeben: nein\nbild: img/blog/skyline-frankfurt.webp\nquellen: sgb3_296\n---\n"
+                "Text mit [Link](link:gibt-es-nicht)."}}),
+    ("Beitrag ohne Quellen", 1, "Pflichtfeld fehlt: quellen",
+     {"extra": {"data/beitraege/zz-test.md": "---\ntitel: T\nbeschreibung: B\nrubrik: ratgeber\nslug: zz\n"
+                "stand: 2026-11-15\nfreigegeben: nein\nbild: img/blog/skyline-frankfurt.webp\n---\nText."}}),
+    ("toter Link aus Unterordner", 1, "toter Link ../../fehlt.html",
+     {"extra": {"ratgeber/zz/index.html": SEITE.format('<a href="../../fehlt.html">x</a>')}}),
     ("vollständig", 0, "0 Fehler",
      {"datei": True, "bilder": [EINTRAG], "seite": '<img src="img/test.webp" alt="Testbild">'}),
 ]
