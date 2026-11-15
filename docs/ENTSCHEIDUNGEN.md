@@ -91,3 +91,12 @@ Barrierefreiheit: Icons neben Text sind Deko (`aria-hidden="true"`, `focusable="
 | „16 Ortsbeiräte“ als dritte Kachel | thematisch passend | Primärquelle nicht abrufbar (frankfurt.de 403) | in docs/OFFEN.md |
 Wortlaut eng an der Quelle: „Einwohnerinnen und Einwohner“ (Statistik) und „bis 131 €“ (Gesetz: „bis zu 131 Euro monatlich“). Kein Hinweis, dass Nachbarschaftshilfe über den Entlastungsbetrag abgerechnet werden kann – das setzt eine Anerkennung nach Landesrecht voraus und ist nicht belegt.
 Quellen-Links in `links.json` am 15.11.2026 per Abruf mit Inhaltsprüfung bestätigt (nicht im Browser des Nutzers) – vor Launch einmal im Browser öffnen.
+
+## E14 · Ablauf-Diagramme und Zeitleiste (Phase 2, Aufgabe 4)
+**Gewählt:** `steps(key)` und `timeline()` in build.py, Inhalte in `data/ablaeufe.json`. Beide als `<ol role="list">`: Die Liste trägt Reihenfolge und Anzahl für Screenreader; Schrittnummer (`aria-hidden`) und Icons sind nur visuell. Zeitleiste ohne Datum, solange keins bestätigt ist; Status als Text („in Arbeit“, „geplant“) plus Punktform (voll/halb/leer), nicht nur Farbe. `{ziel}` holt die 220 aus `petitionen.json` (E3).
+| Alternative | Nutzen | Sicherheit / Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| Diagramm als SVG-Grafik | freiere Gestaltung | Text in Grafik, schlecht skalierbar, extra Text-Alternative nötig | verworfen |
+| CSS-Zähler statt Nummer im HTML | weniger Markup | manche Screenreader lesen `::before`-Inhalt doppelt | verworfen |
+| Zeitleiste mit geschätzten Monaten | lebendiger | erfundene Termine (Auftrag Regel 4) | verworfen |
+Nachbarschafts-Ablauf ist ausdrücklich als „geplant“ gekennzeichnet (Verein in Gründung).

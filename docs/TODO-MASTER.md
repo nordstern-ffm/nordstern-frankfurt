@@ -8,7 +8,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | # | Block | Aufgabe | Quelle | Status |
 | --- | --- | --- | --- | --- |
 | 1 | Phase 2 | Aufgaben 1–3: Bildrechte, Icons, Kennzahlen (+ Kontrast Hellmodus) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt (Branch ux-phase2) |
-| 2 | Phase 2 | **4** Ablauf-Diagramme + Zeitleiste (`steps()`/`timeline()`) | CLAUDE-CODE-AUFTRAG.md | ◐ in Arbeit |
+| 2 | Phase 2 | **4** Ablauf-Diagramme + Zeitleiste (`steps()`/`timeline()`) | CLAUDE-CODE-AUFTRAG.md | ✓ erledigt |
 | 3 | Phase 2 | **5** Schaubild „Wer entscheidet in Frankfurt?“ (Inline-SVG + Text-Alternative, Quellen HGO/frankfurt.de) | CLAUDE-CODE-AUFTRAG.md | ☐ |
 | 4 | Phase 2 | **6** Schema-Karte Ortsbezirk 10 (eigenes SVG, ODbL-Hinweis) | CLAUDE-CODE-AUFTRAG.md | ☐ |
 | 5 | Phase 2 | **7** Hero-Illustrationen je Seite (eigene SVG) | CLAUDE-CODE-AUFTRAG.md | ☐ |
@@ -49,7 +49,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | Datenschutzerklärung an alle neuen Funktionen anpassen (Audio, lokale Skripte E12, E-Mail-Einsendungen, Anzeigen/UTM, externe Links) | CC + Chat prüft |
 | ☐ | Erklärung zur Barrierefreiheit (Seite) + Prüfung, ob das Barrierefreiheitsstärkungsgesetz für die bezahlten Angebote gilt (Ausnahme für Kleinstunternehmen prüfen) | Chat recherchiert, CC baut |
 | ☐ | Link-Check aller externen Links im Browser, Ergebnis in `data/links.json` | A + CC |
-| ☐ | Mobilansicht 390 px: abgeschnittener Text (Hinweis von CC, Aufgabe 2) per Emulation klären | CC |
+| ✓ | Mobilansicht 390 px: geklärt – Messfehler von Edge headless, per iframe 390 px nichts abgeschnitten (FEHLER-LOG, Aufgabe 4) | CC |
 | ☐ | Wahlprogramm-Text FW schicken + Vorstandsfreigabe der Positionen | A |
 | ☐ | Klären: „220 Bürger“ = Ziel 220 Unterstützer je Projekt? | A |
 

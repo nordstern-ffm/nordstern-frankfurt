@@ -89,3 +89,19 @@ nav a{gap:.4rem} nav a .icon{width:1.1em;height:1.1em}
 .stat-quelle{margin-top:auto;font-size:.85rem;color:var(--muted)}
 /* Hellmodus: gold-soft = #8A6A10 (5,06:1 auf Weiß, 4,56:1 auf --bg); früher #B8901E nur 2,68–2,98:1. Stern-Inneres bleibt hell (Deko). */
 @media (prefers-color-scheme:light){.star-inner{fill:#B8901E}}
+/* Ablauf-Diagramm steps(): <ol> trägt die Reihenfolge, Nummer + Icon nur visuell; mobil untereinander */
+.steps{list-style:none;margin:1rem 0 1.5rem;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+.step{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.2rem}
+.step-kopf{display:flex;align-items:center;gap:.7rem}
+.step-nr{display:inline-flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--btn-bg);color:var(--btn-text);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.15rem}
+.step-icon{color:var(--gold)} .step-icon .icon{width:1.7rem;height:1.7rem}
+.step h3{margin:.7rem 0 .3rem} .step p{margin:0}
+h2[id]{scroll-margin-top:1rem}
+/* Zeitleiste timeline(): Linie + Punkte, Status steht als Text da (nicht nur Farbe) */
+.timeline{list-style:none;margin:1rem 0 1.5rem .6rem;padding:0 0 0 1.6rem;border-left:3px solid var(--line)}
+.tl{position:relative;padding:0 0 1.3rem}
+.tl::before{content:"";position:absolute;left:calc(-1.6rem - 11px);top:.35rem;width:19px;height:19px;box-sizing:border-box;border-radius:50%;border:3px solid var(--gold);background:var(--bg)}
+.tl-erledigt::before{background:var(--gold)}
+.tl-in-arbeit::before{background:linear-gradient(90deg,var(--gold) 50%,var(--bg) 50%)}
+.tl-status{margin:0} .status{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tl h3{margin:.1rem 0 .2rem} .tl p{margin:0}

@@ -21,6 +21,8 @@ ICONS = [
     "bed-double", "car-taxi-front", "sparkles", "scissors", "zap", "shopping-bag",
     # Agentur, Kontakt
     "layout-template", "pen-line", "wrench", "package", "mail",
+    # Abläufe (data/ablaeufe.json → icon)
+    "eye", "message-circle", "send", "search",
 ]
 ERLAUBT = {
     "path": {"d"}, "circle": {"cx", "cy", "r"}, "ellipse": {"cx", "cy", "rx", "ry"},

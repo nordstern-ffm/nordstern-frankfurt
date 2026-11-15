@@ -25,6 +25,7 @@ LINKS = load("links.json")["links"]
 ZAHLUNG = load("zahlung.json")
 BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
 ZAHLEN = load("zahlen.json")["zahlen"]
+ABL = load("ablaeufe.json")
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -92,6 +93,38 @@ def kacheln(ids, titel="Zahlen, die zählen"):
         li += (f'<li class="stat"><span class="stat-wert">{E(z["wert"])}</span> <span class="stat-text">{E(z["text"])}</span>'
                f'<span class="stat-quelle">Quelle: {q} · Stand: {E(z["stand"])}</span></li>')
     return f'<section aria-label="{E(titel)}"><ul class="stats">{li}</ul></section>'
+
+
+def ziel_text(s):
+    """{ziel} aus petitionen.json einsetzen – die Zahl steht nur dort (E3)."""
+    return E(s).replace("{ziel}", str(PET["ziel_unterstuetzer"]))
+
+
+def steps(key, titel=None):
+    """Ablauf-Diagramm: <ol> = Reihenfolge für Screenreader, Nummer und Icon nur visuell."""
+    a = ABL["ablaeufe"][key]
+    hid = f"h-ablauf-{key}"
+    li = ""
+    for n, s in enumerate(a["schritte"], 1):
+        t = f'<a href="{E(s["ziel"])}">{E(s["titel"])}</a>' if s.get("ziel") else E(s["titel"])
+        li += (f'<li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">{n}</span>'
+               f'<span class="step-icon">{icon(s["icon"])}</span></span><h3>{t}</h3><p>{ziel_text(s["text"])}</p></li>')
+    hinweis = f'<p class="notice">{E(a["hinweis"])}</p>' if a["hinweis"] else ""
+    return (f'<section aria-labelledby="{hid}"><h2 id="{hid}">{E(titel or a["titel"])}</h2>{hinweis}'
+            f'<ol class="steps" role="list">{li}</ol></section>')
+
+
+def timeline():
+    """Zeitleiste: Status als Text (nicht nur Farbe), Datum nur wenn in den Daten bestätigt."""
+    z = ABL["zeitleiste"]
+    li = ""
+    for e in z["eintraege"]:
+        cls = "tl-" + e["status"].lower().replace(" ", "-")
+        wann = f' · <span class="tl-wann">{E(e["wann"])}</span>' if e["wann"] else ""
+        li += (f'<li class="tl {cls}"><p class="tl-status"><span class="status">{E(e["status"])}</span>{wann}</p>'
+               f'<h3>{E(e["titel"])}</h3><p>{ziel_text(e["text"])}</p></li>')
+    return (f'<section aria-labelledby="h-zeitleiste"><h2 id="h-zeitleiste">{E(z["titel"])}</h2>'
+            f'<ol class="timeline" role="list">{li}</ol></section>')
 
 
 def kontakt_zeile():
@@ -175,6 +208,7 @@ page("index.html", "Start",
 {card("route", link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
 {card("users", f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
 </div></section>
+{timeline()}
 <section class="callout"><h2>So arbeiten wir</h2>
 <ul><li><strong>Ehrlich:</strong> Was noch in Planung ist, steht auch so da.</li>
 <li><strong>Getrennt:</strong> Ehrenamt, Politik und Geschäft laufen in eigenen Bereichen mit eigener Verantwortung.</li>
@@ -193,6 +227,7 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 {card("shopping-basket", "Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
 {card("user-search", "Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
 </div>
+{steps("nachbarschaft")}
 <p>Alle Details, Fachkraft-Ausschreibung und Blog: <a href="{E(SITE["verein"]["website"])}" rel="noopener">Website der Initiative</a>.</p>
 <div class="callout"><h2>Warum hier getrennt?</h2><p>Der Verein soll gemeinnützig werden. Gemeinnützige Vereine dürfen keine Partei unterstützen und kein Geschäft für Dritte machen. Darum hat der Verein eine eigene Seite, und Nordstern verlinkt nur dorthin.</p></div>
 """)
@@ -232,13 +267,13 @@ page("mitmachen.html", "Melden & Petitionen",
      f"Mängel in Frankfurt direkt an die Stadt melden und Anliegen bündeln – Ziel {ziel} Unterstützer je Projekt.",
      f"""
 <h1>Melden. Bündeln. Bewegen.</h1>
-<h2>1 · Mangel sehen – direkt melden</h2>
+{steps("melden")}
+<h2 id="melden">1 · Mangel sehen – direkt melden</h2>
 <p>Kaputte Laterne, Schlagloch, wilder Müll: Melden Sie es dort, wo die Stadt es bearbeitet – beim offiziellen {link('maengelmelder')}. Ein eigener Melder auf dieser Seite würde nur Umwege erzeugen.</p>
-<h2>2 · Anliegen bündeln – {ziel} Stimmen</h2>
+<h2 id="buendeln">2 · Anliegen bündeln – {ziel} Stimmen</h2>
 <p>Größere Wünsche brauchen viele Unterstützer. Wir helfen beim Formulieren, sammeln im Stadtteil und reichen es auf der {link('ideenplattform')} oder als Petition ein. Unser Ziel je Projekt: <strong>{ziel} Unterstützerinnen und Unterstützer</strong>.</p>
 {pet_html}
-<h2>3 · Selbst ein Anliegen starten</h2>
-<ol><li>Problem in zwei Sätzen beschreiben – wo, was, für wen.</li><li>Uns schreiben; wir prüfen, ob Stadt, Ortsbeirat oder Land zuständig ist.</li><li>Gemeinsam Text und Fotos fertig machen und einreichen.</li></ol>
+{steps("anliegen", "3 · Selbst ein Anliegen starten")}
 {kontakt_zeile()}
 <p class="small">Unterschriften sammeln wir nicht auf dieser Seite – Ihre politische Meinung bleibt bei der Plattform, auf der Sie unterschreiben.</p>
 """)
