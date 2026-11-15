@@ -105,3 +105,12 @@ h2[id]{scroll-margin-top:1rem}
 .tl-in-arbeit::before{background:linear-gradient(90deg,var(--gold) 50%,var(--bg) 50%)}
 .tl-status{margin:0} .status{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .tl h3{margin:.1rem 0 .2rem} .tl p{margin:0}
+/* Blog: Rubrik-Chips als Sprungmarken (ohne JS), Rubrik-Abschnitte, geplante Themen */
+.chips{list-style:none;margin:1rem 0 1.5rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.chips a{display:inline-flex;align-items:center;gap:.45rem;min-height:44px;padding:.4rem 1rem;border:2px solid var(--gold);border-radius:2rem;color:var(--text);text-decoration:none;font-weight:700}
+.chips a:hover{background:var(--bg2)}
+.rubrik{border-top:1px solid var(--line);margin-top:2rem}
+.rubrik h2{display:flex;align-items:center;gap:.7rem}
+.rubrik h2 .card-icon{margin-top:0}
+.geplant{list-style:none;padding:0} .geplant li{margin:.4rem 0}
+.geplant .status{display:inline-block;margin-right:.4rem;padding:0 .5rem;border:1px solid var(--line);border-radius:.4rem}

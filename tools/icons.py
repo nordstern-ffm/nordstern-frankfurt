@@ -23,6 +23,8 @@ ICONS = [
     "layout-template", "pen-line", "wrench", "package", "mail",
     # Abläufe (data/ablaeufe.json → icon)
     "eye", "message-circle", "send", "search",
+    # Blog-Rubriken (data/blog.json → icon)
+    "newspaper", "scale", "cpu",
 ]
 ERLAUBT = {
     "path": {"d"}, "circle": {"cx", "cy", "r"}, "ellipse": {"cx", "cy", "rx", "ry"},

@@ -113,3 +113,7 @@ Nachbarschafts-Ablauf ist ausdrücklich als „geplant“ gekennzeichnet (Verein
 | Zweites privates Repo für Interna | versioniert, gesichert | mehr Pflege, zweites Konto-Recht | später möglich |
 | **Lokale, ignorierte Ordner** | sofort wirksam, kein Aufwand | keine Sicherung durch Git → selbst sichern (TODO P3 „Sicherung“) | **gewählt** |
 Die Git-Historie enthält die alten Fassungen weiterhin (siehe `docs/OFFEN.md`).
+
+## E17 · Blog-Reiter mit Rubriken Stadtpolitik, Politik, KI & Stadt (André, 15.11.2026)
+**Gewählt:** Eigener Menüpunkt „Blog“ (`blog.html`, Daten `data/blog.json`). Stadtpolitik bündelt „Aus dem Römer“, „Aus dem Ortsbeirat 10“, „Bürgerdialog“ (REDAKTION.md); Politik = Land/Bund/Europa aus Frankfurter Sicht; KI & Stadt = Beispiele aus anderen Städten nach festem Muster (Beispiel mit Quelle · Funktionsweise · Kosten laut Quelle · Stand in Frankfurt · was Frankfurt bräuchte). Alle Rubriken parteiunabhängig; Parteipositionen nur unter Standpunkte. Rubrik-Chips als Sprungmarken (ohne JS). Geplante Themen stehen als Fragen ohne Tatsachenbehauptung da.
+**Navigation:** Damit es bei höchstens 7 Hauptpunkten bleibt (R2), ist „Standpunkte“ in den Footer gewandert (deutlich als „gekennzeichneter Partei-Bereich“). Alternative: „Für Vereine & Firmen“ in den Footer – verworfen, weil die neutralen Bereiche und das Angebot sichtbar bleiben sollen und der Partei-Bereich nicht im Hauptmenü neben dem Verein stehen muss. Umkehrbar in `NAV` (build.py).

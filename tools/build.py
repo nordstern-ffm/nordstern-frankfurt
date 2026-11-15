@@ -26,6 +26,7 @@ ZAHLUNG = load("zahlung.json")
 BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
 ZAHLEN = load("zahlen.json")["zahlen"]
 ABL = load("ablaeufe.json")
+BLOG = load("blog.json")
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -33,9 +34,9 @@ NAV = [
     ("index.html", "Start", "house"),
     ("nachbarschaft.html", "Nachbarschaft", "hand-heart"),
     ("frankfurt.html", "Frankfurt-Info", "landmark"),
+    ("blog.html", "Blog", "newspaper"),
     ("mitmachen.html", "Melden & Petitionen", "megaphone"),
     ("dienste.html", "Vermittlung", "handshake"),
-    ("standpunkte.html", "Standpunkte", "flag"),
     ("agentur.html", "Für Vereine & Firmen", "briefcase"),
 ]
 
@@ -171,7 +172,7 @@ def page(path, title, desc, body):
 <div class="wrap">
 <p><strong>{E(SITE["marke"])}</strong> – {E(SITE["claim"])}</p>
 <p>Betrieben von {E(B["name"])} · {E(B["firma"])}. Der Verein „{E(SITE["verein"]["name"])}“ ist eigenständig und parteipolitisch neutral.</p>
-<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="bildnachweise.html">Bildnachweise</a> · Stand: {E(SITE["stand"])}</p>
+<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="bildnachweise.html">Bildnachweise</a> · <a href="standpunkte.html">Standpunkte (gekennzeichneter Partei-Bereich)</a> · Stand: {E(SITE["stand"])}</p>
 <p class="small">Ohne Tracker, ohne Cookies, ohne Fremd-Schriften. Keine Rechts- oder Steuerberatung.</p>
 </div>
 </footer>
@@ -295,6 +296,32 @@ page("dienste.html", "Vermittlung",
 <p class="small">Gewerbliches Angebot von {E(B["firma"])}. Nicht Teil des Vereins. Wir befördern, beherbergen und behandeln nicht selbst, sondern vermitteln an Fachbetriebe und Fachkräfte.</p>
 """)
 
+# ----------------------------------------------------------------- Blog
+def blog_html():
+    """Rubriken mit Sprungmarken-Chips (ohne JS), Leerzustand und geplanten Themen als Fragen (E17)."""
+    rub = BLOG["rubriken"]
+    chips = "".join(f'<li><a href="#{E(r["id"])}">{icon(r["icon"])}<span>{E(r["titel"])}</span></a></li>' for r in rub)
+    teile = [f'<nav aria-label="Rubriken"><ul class="chips">{chips}</ul></nav>']
+    for r in rub:
+        posts = [b for b in BLOG["beitraege"] if b.get("rubrik") == r["id"]]
+        liste = ('<ul>' + "".join(f'<li><a href="{E(b["url"])}">{E(b["titel"])}</a> <span class="small">Stand: {E(b["stand"])}</span></li>' for b in posts) + '</ul>'
+                 if posts else '<p class="notice">Erster Beitrag kommt bald.</p>')
+        geplant = "".join(f'<li><span class="status">geplant</span> {E(g)}</li>' for g in r["geplant"])
+        teile.append(f'<section class="rubrik" aria-labelledby="{E(r["id"])}"><h2 id="{E(r["id"])}"><span class="card-icon">{icon(r["icon"])}</span>{E(r["titel"])}</h2>'
+                     f'<p>{E(r["kurz"])}</p><p class="small">{E(r["umfasst"])}</p>{liste}'
+                     f'<h3>Geplante Themen</h3><ul class="geplant">{geplant}</ul></section>')
+    return "\n".join(teile)
+
+
+page("blog.html", "Blog",
+     "Blog von Nordstern Frankfurt: Stadtpolitik, Politik und KI & Stadt – verständlich, mit Quellen, parteiunabhängig.",
+     f"""
+<h1>Blog</h1>
+<p class="lead">Stadtpolitik, Politik und gute Ideen aus anderen Städten – kurz erklärt, mit Quellen und der Frage: Was heißt das für Frankfurt?</p>
+{blog_html()}
+<p class="small">Wir schreiben parteiunabhängig und mit Primärquellen. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a> und sind dort als solche gekennzeichnet.</p>
+""")
+
 # ---------------------------------------------------------- Standpunkte
 frei = [s for s in STAND["eintraege"] if s.get("freigegeben")]
 if frei:
@@ -393,4 +420,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 4} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 5} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
