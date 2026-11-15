@@ -25,6 +25,8 @@ ICONS = [
     "eye", "message-circle", "send", "search",
     # Blog-Rubriken (data/blog.json → icon)
     "newspaper", "scale", "cpu",
+    # Quiz „Frankfurt-Stern“ (data/quiz.json → icon)
+    "list-checks", "heart", "star", "telescope", "shield-check", "party-popper", "compass", "leaf",
 ]
 ERLAUBT = {
     "path": {"d"}, "circle": {"cx", "cy", "r"}, "ellipse": {"cx", "cy", "rx", "ry"},
