@@ -273,7 +273,7 @@ page("mitmachen.html", "Melden & Petitionen",
 <h1>Melden. Bündeln. Bewegen.</h1>
 {steps("melden")}
 <h2 id="melden">1 · Mangel sehen – direkt melden</h2>
-<p>Kaputte Laterne, Schlagloch, wilder Müll: Melden Sie es dort, wo die Stadt es bearbeitet – beim offiziellen {link('maengelmelder')}. Ein eigener Melder auf dieser Seite würde nur Umwege erzeugen.</p>
+<p>Kaputte Laterne, Schlagloch, wilder Müll? Melden Sie es direkt beim offiziellen {link('maengelmelder')}.</p>
 <h2 id="buendeln">2 · Anliegen bündeln – {ziel} Stimmen</h2>
 <p>Größere Wünsche brauchen viele Unterstützer. Wir helfen beim Formulieren, sammeln im Stadtteil und reichen es auf der {link('ideenplattform')} oder als Petition ein. Unser Ziel je Projekt: <strong>{ziel} Unterstützerinnen und Unterstützer</strong>.</p>
 {pet_html}

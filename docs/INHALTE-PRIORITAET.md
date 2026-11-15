@@ -26,9 +26,5 @@ Bewertung: **Nutzen** für Leser · **Relevanz** für Suche · **Risiko** (Recht
 | tools | SEO-ROUTINE, CONTENT-ROUTINE, Gotchas, Fehler-Routinen → in `docs/SEO-RICHTLINIE.md` und Arbeitsregeln übernommen | CROWN-Dokumente |
 
 ## Ausgeschlossen (nie auf Nordstern)
-- **topwash** – Nachbau der Seite eines realen Unternehmens (Marken-/Wettbewerbsrecht).
-- **STAFF** – Begleitagentur, strikt getrennt.
-- **turmhotel**, Housekeeping, Rezeptionshandbuch – internes Material des Arbeitgebers.
-- **crown-v10/crown7** – Wett-Tool, privat.
-- **partei-der-gerechten** – andere Partei; Vermischung mit FW-Inhalten ausgeschlossen.
-- Bewerbungs-Repos (rm-apply, texter-portfolio, bewerbung-copywriter) – nur als Referenz „Texte“ auf Agenturseite, ohne persönliche Daten.
+- Nachbauten fremder Unternehmensseiten, private Projekte, Material von Arbeitgebern, Inhalte anderer Parteien, persönliche Bewerbungsunterlagen. Die konkrete Liste ist intern (nicht im öffentlichen Repo).
+

@@ -43,7 +43,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ✓ | Aufgabe | Wer |
 | --- | --- | --- |
 | ☐ | **Zwei-Faktor-Anmeldung** für GitHub-Konto nordstern-ffm aktivieren (neues Konto, Hauptschutz des Projekts) | A |
-| ☐ | **Interne Notizen sind öffentlich** (Repo + Pages): `pruefen`-Felder und Vornamen Dritter aus dem Repo nehmen – Optionen in `docs/OFFEN.md` | A entscheidet, CC setzt um |
+| ✓ | Interne Notizen und Vornamen Dritter aus dem Repo genommen (15.11.2026, E16) – offen: Git-Historie bereinigen (siehe `docs/OFFEN.md`) | A entscheidet |
 | ☐ | Impressum-Daten: Anschrift, E-Mail, Telefon → `data/site.json` | A |
 | ☐ | Domain kaufen (nur Domain), DNS nach `docs/DOMAIN-SETUP.md`, Zwei-Faktor beim Registrar | A |
 | ☐ | Phase 2 (Aufgaben 1–10) abnehmen, PR `ux-phase2 → main` prüfen und mergen (1–3 erledigt, siehe Reihenfolge oben) | A + CC |
@@ -61,8 +61,8 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | Gewerbeanmeldung (Agentur, Vermittlung), steuerliche Einordnung (Kleinunternehmer?) mit Steuerberatung | A |
 | ☐ | AGB + Widerrufsbelehrung für bezahlte Pakete/Lernpakete, Preisangaben korrekt (Endpreise) | Chat Entwurf, Fachanwalt/IHK prüfen |
 | ☐ | Eigenes Stripe-Konto Agentur, Zahlungslinks, ggf. Krypto (USDC) erst wenn im Konto verfügbar | A |
-| ☐ | Sam: vollständiger Name, Rolle, Pakete, Preise | A |
-| ☐ | Vermittlung: `pruefen`-Punkte je Dienst (Arbeitgeber-Konflikt Hotel, Konzessionen Taxi, Nachweise Massage, Status Näherinnen) | A |
+| ☐ | Agentur-Partner/in: Rolle, Pakete, Preise (Name nur mit Einwilligung veröffentlichen) | A |
+| ☐ | Vermittlung: interne Prüfpunkte je Dienst abarbeiten (lokal in `data/intern/`) | A |
 | ☐ | TeleSon-Vertragsform + Amway-Website-Richtlinien lesen, dann `aktiv: true` | A |
 | ☐ | Anzeigenpartner-Vertrag (Mustervorlage: Laufzeit, Preis, Kennzeichnung, Ausschlüsse) | Chat |
 | ☐ | Webador-Abo kündigen (Entwurf liegt im Chat), Domain-Code sichern | A |
@@ -74,7 +74,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | Phase 3 Ankommen + Sprachraum (P1–P6), Namen festlegen | A entscheidet, CC baut |
 | ☐ | Phase 3b Bausteine, Verlinkung, Anzeigen, Kultur (V1–V5) | CC |
 | ☐ | Weltstadt/Lesbarkeit/Interaktion (W1–W6) – Entscheidung Quiz-Skripte ✓ (E12 erweitert, 15.11.2026) | CC |
-| ☐ | **Prüfer-Netzwerk** Übersetzungen: Lao (Moni?), Bangla (Amir?), Tigrinya, Thai, Englisch – schriftliche Zusage + Nutzungsrechte | A |
+| ☐ | **Prüfer-Netzwerk** Übersetzungen: Lao, Bangla, Tigrinya, Thai, Englisch – schriftliche Zusage + Nutzungsrechte | A |
 | ☐ | **Einwilligungen** dokumentieren: Personen in Geschichten/Fotos, Sprecher für Audio, Gastautoren, Übersetzer (`docs/EINWILLIGUNGEN.md`, ohne Kontaktdaten) | A |
 | ☐ | Festkalender 2027 per Deep Research (Oktober) | Chat |
 | ☐ | Redaktionsrhythmus festlegen (z. B. 2 Beiträge/Woche) + Freigabeweg | A |
@@ -88,5 +88,5 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | Newsletter (EU-Anbieter, Double-Opt-in) | A + CC |
 | ☐ | Monatlicher automatischer Link-Check (Skript am PC), Bericht ins Repo | CC |
 | ☐ | Sicherung: zweites Remote oder lokales Backup des Repos | A |
-| ☐ | Altes Konto intelligentresponder-max: Impressum für 16 öffentliche Seiten ergänzen oder Pages abschalten, Duplikate archivieren (`docs/REPO-AUDIT.md`) | A + CC |
+| ☐ | Altes Konto intelligentresponder-max: Impressum für 16 öffentliche Seiten ergänzen oder Pages abschalten, Duplikate archivieren (Audit lokal in `docs/intern/`) | A + CC |
 | ☐ | Lernpakete (PDF/Audio) über Gumroad, Kleingruppen über Zahlungslink | A + CC |

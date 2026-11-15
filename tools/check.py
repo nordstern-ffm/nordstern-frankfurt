@@ -186,6 +186,28 @@ for k, l in links.items():
     if not l["url"].startswith("https://"):
         fehler.append(f"links.json: {k} – URL muss mit https:// beginnen")
 
+# 11. Repo ist öffentlich (E16): keine internen Prüfnotizen in data/*.json, Intern-Ordner bleiben ignoriert
+def schluessel(o):
+    if isinstance(o, dict):
+        for k, v in o.items():
+            yield k
+            yield from schluessel(v)
+    elif isinstance(o, list):
+        for v in o:
+            yield from schluessel(v)
+for d in sorted(os.listdir(os.path.join(ROOT, "data"))):
+    if d.endswith(".json"):
+        try:
+            inhalt = json.load(open(os.path.join(ROOT, "data", d), encoding="utf-8"))
+        except ValueError:
+            continue  # schon in Abschnitt 10 gemeldet
+        if {"pruefen", "intern", "notiz_intern"} & set(schluessel(inhalt)):
+            fehler.append(f"data/{d}: internes Feld (pruefen/intern) – gehört nach data/intern/ (E16)")
+ignore = open(os.path.join(ROOT, ".gitignore"), encoding="utf-8").read() if os.path.isfile(os.path.join(ROOT, ".gitignore")) else ""
+for o in ("docs/intern/", "data/intern/"):
+    if o not in ignore.split():
+        fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E16)")
+
 if "--launch" in sys.argv:
     b = site["betreiber"]
     for k in ("anschrift", "email", "telefon"):

@@ -23,7 +23,7 @@ Kurzfassung dessen, was erledigt ist und worauf man achten muss. Details: `docs/
 Bilder mit Nachweis und Alt-Text · Icons vorhanden und korrekt versteckt · Kennzahlen mit Quelle/Stand · **in allen HTML-Dateien des Repos** kein `<script>`, keine `on…=`-Handler, keine `javascript:`-Links, kein `<form>/<iframe>/<object>/<embed>/<base>`, keine Fremdabrufe, `target=_blank` nur mit `noopener` · CSS ohne `@import`/externe `url()` · Hauptseiten mit CSP, Referrer-Policy, `lang`, `<title>`, genau einer h1, ohne Überschriften-Sprünge, ohne doppelte IDs, Sprungmarken mit Ziel · alle `data/*.json` gültig, alle Links https · noindex im Vorschau-Modus.
 
 ## Achtung
-- **Repo ist öffentlich und Pages veröffentlicht das ganze Repo** (`.nojekyll`): auch `data/dienste.json` → `pruefen` (interne Notizen), `docs/`, `FEHLER-LOG.md`. Entscheidung von André offen (siehe `docs/OFFEN.md`).
+- **Repo ist öffentlich und Pages veröffentlicht das ganze Repo** (`.nojekyll`). Interna nur in `docs/intern/` und `data/intern/` (ignoriert). Alte Fassungen stecken noch in der Git-Historie (siehe `docs/OFFEN.md`).
 - E12-Freigabe für Skripte erst mit der ersten Sprachraum-/Quiz-Seite in check.py einbauen (Seitenliste + CSP `script-src 'self'` nur dort).
 - frankfurt.de / ffm.de blocken Skript-Abrufe (403) → solche Quellen im Browser prüfen.
 - Nächste Aufgabe: Phase 2 / 5 „Wer entscheidet in Frankfurt?“ (Quellen: HGO, frankfurt.de).

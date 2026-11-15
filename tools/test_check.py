@@ -82,6 +82,9 @@ FAELLE = [
     ("zweite h1", 1, "2× <h1>", {"seite": "<h1>Noch eine</h1>"}),
     ("Sprungmarke ohne Ziel", 1, "Sprungmarke #fehlt ohne Ziel", {"seite": '<a href="#fehlt">x</a>'}),
     ("doppelte id", 1, "doppelte id", {"seite": '<p id="a">1</p><p id="a">2</p>'}),
+    # Datenschutz (E16)
+    ("internes Feld in Daten", 1, "internes Feld (pruefen/intern)",
+     {"extra": {"data/zz.json": '{"dienste": [{"id": "x", "pruefen": "intern"}]}'}}),
     ("vollständig", 0, "0 Fehler",
      {"datei": True, "bilder": [EINTRAG], "seite": '<img src="img/test.webp" alt="Testbild">'}),
 ]

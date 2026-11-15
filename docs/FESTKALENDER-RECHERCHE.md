@@ -14,7 +14,7 @@ Quellen widersprechen sich: Eine Reiseseite nennt Bulgarien beim 7. Januar, tats
 | Jüdisch | Pessach, Rosch ha-Schana, Jom Kippur, Chanukka | Jüdische Gemeinde Frankfurt, Zentralrat der Juden |
 | Muslimisch | Ramadan, Eid al-Fitr, Eid al-Adha | Moscheegemeinden/Verbände; **Datum hängt vom Mond ab → „voraussichtlich“** |
 | Hinduistisch / bengalisch | Diwali, Durga Puja, Pohela Boishakh (bengal. Neujahr) | Gemeinden in Frankfurt, BanglaHilfe-Kontakte |
-| Buddhistisch / Laos, Thailand | Pi Mai Lao, Songkran, Vesakh | Tempel/Vereine in Rhein-Main, Monis Kontakte |
+| Buddhistisch / Laos, Thailand | Pi Mai Lao, Songkran, Vesakh | Tempel/Vereine in Rhein-Main, persönliche Kontakte |
 | Frankfurt | Dippemess, Wäldchestag, Museumsuferfest, Weihnachtsmarkt, Lichter Filmfest | frankfurt.de, Veranstalter |
 | Ein Wort Hessisch | „Ei Gude“, „Bembel“, „Stöffche“ | eigene Erfahrung + Mundart-Wörterbuch |
 
