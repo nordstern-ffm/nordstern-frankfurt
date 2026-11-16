@@ -50,7 +50,7 @@ Diese Themen beschäftigen gerade auch den Ortsbeirat 10. Sie zeigen, welche Art
 
 ## Hier geht's zum Mängelmelder
 
-→ Mängelmelder der Stadt auf ffm.de (Link aus `data/links.json`, Schlüssel `maengelmelder`)
+→ [[link:maengelmelder]]
 
 ---
 

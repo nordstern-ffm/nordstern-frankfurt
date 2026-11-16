@@ -26,3 +26,7 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 - **Leerzeile im Fehler-Log** · Patch endete mit Leerzeile, Anhang per heredoc dahinter · entfernt · Lehre: vor dem Anhängen an Markdown-Dateien Datei-Ende prüfen (`tail -c 2 | xxd`).
 - **Gleichnamiger Fork blockiert Original in derselben Claude-Sitzung** · Claude Code checkt Repos als <cwd>/<name> aus, Fork und Original heißen beide nordstern-frankfurt · Arbeit am Original in eigener Sitzung · Lehre: Fork nach Collaborator-Einladung nicht mehr nutzen oder löschen.
 - **Push aus Claude Code abgelehnt (403), obwohl Collaborator** · Claude GitHub App war auf dem Konto nordstern-ffm nicht installiert · App installiert · Lehre: Bei neuem GitHub-Konto immer zuerst die Claude GitHub App installieren, dann Collaborator.
+
+## 17.11.2026 – Blog-Build (E10, Variante 1)
+- **`frankfurt.html` änderte sich, obwohl kein Beitrag veröffentlicht war** · Platzhalter `{blog_hinweis}` stand auf eigener Zeile → leere Zeile im HTML · Platzhalter ohne Zeilenumbruch einsetzen, Umbruch nur mitliefern, wenn Inhalt da ist · Lehre: Nach jeder Build-Änderung `git status` prüfen – „keine HTML-Änderung“ ist der Test.
+- **`tools/__pycache__/` tauchte im Repo auf** · `build.py`/`check.py` importieren jetzt `tools/beitraege.py`, Python legt Bytecode an · `sys.dont_write_bytecode = True` vor dem Import · Lehre: Bei neuem Python-Modul im Repo an Bytecode-Ordner denken (kein `.gitignore` nötig).

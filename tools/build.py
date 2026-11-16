@@ -3,10 +3,13 @@
 
 Aufruf im Repo-Hauptordner:  python3 tools/build.py
 Danach immer:                 python3 tools/check.py
+Blog-Vorschau:                 python3 tools/build.py --entwuerfe <ordner außerhalb des Repos>
 Kein Framework, kein npm, kein JavaScript, keine externen Abrufe.
 Läuft in Termux (python3) und Git Bash gleich.
 """
-import html, json, os
+import glob, html, json, os, shutil, sys
+sys.dont_write_bytecode = True  # kein tools/__pycache__ im Repo
+import beitraege
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
@@ -26,6 +29,14 @@ ZAHLUNG = load("zahlung.json")
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
+# Blog (E10): nur status "veroeffentlicht" wird gebaut und verlinkt; Entwürfe nie.
+BEITRAEGE = beitraege.laden(ROOT)
+for _b in BEITRAEGE:
+    if _b["meta"].get("status") not in beitraege.STATUS:
+        sys.exit("Unbekannter status in " + _b["datei"] + " – erst python3 tools/check.py")
+VEROEFF = sorted((b for b in BEITRAEGE if b["meta"]["status"] == "veroeffentlicht"),
+                 key=lambda b: b["meta"]["datum"], reverse=True)
+
 NAV = [
     ("index.html", "Start"),
     ("nachbarschaft.html", "Nachbarschaft"),
@@ -43,6 +54,8 @@ STAR = ('<svg class="star" viewBox="0 0 64 64" aria-hidden="true" focusable="fal
 
 def link(key):
     """Bestätigte Links als <a>, unbestätigte nur als Text (keine ungeprüfte URL online)."""
+    if key not in LINKS:
+        sys.exit("Unbekannter Link-Schlüssel: " + key + " (fehlt in data/links.json)")
     l = LINKS[key]
     if l.get("bestaetigt"):
         return f'<a href="{E(l["url"])}" rel="noopener">{E(l["titel"])}</a>'
@@ -55,10 +68,13 @@ def kontakt_zeile():
     return '<p class="notice">Kontaktadresse wird vor dem Start ergänzt.</p>'
 
 
-def page(path, title, desc, body):
+def page(path, title, desc, body, out=ROOT, aktiv=None):
+    """path relativ zum Ausgabeordner; Unterordner (frankfurt/…) bekommen ../ vor allen internen Pfaden."""
     cur = ' aria-current="page"'
+    pre = "../" * path.count("/")
+    aktiv = aktiv or path
     nav = "".join(
-        f'<li><a href="{h}"{cur if h == path else ""}>{l}</a></li>'
+        f'<li><a href="{pre}{h}"{cur if h == aktiv else ""}>{l}</a></li>'
         for h, l in NAV)
     robots = "" if LIVE else '<meta name="robots" content="noindex, nofollow">\n'
     canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{"" if path == "index.html" else path}">\n' if LIVE else ""
@@ -73,14 +89,14 @@ def page(path, title, desc, body):
 {robots}{canon}<meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0B1630">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23E0B84A' d='M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="{pre}css/style.css">
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 {entwurf}
 <header class="site-header">
 <div class="wrap head">
-<a class="brand" href="index.html">{STAR}<span>{E(SITE["marke"])}<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
+<a class="brand" href="{pre}index.html">{STAR}<span>{E(SITE["marke"])}<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
 <nav aria-label="Hauptmenü"><ul>{nav}</ul></nav>
 </div>
 </header>
@@ -91,14 +107,16 @@ def page(path, title, desc, body):
 <div class="wrap">
 <p><strong>{E(SITE["marke"])}</strong> – {E(SITE["claim"])}</p>
 <p>Betrieben von {E(B["name"])} · {E(B["firma"])}. Der Verein „{E(SITE["verein"]["name"])}“ ist eigenständig und parteipolitisch neutral.</p>
-<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · Stand: {E(SITE["stand"])}</p>
+<p><a href="{pre}impressum.html">Impressum</a> · <a href="{pre}datenschutz.html">Datenschutz</a> · Stand: {E(SITE["stand"])}</p>
 <p class="small">Ohne Tracker, ohne Cookies, ohne Fremd-Schriften. Keine Rechts- oder Steuerberatung.</p>
 </div>
 </footer>
 </body>
 </html>
 """
-    with open(os.path.join(ROOT, path), "w", encoding="utf-8") as f:
+    ziel = os.path.join(out, path)
+    os.makedirs(os.path.dirname(ziel), exist_ok=True)
+    with open(ziel, "w", encoding="utf-8") as f:
         f.write(doc)
 
 
@@ -150,6 +168,8 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 """)
 
 # -------------------------------------------------------------- Frankfurt
+blog_hinweis = ('<p><a class="btn" href="frankfurt/index.html">Alle Beiträge aus dem Frankfurter Norden</a></p>'
+                if VEROEFF else "") + ("\n" if VEROEFF else "")
 page("frankfurt.html", "Frankfurt-Info",
      "Frankfurt einfach erklärt: Stadtverordnete, Ortsbeiräte, Bürgerbeteiligung und wo Bürger welche Hilfe finden.",
      f"""
@@ -163,7 +183,7 @@ page("frankfurt.html", "Frankfurt-Info",
 <h2>Was Bürgerinnen und Bürger brauchen</h2>
 <p>Unsere Themen, über die wir hier regelmäßig schreiben:</p>
 <ul class="topics"><li>Bezahlbares Wohnen und Hilfe bei Wohnungssuche</li><li>Behördengänge verständlich erklärt – auch auf Bengalisch, Tigrinya, Thai und Lao (siehe {link("bangla_hilfe")} und {link("wege_nach_frankfurt")})</li><li>Sichere Wege für Ältere, Kinder und Rollstuhl</li><li>Pflege zu Hause und Entlastung für Angehörige</li><li>Arbeit finden im Frankfurter Norden</li></ul>
-<p class="small">Wir schreiben parteiunabhängig. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a> und sind dort als solche gekennzeichnet.</p>
+{blog_hinweis}<p class="small">Wir schreiben parteiunabhängig. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a> und sind dort als solche gekennzeichnet.</p>
 """)
 
 # ------------------------------------------------- Mängel & Petitionen
@@ -275,6 +295,56 @@ page("datenschutz.html", "Datenschutz", "Datenschutzerklärung von Nordstern Fra
 
 page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist kein Stern.</h1><p><a class="btn btn-primary" href="index.html">Zur Startseite</a></p>')
 
+# ------------------------------------------------------------------ Blog
+def beitrag_html(b, pre):
+    m = b["meta"]
+    kopf = (f'<p class="small">{E(m["datum"])}'
+            + (" · " + E(", ".join(m["stadtteile"])) if isinstance(m.get("stadtteile"), list) else "")
+            + "</p>")
+    rumpf = beitraege.markdown(b["body"], link)
+    zurueck = f'<p><a href="{pre}frankfurt/index.html">Alle Beiträge</a></p>' if b in VEROEFF else ""
+    return f'<article class="beitrag">{kopf}\n{rumpf}\n</article>\n{zurueck}'
+
+
+def beitrag_seite(b, out=ROOT):
+    m = b["meta"]
+    page("frankfurt/" + m["slug"] + ".html", m["titel"], m.get("beschreibung") or m["titel"],
+         beitrag_html(b, "../"), out=out, aktiv="frankfurt.html")
+
+
+BLOG = os.path.join(ROOT, "frankfurt")
+soll = {"index.html"} if VEROEFF else set()
+for b in VEROEFF:
+    beitrag_seite(b)
+    soll.add(b["meta"]["slug"] + ".html")
+if VEROEFF:
+    liste = "".join(card(f'<a href="{E(b["meta"]["slug"])}.html">{E(b["meta"]["titel"])}</a>',
+                         f'<p class="small">{E(b["meta"]["datum"])}</p>') for b in VEROEFF)
+    page("frankfurt/index.html", "Beiträge aus dem Frankfurter Norden",
+         "Neutrale Beiträge über Stadt, Ortsbeirat 10 und Alltag im Frankfurter Norden.",
+         f'<h1>Beiträge aus dem Frankfurter Norden</h1><div class="grid">{liste}</div>', aktiv="frankfurt.html")
+# Veraltete Blog-Seiten entfernen (z. B. Beitrag zurück auf "entwurf")
+if os.path.isdir(BLOG):
+    for alt in glob.glob(os.path.join(BLOG, "*.html")):
+        if os.path.basename(alt) not in soll:
+            os.remove(alt)
+    if not os.listdir(BLOG):
+        os.rmdir(BLOG)
+
+if "--entwuerfe" in sys.argv:
+    i = sys.argv.index("--entwuerfe")
+    if i + 1 >= len(sys.argv):
+        sys.exit("Aufruf: python3 tools/build.py --entwuerfe <ordner außerhalb des Repos>")
+    vz = os.path.abspath(sys.argv[i + 1])
+    if vz == ROOT or vz.startswith(ROOT + os.sep):
+        sys.exit("Vorschau-Ordner muss außerhalb des Repos liegen (sonst landet der Entwurf im Commit).")
+    for d in ("css", "fonts"):
+        shutil.rmtree(os.path.join(vz, d), ignore_errors=True)
+        shutil.copytree(os.path.join(ROOT, d), os.path.join(vz, d))
+    for b in BEITRAEGE:
+        beitrag_seite(b, out=vz)
+    print(f"Vorschau: {len(BEITRAEGE)} Beitrag/Beiträge in {vz}/frankfurt/ (Navigation führt dort ins Leere)")
+
 # -------------------------------------------------- Launch-Dateien
 with open(os.path.join(ROOT, "robots.txt"), "w") as f:
     f.write("User-agent: *\n" + ("Allow: /\n" if LIVE else "Disallow: /\n"))
@@ -284,4 +354,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 3} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 3 + len(soll)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
