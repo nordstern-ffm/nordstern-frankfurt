@@ -2,7 +2,7 @@
 titel: "Mängelmelder praktisch: So meldest du einen Schaden im Frankfurter Norden"
 slug: maengelmelder-praktisch
 datum: 2026-11-17
-status: entwurf
+status: veroeffentlicht
 bereich: maengelmelder
 ortsbezirk: 10
 stadtteile: [Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim]
