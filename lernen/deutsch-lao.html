@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<!-- Ausnahme E13: Lernseite mit eigenem JavaScript (nur inline, keine Fremd-Ressourcen).
+     Handgepflegt, NICHT von tools/build.py erzeugt. Quelle: Claude-Artefakt L8NZM16j2GPPoEXxwyoBpq (18.11.2026). -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deutsch selbst lernen – ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ – Nordstern Frankfurt</title>
+<meta name="description" content="Dativ und Akkusativ in 10 Lektionen, mit Erklärungen auf Laotisch. Kostenlos, ohne Anmeldung.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+@font-face{font-family:"Fraunces";font-weight:500;src:url("../fonts/fraunces-latin-500-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Fraunces";font-weight:700;src:url("../fonts/fraunces-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:400;src:url("../fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:700;src:url("../fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Noto Sans Lao";font-weight:400;src:url("../fonts/noto-sans-lao-lao-400-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Noto Sans Lao";font-weight:600;src:url("../fonts/noto-sans-lao-lao-600-normal.woff2") format("woff2");font-display:swap}
+:root{
+  --bg:#F2F4F7; --ink:#18202B; --muted:#5B6575; --line:#D5DAE2; --surface:#FFFFFF;
+  --akk:#1F4FA3; --akk-soft:#E2EAF8; --dat:#A86A00; --dat-soft:#F6ECD9; --lo:#1E7A6E; --lo-soft:#E0F2EE;
+  --ok:#2E7D4F; --ok-soft:#E3F2E8; --bad:#B3261E; --bad-soft:#FBE7E5;
+  color-scheme: light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141922; --ink:#E7EBF1; --muted:#9AA4B4; --line:#2C3442; --surface:#1C2330;
+    --akk:#8CB2F5; --akk-soft:#1F2D47; --dat:#E8B65A; --dat-soft:#3A2E17; --lo:#6FD3C3; --lo-soft:#173330;
+    --ok:#6FCF97; --ok-soft:#173226; --bad:#F2867E; --bad-soft:#3B1F1D; color-scheme: dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 "Atkinson Hyperlegible",system-ui,sans-serif}
+main{max-width:44rem;margin:0 auto;padding:1.5rem 1.15rem 4rem}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,7vw,3rem);font-weight:700}
+h2{font-size:1.7rem;font-weight:700}
+h3{font-size:1.25rem;font-weight:700;margin:2rem 0 .5rem}
+p{margin:.6rem 0}
+a{color:var(--akk)}
+.lo{font-family:"Noto Sans Lao","Phetsarath OT",sans-serif;color:var(--lo);line-height:1.85}
+.muted{color:var(--muted)}
+.akk{color:var(--akk);font-weight:700}.dat{color:var(--dat);font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.92rem;margin-bottom:1rem}
+.top a{display:inline-flex;align-items:center;min-height:44px}
+.foot{max-width:44rem;margin:0 auto;padding:0 1.15rem 2rem;font-size:.9rem;color:var(--muted)}
+
+.btnrow{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:1rem}
+.primary,.ghost{font:inherit;font-size:.98rem;padding:.6rem 1.1rem;border-radius:.55rem;cursor:pointer;text-decoration:none;display:inline-block;min-height:44px}
+.primary{border:0;background:var(--ink);color:var(--bg);font-weight:700}
+.ghost{border:2px solid var(--line);background:transparent;color:var(--ink)}
+.primary:disabled,.ghost:disabled{opacity:.35;cursor:default}
+
+.scores{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.2rem 0}
+.scores div{background:var(--surface);border:1px solid var(--line);border-radius:.7rem;padding:.7rem 1rem}
+.scores b{display:block;font-family:"Fraunces",Georgia,serif;font-size:1.6rem}
+.list{list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:.5rem}
+.list a{display:flex;align-items:center;gap:.9rem;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:.7rem;text-decoration:none;color:var(--ink)}
+.list a:hover{border-color:var(--akk)}
+.list .n{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.4rem;color:var(--akk);min-width:1.6em}
+.list .t{font-weight:700;display:block}
+.list .s{font-size:.92rem}
+.list .done{margin-left:auto;color:var(--ok);font-weight:700;font-size:.9rem;white-space:nowrap}
+
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:.8rem;padding:1rem 1.1rem;margin-top:1rem}
+.plan ol{margin:.4rem 0;padding-left:1.3rem}
+.plan li{margin:.55rem 0}
+.plan li .lo{display:block}
+
+.back{display:inline-block;margin-bottom:1rem;font-size:.95rem}
+.rule{background:var(--lo-soft);border-radius:.7rem;padding:.9rem 1rem;margin-top:.8rem}
+.rule p{margin:.3rem 0}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:.9rem;padding:1.1rem;margin-top:.8rem}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:.8rem}
+.bar i{display:block;height:100%;background:var(--akk);width:0;transition:width .3s}
+.qmeta{color:var(--muted);font-size:.9rem}
+.qde{font-size:1.25rem;font-weight:700;margin:.4rem 0 .1rem}
+.qlo{margin:0 0 .9rem}
+.opts{display:flex;gap:.55rem;flex-wrap:wrap}
+.opts button{font:inherit;font-weight:700;font-size:1.02rem;padding:.55rem 1rem;border-radius:.6rem;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-width:4rem;min-height:44px}
+.opts button.right{border-color:var(--ok);color:var(--ok)}
+.opts button.wrong{border-color:var(--bad);color:var(--bad)}
+.fb{min-height:2.8em;margin-top:.8rem}
+.tag{display:inline-block;padding:.05rem .5rem;border-radius:.3rem;font-size:.82rem;font-weight:700;margin-right:.3rem}
+.tag.a{background:var(--akk-soft);color:var(--akk)}.tag.d{background:var(--dat-soft);color:var(--dat)}.tag.o{background:var(--lo-soft);color:var(--lo)}
+.mist{list-style:none;padding:0;margin:.6rem 0}
+.mist li{padding:.45rem 0;border-bottom:1px solid var(--line);font-size:.96rem}
+
+.player{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.player .pos{color:var(--muted);font-size:.92rem}
+.plain{font-size:1.05rem;line-height:1.9;margin-top:.6rem}
+.gap{font-size:1.1rem;line-height:2.3}
+.gap input{font:inherit;font-size:1rem;padding:.05rem .35rem;border:0;border-bottom:2px solid var(--akk);background:var(--akk-soft);color:var(--ink);border-radius:.25rem .25rem 0 0;text-align:center}
+.gap input.ok{border-color:var(--ok);background:var(--ok-soft)}
+.gap input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.fix{color:var(--ok);font-weight:700;font-size:.9rem;margin-left:.15rem}
+.bank{background:var(--dat-soft);border-radius:.6rem;padding:.6rem .9rem;margin-bottom:.8rem;font-size:.96rem}
+.bank span{display:inline-block;margin:.15rem .3rem .15rem 0;padding:.05rem .45rem;background:var(--surface);border-radius:.3rem}
+.score{font-weight:700;min-height:1.5em;margin-top:.8rem}
+.finish{margin-top:2rem;padding:1rem;border:2px dashed var(--line);border-radius:.8rem}
+.pager{display:flex;justify-content:space-between;margin-top:1.5rem;font-size:.95rem}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--akk);outline-offset:2px}
+[hidden]{display:none!important}
+@media (max-width:480px){.scores{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="index.html">‹ Nordstern · Lernen</a><span class="muted">Vorschau</span></div>
+<noscript><p class="card">Diese Lernseite braucht JavaScript für Übungen und Vorlesen. Bitte im Browser einschalten.</p></noscript>
+
+<!-- START -->
+<section id="v-home">
+  <h1>Deutsch selbst lernen</h1>
+  <p class="lo" lang="lo">ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ – ບໍ່ຕ້ອງມີຄູ</p>
+  <p class="muted">Dativ und Akkusativ in 10 Lektionen. Für Menschen, die Laotisch sprechen. Ohne Lehrer, in deinem Tempo.</p>
+  <div class="scores">
+    <div>Einstiegstest <span class="lo" lang="lo">ທົດສອບທຳອິດ</span><b id="s1">–</b></div>
+    <div>Abschlusstest <span class="lo" lang="lo">ທົດສອບສຸດທ້າຍ</span><b id="s10">–</b></div>
+  </div>
+  <a class="primary" href="#plan">So lernst du hier <span class="lo" lang="lo" style="color:inherit">ວິທີໃຊ້</span></a>
+  <h3>Lektionen <span class="lo" lang="lo">ບົດຮຽນ</span></h3>
+  <ul class="list" id="lessonList"></ul>
+  <div class="btnrow"><button class="ghost" id="resetAll">Fortschritt löschen</button></div>
+</section>
+
+<!-- PLAN -->
+<section id="v-plan" hidden>
+  <a class="back" href="#">‹ Start</a>
+  <h2>Dein Lernplan</h2>
+  <p class="lo" lang="lo">ແຜນການຮຽນຂອງເຈົ້າ</p>
+  <div class="plan">
+    <ol>
+      <li><b>Woche 1:</b> Mach den Einstiegstest (20 Fragen). Du siehst, was du schon kannst.
+        <span class="lo" lang="lo">ອາທິດທີ 1: ເຮັດການທົດສອບທຳອິດ (20 ຄຳຖາມ). ເບິ່ງວ່າເຈົ້າຮູ້ຫຍັງແລ້ວ.</span></li>
+      <li><b>Woche 2 bis 9:</b> Eine Lektion pro Woche. Nicht schneller – lieber gründlich.
+        <span class="lo" lang="lo">ອາທິດທີ 2 ຫາ 9: ຮຽນໜຶ່ງບົດຕໍ່ອາທິດ. ບໍ່ຕ້ອງຟ້າວ.</span></li>
+      <li><b>In jeder Lektion:</b> Regel lesen, Fragen beantworten, Diktat hören und auf Papier schreiben, dann den Lückentext ausfüllen.
+        <span class="lo" lang="lo">ໃນແຕ່ລະບົດ: ອ່ານກົດ, ຕອບຄຳຖາມ, ຟັງການຂຽນຕາມຄຳບອກ ແລະ ຂຽນໃສ່ເຈ້ຍ, ແລ້ວຕື່ມຄຳທີ່ຂາດ.</span></li>
+      <li><b>Fehler sind gut:</b> Wiederhole deine Fehler, bis alles richtig ist.
+        <span class="lo" lang="lo">ເຮັດຜິດບໍ່ເປັນຫຍັງ: ເຮັດຄືນໃໝ່ຈົນກວ່າຈະຖືກ.</span></li>
+      <li><b>Fertig?</b> Tippe auf „Lektion abschließen“. Dein Fortschritt bleibt auf deinem Handy gespeichert.
+        <span class="lo" lang="lo">ຮຽນແລ້ວບໍ? ກົດ „Lektion abschließen“. ຄວາມຄືບໜ້າຈະຖືກບັນທຶກໄວ້ໃນໂທລະສັບຂອງເຈົ້າ.</span></li>
+      <li><b>Woche 10:</b> Abschlusstest mit allen Fragen. Vergleiche mit deinem ersten Ergebnis.
+        <span class="lo" lang="lo">ອາທິດທີ 10: ການທົດສອບສຸດທ້າຍ. ປຽບທຽບກັບຄະແນນທຳອິດ.</span></li>
+    </ol>
+    <p><b>Tipp:</b> Nimm Kopfhörer und sprich jeden Satz laut nach. 15 Minuten am Tag reichen.</p>
+    <p class="lo" lang="lo">ຄຳແນະນຳ: ໃຊ້ຫູຟັງ ແລະ ເວົ້າແຕ່ລະປະໂຫຍກດັງໆ. ມື້ລະ 15 ນາທີກໍພຽງພໍ.</p>
+  </div>
+  <div class="btnrow"><a class="primary" href="#lektion-1">Mit Lektion 1 beginnen</a></div>
+</section>
+
+<!-- LEKTION -->
+<section id="v-lesson" hidden>
+  <a class="back" href="#">‹ Alle Lektionen</a>
+  <h2 id="lTitle"></h2>
+  <p class="lo" lang="lo" id="lTitleLo"></p>
+  <div class="rule" id="lRule"></div>
+
+  <h3 id="quizHead">Übung <span class="lo" lang="lo">ແບບຝຶກຫັດ</span></h3>
+  <div class="card" id="quiz"></div>
+
+  <h3>Diktat hören <span class="lo" lang="lo">ຟັງ ແລະ ຂຽນ</span></h3>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Hör jeden Satz und schreib ihn auf Papier. Danach vergleichen.</p>
+    <p class="lo" lang="lo">ຟັງແຕ່ລະປະໂຫຍກ ແລະ ຂຽນໃສ່ເຈ້ຍ. ແລ້ວປຽບທຽບ.</p>
+    <div class="player">
+      <button class="primary" id="play">▶ Satz hören</button>
+      <button class="ghost" id="nextS">Nächster Satz</button>
+      <button class="ghost" id="slow">Langsam: an</button>
+      <span class="pos" id="spos"></span>
+    </div>
+    <p class="muted" id="noVoice" hidden>Dein Gerät hat keine deutsche Stimme. Lies den Text stattdessen leise und schreib ihn danach aus dem Gedächtnis.</p>
+    <div class="btnrow"><button class="ghost" id="showText">Text zum Vergleichen zeigen</button></div>
+    <p class="plain" id="plain" hidden></p>
+  </div>
+
+  <h3>Lückentext <span class="lo" lang="lo">ຕື່ມຄຳທີ່ຂາດ</span></h3>
+  <div class="card">
+    <div class="bank" id="bank" hidden></div>
+    <div class="gap" id="gap"></div>
+    <div class="btnrow">
+      <button class="primary" id="gCheck">Prüfen</button>
+      <button class="ghost" id="gHint">Wörter zeigen</button>
+      <button class="ghost" id="gSolve">Lösungen</button>
+      <button class="ghost" id="gReset">Neu</button>
+    </div>
+    <p class="score" id="gScore" aria-live="polite"></p>
+  </div>
+
+  <div class="finish">
+    <button class="primary" id="doneBtn">Lektion abschließen ✓</button>
+    <span class="lo" lang="lo" style="margin-left:.4rem">ຮຽນບົດນີ້ແລ້ວ</span>
+  </div>
+  <div class="pager"><a id="prev" href="#"></a><a id="next" href="#"></a></div>
+</section>
+</main>
+<footer class="foot">
+<p>Ein Angebot von Nordstern Frankfurt · <a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></p>
+<p>Dein Fortschritt wird nur in diesem Browser gespeichert (localStorage) und nie übertragen. Laotische Texte: Gegenlesen durch Muttersprachlerin ausstehend.</p>
+</footer>
+
+<script>
+/* ---------- Inhalte ---------- */
+const L=[
+ {t:"Einstieg",lo:"ບົດທີ 1 – ເລີ່ມຕົ້ນ",rule:"<p><b>Einstiegstest:</b> 20 gemischte Fragen. Keine Angst vor Fehlern – der Test zeigt nur, wo du stehst.</p><p class='lo' lang='lo'>ການທົດສອບທຳອິດ: 20 ຄຳຖາມ. ບໍ່ຕ້ອງຢ້ານຜິດ – ມັນພຽງແຕ່ສະແດງວ່າເຈົ້າຢູ່ລະດັບໃດ.</p><p>Im Laotischen ändert sich das Wort nie. Im Deutschen ändert sich der Artikel: <b>der → den → dem</b>.</p><p class='lo' lang='lo'>ພາສາລາວບໍ່ປ່ຽນຄຳ. ພາສາເຢຍລະມັນປ່ຽນຄຳນຳໜ້າ.</p>",
+  d:"Noy wohnt seit [[einem]] Jahr in Frankfurt. Jeden Morgen fährt sie mit [[dem]] Bus zur Arbeit. Sie arbeitet in [[einem]] Hotel. Dort hilft sie [[den]] Gästen und gibt [[ihnen]] die Schlüssel. Ihre Chefin mag [[sie]] sehr. Am Abend ruft Noy [[ihre]] Mutter in Vientiane an und erzählt [[ihr]] von [[ihrem]] Tag."},
+ {t:"Akkusativ: wen? was?",lo:"ບົດທີ 2 – ສິ່ງທີ່ຖືກກະທຳ",rule:"<p>Das, was man direkt sieht, kauft, hat, kennt: <span class='akk'>Akkusativ</span>. Nur <b>der</b> ändert sich: <b>der → den</b>, <b>ein → einen</b>. die, das, die bleiben gleich.</p><p class='lo' lang='lo'>ສິ່ງທີ່ຖືກກະທຳ (ໃຜ? ຫຍັງ?) ໃຊ້ Akkusativ. ມີແຕ່ der ທີ່ປ່ຽນເປັນ den.</p>",
+  d:"Am Samstag kauft Noy [[einen]] Kühlschrank für [[ihre]] Wohnung. Der Verkäufer zeigt ihr viele Modelle. Noy nimmt [[den]] kleinen. Dann sucht sie [[eine]] Lampe und [[einen]] Teppich. Sie findet [[den]] Teppich nicht. Zu Hause hängt ihr Nachbar [[die]] Lampe auf."},
+ {t:"Dativ: wem?",lo:"ບົດທີ 3 – ຜູ້ຮັບ (ໃຫ້ໃຜ?)",rule:"<p>Die Person, die etwas bekommt: <span class='dat'>Dativ</span>. Endungen: <b>dem</b> (m), <b>der</b> (f), <b>dem</b> (n), <b>den …n</b> (Plural).</p><p class='lo' lang='lo'>ຜູ້ຮັບ (ໃຫ້ໃຜ?) ໃຊ້ Dativ. ບ່ອນທີ່ພາສາລາວໃຊ້ „ໃຫ້“, ພາສາເຢຍລະມັນມັກໃຊ້ Dativ.</p>",
+  d:"Noy schreibt [[ihrer]] Freundin Lan eine Nachricht. Sie schickt [[ihr]] ein Foto von [[dem]] Main. Lan antwortet [[ihr]] sofort. Am Sonntag bringt Noy [[den]] Kindern von Lan kleine Geschenke. Sie gibt [[dem]] Sohn ein Buch und [[der]] Tochter eine Puppe."},
+ {t:"Pronomen: ihn, ihm, sie, ihr",lo:"ບົດທີ 4 – ຄຳແທນນາມ",rule:"<p>Achtung: Laotisch sagt für Mann und Frau <b>ລາວ</b>. Deutsch unterscheidet: <b>er → ihn → ihm</b> und <b>sie → sie → ihr</b>.</p><p class='lo' lang='lo'>ລະວັງ: ພາສາລາວໃຊ້ „ລາວ“ ທັງຜູ້ຊາຍ ແລະ ຜູ້ຍິງ. ພາສາເຢຍລະມັນແຍກ: ຜູ້ຊາຍ ihn/ihm, ຜູ້ຍິງ sie/ihr.</p><p>ich → mich → mir · du → dich → dir · Sie → Sie → Ihnen</p>",
+  d:"Noy hat einen neuen Kollegen. Er heißt Tom. Sie trifft [[ihn]] jeden Morgen in der Küche. Er fragt [[sie]]: „Kannst du [[mir]] helfen?“ Noy hilft [[ihm]] gern. Danach dankt Tom [[ihr]] und lädt [[sie]] zum Kaffee ein. Die Kollegen finden [[ihn]] nett."},
+ {t:"Feste Präpositionen",lo:"ບົດທີ 5 – ບຸບພະບົດ",rule:"<p><span class='akk'>Immer Akkusativ:</span> durch, für, gegen, ohne, um.</p><p><span class='dat'>Immer Dativ:</span> aus, bei, mit, nach, seit, von, zu.</p><p class='lo' lang='lo'>ບາງຄຳໃຊ້ Akkusativ ສະເໝີ, ບາງຄຳໃຊ້ Dativ ສະເໝີ. ຈື່ໄວ້ເປັນກຸ່ມ.</p>",
+  d:"Noy geht ohne [[ihren]] Regenschirm aus dem Haus. Sie läuft durch [[den]] Park zu [[der]] Haltestelle. Nach [[der]] Arbeit geht sie zu [[ihrer]] Freundin. Bei [[ihr]] essen sie Klebreis mit Papayasalat. Das Essen ist für [[die]] ganze Familie."},
+ {t:"Wo? oder Wohin?",lo:"ບົດທີ 6 – ຢູ່ໃສ? ຫຼື ໄປໃສ?",rule:"<p><b>Wohin?</b> (Bewegung) → <span class='akk'>Akkusativ</span>. <b>Wo?</b> (Ort) → <span class='dat'>Dativ</span>. Bei: in, an, auf, unter, über, vor, hinter, neben, zwischen.</p><p class='lo' lang='lo'>ໄປໃສ? → Akkusativ. ຢູ່ໃສ? → Dativ. ພາສາລາວມີຄວາມແຕກຕ່າງນີ້ແລ້ວ – ງ່າຍ!</p><p>legen / stellen / hängen → Wohin · liegen / stehen / hängen → Wo</p>",
+  d:"Noy kommt nach Hause. Sie legt den Schlüssel auf [[den]] Tisch. Die Tasche stellt sie neben [[das]] Sofa. Dann hängt sie das Bild ihrer Familie an [[die]] Wand. Jetzt hängt das Bild an [[der]] Wand und der Schlüssel liegt auf [[dem]] Tisch. Noy setzt sich auf [[das]] Sofa. Jetzt sitzt sie auf [[dem]] Sofa und ruht sich aus."},
+ {t:"Verben mit Dativ",lo:"ບົດທີ 7 – ຄຳກິລິຍາທີ່ໃຊ້ Dativ",rule:"<p>Diese Verben brauchen immer <span class='dat'>Dativ</span>: helfen, danken, gefallen, gehören, schmecken, gratulieren, antworten.</p><p class='lo' lang='lo'>ລະວັງ: helfen (ຊ່ວຍ) ແລະ danken (ຂອບໃຈ) ບໍ່ມີ „ໃຫ້“ ໃນພາສາລາວ, ແຕ່ຕ້ອງໃຊ້ Dativ.</p><p>Besonders schwer: <b>Das Kleid gefällt mir.</b> Im Laotischen ist die Person Subjekt (ຂ້ອຍມັກ…), im Deutschen das Kleid.</p>",
+  d:"Die neue Wohnung gefällt [[ihr]] sehr. Sie gehört [[einem]] alten Herrn. Noy hilft [[ihm]] manchmal beim Einkaufen. Er dankt [[ihr]] immer mit einem Lächeln. Das Essen von Noy schmeckt [[ihm]] auch. Heute gratuliert sie [[ihm]] zum Geburtstag."},
+ {t:"Zwei Objekte",lo:"ບົດທີ 8 – ສອງກຳມະ",rule:"<p>Zwei Nomen: Person (<span class='dat'>Dativ</span>) zuerst, Sache (<span class='akk'>Akk</span>) danach: <b>Ich gebe dem Mann das Buch.</b></p><p>Zwei Pronomen: Akkusativ zuerst: <b>Ich gebe es ihm.</b> Pronomen kommen vor Nomen.</p><p class='lo' lang='lo'>ສອງຄຳນາມ: ຄົນກ່ອນ, ສິ່ງຂອງຫຼັງ. ສອງຄຳແທນນາມ: es / ihn / sie ກ່ອນ.</p>",
+  d:"Noys Bruder hat Geburtstag. Sie kauft ein Hemd und schickt [[es]] [[ihm]] nach Laos. Ihre Mutter möchte Fotos. Noy schickt [[ihr]] viele Fotos. Ihr Chef fragt nach dem Urlaubsplan. Sie gibt [[ihm]] den Plan am Montag. Eine Kollegin möchte ein Rezept für Larb. Noy erklärt [[es]] [[ihr]] genau."},
+ {t:"Reflexiv: mich oder mir?",lo:"ບົດທີ 9 – mich ຫຼື mir?",rule:"<p>Kein anderes Objekt → <span class='akk'>mich</span>: <b>Ich wasche mich.</b></p><p>Noch ein Objekt im Satz → <span class='dat'>mir</span>: <b>Ich wasche mir die Hände.</b></p><p class='lo' lang='lo'>ຖ້າບໍ່ມີກຳມະອື່ນ: mich. ຖ້າມີກຳມະອື່ນ (ມື, ເສື້ອ…): mir.</p>",
+  d:"Am Morgen wäscht Noy sich schnell. Dann putzt sie sich die Zähne. Vor dem Spiegel sagt sie: „Ich freue [[mich]] auf heute!“ Sie zieht [[sich]] eine warme Jacke an. Vor dem Essen sagt sie: „Ich wasche [[mir]] die Hände.“ Im Kurs stellt sie [[sich]] vor: „Ich kann [[mir]] Wörter gut merken.“"},
+ {t:"Abschluss",lo:"ບົດທີ 10 – ການທົດສອບສຸດທ້າຍ",rule:"<p><b>Abschlusstest:</b> alle 40 Übungsfragen. Vergleiche dein Ergebnis mit dem Einstiegstest auf der Startseite.</p><p class='lo' lang='lo'>ການທົດສອບສຸດທ້າຍ: 40 ຄຳຖາມ. ປຽບທຽບກັບຄະແນນທຳອິດ.</p>",
+  d:"Ein Jahr in Frankfurt! Noy denkt an [[ihre]] erste Woche. Damals verstand sie [[die]] Leute kaum. Heute hilft sie [[den]] neuen Kollegen aus Laos. Sie erklärt [[ihnen]] die Stadt und zeigt [[ihnen]] den Weg zu [[dem]] Bürgeramt. Ihre Mutter ist stolz auf [[sie]]. Noy schickt [[ihr]] ein Foto vom Main."}
+];
+// [Lektion, Satz, Lao, Optionen, Lösung, a/d/o, Erklärung]
+const Q=[
+[2,"Ich kaufe ___ Tisch.","ຂ້ອຍຊື້ໂຕະ.",["der","den","dem"],"den","a","Akkusativ maskulin: den."],
+[2,"Wir besuchen ___ Großmutter.","ພວກເຮົາໄປຢາມແມ່ຕູ້.",["die","der"],"die","a","besuchen + Akk. Feminin bleibt die."],
+[2,"Ich habe ___ Bruder.","ຂ້ອຍມີອ້າຍຄົນໜຶ່ງ.",["ein","einen"],"einen","a","haben + Akk, maskulin: einen."],
+[2,"Sie liest ___ Buch.","ລາວອ່ານປຶ້ມ.",["das","dem"],"das","a","Neutral bleibt im Akkusativ das."],
+[2,"Kennst du ___ Nachbarn?","ເຈົ້າຮູ້ຈັກເພື່ອນບ້ານບໍ?",["der","den"],"den","a","kennen + Akk: den Nachbarn."],
+[3,"Ich gebe ___ Kind das Buch.","ຂ້ອຍເອົາປຶ້ມໃຫ້ເດັກ.",["das","dem"],"dem","d","ໃຫ້ເດັກ = Empfänger → Dativ: dem."],
+[3,"Er schenkt ___ Freundin Blumen.","ລາວເອົາດອກໄມ້ໃຫ້ແຟນ.",["die","der"],"der","d","Empfänger, feminin → der."],
+[3,"Wir bringen ___ Kindern Geschenke.","ພວກເຮົາເອົາຂອງຂວັນໃຫ້ເດັກນ້ອຍ.",["die","den"],"den","d","Dativ Plural: den Kindern (+n)."],
+[3,"Ich zeige ___ Mann den Weg.","ຂ້ອຍບອກທາງໃຫ້ຜູ້ຊາຍ.",["den","dem"],"dem","d","Empfänger maskulin → dem."],
+[3,"Sie schreibt ___ Lehrerin eine E-Mail.","ລາວຂຽນອີເມວໃຫ້ຄູ.",["die","der"],"der","d","Empfänger feminin → der."],
+[4,"Ich sehe ___ . (er)","ຂ້ອຍເຫັນລາວ (ຜູ້ຊາຍ).",["ihn","ihm"],"ihn","a","sehen + Akk, Mann → ihn."],
+[4,"Ich gebe ___ das Buch. (sie)","ຂ້ອຍເອົາປຶ້ມໃຫ້ລາວ (ຜູ້ຍິງ).",["sie","ihr"],"ihr","d","Empfängerin → Dativ: ihr."],
+[4,"Er liebt ___ . (du)","ລາວຮັກເຈົ້າ.",["dich","dir"],"dich","a","lieben + Akk → dich."],
+[4,"Ich schicke ___ die Rechnung. (Sie)","ຂ້ອຍສົ່ງໃບບິນໃຫ້ທ່ານ.",["Sie","Ihnen"],"Ihnen","d","Höflich, Empfänger → Ihnen."],
+[4,"Wir besuchen ___ morgen. (sie, Plural)","ພວກເຮົາຈະໄປຢາມພວກເຂົາມື້ອື່ນ.",["sie","ihnen"],"sie","a","besuchen + Akk → sie."],
+[5,"Das ist für ___ Mutter.","ອັນນີ້ແມ່ນສຳລັບແມ່.",["die","der"],"die","a","für → immer Akk."],
+[5,"Ich wohne bei ___ Eltern.","ຂ້ອຍອາໄສຢູ່ກັບພໍ່ແມ່.",["die","den"],"den","d","bei → immer Dativ, Plural: den."],
+[5,"Ich fahre mit ___ Bus.","ຂ້ອຍໄປດ້ວຍລົດເມ.",["den","dem"],"dem","d","mit → immer Dativ."],
+[5,"Wir gehen durch ___ Park.","ພວກເຮົາຍ່າງຜ່ານສວນ.",["den","dem"],"den","a","durch → immer Akk."],
+[5,"Seit ___ Jahr lerne ich Deutsch.","ຂ້ອຍຮຽນພາສາເຢຍລະມັນໄດ້ໜຶ່ງປີແລ້ວ.",["ein","einem"],"einem","d","seit → immer Dativ."],
+[6,"Ich lege das Handy auf ___ Tisch.","ຂ້ອຍວາງໂທລະສັບໄວ້ເທິງໂຕະ.",["den","dem"],"den","a","legen = ໄປໃສ? → Akk."],
+[6,"Das Handy liegt auf ___ Tisch.","ໂທລະສັບຢູ່ເທິງໂຕະ.",["den","dem"],"dem","d","liegen = ຢູ່ໃສ? → Dativ."],
+[6,"Wir fahren in ___ Stadt.","ພວກເຮົາຂັບລົດເຂົ້າເມືອງ.",["die","der"],"die","a","Wohin? → Akk."],
+[6,"Wir wohnen in ___ Stadt.","ພວກເຮົາອາໄສຢູ່ໃນເມືອງ.",["die","der"],"der","d","Wo? → Dativ."],
+[6,"Die Flasche steht in ___ Kühlschrank.","ຂວດຢູ່ໃນຕູ້ເຢັນ.",["den","dem"],"dem","d","stehen = Wo? → Dativ."],
+[7,"Ich helfe ___ Nachbarin.","ຂ້ອຍຊ່ວຍເພື່ອນບ້ານ.",["die","der"],"der","d","helfen + Dativ, auch ohne ໃຫ້."],
+[7,"Das Kleid gefällt ___ Schwester.","ເອື້ອຍຂອງຂ້ອຍມັກຊຸດນີ້.",["meine","meiner"],"meiner","d","gefallen: Person im Dativ, das Kleid ist Subjekt."],
+[7,"Die Wohnung gehört ___ Vermieter.","ອາພາດເມັນນີ້ເປັນຂອງເຈົ້າຂອງເຮືອນ.",["den","dem"],"dem","d","gehören + Dativ."],
+[7,"Wir danken ___ Arzt.","ພວກເຮົາຂອບໃຈທ່ານໝໍ.",["den","dem"],"dem","d","danken + Dativ."],
+[7,"Das Essen schmeckt ___ Kindern.","ເດັກນ້ອຍກິນອາຫານນີ້ແຊບ.",["die","den"],"den","d","schmecken + Dativ, Plural: den."],
+[8,"Ich gebe ___ . (dem Mann / das Buch)","ຂ້ອຍເອົາປຶ້ມໃຫ້ຜູ້ຊາຍ.",["dem Mann das Buch","das Buch dem Mann"],"dem Mann das Buch","o","Zwei Nomen: Person (Dativ) vor Sache (Akk)."],
+[8,"Ich gebe ___ . (es / ihm)","ຂ້ອຍເອົາມັນໃຫ້ລາວ.",["es ihm","ihm es"],"es ihm","o","Zwei Pronomen: Akkusativ zuerst."],
+[8,"Sie zeigt ___ . (mir / den Weg)","ລາວບອກທາງໃຫ້ຂ້ອຍ.",["mir den Weg","den Weg mir"],"mir den Weg","o","Pronomen vor Nomen."],
+[8,"Er erklärt ___ . (uns / die Regel)","ລາວອະທິບາຍກົດໃຫ້ພວກເຮົາ.",["uns die Regel","die Regel uns"],"uns die Regel","o","Pronomen vor Nomen."],
+[8,"Ich schenke ___ . (sie / meiner Mutter)","ຂ້ອຍເອົາມັນໃຫ້ແມ່ຂອງຂ້ອຍ.",["sie meiner Mutter","meiner Mutter sie"],"sie meiner Mutter","o","Pronomen (sie) vor Nomen."],
+[9,"Ich wasche ___ die Hände.","ຂ້ອຍລ້າງມື.",["mich","mir"],"mir","d","Zweites Objekt (die Hände) → mir."],
+[9,"Ich wasche ___ .","ຂ້ອຍລ້າງໂຕ.",["mich","mir"],"mich","a","Kein anderes Objekt → mich."],
+[9,"Ich ziehe ___ eine Jacke an.","ຂ້ອຍໃສ່ເສື້ອກັນໜາວ.",["mich","mir"],"mir","d","Zweites Objekt (eine Jacke) → mir."],
+[9,"Ich freue ___ auf den Urlaub.","ຂ້ອຍຕື່ນເຕັ້ນລໍຖ້າວັນພັກ.",["mich","mir"],"mich","a","sich freuen: kein anderes Objekt → mich."],
+[9,"Ich kann ___ das nicht vorstellen.","ຂ້ອຍນຶກພາບບໍ່ອອກ.",["mich","mir"],"mir","d","Zweites Objekt (das) → mir."]
+];
+
+/* ---------- Speicher (nur auf diesem Gerät) ---------- */
+const KEY="dl-lao-progress";
+let P={done:[],s1:null,s10:null};
+try{const v=localStorage.getItem(KEY);if(v)P=Object.assign(P,JSON.parse(v))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){}}
+
+const $=id=>document.getElementById(id);
+const shuffle=a=>{for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g," ");
+
+/* ---------- Start ---------- */
+function renderHome(){
+  $("s1").textContent=P.s1?P.s1:"–";$("s10").textContent=P.s10?P.s10:"–";
+  const ul=$("lessonList");ul.innerHTML="";
+  L.forEach((l,i)=>{const li=document.createElement("li");
+    li.innerHTML='<a href="#lektion-'+(i+1)+'"><span class="n">'+(i+1)+'</span><span><span class="t"></span><span class="s lo" lang="lo"></span></span>'+(P.done.includes(i+1)?'<span class="done">✓ fertig</span>':'')+'</a>';
+    li.querySelector(".t").textContent=l.t;li.querySelector(".s").textContent=l.lo;ul.appendChild(li)});
+}
+$("resetAll").addEventListener("click",()=>{if(confirm("Allen Fortschritt löschen?")){P={done:[],s1:null,s10:null};save();renderHome()}});
+
+/* ---------- Quiz ---------- */
+let qs=[],qi=0,qr=0,qm=[],qans=false,curL=0;
+function startQuiz(list){qs=list;qi=0;qr=0;qm=[];showQ()}
+function showQ(){
+  const box=$("quiz");
+  if(qi>=qs.length){return endQuiz()}
+  const q=qs[qi];qans=false;
+  box.innerHTML='<div class="bar"><i style="width:'+(qi/qs.length*100)+'%"></i></div><div class="qmeta">Frage '+(qi+1)+' von '+qs.length+'</div><p class="qde"></p><p class="qlo lo" lang="lo"></p><div class="opts"></div><div class="fb" aria-live="polite"></div><button class="primary" disabled>Weiter</button>';
+  box.querySelector(".qde").textContent=q[1];box.querySelector(".qlo").textContent=q[2];
+  const opts=box.querySelector(".opts"),fb=box.querySelector(".fb"),nx=box.querySelector("button.primary");
+  shuffle([...q[3]]).forEach(o=>{const b=document.createElement("button");b.textContent=o;
+    b.addEventListener("click",()=>{if(qans)return;qans=true;const ok=o===q[4];if(ok)qr++;else qm.push(q);
+      b.classList.add(ok?"right":"wrong");if(!ok)[...opts.children].find(x=>x.textContent===q[4]).classList.add("right");
+      const tag=q[5]==="a"?'<span class="tag a">Akkusativ</span>':q[5]==="d"?'<span class="tag d">Dativ</span>':'<span class="tag o">Reihenfolge</span>';
+      fb.innerHTML=tag+(ok?'Richtig. <span class="lo" lang="lo">ຖືກຕ້ອງ</span> ':'Richtig ist „'+q[4]+'“. ')+q[6];
+      nx.disabled=false;nx.focus()});opts.appendChild(b)});
+  nx.addEventListener("click",()=>{qi++;showQ()});
+}
+function endQuiz(){
+  const box=$("quiz"),score=qr+" / "+qs.length;
+  if(curL===1){P.s1=score;save()} if(curL===10){P.s10=score;save()}
+  let html='<p class="qde" style="font-size:2rem;font-family:Fraunces,Georgia,serif">'+score+'</p>';
+  if(curL===10&&P.s1)html+='<p>Einstiegstest war: <b>'+P.s1+'</b></p>';
+  if(qm.length){html+='<p>Deine Fehler <span class="lo" lang="lo">ຂໍ້ຜິດຂອງເຈົ້າ</span>:</p><ul class="mist">'+qm.map(q=>'<li><b>'+q[1].replace("___",q[4]).replace(/ \(.*\)$/,"")+'</b><br>'+q[6]+'</li>').join("")+'</ul>'}
+  else html+='<p>Alles richtig! <span class="lo" lang="lo">ຖືກທັງໝົດ!</span></p>';
+  html+='<div class="btnrow">'+(qm.length?'<button class="primary" id="qRetry">Fehler wiederholen</button>':'')+'<button class="ghost" id="qAgain">Noch einmal</button></div>';
+  box.innerHTML=html;
+  const mis=[...qm];
+  if(mis.length)$("qRetry").addEventListener("click",()=>startQuiz(shuffle(mis)));
+  $("qAgain").addEventListener("click",()=>startQuiz(poolFor(curL)));
+}
+function poolFor(n){
+  if(n===1)return shuffle([...Q]).slice(0,20);
+  if(n===10)return shuffle([...Q]);
+  return shuffle(Q.filter(q=>q[0]===n));
+}
+
+/* ---------- Diktat (Sprachausgabe) ---------- */
+let sents=[],si=0,slow=true;
+const synth=window.speechSynthesis;
+function voiceDe(){if(!synth)return null;return synth.getVoices().find(v=>/^de/i.test(v.lang))||null}
+function speak(){
+  if(!synth){return}
+  synth.cancel();const u=new SpeechSynthesisUtterance(sents[si]);u.lang="de-DE";const v=voiceDe();if(v)u.voice=v;u.rate=slow?.75:.95;synth.speak(u);
+}
+function updPos(){$("spos").textContent="Satz "+(si+1)+" von "+sents.length}
+$("play").addEventListener("click",speak);
+$("nextS").addEventListener("click",()=>{if(si<sents.length-1){si++;updPos();speak()}});
+$("slow").addEventListener("click",()=>{slow=!slow;$("slow").textContent="Langsam: "+(slow?"an":"aus")});
+$("showText").addEventListener("click",()=>{const p=$("plain");p.hidden=!p.hidden;$("showText").textContent=p.hidden?"Text zum Vergleichen zeigen":"Text verbergen"});
+function checkVoice(){const ok=!!synth&&(synth.getVoices().length===0||!!voiceDe());$("noVoice").hidden=ok;["play","nextS","slow"].forEach(id=>$(id).disabled=!synth)}
+if(synth&&"onvoiceschanged" in synth)synth.onvoiceschanged=checkVoice;
+
+/* ---------- Lückentext ---------- */
+let gAns=[];
+function buildGap(text){
+  gAns=[];const box=$("gap");box.innerHTML="";
+  text.split(/(\[\[.*?\]\])/).forEach(part=>{const m=part.match(/^\[\[(.*)\]\]$/);
+    if(m){gAns.push(m[1]);const inp=document.createElement("input");inp.type="text";inp.autocomplete="off";inp.autocapitalize="off";inp.spellcheck=false;
+      inp.size=Math.max(3,m[1].length+1);inp.setAttribute("aria-label","Lücke "+gAns.length);
+      inp.addEventListener("input",()=>{inp.classList.remove("ok","bad");const f=inp.nextSibling;if(f&&f.className==="fix")f.remove()});box.appendChild(inp)}
+    else box.appendChild(document.createTextNode(part))});
+  $("bank").innerHTML="<b>Wörter:</b> "+shuffle([...gAns]).map(w=>"<span>"+w+"</span>").join("");$("bank").hidden=true;$("gHint").textContent="Wörter zeigen";$("gScore").textContent="";
+}
+const gInputs=()=>[...$("gap").querySelectorAll("input")];
+$("gCheck").addEventListener("click",()=>{let r=0;gInputs().forEach((inp,k)=>{const ok=norm(inp.value)===norm(gAns[k]);inp.classList.remove("ok","bad");if(inp.value.trim())inp.classList.add(ok?"ok":"bad");if(ok)r++});
+  $("gScore").textContent=r+" / "+gAns.length+(r===gAns.length?" – perfekt! ດີຫຼາຍ!":" – korrigiere die roten Wörter.")});
+$("gSolve").addEventListener("click",()=>{gInputs().forEach((inp,k)=>{const ok=norm(inp.value)===norm(gAns[k]);inp.classList.remove("ok","bad");if(ok){inp.classList.add("ok");return}
+  inp.classList.add("bad");const nx=inp.nextSibling;if(!(nx&&nx.className==="fix")){const f=document.createElement("span");f.className="fix";f.textContent=gAns[k];inp.after(f)}});$("gScore").textContent="Lösungen in Grün."});
+$("gReset").addEventListener("click",()=>buildGap(L[curL-1].d));
+$("gHint").addEventListener("click",()=>{const b=$("bank");b.hidden=!b.hidden;$("gHint").textContent=b.hidden?"Wörter zeigen":"Wörter verbergen"});
+
+/* ---------- Lektion ---------- */
+function renderLesson(n){
+  curL=n;const l=L[n-1];
+  $("lTitle").textContent="Lektion "+n+" – "+l.t;$("lTitleLo").textContent=l.lo;$("lRule").innerHTML=l.rule;
+  $("quizHead").firstChild.textContent=n===1?"Einstiegstest ":n===10?"Abschlusstest ":"Übung ";
+  startQuiz(poolFor(n));
+  const plain=l.d.replace(/\[\[(.*?)\]\]/g,"$1");
+  $("plain").textContent=plain;$("plain").hidden=true;$("showText").textContent="Text zum Vergleichen zeigen";
+  sents=plain.split(/(?<=[.!?“])\s+(?=[A-ZÄÖÜ„])/);si=0;updPos();if(synth)synth.cancel();checkVoice();
+  buildGap(l.d);
+  const done=P.done.includes(n);$("doneBtn").textContent=done?"Abgeschlossen ✓":"Lektion abschließen ✓";$("doneBtn").disabled=done;
+  $("prev").hidden=n===1;$("prev").href="#lektion-"+(n-1);$("prev").textContent="‹ Lektion "+(n-1);
+  $("next").hidden=n===10;$("next").href="#lektion-"+(n+1);$("next").textContent="Lektion "+(n+1)+" ›";
+}
+$("doneBtn").addEventListener("click",()=>{if(!P.done.includes(curL)){P.done.push(curL);save()}$("doneBtn").textContent="Abgeschlossen ✓";$("doneBtn").disabled=true});
+
+/* ---------- Routing ---------- */
+function route(){
+  if(synth)synth.cancel();
+  const h=location.hash;const m=h.match(/^#lektion-(\d+)$/);
+  ["v-home","v-plan","v-lesson"].forEach(id=>$(id).hidden=true);
+  if(m&&+m[1]>=1&&+m[1]<=10){$("v-lesson").hidden=false;renderLesson(+m[1])}
+  else if(h==="#plan"){$("v-plan").hidden=false}
+  else{$("v-home").hidden=false;renderHome()}
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

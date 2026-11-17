@@ -78,3 +78,12 @@ Verhältnis zu E11 (Variante A): Die 16 Seiten sind die angekündigte Struktur. 
 | Nur statische Liste | am einfachsten, am barrierefreiesten | erfüllt nicht den Wunsch „rotierend“ | bleibt als Rückfall bei reduzierter Bewegung |
 | PARLIS-Kalender einbetten (iframe) | immer aktuell | Fremdabruf, Datenweitergabe an Dritte; frankfurt.de blockt ohnehin | verworfen |
 **Grenze:** „Nächste Termine“ werden beim Bauen berechnet (Stichtag = Build-Datum, reproduzierbar mit `NORDSTERN_HEUTE=JJJJ-MM-TT`). Ohne neuen Build veralten sie → mindestens wöchentlich bauen; `check.py` warnt, wenn alle Termine vorbei sind. **Neuer Weg später:** GitHub Action mit wöchentlichem Build (Entscheidung offen).
+
+## E13 · Lernseiten mit JavaScript als Ausnahme (`lernen/`) – entschieden 18.11.2026 (Nutzer)
+**Gewählt:** Neuer Bereich `lernen/` (Menüpunkt „Lernen“). `lernen/index.html` wird von `build.py` gebaut (ohne JS). Die Lernseiten selbst (`lernen/deutsch-lao.html`, Quelle: Claude-Artefakt „Deutsch selbst lernen – für Lao-Sprechende“) sind handgepflegt und dürfen **als einzige Ausnahme** Inline-JavaScript enthalten. `check.py` schlägt Alarm, sobald `<script` irgendwo sonst steht. Schriften lokal (Noto Sans Lao neu, SIL OFL), kein CDN, Fortschritt nur im localStorage des Browsers, Hinweis in Datenschutz und Seitenfuß.
+| Alternative | Nutzen | Sicherheit / Regeln | Ergebnis |
+| --- | --- | --- | --- |
+| **A · Ausnahme `lernen/` mit Inline-JS** | Quiz, Fehlerwiederholung, Vorlesen und Fortschritt bleiben erhalten | keine Fremdabrufe, keine Daten verlassen das Gerät; Ausnahme technisch auf einen Ordner begrenzt | **gewählt** |
+| B · statisch ohne JS (`<details>` mit Lösungen) | erfüllt Regel „kein JS“ vollständig | kein Zähler, keine Selbstkontrolle, kein Vorlesen → Lernwert deutlich geringer | Rückfall, falls JS je Probleme macht |
+| C · nur auf das Claude-Artefakt verlinken | null Aufwand | Inhalt liegt außerhalb des Repos, nicht verkaufbar/versionierbar, fremde Plattform | verworfen |
+**Offen:** Laotische Texte von einer Muttersprachlerin gegenlesen lassen. **Neuer Weg später:** Lerninhalte als JSON in `data/lernen/` und eine gemeinsame Lern-Engine für Lao, Französisch, Englisch (Folgeauftrag „Fortsetzung“).

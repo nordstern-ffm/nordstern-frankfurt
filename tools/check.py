@@ -13,7 +13,7 @@ fehler, warn = [], []
 site = json.load(open(os.path.join(ROOT, "data/site.json"), encoding="utf-8"))
 links = json.load(open(os.path.join(ROOT, "data/links.json"), encoding="utf-8"))["links"]
 pages = sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
-for unter in ("frankfurt", "ortsbezirke"):  # gebaute Unterordner (Blog, Ortsbezirke)
+for unter in ("frankfurt", "ortsbezirke", "lernen"):  # Unterordner (Blog, Ortsbezirke, Lernseiten E13)
     if os.path.isdir(os.path.join(ROOT, unter)):
         pages += sorted(unter + "/" + f for f in os.listdir(os.path.join(ROOT, unter)) if f.endswith(".html"))
 
@@ -25,6 +25,9 @@ for p in pages:
             fehler.append(f"{p}: externes Stylesheet {m}")
     if re.search(r"<script[^>]+src=", t) or "fonts.googleapis" in t:
         fehler.append(f"{p}: externes Skript/Google Fonts")
+    # 1b. JavaScript nur als Ausnahme E13: inline, nur in handgepflegten Lernseiten lernen/*.html
+    if re.search(r"<script", t, re.I) and not (p.startswith("lernen/") and p != "lernen/index.html"):
+        fehler.append(f"{p}: JavaScript außerhalb der Ausnahme E13 (nur lernen/, nicht index)")
     # 2. Interne Links existieren
     for m in re.findall(r'href="((?:\.\./)?(?:[a-z0-9\-]+/)?[a-z0-9\-]+\.html)', t):
         ziel = posixpath.normpath(posixpath.join(posixpath.dirname(p), m))
