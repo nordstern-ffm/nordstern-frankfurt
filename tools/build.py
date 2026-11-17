@@ -395,7 +395,7 @@ for _datei, _kopf, _text in BEITRAEGE:
 
 
 def blog_html():
-    """Rubriken mit Sprungmarken-Chips (ohne JS), Leerzustand und geplanten Themen als Fragen (E17)."""
+    """Rubriken mit Sprungmarken-Chips (ohne JS), Leerzustand und geplanten Themen als Fragen (E20)."""
     rub = BLOG["rubriken"]
     chips = "".join(f'<li><a href="#{E(r["id"])}">{icon(r["icon"])}<span>{E(r["titel"])}</span></a></li>' for r in rub)
     teile = [f'<nav aria-label="Rubriken"><ul class="chips">{chips}</ul></nav>']

@@ -42,13 +42,13 @@ Ein Beitrag pro Sprache, Reihenfolge nach den größten Herkunftsgruppen laut St
 ## 5 · Interaktion – ohne Tracking, ohne Konten
 | Element | Technik | Datenschutz |
 | --- | --- | --- |
-| Quiz „Wie gut kennst du Frankfurt?“ (aus `Frankfurt_FW/…/quiz.json`) und „Welche Sprache ist das?“ | lokales Skript wie E12 (gleiche Datei-Regeln) | nichts gespeichert |
+| Quiz „Wie gut kennst du Frankfurt?“ (aus `Frankfurt_FW/…/quiz.json`) und „Welche Sprache ist das?“ | lokales Skript wie E15 (gleiche Datei-Regeln) | nichts gespeichert |
 | Wort-Memory / Zuordnen im Sprachraum | lokales Skript | nichts gespeichert |
 | „Dein Wort für Frankfurt“ – Leser schicken ein Wort aus ihrer Sprache | `mailto:` mit vorbereitetem Betreff | Veröffentlichung nur mit ausdrücklicher Zustimmung, Vorname optional |
 | Leserbriefe statt Kommentarspalte | E-Mail, kuratiert | keine Moderationshaftung für Kommentare |
 | Sprachcafé / Spaziergänge | Termine (offline treffen) | — |
 | Newsletter (später) | EU-Anbieter, Double-Opt-in | eigene Datenschutz-Ergänzung |
-Für Quiz/Memory gilt eine **neue Entscheidung (E-neu)**: E12 erweitern auf „Lern- und Spiel-Elemente“, gleiche Bedingungen (lokal, ohne Bibliotheken, ohne Speicherung, funktioniert ohne JS mit Lösungsansicht). André entscheidet.
+Für Quiz/Memory gilt eine **neue Entscheidung (E-neu)**: E15 erweitern auf „Lern- und Spiel-Elemente“, gleiche Bedingungen (lokal, ohne Bibliotheken, ohne Speicherung, funktioniert ohne JS mit Lösungsansicht). André entscheidet.
 
 ## Aufgaben für Claude Code
 | # | Aufgabe | Fertig, wenn |

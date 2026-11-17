@@ -130,7 +130,7 @@ for p in pages:
             fehler.append(f"{p}: Kennzahl ohne Quelle/Stand: {re.sub('<[^>]+>', ' ', s)[:40]}")
 
 # 8. Sicherheit für ALLE veröffentlichten Dateien (GitHub Pages + .nojekyll veröffentlicht das ganze Repo,
-#    auch docs/mockups/*.html): keine Skripte (E12-Freigabe kommt mit P3/W4), keine Fremdabrufe, keine Formulare
+#    auch docs/mockups/*.html): keine Skripte (E15-Freigabe kommt mit P3/W4), keine Fremdabrufe, keine Formulare
 alle_html, alle_css = [], []
 for wurzel, ordner, dateien in os.walk(ROOT):
     ordner[:] = [o for o in ordner if o != ".git"]
@@ -143,7 +143,7 @@ for wurzel, ordner, dateien in os.walk(ROOT):
 for p in sorted(alle_html):
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
     if re.search(r"<script\b", t, re.I):
-        fehler.append(f"{p}: <script> gefunden (kein JavaScript, E4/E12)")
+        fehler.append(f"{p}: <script> gefunden (kein JavaScript, E4/E15)")
     if re.search(r"<[a-z][^>]*\son[a-z]+\s*=", t, re.I):
         fehler.append(f"{p}: Inline-Event-Handler (on…=) gefunden")
     if re.search(r'(?:href|src|action)\s*=\s*"\s*javascript:', t, re.I):
@@ -202,7 +202,7 @@ for k, l in links.items():
     if not l["url"].startswith("https://"):
         fehler.append(f"links.json: {k} – URL muss mit https:// beginnen")
 
-# 11. Repo ist öffentlich (E16): keine internen Prüfnotizen in data/*.json, Intern-Ordner bleiben ignoriert
+# 11. Repo ist öffentlich (E19): keine internen Prüfnotizen in data/*.json, Intern-Ordner bleiben ignoriert
 def schluessel(o):
     if isinstance(o, dict):
         for k, v in o.items():
@@ -218,11 +218,11 @@ for d in sorted(os.listdir(os.path.join(ROOT, "data"))):
         except ValueError:
             continue  # schon in Abschnitt 10 gemeldet
         if {"pruefen", "intern", "notiz_intern"} & set(schluessel(inhalt)):
-            fehler.append(f"data/{d}: internes Feld (pruefen/intern) – gehört nach data/intern/ (E16)")
+            fehler.append(f"data/{d}: internes Feld (pruefen/intern) – gehört nach data/intern/ (E19)")
 ignore = open(os.path.join(ROOT, ".gitignore"), encoding="utf-8").read() if os.path.isfile(os.path.join(ROOT, ".gitignore")) else ""
 for o in ("docs/intern/", "data/intern/"):
     if o not in ignore.split():
-        fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E16)")
+        fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E19)")
 
 # 12. Blog-Beiträge (data/beitraege/*.md, R1): Pflichtfelder, Quellen über bestätigte Links, Bild mit Nachweis
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

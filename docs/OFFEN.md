@@ -19,7 +19,7 @@ Regel (CLAUDE-CODE-AUFTRAG.md, Punkt 4): Jede Zahl, Rechtsaussage und jeder Link
 Erledigt am 15.11.2026: Hellmodus-Kontrast von `--gold-soft` (siehe FEHLER-LOG, Aufgabe 3).
 
 ## Sicherheit / Datenschutz – Entscheidung André
-Erledigt am 15.11.2026 (E16): interne Prüfnotizen, Vornamen Dritter und das Repo-Audit liegen nur noch lokal in `docs/intern/` und `data/intern/` (per `.gitignore` ausgeschlossen).
+Erledigt am 15.11.2026 (E19): interne Prüfnotizen, Vornamen Dritter und das Repo-Audit liegen nur noch lokal in `docs/intern/` und `data/intern/` (per `.gitignore` ausgeschlossen).
 **Offen:** Die Git-Historie (bis Commit 147d551) und damit GitHub enthält die alten Fassungen weiterhin. Entfernen ginge nur durch Umschreiben der Historie und erzwungenen Push (`git filter-repo`, danach `--force`) – nicht umkehrbar, Forks/Kopien bleiben. Alternative: Repo privat stellen (Pages braucht dann einen bezahlten Plan) oder neues, sauberes Repo nur mit dem aktuellen Stand anlegen. Entscheidung André.
 
 ## Blog / Artikel Personalvermittlung (15.11.2026)
