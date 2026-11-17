@@ -59,3 +59,11 @@ Wichtig: eigenes Stripe-Konto für die Agentur (nicht das von Gumroad verwaltete
 | (1) Eigener Mini-Parser in `build.py` (Frontmatter, Überschriften, Absätze, Listen, Fett/Kursiv, Links nur über Schlüssel aus `data/links.json`) | keine Abhängigkeit, läuft unverändert in Termux und Git Bash | volle Kontrolle über erlaubtes HTML, kein JS/CDN | **Empfehlung** |
 | (2) Python-Paket `markdown` | vollständiges Markdown, wenig eigener Code | neue Abhängigkeit (auch in Termux zu installieren), rohes HTML im Markdown möglich → filtern | Rückfall, falls (1) zu aufwendig wird |
 | (3) Beiträge als JSON in `data/` wie die übrigen Inhalte | einheitlich mit dem Rest, kein Parser | lange Texte in JSON schwer zu schreiben und zu prüfen | verworfen für Fließtext |
+
+## E11 · Umfang: Variante A, entschieden 17.11.2026 (Nutzer)
+**Gewählt:** Start mit Ortsbezirk 10 (Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim). Die Struktur (Pflichtfeld `ortsbezirk` 1–16 in Beiträgen, Tabelle in `docs/BETREUUNG.md`) ist für alle 16 Ortsbezirke angelegt. Weitere Bezirke gehen erst online, wenn jemand sie dauerhaft betreut.
+| Alternative | Nutzen | Sicherheit | Ergebnis |
+| --- | --- | --- | --- |
+| **A · OBR 10 zuerst, Struktur für alle 16** | Qualität dort, wo wir uns auskennen; Ausbau ohne Umbau | jede Angabe hat eine verantwortliche Person, die Quellen prüft | **gewählt** |
+| B · ganze Stadt sofort | große Reichweite ab Tag 1 | 16 Bezirke ohne Betreuung → veraltete Termine, ungeprüfte Angaben, Glaubwürdigkeit leidet; Rechercheaufwand vervielfacht sich, solange PARLIS/frankfurt.de in der Cloud-Umgebung gesperrt sind | verworfen |
+| C · nur Frankfurter Norden, keine Struktur für mehr | am einfachsten | spätere Erweiterung braucht Umbau (Datenmodell, Navigation); Name „Frankfurt“ verspricht mehr, als die Seite hält | verworfen |
