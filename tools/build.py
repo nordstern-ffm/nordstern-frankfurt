@@ -52,6 +52,7 @@ NAV = [
     ("mitmachen.html", "Melden & Petitionen"),
     ("dienste.html", "Vermittlung"),
     ("standpunkte.html", "Standpunkte"),
+    ("lernen/index.html", "Lernen"),
     ("agentur.html", "Für Vereine & Firmen"),
 ]
 
@@ -352,12 +353,27 @@ page("impressum.html", "Impressum", "Impressum von Nordstern Frankfurt.", f"""
 """)
 page("datenschutz.html", "Datenschutz", "Datenschutzerklärung von Nordstern Frankfurt.", f"""
 <h1>Datenschutz</h1>
-<p><strong>Kurz:</strong> Diese Seite setzt keine Cookies, nutzt keine Tracker, lädt keine Schriften oder Skripte von Dritten und hat keine Formulare.</p>
+<p><strong>Kurz:</strong> Diese Seite setzt keine Cookies, nutzt keine Tracker, lädt keine Schriften oder Skripte von Dritten und hat keine Formulare. Ausnahme Lernseiten (<code>lernen/</code>): Sie speichern den Lernfortschritt nur im eigenen Browser (localStorage); nichts davon wird an uns oder Dritte übertragen.</p>
 <h2>Verantwortlich</h2><p>Siehe <a href="impressum.html">Impressum</a>.</p>
 <h2>Hosting</h2><p>Die Seite wird über GitHub Pages (GitHub Inc., USA) ausgeliefert. Dabei verarbeitet GitHub technisch notwendige Daten wie die IP-Adresse. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Hinweis des Betreibers: Ein Umzug zu einem Hoster in der EU ist geplant.</p>
 <h2>E-Mail</h2><p>Wenn Sie uns schreiben, nutzen wir Ihre Angaben nur zur Beantwortung und löschen sie, wenn der Vorgang erledigt ist.</p>
 <h2>Externe Links</h2><p>Links zu ffm.de oder Petitionsplattformen führen zu deren eigenen Datenschutzregeln.</p>
 <h2>Ihre Rechte</h2><p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit.</p>
+""")
+
+# ---------------------------------------------------------------- Lernen (E13)
+# Übersicht wird gebaut; die Lernseiten selbst (lernen/*.html außer index) sind handgepflegt
+# und dürfen als einzige Ausnahme Inline-JavaScript enthalten (kein CDN, keine Datenübertragung).
+page("lernen/index.html", "Lernen", "Kostenlose Lernseiten für Deutsch – mit Erklärungen in der Muttersprache.", """
+<p class="eyebrow">Lernen</p>
+<h1>Deutsch lernen im Frankfurter Norden</h1>
+<p class="lead">Kostenlose Übungsseiten fürs Handy. Ohne Anmeldung, in deinem Tempo.</p>
+<div class="grid">
+<article class="card"><h3><a href="deutsch-lao.html">Deutsch selbst lernen – für Lao-Sprechende</a></h3>
+<p lang="lo">ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ</p>
+<p>Dativ und Akkusativ in 10 Lektionen: Einstiegstest, Regeln auf Deutsch und Laotisch, Übungsfragen, Hör-Diktat, Lückentext, Abschlusstest.</p></article>
+</div>
+<div class="callout"><h2>Gut zu wissen</h2><p>Die Lernseiten nutzen JavaScript für Übungen und Vorlesen. Dein Fortschritt bleibt nur in deinem Browser gespeichert und wird nicht übertragen. Die laotischen Texte werden noch von einer Muttersprachlerin gegengelesen.</p></div>
 """)
 
 page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist kein Stern.</h1><p><a class="btn btn-primary" href="index.html">Zur Startseite</a></p>')

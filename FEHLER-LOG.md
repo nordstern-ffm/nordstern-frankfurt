@@ -38,3 +38,7 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 ## 18.11.2026 – Blog-Beitrag Laab
 - **`gh pr create` aus Claude Code abgelehnt (HTTP 403, GraphQL gesperrt)** · Claude-Code-Sitzungen erlauben nur die GitHub-REST-API · PR per `gh api repos/nordstern-ffm/nordstern-frankfurt/pulls -f base=main -f head=<branch> -f title=… -f body=…` angelegt (#12) · Lehre: In Claude Code PRs immer über `gh api …/pulls` erstellen, nicht über `gh pr create`.
 - **`xxd` fehlt in der Cloud-Umgebung** · Datei-Ende-Prüfung aus dem Log (`tail -c 2 | xxd`) brach ab · `tail -c 2 Datei | od -c` nutzen · Lehre: Prüfbefehle mit Standardwerkzeugen (`od`) schreiben.
+
+## 18.11.2026 – Lernseite Deutsch für Lao-Sprechende
+- **„Repo Deutschlernen für Laos“ nicht gefunden** · Lernseite existierte nur als Claude-Artefakt, nie als Repo · über Chat-Suche gefunden und nach `lernen/deutsch-lao.html` übernommen · Lehre: Bei „Repo nicht gefunden“ zuerst Claude-Artefakte und frühere Chats prüfen; fertige Artefakte zeitnah in ein Repo übernehmen.
+- **Artefakt verstieß gegen zwei Muss-Regeln** (JavaScript, Google Fonts per CDN) · Schriften lokal (Noto Sans Lao neu), JS als begrenzte Ausnahme E13, `check.py` erzwingt die Grenze · Lehre: Fremdes HTML vor dem Übernehmen gegen die Muss-Regeln prüfen, nicht nur `check.py` laufen lassen – `check.py` erkannte Inline-JS bis heute gar nicht.
