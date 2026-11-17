@@ -298,7 +298,7 @@ page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist 
 # ------------------------------------------------------------------ Blog
 def beitrag_html(b, pre):
     m = b["meta"]
-    kopf = (f'<p class="small">{E(m["datum"])}'
+    kopf = (f'<p class="small">{E(m["datum"])} · Ortsbezirk {E(m["ortsbezirk"])}'
             + (" · " + E(", ".join(m["stadtteile"])) if isinstance(m.get("stadtteile"), list) else "")
             + "</p>")
     rumpf = beitraege.markdown(b["body"], link)

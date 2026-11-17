@@ -53,11 +53,14 @@ except ValueError as e:
 slugs = {}
 for b in posts:
     d, m = b["datei"], b["meta"]
-    for k in ("titel", "slug", "datum", "status"):
+    for k in ("titel", "slug", "datum", "status", "ortsbezirk"):
         if not m.get(k):
             fehler.append(f"{d}: Frontmatter-Feld {k} fehlt")
     if m.get("status") and m["status"] not in STATUS:
         fehler.append(f"{d}: status {m['status']!r} nicht in {STATUS}")
+    ob = m.get("ortsbezirk")
+    if ob and not (re.fullmatch(r"[0-9]{1,2}", ob) and 1 <= int(ob) <= 16):
+        fehler.append(f"{d}: ortsbezirk {ob!r} muss eine Zahl von 1 bis 16 sein")
     if m.get("datum") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", m["datum"]):
         fehler.append(f"{d}: datum nicht im Format JJJJ-MM-TT")
     if m.get("slug"):
