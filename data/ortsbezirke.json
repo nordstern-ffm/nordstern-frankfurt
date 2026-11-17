@@ -1,0 +1,202 @@
+{
+ "hinweis": "Stadtteilzuordnung vor Veröffentlichung auf frankfurt.de prüfen; Betreuung siehe docs/BETREUUNG.md (Variante A, E11).",
+ "stadtteile_geprueft": false,
+ "ortsbezirke": [
+  {
+   "nr": 1,
+   "name": "Innenstadt I",
+   "stadtteile": [
+    "Altstadt",
+    "Bahnhofsviertel",
+    "Gallus",
+    "Gutleutviertel",
+    "Innenstadt"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 2,
+   "name": "Innenstadt II",
+   "stadtteile": [
+    "Bockenheim",
+    "Kuhwald",
+    "Westend-Nord",
+    "Westend-Süd"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 3,
+   "name": "Innenstadt III",
+   "stadtteile": [
+    "Nordend-Ost",
+    "Nordend-West"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 4,
+   "name": "Bornheim/Ostend",
+   "stadtteile": [
+    "Bornheim",
+    "Ostend"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 5,
+   "name": "Süd",
+   "stadtteile": [
+    "Flughafen",
+    "Niederrad",
+    "Oberrad",
+    "Sachsenhausen-Nord",
+    "Sachsenhausen-Süd"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 6,
+   "name": "West",
+   "stadtteile": [
+    "Goldstein",
+    "Griesheim",
+    "Höchst",
+    "Nied",
+    "Schwanheim",
+    "Sindlingen",
+    "Sossenheim",
+    "Unterliederbach",
+    "Zeilsheim"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 7,
+   "name": "Mitte-West",
+   "stadtteile": [
+    "Hausen",
+    "Industriehof",
+    "Praunheim",
+    "Rödelheim",
+    "Westhausen"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 8,
+   "name": "Nord-West",
+   "stadtteile": [
+    "Heddernheim",
+    "Niederursel",
+    "Nordweststadt"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 9,
+   "name": "Mitte-Nord",
+   "stadtteile": [
+    "Dornbusch",
+    "Eschersheim",
+    "Ginnheim"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 10,
+   "name": "Nord-Ost",
+   "stadtteile": [
+    "Berkersheim",
+    "Bonames",
+    "Eckenheim",
+    "Frankfurter Berg",
+    "Preungesheim"
+   ],
+   "betreuung": "André",
+   "status": "aktiv",
+   "rhythmus": "monatlich"
+  },
+  {
+   "nr": 11,
+   "name": "Ost",
+   "stadtteile": [
+    "Fechenheim",
+    "Riederwald",
+    "Seckbach"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 12,
+   "name": "Kalbach-Riedberg",
+   "stadtteile": [
+    "Kalbach",
+    "Riedberg"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 13,
+   "name": "Nieder-Erlenbach",
+   "stadtteile": [
+    "Nieder-Erlenbach"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 14,
+   "name": "Harheim",
+   "stadtteile": [
+    "Harheim"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 15,
+   "name": "Nieder-Eschbach",
+   "stadtteile": [
+    "Nieder-Eschbach"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  },
+  {
+   "nr": 16,
+   "name": "Bergen-Enkheim",
+   "stadtteile": [
+    "Bergen-Enkheim"
+   ],
+   "betreuung": "offen",
+   "status": "nicht aktiv",
+   "rhythmus": ""
+  }
+ ]
+}

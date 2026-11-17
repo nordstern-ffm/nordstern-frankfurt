@@ -1,0 +1,2654 @@
+{
+ "quelle": "PARLIS-Kalender der Stadt Frankfurt am Main (Export .ics, alle Termine)",
+ "datei": "docs/recherche/parlis/2026-11-05-alle-termine.ics",
+ "stand": "2026-11-05",
+ "hinweis": "Geplante Termine ohne Ort und Tagesordnung – beides vor Veröffentlichung in PARLIS prüfen.",
+ "termine": [
+  {
+   "datum": "2026-11-02",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20261102T1700"
+  },
+  {
+   "datum": "2026-11-03",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20261103T1700"
+  },
+  {
+   "datum": "2026-11-05",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20261105T1400"
+  },
+  {
+   "datum": "2026-11-05",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20261105T1600"
+  },
+  {
+   "datum": "2026-11-23",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20261123T1800"
+  },
+  {
+   "datum": "2026-11-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120261123T1930"
+  },
+  {
+   "datum": "2026-11-24",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620261124T1800"
+  },
+  {
+   "datum": "2026-11-24",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120261124T1900"
+  },
+  {
+   "datum": "2026-11-24",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020261124T1930"
+  },
+  {
+   "datum": "2026-11-24",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720261124T1930"
+  },
+  {
+   "datum": "2026-11-26",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20261126T1700"
+  },
+  {
+   "datum": "2026-11-26",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20261126T1700"
+  },
+  {
+   "datum": "2026-11-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820261126T1930"
+  },
+  {
+   "datum": "2026-11-27",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520261127T1900"
+  },
+  {
+   "datum": "2026-11-27",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520261127T1930"
+  },
+  {
+   "datum": "2026-11-30",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20261130T1700"
+  },
+  {
+   "datum": "2026-11-30",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20261130T1700"
+  },
+  {
+   "datum": "2026-11-30",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220261130T1900"
+  },
+  {
+   "datum": "2026-11-30",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420261130T2000"
+  },
+  {
+   "datum": "2026-12-01",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20261201T1700"
+  },
+  {
+   "datum": "2026-12-01",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20261201T1700"
+  },
+  {
+   "datum": "2026-12-01",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620261201T1930"
+  },
+  {
+   "datum": "2026-12-01",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420261201T1930"
+  },
+  {
+   "datum": "2026-12-01",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320261201T2000"
+  },
+  {
+   "datum": "2026-12-03",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20261203T1700"
+  },
+  {
+   "datum": "2026-12-03",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20261203T1700"
+  },
+  {
+   "datum": "2026-12-03",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320261203T1930"
+  },
+  {
+   "datum": "2026-12-03",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920261203T1930"
+  },
+  {
+   "datum": "2026-12-04",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220261204T1930"
+  },
+  {
+   "datum": "2026-12-07",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20261207T1700"
+  },
+  {
+   "datum": "2026-12-08",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20261208T1700"
+  },
+  {
+   "datum": "2026-12-10",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20261210T1400"
+  },
+  {
+   "datum": "2026-12-10",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20261210T1600"
+  },
+  {
+   "datum": "2026-12-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Jugendhilfeausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_JU20261214T1700"
+  },
+  {
+   "datum": "2027-01-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270114T1700"
+  },
+  {
+   "datum": "2027-01-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270114T1700"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270118T1700"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270118T1700"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270118T1800"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270118T1900"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270118T1930"
+  },
+  {
+   "datum": "2027-01-18",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270118T2000"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270119T1700"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270119T1700"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270119T1800"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270119T1900"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270119T1930"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270119T1930"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270119T1930"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270119T1930"
+  },
+  {
+   "datum": "2027-01-19",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270119T2000"
+  },
+  {
+   "datum": "2027-01-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270121T1700"
+  },
+  {
+   "datum": "2027-01-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270121T1700"
+  },
+  {
+   "datum": "2027-01-21",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270121T1900"
+  },
+  {
+   "datum": "2027-01-21",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270121T1930"
+  },
+  {
+   "datum": "2027-01-21",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270121T1930"
+  },
+  {
+   "datum": "2027-01-22",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270122T1900"
+  },
+  {
+   "datum": "2027-01-22",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270122T1930"
+  },
+  {
+   "datum": "2027-01-22",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270122T1930"
+  },
+  {
+   "datum": "2027-01-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270125T1700"
+  },
+  {
+   "datum": "2027-01-26",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270126T1700"
+  },
+  {
+   "datum": "2027-01-28",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270128T1400"
+  },
+  {
+   "datum": "2027-01-28",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270128T1600"
+  },
+  {
+   "datum": "2027-02-15",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270215T1800"
+  },
+  {
+   "datum": "2027-02-15",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270215T1900"
+  },
+  {
+   "datum": "2027-02-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270215T1930"
+  },
+  {
+   "datum": "2027-02-16",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270216T1800"
+  },
+  {
+   "datum": "2027-02-16",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270216T1900"
+  },
+  {
+   "datum": "2027-02-16",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270216T1930"
+  },
+  {
+   "datum": "2027-02-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270218T1700"
+  },
+  {
+   "datum": "2027-02-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270218T1700"
+  },
+  {
+   "datum": "2027-02-18",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270218T1930"
+  },
+  {
+   "datum": "2027-02-22",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270222T1700"
+  },
+  {
+   "datum": "2027-02-22",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270222T1700"
+  },
+  {
+   "datum": "2027-02-22",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270222T2000"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270223T1700"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270223T1700"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270223T1930"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270223T1930"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270223T1930"
+  },
+  {
+   "datum": "2027-02-23",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270223T2000"
+  },
+  {
+   "datum": "2027-02-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270225T1700"
+  },
+  {
+   "datum": "2027-02-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270225T1700"
+  },
+  {
+   "datum": "2027-02-25",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270225T1900"
+  },
+  {
+   "datum": "2027-02-25",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270225T1930"
+  },
+  {
+   "datum": "2027-02-26",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270226T1900"
+  },
+  {
+   "datum": "2027-02-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270226T1930"
+  },
+  {
+   "datum": "2027-02-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270226T1930"
+  },
+  {
+   "datum": "2027-03-01",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270301T1700"
+  },
+  {
+   "datum": "2027-03-02",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270302T1700"
+  },
+  {
+   "datum": "2027-03-04",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270304T1400"
+  },
+  {
+   "datum": "2027-03-04",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270304T1600"
+  },
+  {
+   "datum": "2027-03-15",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270315T1800"
+  },
+  {
+   "datum": "2027-04-05",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270405T1930"
+  },
+  {
+   "datum": "2027-04-06",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270406T1800"
+  },
+  {
+   "datum": "2027-04-06",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270406T1930"
+  },
+  {
+   "datum": "2027-04-06",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270406T1930"
+  },
+  {
+   "datum": "2027-04-08",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270408T1700"
+  },
+  {
+   "datum": "2027-04-08",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270408T1700"
+  },
+  {
+   "datum": "2027-04-09",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270409T1930"
+  },
+  {
+   "datum": "2027-04-12",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270412T1700"
+  },
+  {
+   "datum": "2027-04-12",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270412T1700"
+  },
+  {
+   "datum": "2027-04-12",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270412T1900"
+  },
+  {
+   "datum": "2027-04-12",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270412T2000"
+  },
+  {
+   "datum": "2027-04-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270413T1700"
+  },
+  {
+   "datum": "2027-04-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270413T1700"
+  },
+  {
+   "datum": "2027-04-13",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270413T1930"
+  },
+  {
+   "datum": "2027-04-13",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270413T1930"
+  },
+  {
+   "datum": "2027-04-13",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270413T2000"
+  },
+  {
+   "datum": "2027-04-15",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270415T1700"
+  },
+  {
+   "datum": "2027-04-15",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270415T1700"
+  },
+  {
+   "datum": "2027-04-15",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270415T1900"
+  },
+  {
+   "datum": "2027-04-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270415T1930"
+  },
+  {
+   "datum": "2027-04-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270415T1930"
+  },
+  {
+   "datum": "2027-04-16",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270416T1900"
+  },
+  {
+   "datum": "2027-04-16",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270416T1930"
+  },
+  {
+   "datum": "2027-04-19",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270419T1700"
+  },
+  {
+   "datum": "2027-04-20",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270420T1700"
+  },
+  {
+   "datum": "2027-04-22",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270422T1400"
+  },
+  {
+   "datum": "2027-04-22",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270422T1600"
+  },
+  {
+   "datum": "2027-05-03",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270503T1800"
+  },
+  {
+   "datum": "2027-05-03",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270503T1930"
+  },
+  {
+   "datum": "2027-05-04",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270504T1700"
+  },
+  {
+   "datum": "2027-05-04",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270504T1700"
+  },
+  {
+   "datum": "2027-05-04",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270504T1800"
+  },
+  {
+   "datum": "2027-05-04",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270504T1930"
+  },
+  {
+   "datum": "2027-05-10",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270510T1700"
+  },
+  {
+   "datum": "2027-05-10",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270510T1700"
+  },
+  {
+   "datum": "2027-05-10",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270510T1700"
+  },
+  {
+   "datum": "2027-05-10",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270510T1900"
+  },
+  {
+   "datum": "2027-05-10",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270510T2000"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270511T1700"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270511T1700"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270511T1900"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270511T1930"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270511T1930"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270511T1930"
+  },
+  {
+   "datum": "2027-05-11",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270511T2000"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270513T1700"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270513T1700"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270513T1700"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270513T1900"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270513T1930"
+  },
+  {
+   "datum": "2027-05-13",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270513T1930"
+  },
+  {
+   "datum": "2027-05-14",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270514T1900"
+  },
+  {
+   "datum": "2027-05-14",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270514T1930"
+  },
+  {
+   "datum": "2027-05-14",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270514T1930"
+  },
+  {
+   "datum": "2027-05-20",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270520T1400"
+  },
+  {
+   "datum": "2027-05-20",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270520T1600"
+  },
+  {
+   "datum": "2027-06-07",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270607T1800"
+  },
+  {
+   "datum": "2027-06-07",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270607T1930"
+  },
+  {
+   "datum": "2027-06-08",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270608T1800"
+  },
+  {
+   "datum": "2027-06-08",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270608T1930"
+  },
+  {
+   "datum": "2027-06-10",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270610T1700"
+  },
+  {
+   "datum": "2027-06-10",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270610T1700"
+  },
+  {
+   "datum": "2027-06-10",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270610T1930"
+  },
+  {
+   "datum": "2027-06-10",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270610T1930"
+  },
+  {
+   "datum": "2027-06-11",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270611T1930"
+  },
+  {
+   "datum": "2027-06-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270614T1700"
+  },
+  {
+   "datum": "2027-06-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270614T1700"
+  },
+  {
+   "datum": "2027-06-14",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270614T1900"
+  },
+  {
+   "datum": "2027-06-14",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270614T2000"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270615T1700"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270615T1700"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270615T1900"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270615T1930"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270615T1930"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270615T1930"
+  },
+  {
+   "datum": "2027-06-15",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270615T2000"
+  },
+  {
+   "datum": "2027-06-17",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270617T1700"
+  },
+  {
+   "datum": "2027-06-17",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270617T1700"
+  },
+  {
+   "datum": "2027-06-17",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270617T1900"
+  },
+  {
+   "datum": "2027-06-18",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270618T1900"
+  },
+  {
+   "datum": "2027-06-18",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270618T1930"
+  },
+  {
+   "datum": "2027-06-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270621T1700"
+  },
+  {
+   "datum": "2027-06-22",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270622T1700"
+  },
+  {
+   "datum": "2027-06-24",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270624T1400"
+  },
+  {
+   "datum": "2027-06-24",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270624T1600"
+  },
+  {
+   "datum": "2027-08-09",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270809T1800"
+  },
+  {
+   "datum": "2027-08-10",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270810T1930"
+  },
+  {
+   "datum": "2027-08-10",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270810T1930"
+  },
+  {
+   "datum": "2027-08-12",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270812T1700"
+  },
+  {
+   "datum": "2027-08-12",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270812T1700"
+  },
+  {
+   "datum": "2027-08-16",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270816T1700"
+  },
+  {
+   "datum": "2027-08-16",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270816T1700"
+  },
+  {
+   "datum": "2027-08-16",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270816T1900"
+  },
+  {
+   "datum": "2027-08-16",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270816T1930"
+  },
+  {
+   "datum": "2027-08-16",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270816T2000"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270817T1700"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270817T1700"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270817T1800"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270817T1900"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270817T1930"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270817T1930"
+  },
+  {
+   "datum": "2027-08-17",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270817T2000"
+  },
+  {
+   "datum": "2027-08-19",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270819T1700"
+  },
+  {
+   "datum": "2027-08-19",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270819T1700"
+  },
+  {
+   "datum": "2027-08-19",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270819T1900"
+  },
+  {
+   "datum": "2027-08-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270819T1930"
+  },
+  {
+   "datum": "2027-08-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270819T1930"
+  },
+  {
+   "datum": "2027-08-20",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270820T1900"
+  },
+  {
+   "datum": "2027-08-20",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270820T1930"
+  },
+  {
+   "datum": "2027-08-20",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270820T1930"
+  },
+  {
+   "datum": "2027-08-23",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270823T1700"
+  },
+  {
+   "datum": "2027-08-24",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270824T1700"
+  },
+  {
+   "datum": "2027-08-26",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270826T1400"
+  },
+  {
+   "datum": "2027-08-26",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270826T1600"
+  },
+  {
+   "datum": "2027-09-06",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20270906T1800"
+  },
+  {
+   "datum": "2027-09-07",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620270907T1800"
+  },
+  {
+   "datum": "2027-09-07",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720270907T1930"
+  },
+  {
+   "datum": "2027-09-09",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20270909T1700"
+  },
+  {
+   "datum": "2027-09-09",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20270909T1700"
+  },
+  {
+   "datum": "2027-09-09",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920270909T1930"
+  },
+  {
+   "datum": "2027-09-10",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520270910T1900"
+  },
+  {
+   "datum": "2027-09-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20270913T1700"
+  },
+  {
+   "datum": "2027-09-13",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20270913T1700"
+  },
+  {
+   "datum": "2027-09-13",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220270913T1900"
+  },
+  {
+   "datum": "2027-09-13",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120270913T1930"
+  },
+  {
+   "datum": "2027-09-13",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420270913T2000"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20270914T1700"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20270914T1700"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120270914T1900"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020270914T1930"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620270914T1930"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420270914T1930"
+  },
+  {
+   "datum": "2027-09-14",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320270914T2000"
+  },
+  {
+   "datum": "2027-09-16",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20270916T1700"
+  },
+  {
+   "datum": "2027-09-16",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20270916T1700"
+  },
+  {
+   "datum": "2027-09-16",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320270916T1900"
+  },
+  {
+   "datum": "2027-09-16",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820270916T1930"
+  },
+  {
+   "datum": "2027-09-17",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220270917T1930"
+  },
+  {
+   "datum": "2027-09-17",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520270917T1930"
+  },
+  {
+   "datum": "2027-09-20",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20270920T1700"
+  },
+  {
+   "datum": "2027-09-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20270921T1700"
+  },
+  {
+   "datum": "2027-09-23",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20270923T1400"
+  },
+  {
+   "datum": "2027-09-23",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20270923T1600"
+  },
+  {
+   "datum": "2027-10-18",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20271018T1800"
+  },
+  {
+   "datum": "2027-10-19",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620271019T1800"
+  },
+  {
+   "datum": "2027-10-19",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120271019T1900"
+  },
+  {
+   "datum": "2027-10-19",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020271019T1930"
+  },
+  {
+   "datum": "2027-10-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20271021T1700"
+  },
+  {
+   "datum": "2027-10-21",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20271021T1700"
+  },
+  {
+   "datum": "2027-10-21",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820271021T1930"
+  },
+  {
+   "datum": "2027-10-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20271025T1700"
+  },
+  {
+   "datum": "2027-10-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20271025T1700"
+  },
+  {
+   "datum": "2027-10-25",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220271025T1900"
+  },
+  {
+   "datum": "2027-10-25",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120271025T1930"
+  },
+  {
+   "datum": "2027-10-25",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420271025T2000"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20271026T1700"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20271026T1700"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620271026T1930"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420271026T1930"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720271026T1930"
+  },
+  {
+   "datum": "2027-10-26",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320271026T2000"
+  },
+  {
+   "datum": "2027-10-28",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20271028T1700"
+  },
+  {
+   "datum": "2027-10-28",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20271028T1700"
+  },
+  {
+   "datum": "2027-10-28",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320271028T1900"
+  },
+  {
+   "datum": "2027-10-28",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920271028T1930"
+  },
+  {
+   "datum": "2027-10-29",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520271029T1900"
+  },
+  {
+   "datum": "2027-10-29",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220271029T1930"
+  },
+  {
+   "datum": "2027-10-29",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520271029T1930"
+  },
+  {
+   "datum": "2027-11-01",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20271101T1700"
+  },
+  {
+   "datum": "2027-11-02",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20271102T1700"
+  },
+  {
+   "datum": "2027-11-04",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20271104T1400"
+  },
+  {
+   "datum": "2027-11-04",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20271104T1600"
+  },
+  {
+   "datum": "2027-11-15",
+   "zeit": "18:00",
+   "typ": "kav",
+   "ortsbezirk": null,
+   "gremium": "KAV (Kommunale Ausländerinnen- und Ausländervertretung)",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_KAV20271115T1800"
+  },
+  {
+   "datum": "2027-11-15",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 11,
+   "gremium": "Ortsbeirat 11",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1120271115T1930"
+  },
+  {
+   "datum": "2027-11-16",
+   "zeit": "18:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 6,
+   "gremium": "Ortsbeirat 6",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_620271116T1800"
+  },
+  {
+   "datum": "2027-11-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Klimaschutz, Umwelt und Frauen",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_U20271118T1700"
+  },
+  {
+   "datum": "2027-11-18",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Soziales, Gesundheit und Inklusion",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_SG20271118T1700"
+  },
+  {
+   "datum": "2027-11-18",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 9,
+   "gremium": "Ortsbeirat 9",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_920271118T1930"
+  },
+  {
+   "datum": "2027-11-22",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Bildung und Schulbau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_B20271122T1700"
+  },
+  {
+   "datum": "2027-11-22",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Mobilität",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_M20271122T1700"
+  },
+  {
+   "datum": "2027-11-22",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 2,
+   "gremium": "Ortsbeirat 2",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_220271122T1900"
+  },
+  {
+   "datum": "2027-11-22",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 14,
+   "gremium": "Ortsbeirat 14",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1420271122T2000"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Planung, Wohnen und Städtebau",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_PW20271123T1700"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Wirtschaft, Recht und Sport",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_W20271123T1700"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 1,
+   "gremium": "Ortsbeirat 1",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_120271123T1900"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 10,
+   "gremium": "Ortsbeirat 10",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1020271123T1930"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 16,
+   "gremium": "Ortsbeirat 16",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1620271123T1930"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 4,
+   "gremium": "Ortsbeirat 4",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_420271123T1930"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 7,
+   "gremium": "Ortsbeirat 7",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_720271123T1930"
+  },
+  {
+   "datum": "2027-11-23",
+   "zeit": "20:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 13,
+   "gremium": "Ortsbeirat 13",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1320271123T2000"
+  },
+  {
+   "datum": "2027-11-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Diversität, Beteiligung und Europa",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_D20271125T1700"
+  },
+  {
+   "datum": "2027-11-25",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Kultur und Wissenschaft",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_K20271125T1700"
+  },
+  {
+   "datum": "2027-11-25",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 3,
+   "gremium": "Ortsbeirat 3",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_320271125T1900"
+  },
+  {
+   "datum": "2027-11-25",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 8,
+   "gremium": "Ortsbeirat 8",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_820271125T1930"
+  },
+  {
+   "datum": "2027-11-26",
+   "zeit": "19:00",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 5,
+   "gremium": "Ortsbeirat 5",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_520271126T1900"
+  },
+  {
+   "datum": "2027-11-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 12,
+   "gremium": "Ortsbeirat 12",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1220271126T1930"
+  },
+  {
+   "datum": "2027-11-26",
+   "zeit": "19:30",
+   "typ": "ortsbeirat",
+   "ortsbezirk": 15,
+   "gremium": "Ortsbeirat 15",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_1520271126T1930"
+  },
+  {
+   "datum": "2027-11-29",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ausschuss für Sicherheit, Digitalisierung und Smart City",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_S20271129T1700"
+  },
+  {
+   "datum": "2027-11-30",
+   "zeit": "17:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Haupt- und Finanzausschuss sowie Personal",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_H20271130T1700"
+  },
+  {
+   "datum": "2027-12-02",
+   "zeit": "14:00",
+   "typ": "ausschuss",
+   "ortsbezirk": null,
+   "gremium": "Ältestenausschuss",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_�20271202T1400"
+  },
+  {
+   "datum": "2027-12-02",
+   "zeit": "16:00",
+   "typ": "stvv",
+   "ortsbezirk": null,
+   "gremium": "Stadtverordnetenversammlung",
+   "status": "geplant",
+   "uid": "parlis.amt01@stadt-frankfurt.de_STVV20271202T1600"
+  }
+ ]
+}

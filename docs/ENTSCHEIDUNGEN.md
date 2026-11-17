@@ -67,3 +67,14 @@ Wichtig: eigenes Stripe-Konto für die Agentur (nicht das von Gumroad verwaltete
 | **A · OBR 10 zuerst, Struktur für alle 16** | Qualität dort, wo wir uns auskennen; Ausbau ohne Umbau | jede Angabe hat eine verantwortliche Person, die Quellen prüft | **gewählt** |
 | B · ganze Stadt sofort | große Reichweite ab Tag 1 | 16 Bezirke ohne Betreuung → veraltete Termine, ungeprüfte Angaben, Glaubwürdigkeit leidet; Rechercheaufwand vervielfacht sich, solange PARLIS/frankfurt.de in der Cloud-Umgebung gesperrt sind | verworfen |
 | C · nur Frankfurter Norden, keine Struktur für mehr | am einfachsten | spätere Erweiterung braucht Umbau (Datenmodell, Navigation); Name „Frankfurt“ verspricht mehr, als die Seite hält | verworfen |
+
+## E12 · Termine, 16 Ortsbezirksseiten und Kalender-Laufband – entschieden 17.11.2026 (Nutzer)
+**Gewählt:** Termine aus dem PARLIS-Kalender (.ics, vom Nutzer geladen) → `tools/ics_import.py` → `data/termine.json`. Jede der 16 Ortsbezirke bekommt eine Seite mit „Neues“ (veröffentlichte Beiträge mit passendem `ortsbezirk`) und den nächsten Sitzungen. Startseite oben: Laufband „Termine & Neues“ mit 5 Einträgen, **ohne JavaScript** (CSS-Animation).
+Verhältnis zu E11 (Variante A): Die 16 Seiten sind die angekündigte Struktur. Ohne Betreuung zeigen sie nur amtliche Termine und den Hinweis „noch ohne Betreuung“, keine eigenen Inhalte.
+| Alternative | Nutzen | Sicherheit / Regeln | Ergebnis |
+| --- | --- | --- | --- |
+| **CSS-Laufband mit Pause** (Hover, Tastaturfokus, Schalter „Laufband anhalten“; bei `prefers-reduced-motion` ruhige Liste) | rotiert wie gewünscht, kein JS | erfüllt WCAG 2.2.2 (anhaltbar), Tastatur erreicht bei Fokus alle Einträge | **gewählt** |
+| JavaScript-Karussell | flexibler | Muss-Regel „kein JavaScript“ | verworfen |
+| Nur statische Liste | am einfachsten, am barrierefreiesten | erfüllt nicht den Wunsch „rotierend“ | bleibt als Rückfall bei reduzierter Bewegung |
+| PARLIS-Kalender einbetten (iframe) | immer aktuell | Fremdabruf, Datenweitergabe an Dritte; frankfurt.de blockt ohnehin | verworfen |
+**Grenze:** „Nächste Termine“ werden beim Bauen berechnet (Stichtag = Build-Datum, reproduzierbar mit `NORDSTERN_HEUTE=JJJJ-MM-TT`). Ohne neuen Build veralten sie → mindestens wöchentlich bauen; `check.py` warnt, wenn alle Termine vorbei sind. **Neuer Weg später:** GitHub Action mit wöchentlichem Build (Entscheidung offen).

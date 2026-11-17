@@ -14,7 +14,8 @@ Umfang siehe docs/ENTSCHEIDUNGEN.md (Variante A) und docs/BETREUUNG.md.
 3. Neue Seite = ein `page(...)`-Aufruf in `tools/build.py` + Eintrag in `NAV`.
 4. Fixes zuerst per `sed`/`python3` im Repo (SED-MAGIC-Regel aus dem tools-Repo).
 5. Routine (Texte, JSON-Einträge, Tippfehler) mit dem günstigsten Modell; großes Modell nur für Architektur, Recht/Datenschutz-Abwägungen und Reviews.
-6. Jeder Fehler → `FEHLER-LOG.md`. Jede Richtungsentscheidung → `docs/ENTSCHEIDUNGEN.md` mit Alternativen.
+6. Termine aktualisieren: PARLIS-Kalender (.ics) im eigenen Browser laden, nach `docs/recherche/parlis/` legen, `python3 tools/ics_import.py <datei>` → `data/termine.json`, dann bauen. Nach dem Import und mindestens wöchentlich neu bauen, damit „nächste Termine“ stimmen.
+7. Jeder Fehler → `FEHLER-LOG.md`. Jede Richtungsentscheidung → `docs/ENTSCHEIDUNGEN.md` mit Alternativen.
 
 ## Muss-Regeln
 - Bilder/Grafiken nur mit vollständigem Eintrag in `data/bilder.json` (Lizenz am Original geprüft).
