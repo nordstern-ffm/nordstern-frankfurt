@@ -52,6 +52,14 @@ Wichtig: eigenes Stripe-Konto für die Agentur (nicht das von Gumroad verwaltete
 ## E9 · Verknüpfung mit BanglaHilfe und wege-nach-frankfurt
 **Gewählt:** Nordstern verlinkt beide auf Start („Nordstern-Familie“) und Frankfurt-Info; Links am 15.11.2026 erreichbar geprüft (HTTP 200). **Rückverlinkung** aus beiden Repos erst nach Domain-Start (sonst zeigen sie auf eine `noindex`-Vorschau). Repos bleiben eigenständig – kein Zusammenlegen, damit sie einzeln verkaufbar bleiben (Repo-Verkauf).
 
+## E10 · Blog-Build für `data/beitraege/*.md` – entschieden 17.11.2026: Variante 1 (Nutzer)
+**Gewählt:** eigener Mini-Parser in `tools/beitraege.py`, genutzt von `build.py` und `check.py`. Nur `status: veroeffentlicht` erzeugt `frankfurt/<slug>.html` (+ Übersicht `frankfurt/index.html`); Entwürfe werden nie gebaut oder verlinkt. Pflichtfeld `ortsbezirk` (1–16) im Frontmatter. Links im Text nur als `[[link:schluessel]]` aus `data/links.json`. Vorschau: `python3 tools/build.py --entwuerfe <ordner außerhalb des Repos>`.
+| Alternative | Nutzen | Sicherheit | Ergebnis |
+| --- | --- | --- | --- |
+| (1) Eigener Mini-Parser in `build.py` (Frontmatter, Überschriften, Absätze, Listen, Fett/Kursiv, Links nur über Schlüssel aus `data/links.json`) | keine Abhängigkeit, läuft unverändert in Termux und Git Bash | volle Kontrolle über erlaubtes HTML, kein JS/CDN | **Empfehlung** |
+| (2) Python-Paket `markdown` | vollständiges Markdown, wenig eigener Code | neue Abhängigkeit (auch in Termux zu installieren), rohes HTML im Markdown möglich → filtern | Rückfall, falls (1) zu aufwendig wird |
+| (3) Beiträge als JSON in `data/` wie die übrigen Inhalte | einheitlich mit dem Rest, kein Parser | lange Texte in JSON schwer zu schreiben und zu prüfen | verworfen für Fließtext |
+
 ## E11 · Umfang: Variante A, entschieden 17.11.2026 (Nutzer)
 **Gewählt:** Start mit Ortsbezirk 10 (Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim). Die Struktur (Pflichtfeld `ortsbezirk` 1–16 in Beiträgen, Tabelle in `docs/BETREUUNG.md`) ist für alle 16 Ortsbezirke angelegt. Weitere Bezirke gehen erst online, wenn jemand sie dauerhaft betreut.
 | Alternative | Nutzen | Sicherheit | Ergebnis |
