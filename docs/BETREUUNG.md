@@ -2,7 +2,9 @@
 
 Umfang laut `docs/ENTSCHEIDUNGEN.md`, Eintrag „Umfang: Variante A“: Start mit Ortsbezirk 10, Struktur für alle 16. Ein Ortsbezirk wird erst **aktiv** (Beiträge mit diesem `ortsbezirk` werden veröffentlicht), wenn er eine Betreuung hat.
 
-Stadtteilzuordnung vor Veröffentlichung auf frankfurt.de prüfen (in der Cloud-Umgebung zurzeit gesperrt).
+Stadtteilzuordnung vor Veröffentlichung auf frankfurt.de prüfen (frankfurt.de blockt Zugriffe aus der Cloud-Umgebung).
+
+Die Webseite liest die Bezirke aus `data/ortsbezirke.json` – Änderungen an Betreuung/Status dort **und** in dieser Tabelle eintragen. Jeder Bezirk hat eine eigene Seite `ortsbezirke/ortsbezirk-<Nr>.html` mit Sitzungsterminen (aus PARLIS) und Beiträgen mit passendem `ortsbezirk`.
 
 | Nr. | Ortsbezirk | Stadtteile | Betreuung | Status | Rhythmus |
 | --- | --- | --- | --- | --- | --- |
@@ -27,7 +29,7 @@ Stadtteilzuordnung vor Veröffentlichung auf frankfurt.de prüfen (in der Cloud-
 
 Wer einen Ortsbezirk betreut, macht im vereinbarten Rhythmus:
 
-1. **Monatsrecherche:** Sitzungstermine und Tagesordnung des Ortsbeirats, neue Anträge, Termine im Stadtteil. Ablage als `docs/recherche/JJJJ-MM-<thema>.md` mit Status-Legende (✅ / ⚠️ / ❓).
+1. **Monatsrecherche:** PARLIS-Kalender (.ics) herunterladen und mit `python3 tools/ics_import.py` einlesen; Sitzungstermine und Tagesordnung des Ortsbeirats, neue Anträge, Termine im Stadtteil. Ablage als `docs/recherche/JJJJ-MM-<thema>.md` mit Status-Legende (✅ / ⚠️ / ❓).
 2. **Quellenprüfung:** Jede Angabe an der Originalquelle prüfen (PARLIS, frankfurt.de, Veranstalter). Externe Links nur über `data/links.json` mit Datum `bestaetigt`. Widersprüche als ❓ markieren und nicht als Fakt übernehmen.
 3. **Blogentwurf:** mindestens ein Beitrag in `data/beitraege/` mit `ortsbezirk: <Nr.>` und `status: entwurf`, offene Punkte im Feld `pruefen`. Veröffentlicht wird erst, wenn `pruefen` leer ist und `check.py` 0 Fehler meldet.
 4. **Fehler-Log:** Jeder Fehler (falsche Angabe, gesperrte Quelle, Werkzeugproblem) kommt mit Ursache, Fix und Lehre in `FEHLER-LOG.md`.

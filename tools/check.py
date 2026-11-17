@@ -13,8 +13,9 @@ fehler, warn = [], []
 site = json.load(open(os.path.join(ROOT, "data/site.json"), encoding="utf-8"))
 links = json.load(open(os.path.join(ROOT, "data/links.json"), encoding="utf-8"))["links"]
 pages = sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
-if os.path.isdir(os.path.join(ROOT, "frankfurt")):
-    pages += sorted("frankfurt/" + f for f in os.listdir(os.path.join(ROOT, "frankfurt")) if f.endswith(".html"))
+for unter in ("frankfurt", "ortsbezirke"):  # gebaute Unterordner (Blog, Ortsbezirke)
+    if os.path.isdir(os.path.join(ROOT, unter)):
+        pages += sorted(unter + "/" + f for f in os.listdir(os.path.join(ROOT, unter)) if f.endswith(".html"))
 
 for p in pages:
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
@@ -77,6 +78,20 @@ for b in posts:
             warn.append(f"{d}: Link {k} ohne bestaetigt (erscheint nur als Text)")
     if re.search(r"\]\(\s*https?://|<a\s|<script", b["body"], re.I):
         fehler.append(f"{d}: rohe URL/HTML im Text – Links nur als [[link:schluessel]]")
+
+# 6. Termine/Ortsbezirke (E12): Quelle, Stand, 16 Bezirke mit eigener Seite
+termine = json.load(open(os.path.join(ROOT, "data/termine.json"), encoding="utf-8"))
+if not termine.get("quelle") or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", termine.get("stand", "")):
+    fehler.append("data/termine.json: quelle oder stand fehlt")
+obrs = json.load(open(os.path.join(ROOT, "data/ortsbezirke.json"), encoding="utf-8"))["ortsbezirke"]
+if sorted(o["nr"] for o in obrs) != list(range(1, 17)):
+    fehler.append("data/ortsbezirke.json: nicht genau die Ortsbezirke 1–16")
+for o in obrs:
+    if f"ortsbezirke/ortsbezirk-{o['nr']}.html" not in pages:
+        fehler.append(f"Seite für Ortsbezirk {o['nr']} fehlt – erst python3 tools/build.py")
+import datetime
+if termine.get("termine") and max(t["datum"] for t in termine["termine"]) < datetime.date.today().isoformat():
+    warn.append("data/termine.json: alle Termine liegen in der Vergangenheit – neuen PARLIS-Export importieren")
 
 if "--launch" in sys.argv:
     b = site["betreiber"]

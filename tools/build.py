@@ -7,7 +7,7 @@ Blog-Vorschau:                 python3 tools/build.py --entwuerfe <ordner außer
 Kein Framework, kein npm, kein JavaScript, keine externen Abrufe.
 Läuft in Termux (python3) und Git Bash gleich.
 """
-import glob, html, json, os, shutil, sys
+import datetime, glob, html, json, os, shutil, sys
 sys.dont_write_bytecode = True  # kein tools/__pycache__ im Repo
 import beitraege
 
@@ -34,6 +34,13 @@ BEITRAEGE = beitraege.laden(ROOT)
 for _b in BEITRAEGE:
     if _b["meta"].get("status") not in beitraege.STATUS:
         sys.exit("Unbekannter status in " + _b["datei"] + " – erst python3 tools/check.py")
+# Termine (PARLIS-Export, tools/ics_import.py) und Ortsbezirke (E11/E12)
+TERMINE = load("termine.json")
+ORTSBEZIRKE = load("ortsbezirke.json")["ortsbezirke"]
+# Stichtag für "nächste Termine": NORDSTERN_HEUTE=JJJJ-MM-TT erlaubt reproduzierbare Builds
+HEUTE = os.environ.get("NORDSTERN_HEUTE") or datetime.date.today().isoformat()
+KOMMEND = [t for t in TERMINE["termine"] if t["datum"] >= HEUTE]
+
 VEROEFF = sorted((b for b in BEITRAEGE if b["meta"]["status"] == "veroeffentlicht"),
                  key=lambda b: b["meta"]["datum"], reverse=True)
 
@@ -41,6 +48,7 @@ NAV = [
     ("index.html", "Start"),
     ("nachbarschaft.html", "Nachbarschaft"),
     ("frankfurt.html", "Frankfurt-Info"),
+    ("ortsbezirke/index.html", "Ortsbezirke"),
     ("mitmachen.html", "Melden & Petitionen"),
     ("dienste.html", "Vermittlung"),
     ("standpunkte.html", "Standpunkte"),
@@ -124,6 +132,64 @@ def card(t, body, extra=""):
     return f'<article class="card{extra}"><h3>{t}</h3>{body}</article>'
 
 
+# ------------------------------------------------------- Termine-Helfer
+WOCHENTAG = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+
+def datum_text(t, lang=False):
+    d = datetime.date.fromisoformat(t["datum"])
+    tag = WOCHENTAG[d.weekday()]
+    return tag + " " + d.strftime("%d.%m.%Y") + ", " + t["zeit"] + " Uhr"
+
+
+def naechster(pred):
+    for t in KOMMEND:
+        if pred(t):
+            return t
+    return None
+
+
+def obr_seite(nr):
+    return "ortsbezirke/ortsbezirk-" + str(nr) + ".html"
+
+
+def termin_hinweis():
+    return (f'<p class="small">Geplante Termine laut PARLIS-Kalender der Stadt (Stand {E(TERMINE["stand"])}). '
+            'Ort und Tagesordnung stehen im Ratsinformationssystem PARLIS – bitte dort prüfen.</p>')
+
+
+def kalender_ticker():
+    """Rotierende News-Zeile ohne JavaScript (E12): CSS-Animation, pausiert bei Hover/Fokus/Schalter,
+    bei prefers-reduced-motion als ruhige Liste. Immer genau 5 Einträge."""
+    eintraege = []
+    if VEROEFF:
+        b = VEROEFF[0]["meta"]
+        eintraege.append(("Neu im Blog", E(b["titel"]), "frankfurt/" + E(b["slug"]) + ".html"))
+    for pred, label, ziel in [
+        (lambda t: t["ortsbezirk"] == 10, "Ortsbeirat 10", obr_seite(10)),
+        (lambda t: t["typ"] == "stvv", "Stadtverordnetenversammlung", "ortsbezirke/index.html"),
+        (lambda t: t["typ"] == "kav", "KAV – Ausländerinnen- und Ausländervertretung", "ortsbezirke/index.html"),
+    ]:
+        t = naechster(pred)
+        if t:
+            eintraege.append(("Nächste Sitzung", label + ": " + datum_text(t), ziel))
+    woche = (datetime.date.fromisoformat(HEUTE) + datetime.timedelta(days=7)).isoformat()
+    n = len([t for t in KOMMEND if t["typ"] == "ortsbeirat" and t["datum"] <= woche])
+    wort = "Ortsbeiratssitzung" if n == 1 else "Ortsbeiratssitzungen"
+    eintraege.append(("Alle 16 Ortsbezirke", str(n) + " " + wort + " in den nächsten 7 Tagen", "ortsbezirke/index.html"))
+    eintraege.append(("Mitmachen", "Mangel gesehen? So meldest du ihn der Stadt", "mitmachen.html"))
+    eintraege = eintraege[:5]
+    li = "".join(
+        f'<li class="tick" style="--i:{i}"><span class="tick-label">{lab}</span> '
+        f'<a href="{ziel}">{txt}</a></li>'
+        for i, (lab, txt, ziel) in enumerate(eintraege))
+    return ('<section class="ticker" aria-labelledby="h-ticker">'
+            '<h2 id="h-ticker" class="ticker-h">Termine &amp; Neues</h2>'
+            '<input type="checkbox" id="ticker-pause" class="ticker-pause">'
+            '<label for="ticker-pause" class="ticker-btn">Laufband anhalten</label>'
+            f'<ol class="ticker-list">{li}</ol></section>')
+
+
 # ------------------------------------------------------------------ Start
 pillars = "".join(card(f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for h, t, d in [
     ("nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
@@ -134,6 +200,7 @@ pillars = "".join(card(f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for h, t, d in [
 page("index.html", "Start",
      "Nordstern Frankfurt: Nachbarschaftshilfe, Stadt-Infos, Mängelmelder und Petitionen für den Frankfurter Norden – plus persönliche Vermittlung.",
      f"""
+{kalender_ticker()}
 <section class="hero">
 <p class="eyebrow">Frankfurter Norden · Preungesheim und Nachbarschaft</p>
 <h1>Ein Stern für den Norden.<br><span>Damit niemand allein durch Frankfurt muss.</span></h1>
@@ -298,7 +365,7 @@ page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist 
 # ------------------------------------------------------------------ Blog
 def beitrag_html(b, pre):
     m = b["meta"]
-    kopf = (f'<p class="small">{E(m["datum"])} · Ortsbezirk {E(m["ortsbezirk"])}'
+    kopf = (f'<p class="small">{E(m["datum"])} · <a href="{pre}{obr_seite(m["ortsbezirk"])}">Ortsbezirk {E(m["ortsbezirk"])}</a>'
             + (" · " + E(", ".join(m["stadtteile"])) if isinstance(m.get("stadtteile"), list) else "")
             + "</p>")
     rumpf = beitraege.markdown(b["body"], link)
@@ -331,6 +398,56 @@ if os.path.isdir(BLOG):
     if not os.listdir(BLOG):
         os.rmdir(BLOG)
 
+# ----------------------------------------------------------- Ortsbezirke
+def obr_karte(o):
+    t = naechster(lambda x: x["ortsbezirk"] == o["nr"])
+    nxt = f'<p>Nächste Sitzung: <strong>{datum_text(t)}</strong></p>' if t else "<p>Keine geplanten Sitzungen im Kalender.</p>"
+    status = '<span class="badge">betreut</span>' if o["status"] == "aktiv" else '<span class="small">noch ohne Betreuung</span>'
+    return card(f'<a href="ortsbezirk-{o["nr"]}.html">{o["nr"]} · {E(o["name"])}</a>',
+                f'<p class="small">{E(", ".join(o["stadtteile"]))}</p>{nxt}{status}')
+
+
+page("ortsbezirke/index.html", "Ortsbezirke",
+     "Alle 16 Frankfurter Ortsbezirke: Stadtteile, nächste Ortsbeiratssitzungen und Neues aus dem Stadtteil.",
+     f"""<h1>Die 16 Ortsbezirke</h1>
+<p class="lead">Frankfurt hat 16 Ortsbeiräte. Hier stehen die nächsten Sitzungen und Neues aus jedem Bezirk.</p>
+<div class="grid">{"".join(obr_karte(o) for o in ORTSBEZIRKE)}</div>
+{termin_hinweis()}
+<h2>Stadtweit</h2>
+<ul>{"".join(f'<li>{lab}: {datum_text(t)}</li>' for lab, t in [
+    ("Stadtverordnetenversammlung", naechster(lambda x: x["typ"] == "stvv")),
+    ("KAV – Kommunale Ausländerinnen- und Ausländervertretung", naechster(lambda x: x["typ"] == "kav"))] if t)}</ul>
+<p class="small">Stadtteilzuordnung wird vor dem offiziellen Start noch einmal mit der Stadt abgeglichen.</p>
+""", aktiv="ortsbezirke/index.html")
+
+for o in ORTSBEZIRKE:
+    nr = o["nr"]
+    news = [b for b in VEROEFF if str(b["meta"].get("ortsbezirk")) == str(nr)]
+    if news:
+        news_html = '<div class="grid">' + "".join(card(
+            f'<a href="../frankfurt/{E(b["meta"]["slug"])}.html">{E(b["meta"]["titel"])}</a>',
+            f'<p class="small">{E(b["meta"]["datum"])}</p>') for b in news) + "</div>"
+    elif o["status"] == "aktiv":
+        news_html = '<p class="notice">Der nächste Beitrag aus diesem Ortsbezirk ist in Arbeit.</p>'
+    else:
+        news_html = ('<p class="notice">Für diesen Ortsbezirk suchen wir noch jemanden, der ihn betreut – '
+                     'erst dann erscheinen hier eigene Beiträge.</p>')
+    sitzungen = [t for t in KOMMEND if t["ortsbezirk"] == nr][:6]
+    termin_html = ("<ol class=\"termine\">" + "".join(f"<li>{datum_text(t)}</li>" for t in sitzungen) + "</ol>"
+                   if sitzungen else "<p>Keine geplanten Sitzungen im Kalender.</p>")
+    page(obr_seite(nr), f"Ortsbezirk {nr} – {o['name']}",
+         f"Ortsbezirk {nr} ({', '.join(o['stadtteile'])}): nächste Ortsbeiratssitzungen und Neues aus dem Stadtteil.",
+         f"""<p class="eyebrow">Ortsbezirk {nr}</p>
+<h1>{E(o["name"])}</h1>
+<p class="lead">{E(", ".join(o["stadtteile"]))}</p>
+<section aria-labelledby="h-news"><h2 id="h-news">Neues aus dem Ortsbezirk</h2>{news_html}</section>
+<section aria-labelledby="h-termine"><h2 id="h-termine">Nächste Sitzungen des Ortsbeirats {nr}</h2>
+{termin_html}
+{termin_hinweis()}
+<p>Die Sitzungen sind öffentlich. In der Bürgerfragestunde können Anwohnerinnen und Anwohner Fragen stellen.</p></section>
+<p><a class="btn" href="index.html">Alle 16 Ortsbezirke</a></p>
+""", aktiv="ortsbezirke/index.html")
+
 if "--entwuerfe" in sys.argv:
     i = sys.argv.index("--entwuerfe")
     if i + 1 >= len(sys.argv):
@@ -354,4 +471,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 3 + len(soll)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 3 + len(soll) + len(ORTSBEZIRKE)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
