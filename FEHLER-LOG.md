@@ -30,3 +30,6 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 ## 17.11.2026 – Blog-Build (E10, Variante 1)
 - **`frankfurt.html` änderte sich, obwohl kein Beitrag veröffentlicht war** · Platzhalter `{blog_hinweis}` stand auf eigener Zeile → leere Zeile im HTML · Platzhalter ohne Zeilenumbruch einsetzen, Umbruch nur mitliefern, wenn Inhalt da ist · Lehre: Nach jeder Build-Änderung `git status` prüfen – „keine HTML-Änderung“ ist der Test.
 - **`tools/__pycache__/` tauchte im Repo auf** · `build.py`/`check.py` importieren jetzt `tools/beitraege.py`, Python legt Bytecode an · `sys.dont_write_bytecode = True` vor dem Import · Lehre: Bei neuem Python-Modul im Repo an Bytecode-Ordner denken (kein `.gitignore` nötig).
+
+## 17.11.2026 – Netzwerk-Freigabe der Cloud-Umgebung
+- **Freigabe von Domains (github.io, frankfurt.de, PARLIS, ffm.de) scheiterte** · Bestätigungskarte für die Umgebungsänderung lässt sich in der Handy-App nicht genehmigen („Prüfe sie auf deinem Computer“), Ablehnung kam dadurch automatisch · am Computer (claude.ai im Browser oder Desktop-App) genehmigen oder Domains selbst unter Umgebung → Bearbeiten → Netzwerkzugriff → Allowed domains eintragen · Lehre: Umgebungs- und Rechteänderungen nur am Computer anstoßen; vom Handy aus nur Aufgaben ohne Freigabe.
