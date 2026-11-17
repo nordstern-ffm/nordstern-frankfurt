@@ -6,6 +6,7 @@ Umgebung des Nutzers: Windows + Git Bash (dort `python` statt `python3`), unterw
 
 ## Ziel
 Dachseite für den Frankfurter Norden: Nachbarschaftshilfe (Verlinkung zum Verein), neutrale Frankfurt-Infos, Mängelmelder (Link zur Stadt), Petitionen (Ziel 220 Unterstützer, extern gesammelt), gewerbliche Vermittlung, gekennzeichnete Standpunkte FREIE WÄHLER, Schaufenster der Copy & Code Agency (André + Sam).
+Umfang siehe docs/ENTSCHEIDUNGEN.md (Variante A) und docs/BETREUUNG.md.
 
 ## Arbeitsweise (sparsam = wenige Tokens, keine teuren Modelle für Routine)
 1. **Inhalte ändern = nur `data/*.json` ändern.** Nie HTML direkt editieren – es wird überschrieben.
