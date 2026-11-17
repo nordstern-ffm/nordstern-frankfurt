@@ -33,3 +33,10 @@ Erledigt am 15.11.2026 (E19): interne Prüfnotizen, Vornamen Dritter und das Rep
 - **Zahlen nach der Kommunalwahl 2026:** 93 Stadtverordnete folgt aus § 38 Abs. 1 HGO (Frankfurt > 500 000 Einwohner) – gilt weiter, solange die Hauptsatzung die Zahl nicht senkt (§ 38 Abs. 2). 284 Ortsbeiratsmitglieder: Stand Mai 2025, nach der Wahl am 15.03.2026 auf stvv.frankfurt.de prüfen.
 - **Ausländerbeirat / KAV:** Hat Frankfurt eine Kommunale Ausländer- und Ausländerinnenvertretung (Ausländerbeirat nach § 84 HGO) oder eine Integrations-Kommission (§ 89)? Primärquelle (stvv.frankfurt.de / Wahlamt) suchen, dann ins Schaubild.
 - **Zahl der Stadträtinnen und Stadträte:** Broschüre widersprüchlich (OB + 11 / 12 hauptamtliche / OB + Bürgermeister + 9) → nicht verwenden, bis die Magistratsseite der Stadt geprüft ist.
+
+## Aus Chat 2 übernommen (17.11.2026)
+- Gesperrte Quellen in der Cloud-Umgebung: www.stvv.frankfurt.de (PARLIS), frankfurt.de (inkl. Amtsblatt), www.frankfurt-gestalten.de → im eigenen Browser prüfen.
+- Mängelmelder-Beitrag (veröffentlicht): Ablauf auf ffm.de (Pflichtfelder, Foto, Rückmeldung), Bürgerfragestunde OBR 10 (Ablauf/Anmeldung), Antragsnummern OF 63/10, 64/10, 69/10 – noch unbelegt.
+- OBR-Termine im Claude-Doc vom 16.11. stammen aus einem früheren Lauf; mit `data/termine.json` (PARLIS-Export) abgleichen.
+- Ungeprüfte Recherche (Wohngeld, Mietpreisbremse, Haushalt, Glasfaser, Weihnachtsmärkte): `docs/recherche/2026-11-uebergabe-chat2.md`.
+- **Datenschutz, Entscheidung André:** Die Verbindung der Konten `intelligentresponder-max` ↔ `nordstern-ffm` ist öffentlich sichtbar (Fork, PR #1, Collaborator, Fehler-Log); Commits enthalten Links zu claude.ai-Sitzungen; das Claude-Doc „Ortsbeiräte Frankfurt – Recherche Nov/Dez 2026“ ist für alle mit Link lesbar. Bewusst so lassen oder ändern?

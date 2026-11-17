@@ -72,3 +72,11 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 
 ## 17.11.2026 – Zusammenführen ux-phase2 ↔ main
 - **Zwei Chats arbeiteten parallel auf verschiedenen Ständen** · `main` (anderer Chat, 10 PRs, live) und `ux-phase2` (20 Commits, nie gepusht) zweigten beide von 3e37dcd ab · doppelte Arbeit (zwei Blog-Systeme) und doppelte Entscheidungsnummern E10–E12; die Datenschutz-Bereinigung war nur auf ux-phase2, auf `main` waren interne Notizen weiter live · Zusammenführung auf `main`-Basis, ux-phase2-Entscheidungen E10–E20 → **E13–E23** (ältere Einträge in diesem Log nennen noch die alten Nummern) · Lehre: vor jeder Sitzung `git fetch` + Vergleich mit `origin/main`; nur ein Chat arbeitet gleichzeitig an einem Branch; Arbeitsstände früh als PR pushen.
+
+## 16./17.11.2026 – nachgetragen aus Chat 2
+- **Push/PR-Freigabe über eine Elternsitzung wirkte nicht** · Kind-Sitzungen pushen nur nach Bestätigung in der eigenen Sitzung · Lehre: Freigaben direkt in der arbeitenden Sitzung geben.
+- **Parallele PRs hängten an dieselbe Stelle in ENTSCHEIDUNGEN.md an (#4/#6)** · Konflikt; Rebase + Force-Push hätte die PRs gekoppelt · besser `main` in den Branch mergen · Lehre: Nummern zentral vergeben, nur ein offener PR ändert ENTSCHEIDUNGEN.md (siehe E24).
+- **Übergabedateien lagen im Arbeitsordner eines fremden Repos** · ein Stop-Hook verlangte einen Commit · Lehre: Übergabedateien nur im Scratchpad oder außerhalb jedes Repos.
+- **„Claude GitHub App“ im Play Store gesucht** · Lehre: Das ist eine GitHub-Integration (github.com/apps/claude, im Browser), keine Handy-App.
+- **Merge-Kasten im mobilen GitHub lud nicht** · Lehre: neu laden oder Desktop-Ansicht; notfalls am PC `git fetch origin pull/N/head` und Fast-Forward.
+- **Repo nur unter dem verbundenen Konto gesucht** · Lehre: bei unbekanntem Repo zuerst die GitHub-Suche nutzen.

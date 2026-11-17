@@ -150,3 +150,8 @@ h2[id]{scroll-margin-top:1rem}
 .sb-linie{stroke:var(--gold);stroke-width:2.5}
 .sb-spitze{fill:var(--gold)}
 .sb-lang{font-size:15px}
+/* Tabellen in Beiträgen: auf dem Handy waagerecht scrollbar statt abgeschnitten */
+.tabelle{overflow-x:auto;margin:1rem 0}
+.tabelle table{border-collapse:collapse;min-width:32rem;width:100%}
+.tabelle th,.tabelle td{border:1px solid var(--line);padding:.5rem .7rem;text-align:left;vertical-align:top}
+.tabelle thead th{background:var(--bg2)}

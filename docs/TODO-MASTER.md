@@ -52,6 +52,19 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | **Beitrag 1:** „Zebrastreifen, die auffallen“ (3D/LED/Solar) – Rohstoff aus eigenem Portfolio, Anträge in PARLIS prüfen, parteineutral (Plan lokal in `docs/intern/`) | CC, Freigabe A |
 | ☐ | **Beitrag 2:** „Das digitale Rathaus“ – neutral im Blog; FW-Position nur als gekennzeichneter Standpunkt-Check nach Vorstandsfreigabe | CC, Freigabe A |
 
+## Übernommen aus Chat 2 (17.11.2026)
+| ✓ | Aufgabe | Wer |
+| --- | --- | --- |
+| ☐ | **P1** Domains für die Cloud-Umgebung freigeben (stvv.frankfurt.de, frankfurt.de, frankfurt-gestalten.de) | A |
+| ☐ | **P1** OBR-10-Tagesordnung für Di 24.11.2026 holen; Termine/Orte der übrigen Ortsbeiräte mit `data/termine.json` abgleichen | CC (Browser) |
+| ☐ | **P1** Mängelmelder-Beitrag: offene `pruefen`-Punkte klären (er ist schon veröffentlicht) | CC + A |
+| ☐ | **P2** Entscheidung: nächster Beitrag „Ortsbeirat 10 in 5 Minuten“ (vor 24.11.) oder „Advent im Frankfurter Norden“ (vor 28.11.)? | A |
+| ☐ | **P2** Claude-Doc „Ortsbeiräte Frankfurt – Recherche Nov/Dez 2026“: Tabelle Sitzungstermine nachziehen | CC |
+| ☐ | **P2** Wohngeld-Widerspruch klären, bevor Thema 3 geschrieben wird | CC |
+| ☐ | **P3** Fachliche Prüfung: Gemeinnützigkeit des Vereins vs. Bereich „Standpunkte“ (empfohlen) | A |
+| ☐ | **P3** Aufräumen: gemergte Branches löschen (recherche/blog-themen-2026-11, blog/entwurf-maengelmelder-praktisch, blog/build-variante-1, docs/umfang-variante-a, blog/entwurf-schweizer-rentner, feature/termine-ortsbezirke, fix/fehler-log-handy-freigabe, blog/maengelmelder-veroeffentlichen); Fork `intelligentresponder-max/nordstern-frankfurt` löschen; Kind-Sitzung „Collaborator-Test“ archivieren | A |
+| ☐ | Schweizer-Rentner-Entwurf (aus #11): 8 `pruefen`-Punkte im Frontmatter | CC, Freigabe A |
+
 ## P0 – vor dem Start (Domain, noindex weg)
 | ✓ | Aufgabe | Wer |
 | --- | --- | --- |

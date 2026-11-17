@@ -4,7 +4,8 @@ Nur Standardbibliothek, kein PyYAML, kein markdown-Paket. Läuft auch auf älter
 keine f-Strings mit Backslash im Ausdruck (siehe FEHLER-LOG).
 
 Unterstützt genau das, was die Beiträge nutzen:
-  # / ## / ###, Absätze, "- " Listen, "1. " Listen, **fett**, *kursiv*, `code`, ---
+  # / ## / ###, Absätze, "- " Listen, "1. " Listen, **fett**, *kursiv*, `code`, ---,
+  einfache Tabellen (| Kopf | … | + Trennzeile | --- | … |)
   Links nur als Platzhalter [[link:schluessel]] → Eintrag aus data/links.json,
   mit eigenem Text: [[link:schluessel|Text]] · interne Seite: [[seite:pfad.html|Text]] (Pfad ab Hauptordner).
   Zeile nur aus [[bild:img/…]] → Bild mit Nachweis aus data/bilder.json (E13) · Zeilen mit "> " → Hinweiskasten.
@@ -106,9 +107,26 @@ def _fmt(s):
     return ITAL_RE.sub(r"<em>\1</em>", s)
 
 
+TRENN_RE = re.compile(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?$")
+
+
+def _zellen(zeile):
+    return [z.strip() for z in zeile.strip().strip("|").split("|")]
+
+
+def _tabelle(zeilen, link):
+    kopf, rumpf = _zellen(zeilen[0]), [_zellen(z) for z in zeilen[2:]]
+    th = "".join('<th scope="col">' + inline(z, link) + "</th>" for z in kopf)
+    tr = "".join("<tr>" + "".join(
+        ('<th scope="row">' if i == 0 else "<td>") + inline(z, link) + ("</th>" if i == 0 else "</td>")
+        for i, z in enumerate(r)) + "</tr>" for r in rumpf)
+    return '<div class="tabelle"><table><thead><tr>' + th + "</tr></thead><tbody>" + tr + "</tbody></table></div>"
+
+
 def markdown(body, link, bild=None):
-    """Block-Parser: Überschriften, Trennlinie, Listen, Absätze, Hinweiskasten, Bilder (bild(datei) → <figure>)."""
+    """Block-Parser: Überschriften, Trennlinie, Listen, Tabellen, Absätze, Hinweiskasten, Bilder (bild(datei) → <figure>)."""
     out, para, liste, kasten = [], [], None, []  # liste = ("ul"|"ol", [items])
+    tab = []
 
     def flush():
         if para:
@@ -126,9 +144,20 @@ def markdown(body, link, bild=None):
             out.append("<" + tag + ">" + li + "</" + tag + ">")
             liste = None
 
+    def flush_tab():
+        if tab:
+            if len(tab) >= 2 and TRENN_RE.match(tab[1]):
+                out.append(_tabelle(tab, link))
+            else:  # keine gültige Tabelle → als Absatz
+                out.append("<p>" + inline(" ".join(tab), link) + "</p>")
+            del tab[:]
+
     for raw in body.split("\n"):
         line = raw.rstrip()
         s = line.strip()
+        if s.startswith("|"):
+            flush(); flush_list(); tab.append(s); continue
+        flush_tab()
         if not s:
             flush(); flush_list(); continue
         m = re.match(r"^(#{1,3})\s+(.*)$", s)
@@ -164,5 +193,5 @@ def markdown(body, link, bild=None):
             liste[1].append(OL_RE.sub("", s, count=1)); continue
         flush_list()
         para.append(s)
-    flush(); flush_list()
+    flush(); flush_list(); flush_tab()
     return "\n".join(out)

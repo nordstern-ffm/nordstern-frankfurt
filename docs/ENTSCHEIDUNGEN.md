@@ -180,3 +180,11 @@ Umsetzung nach Abschluss aller Inhaltsaufgaben (TODO-MASTER G1–G3).
 | Standpunkte in den Footer, Blog und Ortsbezirke getrennt | klare Trennung | 8 Menüpunkte | verworfen (Nutzer) |
 | Agentur in den Footer | Partei-Bereich sichtbar | Angebot verschwindet aus dem Menü | verworfen (Nutzer) |
 | **Ein Punkt „Ortsbezirke & Blog“** | Blog und Stadtteile gehören inhaltlich zusammen (Beiträge haben Pflichtfeld `ortsbezirk`) | längerer Menütext | **gewählt** |
+
+## E25 · Arbeitsorganisation und Zugänge (Nutzer, 16./17.11.2026, nachgetragen aus Chat 2)
+- Recherchen als Markdown unter `docs/recherche/` im Nordstern-Repo (kein eigenes Recherche-Repo).
+- `intelligentresponder-max` ist Collaborator mit Schreibrechten; Claude GitHub App auf `nordstern-ffm` nur für `nordstern-frankfurt` installiert.
+- Cloud-Umgebung mit Freigabe für www.stvv.frankfurt.de, frankfurt.de, www.frankfurt-gestalten.de: zunächst abgelehnt, André gibt die Domains später selbst frei. Bis dahin werden diese Quellen im eigenen Browser geprüft.
+- Merge-Reihenfolge #3 → #4 → #5 → #6 (erledigt).
+- **Ab 17.11.2026 arbeitet nur noch ein Chat am Repo**; `main` wird durch `integration` ersetzt (E24).
+**Prüfung E11 ↔ E12:** stimmig – Ortsbezirksseiten ohne Betreuung zeigen nur amtliche PARLIS-Termine und „noch ohne Betreuung“, eigene Beiträge nur für betreute Bezirke (derzeit 10).
