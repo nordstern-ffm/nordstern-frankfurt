@@ -93,3 +93,8 @@ main{padding-bottom:3rem}
 @media (max-width:30rem){.ticker{padding-top:3.4rem}}
 .termine{padding-left:1.3rem}
 .termine li{margin:.2rem 0}
+/* Tabellen in Beiträgen: auf dem Handy waagerecht scrollbar statt abgeschnitten */
+.tabelle{overflow-x:auto;margin:1rem 0}
+.tabelle table{border-collapse:collapse;min-width:32rem;width:100%}
+.tabelle th,.tabelle td{border:1px solid var(--line);padding:.5rem .7rem;text-align:left;vertical-align:top}
+.tabelle thead th{background:var(--bg2)}
