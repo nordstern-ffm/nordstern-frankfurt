@@ -1,0 +1,29 @@
+{
+  "_regel": "Schaubild „Wer entscheidet in Frankfurt?“ (Aufgabe 5). Jede Aussage mit Quelle (Schlüssel aus links.json). Zahlen der Stadt mit Stand der Broschüre. Neutral, keine Parteinamen. Ausländerbeirat/KAV erst nach Prüfung (docs/OFFEN.md).",
+  "titel": "Wer entscheidet in Frankfurt?",
+  "stand": "Zahlen: Broschüre der Stadtverordnetenversammlung, Stand Mai 2025 · Gesetz: HGO, abgerufen am 15.11.2026",
+  "quellen": ["hgo", "stvv_broschuere"],
+  "kasten": {
+    "magistrat": ["Magistrat", "Oberbürgermeister/in und", "Stadträtinnen und Stadträte", "führt die laufende Verwaltung"],
+    "stvv": ["Stadtverordnetenversammlung", "93 Mitglieder", "trifft die wichtigen Entscheidungen", "und kontrolliert die Verwaltung"],
+    "ortsbeiraete": ["16 Ortsbeiräte", "284 Mitglieder", "Vorschläge für den", "eigenen Stadtteil"],
+    "buerger": ["Bürgerinnen und Bürger", "wählen alle 5 Jahre: Stadtverordnete", "und Ortsbeiräte – und alle 6 Jahre", "die Oberbürgermeisterin/den OB direkt"]
+  },
+  "pfeile": {
+    "stvv_magistrat": ["wählt Stadträte,", "kontrolliert"],
+    "ortsbeirat_stvv": ["Vorschläge"],
+    "buerger_stvv": ["wählen"],
+    "buerger_ortsbeirat": ["wählen"],
+    "buerger_ob": ["wählen OB direkt"]
+  },
+  "tabelle": [
+    {"organ": "Stadtverordnetenversammlung", "wer": "93 Stadtverordnete (Stand Mai 2025)", "wahl": "von den Bürgerinnen und Bürgern bei der Kommunalwahl, für 5 Jahre", "aufgabe": "Oberstes Organ der Stadt: trifft die wichtigen Entscheidungen und überwacht die gesamte Verwaltung", "beleg": "§ 9 Abs. 1 und § 38 Abs. 1 HGO; Broschüre StVV"},
+    {"organ": "Magistrat", "wer": "Oberbürgermeister/in sowie haupt- und ehrenamtliche Stadträtinnen und Stadträte", "wahl": "Stadträtinnen und Stadträte wählt die Stadtverordnetenversammlung", "aufgabe": "Besorgt die laufende Verwaltung", "beleg": "§ 9 Abs. 2 HGO; Broschüre StVV"},
+    {"organ": "Oberbürgermeister/in", "wer": "steht an der Spitze des Magistrats", "wahl": "direkt von den Bürgerinnen und Bürgern, für 6 Jahre", "aufgabe": "Hauptamtliches Mitglied und Spitze des Magistrats", "beleg": "§ 39 HGO; Broschüre StVV"},
+    {"organ": "Ortsbeiräte", "wer": "16 Ortsbeiräte mit zusammen 284 Mitgliedern (Stand Mai 2025)", "wahl": "zusammen mit der Stadtverordnetenversammlung, für deren Wahlzeit", "aufgabe": "Werden in wichtigen Angelegenheiten ihres Ortsbezirks gehört und haben dort ein Vorschlagsrecht", "beleg": "§ 82 Abs. 1 und 3 HGO; Broschüre StVV"}
+  ],
+  "ortsbezirk10": {
+    "text": "Preungesheim gehört zum Ortsbezirk 10 – zusammen mit Berkersheim, Bonames, Eckenheim und Frankfurter Berg.",
+    "beleg": "Broschüre StVV, Stand Mai 2025"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_regel": "Nur Zahlen aus Primärquellen (Stadt Frankfurt, Gesetz). 'link' = Schlüssel in data/links.json (muss bestätigt sein). 'fundstelle' = wo genau die Zahl steht. 'stand' = Stichtag laut Quelle, 'geprueft' = Datum der Prüfung JJJJ-MM-TT. Unbelegtes gehört in docs/OFFEN.md.",
+  "zahlen": {
+    "einwohner_preungesheim": {
+      "wert": "15.896",
+      "text": "Einwohnerinnen und Einwohner in Preungesheim",
+      "quelle": "Stadt Frankfurt am Main, Statistik",
+      "link": "statistik_bevoelkerung_2025",
+      "fundstelle": "Karte „Einwohnerinnen und Einwohner in den Stadtteilen im Jahr 2025“, Reiter „insgesamt“",
+      "stand": "Ende 2025",
+      "geprueft": "2026-11-15"
+    },
+    "einwohner_frankfurt": {
+      "wert": "781.337",
+      "text": "Einwohnerinnen und Einwohner mit Hauptwohnung in Frankfurt",
+      "quelle": "Stadt Frankfurt am Main, Statistik",
+      "link": "statistik_bevoelkerung_2025",
+      "fundstelle": "Einleitung: „Ende 2025 waren 781.337 Einwohnerinnen und Einwohner mit Hauptwohnung hier gemeldet.“",
+      "stand": "Ende 2025",
+      "geprueft": "2026-11-15"
+    },
+    "entlastungsbetrag": {
+      "wert": "bis 131 €",
+      "text": "Entlastungsbetrag im Monat für Pflegebedürftige, die zu Hause gepflegt werden",
+      "quelle": "§ 45b Abs. 1 Satz 1 SGB XI",
+      "link": "sgb11_45b",
+      "fundstelle": "„… Anspruch auf einen Entlastungsbetrag in Höhe von bis zu 131 Euro monatlich.“",
+      "stand": "seit 1. Januar 2025",
+      "geprueft": "2026-11-15"
+    }
+  }
+}

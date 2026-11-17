@@ -5,16 +5,20 @@ keine f-Strings mit Backslash im Ausdruck (siehe FEHLER-LOG).
 
 Unterstützt genau das, was die Beiträge nutzen:
   # / ## / ###, Absätze, "- " Listen, "1. " Listen, **fett**, *kursiv*, `code`, ---
-  Links nur als Platzhalter [[link:schluessel]] → Eintrag aus data/links.json.
+  Links nur als Platzhalter [[link:schluessel]] → Eintrag aus data/links.json,
+  mit eigenem Text: [[link:schluessel|Text]] · interne Seite: [[seite:pfad.html|Text]] (Pfad ab Hauptordner).
+  Zeile nur aus [[bild:img/…]] → Bild mit Nachweis aus data/bilder.json (E13) · Zeilen mit "> " → Hinweiskasten.
 Alles andere wird als Text ausgegeben (HTML-escaped). Rohe URLs werden nie zu Links.
 """
 import glob, html, os, re
 
 E = html.escape
 STATUS = ("entwurf", "veroeffentlicht")
-LINK_RE = re.compile(r"\[\[link:([a-z0-9_]+)\]\]")
+LINK_RE = re.compile(r"\[\[link:([a-z0-9_]+)(?:\|([^\]]+))?\]\]")
+SEITE_RE = re.compile(r"\[\[seite:([a-z0-9_\-/.#]+)\|([^\]]+)\]\]")
+BILD_RE = re.compile(r"\[\[bild:([a-z0-9_\-/.]+)\]\]")
 CODE_RE = re.compile(r"`([^`\n]+)`")
-TOKEN_RE = re.compile(r"\[\[link:[a-z0-9_]+\]\]|`[^`\n]+`")
+TOKEN_RE = re.compile(r"\[\[link:[a-z0-9_]+(?:\|[^\]]+)?\]\]|\[\[seite:[^\]]+\]\]|`[^`\n]+`")
 BOLD_RE = re.compile(r"\*\*([^*\n]+)\*\*")
 ITAL_RE = re.compile(r"(?<![*\w])\*([^*\n]+)\*(?![*\w])")
 OL_RE = re.compile(r"^\d+\.\s+")
@@ -66,18 +70,30 @@ def laden(root):
 
 
 def link_keys(text):
-    return LINK_RE.findall(text)
+    return [k for k, _ in LINK_RE.findall(text)]
+
+
+def seiten(text):
+    """Interne Ziele aus [[seite:…]] (ohne #Sprungmarke) – für check.py."""
+    return [z.split("#")[0] for z, _ in SEITE_RE.findall(text)]
+
+
+def bilder(text):
+    return BILD_RE.findall(text)
 
 
 def inline(text, link):
-    """Escaped Text; [[link:x]] über link(x), `code`, **fett**, *kursiv*."""
+    """Escaped Text; [[link:x]] / [[link:x|Text]] über link(x[, Text]), [[seite:…|Text]], `code`, **fett**, *kursiv*."""
     parts, pos = [], 0
     for m in TOKEN_RE.finditer(text):
         parts.append(_fmt(E(text[pos:m.start()], quote=False)))
         tok = m.group(0)
         lm = LINK_RE.fullmatch(tok)
+        sm = SEITE_RE.fullmatch(tok)
         if lm:
-            parts.append(link(lm.group(1)))
+            parts.append(link(lm.group(1), E(lm.group(2), quote=False)) if lm.group(2) else link(lm.group(1)))
+        elif sm:
+            parts.append('<a href="' + E(sm.group(1)) + '">' + E(sm.group(2), quote=False) + "</a>")
         else:
             parts.append("<code>" + E(tok[1:-1], quote=False) + "</code>")
         pos = m.end()
@@ -90,14 +106,17 @@ def _fmt(s):
     return ITAL_RE.sub(r"<em>\1</em>", s)
 
 
-def markdown(body, link):
-    """Block-Parser: Überschriften, Trennlinie, Listen, Absätze."""
-    out, para, liste = [], [], None  # liste = ("ul"|"ol", [items])
+def markdown(body, link, bild=None):
+    """Block-Parser: Überschriften, Trennlinie, Listen, Absätze, Hinweiskasten, Bilder (bild(datei) → <figure>)."""
+    out, para, liste, kasten = [], [], None, []  # liste = ("ul"|"ol", [items])
 
     def flush():
         if para:
             out.append("<p>" + inline(" ".join(para), link) + "</p>")
             del para[:]
+        if kasten:
+            out.append('<div class="callout">' + "".join("<p>" + inline(k, link) + "</p>" for k in kasten) + "</div>")
+            del kasten[:]
 
     def flush_list():
         nonlocal liste
@@ -120,6 +139,19 @@ def markdown(body, link):
             continue
         if s == "---":
             flush(); flush_list(); out.append("<hr>"); continue
+        bm = BILD_RE.fullmatch(s)
+        if bm:
+            flush(); flush_list()
+            if bild is None:
+                raise ValueError("[[bild:…]] ohne Bild-Funktion")
+            out.append(bild(bm.group(1))); continue
+        if s.startswith("> "):
+            if para:
+                flush()
+            flush_list()
+            kasten.append(s[2:]); continue
+        if kasten:
+            flush()
         if s.startswith("- "):
             flush()
             if not liste or liste[0] != "ul":

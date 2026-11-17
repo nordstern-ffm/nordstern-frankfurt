@@ -1,5 +1,5 @@
 {
-  "_hinweis": "Bezahlen nur über gehostete Zahlungsseiten (Stripe Payment Link oder Gumroad) – kein Code, keine Kartendaten auf dieser Seite. Paket erscheint erst mit aktiv=true, Preis und Link. Eigenes Stripe-Konto für die Agentur anlegen (nicht das von Gumroad verwaltete bangla-hilfe-Konto, nicht mindful7777).",
+  "_hinweis": "Bezahlen nur über gehostete Zahlungsseiten (Stripe Payment Link oder Gumroad) – kein Code, keine Kartendaten auf dieser Seite. Paket erscheint erst mit aktiv=true, Preis und Link. Eigenes Stripe-Konto für die Agentur anlegen (getrennt von allen anderen Projekt-Konten).",
   "anbieter": "stripe_payment_link",
   "pakete": [
     {

@@ -1,0 +1,409 @@
+{
+  "_regel": "Spaß-Quiz (W4, E15). Positive Frankfurt-Sterne, keine Diagnosen, kein psychologischer Test. Inspiration: Typenmodelle (Enneagramm-Stil), frei übertragen – keine Quelle zitiert, weil keine belegt ist. Jede Antwort gibt genau zwei Sternen je einen Punkt; check.py prüft, dass jeder Stern gleich oft vorkommt. Nichts wird gespeichert.",
+  "titel": "Welcher Frankfurt-Stern bist du?",
+  "hinweis": "Zum Schmunzeln: kein psychologischer Test, keine Diagnose. Nichts wird gespeichert oder verschickt.",
+  "typen": [
+    {
+      "id": "praezision",
+      "name": "Präzisionsstern",
+      "icon": "list-checks",
+      "farbe": "#7FB7FF",
+      "kurz": "Du siehst, was fehlt – und bringst es in Ordnung.",
+      "staerken": [
+        "sorgfältig",
+        "verlässlich",
+        "fair"
+      ],
+      "frankfurt": "Du weißt, wann deine Bahn fährt – und kennst den Grund, wenn sie es nicht tut.",
+      "tipp": {
+        "text": "Mängel siehst du zuerst: direkt an die Stadt melden",
+        "href": "mitmachen.html#melden"
+      }
+    },
+    {
+      "id": "herz",
+      "name": "Herzstern",
+      "icon": "heart",
+      "farbe": "#FF8FB8",
+      "kurz": "Du merkst, dass jemand Hilfe braucht, bevor es jemand sagt.",
+      "staerken": [
+        "warmherzig",
+        "aufmerksam",
+        "hilfsbereit"
+      ],
+      "frankfurt": "Bei dir klingelt die Nachbarschaft zuerst – und geht mit einem Lächeln.",
+      "tipp": {
+        "text": "Nachbarschaftshilfe im Frankfurter Norden",
+        "href": "nachbarschaft.html"
+      }
+    },
+    {
+      "id": "glanz",
+      "name": "Glanzstern",
+      "icon": "star",
+      "farbe": "#F4D98A",
+      "kurz": "Du bringst Menschen zum Strahlen – und gute Ideen auf die Bühne.",
+      "staerken": [
+        "mitreißend",
+        "selbstbewusst",
+        "sichtbar"
+      ],
+      "frankfurt": "Wie die Skyline am Abend: Du fällst auf, und alle schauen gern hin.",
+      "tipp": {
+        "text": "Ideen sichtbar machen – für Vereine und Initiativen",
+        "href": "agentur.html"
+      }
+    },
+    {
+      "id": "entdecker",
+      "name": "Entdeckerstern",
+      "icon": "telescope",
+      "farbe": "#B79CFF",
+      "kurz": "Du beobachtest genau und findest, was anderen entgeht.",
+      "staerken": [
+        "neugierig",
+        "klug",
+        "geduldig"
+      ],
+      "frankfurt": "Du kennst die stillen Ecken der Stadt, von denen andere noch nie gehört haben.",
+      "tipp": {
+        "text": "Hintergründe lesen im Blog",
+        "href": "ortsbezirke/index.html#h-blog"
+      }
+    },
+    {
+      "id": "waechter",
+      "name": "Wächterstern",
+      "icon": "shield-check",
+      "farbe": "#8FD3C8",
+      "kurz": "Du denkst voraus, damit alle sicher ankommen.",
+      "staerken": [
+        "umsichtig",
+        "treu",
+        "vorbereitet"
+      ],
+      "frankfurt": "Du hast den Schirm dabei, wenn ganz Frankfurt vom Regen überrascht wird.",
+      "tipp": {
+        "text": "Wer entscheidet was in Frankfurt?",
+        "href": "frankfurt.html#h-schaubild"
+      }
+    },
+    {
+      "id": "funken",
+      "name": "Funkenstern",
+      "icon": "party-popper",
+      "farbe": "#FFB36B",
+      "kurz": "Mit dir wird auch ein Dienstag zum kleinen Fest.",
+      "staerken": [
+        "fröhlich",
+        "spontan",
+        "ansteckend gut gelaunt"
+      ],
+      "frankfurt": "Wo du bist, wird aus einem Spaziergang am Main schnell ein Treffen mit Freunden.",
+      "tipp": {
+        "text": "Anliegen bündeln braucht Begeisterung",
+        "href": "mitmachen.html#buendeln"
+      }
+    },
+    {
+      "id": "leit",
+      "name": "Leitstern",
+      "icon": "compass",
+      "farbe": "#E0B84A",
+      "kurz": "Du nimmst die Sache in die Hand – und andere gehen gern mit.",
+      "staerken": [
+        "mutig",
+        "entschlossen",
+        "verantwortungsvoll"
+      ],
+      "frankfurt": "Wenn im Viertel etwas besser werden soll, fragen alle zuerst dich.",
+      "tipp": {
+        "text": "Mitreden im Ortsbeirat und in der Bürgerfragestunde",
+        "href": "frankfurt.html"
+      }
+    },
+    {
+      "id": "ruhe",
+      "name": "Ruhestern",
+      "icon": "leaf",
+      "farbe": "#9BD58A",
+      "kurz": "Du bringst Ruhe in jede Runde – wie das Grün an einem Sonntagmorgen.",
+      "staerken": [
+        "gelassen",
+        "ausgleichend",
+        "freundlich"
+      ],
+      "frankfurt": "Wenn es hektisch wird, findest du den Weg ins Grüne – und nimmst andere mit.",
+      "tipp": {
+        "text": "Frankfurt in Ruhe verstehen",
+        "href": "frankfurt.html"
+      }
+    }
+  ],
+  "fragen": [
+    {
+      "frage": "Samstagmorgen in Frankfurt – du …",
+      "antworten": [
+        {
+          "text": "gehst mit Einkaufsliste über den Wochenmarkt.",
+          "sterne": [
+            "praezision",
+            "waechter"
+          ]
+        },
+        {
+          "text": "klingelst bei der Nachbarin und fragst, ob sie etwas braucht.",
+          "sterne": [
+            "herz",
+            "ruhe"
+          ]
+        },
+        {
+          "text": "triffst dich mit Freunden am Mainufer.",
+          "sterne": [
+            "funken",
+            "glanz"
+          ]
+        },
+        {
+          "text": "gehst ganz in Ruhe in ein Museum.",
+          "sterne": [
+            "entdecker",
+            "praezision"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Eine Reisegruppe steht ratlos am Römerberg. Du …",
+      "antworten": [
+        {
+          "text": "erklärst ihnen freundlich den Weg.",
+          "sterne": [
+            "herz",
+            "leit"
+          ]
+        },
+        {
+          "text": "zeigst auf der Karte genau, wo es langgeht.",
+          "sterne": [
+            "praezision",
+            "waechter"
+          ]
+        },
+        {
+          "text": "machst ein Gruppenfoto mit ihnen.",
+          "sterne": [
+            "glanz",
+            "funken"
+          ]
+        },
+        {
+          "text": "schaust erst, ob sie überhaupt Hilfe möchten.",
+          "sterne": [
+            "entdecker",
+            "waechter"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Vor deiner Tür ist ein Schlagloch. Du …",
+      "antworten": [
+        {
+          "text": "meldest es sofort beim Mängelmelder.",
+          "sterne": [
+            "waechter",
+            "praezision"
+          ]
+        },
+        {
+          "text": "sprichst die Nachbarn an und bringst es in den Ortsbeirat.",
+          "sterne": [
+            "leit",
+            "herz"
+          ]
+        },
+        {
+          "text": "machst ein lustiges Foto mit Spruch dazu.",
+          "sterne": [
+            "glanz",
+            "funken"
+          ]
+        },
+        {
+          "text": "bleibst gelassen – das wird schon.",
+          "sterne": [
+            "ruhe",
+            "entdecker"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Dein Lieblingsort im Frankfurter Norden ist …",
+      "antworten": [
+        {
+          "text": "ein grünes Plätzchen am Wasser.",
+          "sterne": [
+            "ruhe",
+            "entdecker"
+          ]
+        },
+        {
+          "text": "das Café, in dem immer etwas los ist.",
+          "sterne": [
+            "funken",
+            "herz"
+          ]
+        },
+        {
+          "text": "ein Ort mit Blick auf die Skyline.",
+          "sterne": [
+            "glanz",
+            "leit"
+          ]
+        },
+        {
+          "text": "eine ruhige Ecke mit einem guten Buch.",
+          "sterne": [
+            "entdecker",
+            "ruhe"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Apfelwein-Abend mit Freunden. Du …",
+      "antworten": [
+        {
+          "text": "bestellst für den ganzen Tisch – und weißt, was jeder trinkt.",
+          "sterne": [
+            "leit",
+            "praezision"
+          ]
+        },
+        {
+          "text": "erzählst die besten Geschichten.",
+          "sterne": [
+            "glanz",
+            "funken"
+          ]
+        },
+        {
+          "text": "hörst zu und lachst mit.",
+          "sterne": [
+            "ruhe",
+            "herz"
+          ]
+        },
+        {
+          "text": "achtest darauf, dass alle gut nach Hause kommen.",
+          "sterne": [
+            "waechter",
+            "leit"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Du hast eine Idee für deinen Stadtteil. Als Erstes …",
+      "antworten": [
+        {
+          "text": "schreibst du einen klaren Plan.",
+          "sterne": [
+            "praezision",
+            "leit"
+          ]
+        },
+        {
+          "text": "denkst du durch, was schiefgehen könnte.",
+          "sterne": [
+            "waechter",
+            "entdecker"
+          ]
+        },
+        {
+          "text": "erzählst du begeistert allen davon.",
+          "sterne": [
+            "funken",
+            "glanz"
+          ]
+        },
+        {
+          "text": "fragst du die Nachbarn, was sie brauchen.",
+          "sterne": [
+            "herz",
+            "ruhe"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Welche Superkraft wünschst du Frankfurt?",
+      "antworten": [
+        {
+          "text": "Alles fährt pünktlich.",
+          "sterne": [
+            "praezision",
+            "waechter"
+          ]
+        },
+        {
+          "text": "Niemand ist allein.",
+          "sterne": [
+            "herz",
+            "ruhe"
+          ]
+        },
+        {
+          "text": "Jeder Tag hat ein kleines Fest.",
+          "sterne": [
+            "funken",
+            "glanz"
+          ]
+        },
+        {
+          "text": "Gute Ideen werden schnell umgesetzt.",
+          "sterne": [
+            "leit",
+            "entdecker"
+          ]
+        }
+      ]
+    },
+    {
+      "frage": "Wie entdeckst du einen neuen Stadtteil?",
+      "antworten": [
+        {
+          "text": "Ich lese vorher Geheimtipps nach.",
+          "sterne": [
+            "entdecker",
+            "waechter"
+          ]
+        },
+        {
+          "text": "Ich laufe los und komme mit Leuten ins Gespräch.",
+          "sterne": [
+            "funken",
+            "herz"
+          ]
+        },
+        {
+          "text": "Ich habe eine Liste der schönsten Orte.",
+          "sterne": [
+            "praezision",
+            "glanz"
+          ]
+        },
+        {
+          "text": "Ich lade andere ein und wir gehen zusammen.",
+          "sterne": [
+            "leit",
+            "ruhe"
+          ]
+        }
+      ]
+    }
+  ]
+}

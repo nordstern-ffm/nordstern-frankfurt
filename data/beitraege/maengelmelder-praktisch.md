@@ -4,6 +4,7 @@ slug: maengelmelder-praktisch
 datum: 2026-11-17
 status: veroeffentlicht
 bereich: maengelmelder
+rubrik: ratgeber
 ortsbezirk: 10
 stadtteile: [Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim]
 links: [maengelmelder]
