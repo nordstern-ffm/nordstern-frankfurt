@@ -4,6 +4,7 @@ slug: maengelmelder-praktisch
 datum: 2026-11-17
 status: entwurf
 bereich: maengelmelder
+ortsbezirk: 10
 stadtteile: [Berkersheim, Bonames, Eckenheim, Frankfurter Berg, Preungesheim]
 links: [maengelmelder]
 pruefen:
@@ -50,7 +51,7 @@ Diese Themen beschäftigen gerade auch den Ortsbeirat 10. Sie zeigen, welche Art
 
 ## Hier geht's zum Mängelmelder
 
-→ Mängelmelder der Stadt auf ffm.de (Link aus `data/links.json`, Schlüssel `maengelmelder`)
+→ [[link:maengelmelder]]
 
 ---
 
