@@ -97,3 +97,8 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 - **Seiten in Unterordnern bekamen doppelte `../`** (`lernen/index.html` verlinkte `../deutsch-lao.html`) · `page()` ergänzt `../` selbst, die Übersicht schrieb schon relative Pfade · Pfade ab Hauptordner (`lernen/…`) · Lehre: In `page()`-Texten immer Pfade ab Hauptordner schreiben.
 - **Testgerüst löschte die echte `lernen/index.html` der Testkopie** (Testfall überschrieb und entfernte sie) · Originale werden jetzt gesichert und zurückgespielt · Lehre: Ein Testgerüst darf nur wegräumen, was es selbst angelegt hat.
 - **Geprüft: Token im Klartext in `Frankfurt_FW`** (Hinweis aus Chat 3) · vorhanden, Wert nicht ausgegeben; André widerruft und setzt die Remote-URL ohne Token.
+
+## 18.11.2026 – Optik-Paket 1
+- **Vorschau zeigte altes CSS** · Browser-Cache des lokalen Servers (`python -m http.server` setzt keine Cache-Header) · beim Prüfen `fetch('/css/style.css', {cache:'reload'})` oder Strg+F5 · Lehre: Bei Optik-Änderungen immer hart neu laden, bevor man etwas „kaputt“ nennt.
+- **Geöffneter Menü-Knopf im Hellmodus nur 2,4:1** (Gold #8A6A10 mit Marineblau) · im Hellmodus Marineblau mit Weiß wie beim aktiven Menüpunkt · Lehre: Jeden neuen Zustand (geöffnet, Fokus, aktiv) in beiden Farbschemata rechnen.
+- **Externer Link ohne Eintrag in links.json** (lucide.dev auf der Bildnachweis-Seite) · von check.py gewarnt · bestätigt (HTTP 200) und über `link('lucide')` eingebunden.

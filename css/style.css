@@ -155,3 +155,65 @@ h2[id]{scroll-margin-top:1rem}
 .tabelle table{border-collapse:collapse;min-width:32rem;width:100%}
 .tabelle th,.tabelle td{border:1px solid var(--line);padding:.5rem .7rem;text-align:left;vertical-align:top}
 .tabelle thead th{background:var(--bg2)}
+/* ===== Optik-Paket 1 (18.11.2026): Skalen, Handy-Menü ohne JS, Hero-Illustration, Abschnittsbänder ===== */
+:root{--s-1:.5rem;--s-2:.75rem;--s-3:1rem;--s-4:1.5rem;--s-5:2.5rem;--s-6:4rem;--lese:42rem;--band:#0F1E40;--band-hell:#13264D}
+@media (prefers-color-scheme:light){:root{--band:#ECE7D6;--band-hell:#FFF6DA}}
+body{overflow-x:hidden;overflow-x:clip} /* Vollbreite-Bänder ragen per Schatten über den Rand */
+h1{font-size:clamp(2rem,5.2vw,3.1rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.45rem,3.4vw,1.9rem)}
+main p,main li{max-width:var(--lese)}
+main .card p,main .card li,main .stat *,main .callout p,main .callout li,.ticker *{max-width:none}
+main{padding-bottom:var(--s-6)}
+
+/* Menü: Checkbox-Klapp (ohne JS). Unter 58rem als Aufklapp-Karte, darüber als Zeile */
+.menue{position:relative}
+.menue-an{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+.menue-btn{display:inline-flex;align-items:center;gap:.65rem;min-height:44px;padding:.4rem 1.1rem;border:2px solid var(--gold);border-radius:2rem;font-weight:700;cursor:pointer;color:var(--text)}
+.menue-btn:hover{background:var(--bg2)}
+.menue-an:focus-visible+.menue-btn{outline:3px solid var(--focus);outline-offset:3px}
+.menue-balken{display:block;width:1.15rem;height:2px;background:currentColor;box-shadow:0 -6px currentColor,0 6px currentColor;border-radius:1px}
+.menue ul{display:none;position:absolute;right:0;top:calc(100% + .5rem);z-index:20;flex-direction:column;flex-wrap:nowrap;gap:.15rem;min-width:min(17rem,calc(100vw - 2rem));padding:.5rem;background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:0 12px 36px rgba(0,0,0,.35)}
+.menue-an:checked~ul{display:flex}
+.menue-an:checked+.menue-btn{background:var(--gold);color:#0B1630}
+.menue li{width:100%} .menue li a{width:100%}
+@media (min-width:58rem){
+  .menue-btn,.menue-an{display:none}
+  .menue ul{display:flex;position:static;flex-direction:row;flex-wrap:wrap;gap:.3rem;min-width:0;padding:0;background:none;border:0;box-shadow:none}
+  .menue li,.menue li a{width:auto}
+}
+
+/* Hero: Text + eigene Illustration (hero_svg in build.py), mobil untereinander */
+.hero{display:grid;gap:var(--s-4);padding:var(--s-5) 0 var(--s-3)}
+.hero-art{border-radius:1.25rem;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 44px rgba(0,0,0,.28)}
+.hero-art svg{display:block;width:100%;height:auto}
+@media (min-width:58rem){.hero{grid-template-columns:1.08fr .92fr;align-items:center;gap:var(--s-5)}}
+.hero-hinten{fill:#1c3770}.hero-vorn{fill:#08142b}
+.hero-fenster{fill:url(#hero-raster);opacity:.5}
+.hero-funke{fill:#F4D98A}
+.hero-stern{fill:#E0B84A}.hero-stern-innen{fill:#F4D98A}
+.hero-halo{fill:none;stroke:#E0B84A;stroke-width:7;stroke-linejoin:round;opacity:.3}
+.hero-glanz{fill:#E0B84A;opacity:.3}
+@media (prefers-reduced-motion:no-preference){
+  .hero-funke{animation:funkeln 4s ease-in-out infinite}
+  .hero-halo{animation:pulsieren 6s ease-in-out infinite}
+  @keyframes funkeln{50%{opacity:.2}}
+  @keyframes pulsieren{50%{opacity:.5}}
+  .card{transition:transform .2s ease,border-color .2s ease}
+  .card:hover{transform:translateY(-3px)}
+}
+
+/* Abschnittsbänder: volle Breite, abwechselnd getönt */
+.band{padding:var(--s-5) 0;margin:var(--s-5) 0;background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.band-hell{background:var(--band-hell);box-shadow:0 0 0 100vmax var(--band-hell)}
+.band>h2:first-child,.band>section>h2:first-child{margin-top:0}
+/* Handy: Logo und Menü-Knopf in einer Zeile */
+@media (max-width:34rem){
+  .head{flex-wrap:nowrap;gap:.5rem}
+  .brand{font-size:1.1rem;gap:.5rem;min-width:0}
+  .brand small{font-size:.68rem}
+  .star{width:2.1rem;height:2.1rem}
+  .menue-btn{padding:.4rem .85rem;gap:.5rem}
+}
+/* Desktop: Menüzeile kompakter, damit sieben Punkte in eine Zeile passen */
+@media (min-width:58rem){.menue a{padding:.4rem .6rem;font-size:.88rem}}
+@media (prefers-color-scheme:light){.menue-an:checked+.menue-btn{background:#132A4E;color:#FFFFFF}} /* Gold #8A6A10 + Navy nur 2,4:1 */

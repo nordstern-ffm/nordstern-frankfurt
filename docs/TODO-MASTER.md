@@ -60,7 +60,7 @@ Abarbeitung strikt von oben nach unten. Details und „Fertig, wenn“ stehen im
 | ☐ | Lao-Lernseiten: Muttersprachlerin zum Gegenlesen (E13 offen) | A |
 | ☐ | Laab-Rezept: 2 offene `pruefen`-Punkte; Rezept ist veröffentlicht | CC + A |
 | ☐ | `nh-preungesheim` (Desktop, kein Git): im Browser prüfen, versionieren – Entscheidung: eigenes Repo oder Teil von Nordstern? | A |
-| ☐ | **Optik-Paket 1:** Hero-Illustration, kompaktes Handy-Menü, Abschnittsbänder, Abstands-/Schriftskala | CC |
+| ✓ | **Optik-Paket 1** (E28): Hero-Illustration, Klapp-Menü, Bänder, Skalen – auf Start; Bänder für Unterseiten noch offen | CC |
 | ☐ | **Optik-Paket 2:** Fotos auf Hauptseiten, abwechslungsreiche Karten, Karte OBR 10 | CC |
 
 ## Übernommen aus Chat 2 (17.11.2026)

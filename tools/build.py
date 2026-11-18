@@ -191,7 +191,10 @@ def page(path, title, desc, body, aktiv=None, out=ROOT):
 <header class="site-header">
 <div class="wrap head">
 <a class="brand" href="index.html">{STAR}<span>{E(SITE["marke"])}<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
-<nav aria-label="Hauptmenü"><ul>{nav}</ul></nav>
+<nav aria-label="Hauptmenü" class="menue">
+<input type="checkbox" id="menue-an" class="menue-an" aria-label="Menü ein- oder ausklappen">
+<label for="menue-an" class="menue-btn"><span class="menue-balken" aria-hidden="true"></span>Menü</label>
+<ul>{nav}</ul></nav>
 </div>
 </header>
 <main id="inhalt" class="wrap">
@@ -284,6 +287,52 @@ def kalender_ticker():
             f'<ol class="ticker-list">{li}</ol></section>')
 
 
+def hero_svg():
+    """Eigene Illustration (Nachthimmel, Nordstern, stilisierte Skyline am Fluss) – reine Deko, aria-hidden.
+    Keine erkennbaren Einzelgebäude, keine Fremdvorlage; Herkunft: bildnachweise.html (eigene Zeichnung)."""
+    # (x, Breite, Höhe) der Türme; vorne dunkler, hinten heller; Grundlinie y = 270
+    hinten = [(14, 34, 96), (60, 28, 128), (98, 40, 80), (150, 30, 150), (196, 36, 110), (246, 32, 140),
+              (292, 42, 90), (340, 30, 120), (384, 38, 100), (430, 36, 70)]
+    vorn = [(0, 40, 70), (34, 30, 104), (72, 46, 150), (126, 28, 90), (164, 38, 190), (212, 32, 120),
+            (252, 44, 170), (304, 30, 100), (342, 40, 140), (390, 30, 90), (426, 54, 120)]
+    y0 = 270
+
+    def tuerme(liste, cls):
+        return "".join(f'<rect class="{cls}" x="{x}" y="{y0 - h}" width="{w}" height="{h}"/>' for x, w, h in liste)
+
+    fenster = "".join(f'<rect class="hero-fenster" x="{x}" y="{y0 - h}" width="{w}" height="{h}"/>'
+                      for x, w, h in vorn if h >= 100)
+    spitzen = ('<path class="hero-vorn" d="M176 80 L183 40 L190 80 Z"/>'      # Dach des höchsten Turms
+               '<path class="hero-vorn" d="M266 100 L270 62 L274 100 Z"/>'    # Antenne/Spitze
+               '<rect class="hero-vorn" x="269" y="46" width="2" height="22"/>')
+    sterne = "".join(f'<circle class="hero-funke" style="animation-delay:{d}s" cx="{x}" cy="{y}" r="{r}"/>'
+                     for x, y, r, d in [(40, 36, 1.4, 0), (92, 70, 1, 1.2), (140, 28, 1.2, 2.1), (210, 52, 1, .6),
+                                        (258, 24, 1.3, 1.7), (310, 80, 1, 2.6), (366, 22, 1.1, .9), (424, 64, 1.4, 1.9),
+                                        (456, 30, 1, 3.1), (64, 120, 1, 2.4)]) 
+    fluss = "".join(f'<rect class="hero-glanz" x="{x}" y="{y}" width="{w}" height="1.6" rx=".8"/>'
+                    for x, y, w in [(60, 282, 70), (170, 292, 110), (300, 284, 80), (120, 302, 60), (250, 310, 120), (30, 318, 90)])
+    stern = ('<g transform="translate(332 34) scale(2.1)">'
+             '<path class="hero-halo" d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/>'
+             '<path class="hero-stern" d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/>'
+             '<path class="hero-stern-innen" d="M32 14 L35 29 L50 32 L35 35 L32 50 L29 35 L14 32 L29 29 Z"/></g>')
+    return ('<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 480 340" focusable="false" aria-hidden="true">'
+            '<defs>'
+            '<linearGradient id="hero-himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070f23"/>'
+            '<stop offset=".7" stop-color="#16306a"/><stop offset="1" stop-color="#24498f"/></linearGradient>'
+            '<radialGradient id="hero-leuchten" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E0B84A" stop-opacity=".55"/>'
+            '<stop offset="1" stop-color="#E0B84A" stop-opacity="0"/></radialGradient>'
+            '<linearGradient id="hero-wasser" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16306a"/>'
+            '<stop offset="1" stop-color="#0b1a3a"/></linearGradient>'
+            '<pattern id="hero-raster" width="9" height="12" patternUnits="userSpaceOnUse">'
+            '<rect x="2.5" y="3" width="3" height="4" fill="#F4D98A"/></pattern>'
+            '</defs>'
+            '<rect width="480" height="340" fill="url(#hero-himmel)"/>'
+            f'<circle cx="364" cy="68" r="86" fill="url(#hero-leuchten)"/>{sterne}{stern}'
+            f'<g>{tuerme(hinten, "hero-hinten")}{tuerme(vorn, "hero-vorn")}{spitzen}{fenster}</g>'
+            f'<rect x="0" y="{y0}" width="480" height="{340 - y0}" fill="url(#hero-wasser)"/>{fluss}'
+            '</svg></div>')
+
+
 # ------------------------------------------------------------------ Start
 pillars = "".join(card(i, f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for i, h, t, d in [
     ("hand-heart", "nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
@@ -296,19 +345,22 @@ page("index.html", "Start",
      f"""
 {kalender_ticker()}
 <section class="hero">
+<div class="hero-text">
 <p class="eyebrow">Frankfurter Norden · Preungesheim und Nachbarschaft</p>
 <h1>Ein Stern für den Norden.<br><span>Damit niemand allein durch Frankfurt muss.</span></h1>
 <p class="lead">Nordstern verbindet Nachbarschaftshilfe, verständliche Infos über unsere Stadt und kurze Wege zu Menschen, die anpacken.</p>
 <div class="buttons"><a class="btn btn-primary" href="nachbarschaft.html">Hilfe &amp; Mitmachen</a><a class="btn" href="mitmachen.html">Mangel melden</a></div>
+</div>
+{hero_svg()}
 </section>
 {kacheln(["einwohner_preungesheim", "einwohner_frankfurt", "entlastungsbetrag"])}
-<section aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
-<section aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
+<section class="band" aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
+<section class="band band-hell" aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
 {card("languages", link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
 {card("route", link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
 {card("users", f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
 </div></section>
-{timeline()}
+<div class="band">{timeline()}</div>
 <section class="callout"><h2>So arbeiten wir</h2>
 <ul><li><strong>Ehrlich:</strong> Was noch in Planung ist, steht auch so da.</li>
 <li><strong>Getrennt:</strong> Ehrenamt, Politik und Geschäft laufen in eigenen Bereichen mit eigener Verantwortung.</li>
@@ -662,6 +714,11 @@ page("bildnachweise.html", "Bildnachweise", "Urheber, Lizenzen und Quellen aller
 <p class="lead">Jedes Bild steht hier mit Urheber, Lizenz und Quelle. Die Lizenz wurde jeweils am Original geprüft.</p>
 {bn}
 <p class="small">Schriften: Fraunces und Atkinson Hyperlegible, lokal eingebunden unter der SIL Open Font License (Lizenztexte im Ordner <code>fonts/</code>).</p>
+<h2>Eigene Grafiken und Symbole</h2>
+<ul>
+<li><strong>Eigene Zeichnungen:</strong> Stern-Symbol, Illustration auf der Startseite (Nachthimmel, Nordstern, stilisierte Skyline) und das Schaubild „Wer entscheidet in Frankfurt?“ wurden für Nordstern Frankfurt gezeichnet. Die Skyline zeigt keine erkennbaren Einzelgebäude.</li>
+<li><strong>Symbole:</strong> {link('lucide')}, ISC-Lizenz, lokal eingebunden (Lizenztext: <code>assets/LICENSE-icons.txt</code>).</li>
+</ul>
 """)
 
 # ---------------------------------------------------------------- Lernen (E13)

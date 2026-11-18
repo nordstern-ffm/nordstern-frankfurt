@@ -40,3 +40,4 @@ Bilder mit Nachweis und Alt-Text · Icons vorhanden und korrekt versteckt · Ken
 - `integration` enthält jetzt `main` bis PR #14 (Laab-Rezept, Lernseiten für Lao-Sprechende, E13 = Lernseiten). Entscheidungen ux-phase2 jetzt **E14–E26**, E27 = Lernseiten-CSP.
 - Hauptmenü weiter 7 Punkte; „Lernen“ als Abschnitt im Hub „Ortsbezirke & Blog“.
 - 34 Tests, 0 Fehler. Nächster Schritt: Optik-Paket 1 (Hero, Menü, Abschnittsbänder, Skalen).
+- Optik-Paket 1 (E28) fertig auf der Startseite. Nächstes: Paket 2 (Fotos auf Hauptseiten, Karten-Abwechslung, Karte OBR 10), Bänder und Hero-Kopf für Unterseiten.

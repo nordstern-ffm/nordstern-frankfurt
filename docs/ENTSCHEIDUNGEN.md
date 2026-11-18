@@ -207,3 +207,13 @@ Umsetzung nach Abschluss aller Inhaltsaufgaben (TODO-MASTER G1–G3).
 | Nonces/Hashes statt `'unsafe-inline'` | strengste CSP | Seiten sind handgepflegt, jede Änderung bräuchte neuen Hash | später mit gemeinsamer Lern-Engine |
 | **CSP mit `connect-src 'none'`** | Datenabfluss technisch ausgeschlossen | `'unsafe-inline'` bleibt nötig | **gewählt** |
 **Nummernlauf:** Weil `main` E13 für die Lernseiten vergab, heißen die früheren ux-phase2-Entscheidungen jetzt **E14–E26** (zuvor E13–E25; ursprünglich E10–E20). Das Hauptmenü bleibt bei 7 Punkten; „Lernen“ steht als Abschnitt im Punkt „Ortsbezirke & Blog“ (E25).
+
+## E28 · Optik-Paket 1: Hero-Illustration, Klapp-Menü ohne JS, Abschnittsbänder, Skalen (Nutzer „ja“, 18.11.2026)
+**Gewählt:** (1) Eigene Hero-Illustration als Inline-SVG (`hero_svg()` in build.py): Nachthimmel, leuchtender Nordstern, stilisierte Skyline am Fluss, bewusst ohne erkennbare Einzelgebäude; Deko (`aria-hidden`), Funkeln nur bei erlaubter Bewegung. (2) Menü als Checkbox-Klapp ohne JavaScript: unter 58 rem Knopf „Menü“ mit Aufklapp-Karte (48 px hoch), darüber die Zeile. (3) Vollbreite-Bänder `.band` im Wechsel (Säulen, Familie, Zeitleiste). (4) Abstands- und Schriftskala als Variablen, Lesebreite 42 rem. Eigene Grafiken und Lucide-Symbole stehen auf `bildnachweise.html`.
+| Alternative | Nutzen | Nachteil | Ergebnis |
+| --- | --- | --- | --- |
+| `<details>` für das Menü | semantisch | Desktop-Zeile bräuchte `::details-content` (neu, auf alten Android-Geräten fehlt es → Menü unerreichbar) | verworfen |
+| JavaScript-Menü | gewohnte Bedienung | gegen E4 (kein JS außer Lernseiten) | verworfen |
+| Foto im Hero | echt | Lizenzprüfung, Personen, kein Alleinstellungsmerkmal | später ergänzend (Aufgabe 8) |
+| Illustration einer echten Skyline | wiedererkennbar | Detailtreue, Rechtefragen bei Bildvorlagen | verworfen – stilisiert |
+**Grenze:** Das Menü springt bei Fokus nicht automatisch zu; Tastaturnutzer erreichen die Checkbox per Tab und öffnen mit Leertaste. Beim Wechsel der Seite startet es geschlossen.
