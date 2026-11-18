@@ -1,0 +1,32 @@
+{
+  "_hinweis": "Kultur-Momente. Ein Satz, respektvoll, ohne Wertung, mit Quelle. Jedes Jahr neu prüfen (Kalender verschieben sich). Nur Einträge mit geprueft (JJJJ-MM-TT) werden gebaut. Quellen-Links vor Nutzung im Browser bestätigen.",
+  "eintraege": [
+    {
+      "id": "weihnachten-west-2026",
+      "datum_von": "2026-12-24", "datum_bis": "2026-12-26",
+      "titel": "Heiligabend und Weihnachten",
+      "satz": "Katholische und evangelische Christen – und viele orthodoxe Gemeinden mit revidiertem Kalender, etwa griechische, rumänische und bulgarische – feiern am Abend des 24. Dezember und am 25. und 26. Dezember.",
+      "kategorie": "religion",
+      "quelle": "Sonntagsblatt: Warum feiern viele Orthodoxe erst im Januar Weihnachten? · https://sonntagsblatt.de/artikel/glaube/warum-feiern-viele-orthodoxe-erst-im-januar-weihnachten",
+      "geprueft": "2026-11-15"
+    },
+    {
+      "id": "weihnachten-julianisch-2027",
+      "datum_von": "2027-01-06", "datum_bis": "2027-01-07",
+      "titel": "Orthodoxes Weihnachten im Januar",
+      "satz": "Orthodoxe Kirchen, die dem julianischen Kalender folgen – etwa die russische, serbische und georgische –, feiern Weihnachten 13 Tage später am 6. und 7. Januar; auch in Deutschland feiern so viele orthodoxe Christen.",
+      "kategorie": "religion",
+      "quelle": "Sonntagsblatt (wie oben); Ergänzung Eritrea/Äthiopien vor Veröffentlichung bei der Kirche selbst prüfen",
+      "geprueft": "2026-11-15"
+    },
+    {
+      "id": "ukraine-kalender-hinweis",
+      "datum_von": "2026-12-24", "datum_bis": "2027-01-07",
+      "titel": "Zwei Termine in einer Familie",
+      "satz": "Die Orthodoxe Kirche der Ukraine feiert seit 2023 am 25. Dezember, viele ukrainische Familien feiern trotzdem an beiden Terminen.",
+      "kategorie": "religion",
+      "quelle": "Vatican News 12/2023: Ukraine – gemeinsames Weihnachtsdatum · https://www.vaticannews.va/de/welt/news/2023-12/ukraine-gemeinsames-weihnachtsdatum-gutes-zeichen-szyrokoradiuk.html",
+      "geprueft": "2026-11-15"
+    }
+  ]
+}

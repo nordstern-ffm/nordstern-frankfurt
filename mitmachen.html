@@ -2,6 +2,8 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Melden &amp; Petitionen – Nordstern Frankfurt</title>
 <meta name="description" content="Mängel in Frankfurt direkt an die Stadt melden und Anliegen bündeln – Ziel 220 Unterstützer je Projekt.">
@@ -17,19 +19,22 @@
 <header class="site-header">
 <div class="wrap head">
 <a class="brand" href="index.html"><svg class="star" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/><path class="star-inner" d="M32 14 L35 29 L50 32 L35 35 L32 50 L29 35 L14 32 L29 29 Z"/></svg><span>Nordstern Frankfurt<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
-<nav aria-label="Hauptmenü"><ul><li><a href="index.html">Start</a></li><li><a href="nachbarschaft.html">Nachbarschaft</a></li><li><a href="frankfurt.html">Frankfurt-Info</a></li><li><a href="ortsbezirke/index.html">Ortsbezirke</a></li><li><a href="mitmachen.html" aria-current="page">Melden & Petitionen</a></li><li><a href="dienste.html">Vermittlung</a></li><li><a href="standpunkte.html">Standpunkte</a></li><li><a href="lernen/index.html">Lernen</a></li><li><a href="agentur.html">Für Vereine & Firmen</a></li></ul></nav>
+<nav aria-label="Hauptmenü" class="menue">
+<input type="checkbox" id="menue-an" class="menue-an" aria-label="Menü ein- oder ausklappen">
+<label for="menue-an" class="menue-btn"><span class="menue-balken" aria-hidden="true"></span>Menü</label>
+<ul><li><a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#house"/></svg><span>Start</span></a></li><li><a href="nachbarschaft.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#hand-heart"/></svg><span>Nachbarschaft</span></a></li><li><a href="frankfurt.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#landmark"/></svg><span>Frankfurt-Info</span></a></li><li><a href="ortsbezirke/index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#map-pinned"/></svg><span>Ortsbezirke & Blog</span></a></li><li><a href="mitmachen.html" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#megaphone"/></svg><span>Melden & Petitionen</span></a></li><li><a href="dienste.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#handshake"/></svg><span>Vermittlung</span></a></li><li><a href="agentur.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#briefcase"/></svg><span>Für Vereine & Firmen</span></a></li></ul></nav>
 </div>
 </header>
 <main id="inhalt" class="wrap">
 
 <h1>Melden. Bündeln. Bewegen.</h1>
-<h2>1 · Mangel sehen – direkt melden</h2>
-<p>Kaputte Laterne, Schlagloch, wilder Müll: Melden Sie es dort, wo die Stadt es bearbeitet – beim offiziellen <a href="https://www.ffm.de/de/maengelmelder" rel="noopener">Mängelmelder der Stadt (ffm.de – Frankfurt fragt mich)</a>. Ein eigener Melder auf dieser Seite würde nur Umwege erzeugen.</p>
-<h2>2 · Anliegen bündeln – 220 Stimmen</h2>
+<section aria-labelledby="h-ablauf-melden"><h2 id="h-ablauf-melden">In drei Schritten zum Ziel</h2><ol class="steps" role="list"><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">1</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#eye"/></svg></span></span><h3><a href="#melden">Sehen</a></h3><p>Kaputte Laterne, Schlagloch, wilder Müll – oder ein größerer Wunsch für den Stadtteil.</p></li><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">2</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#megaphone"/></svg></span></span><h3><a href="#melden">Melden</a></h3><p>Mängel direkt beim offiziellen Mängelmelder der Stadt melden.</p></li><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">3</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#users"/></svg></span></span><h3><a href="#buendeln">Bündeln</a></h3><p>Größere Anliegen gemeinsam mit Unterstützerinnen und Unterstützern einreichen.</p></li></ol></section>
+<h2 id="melden">1 · Mangel sehen – direkt melden</h2>
+<p>Kaputte Laterne, Schlagloch, wilder Müll? Melden Sie es direkt beim offiziellen <a href="https://www.ffm.de/de/maengelmelder" rel="noopener">Mängelmelder der Stadt (ffm.de – Frankfurt fragt mich)</a>.</p>
+<h2 id="buendeln">2 · Anliegen bündeln – 220 Stimmen</h2>
 <p>Größere Wünsche brauchen viele Unterstützer. Wir helfen beim Formulieren, sammeln im Stadtteil und reichen es auf der <a href="https://www.ffm.de/de/ideenplattform" rel="noopener">Ideenplattform der Stadt (ffm.de)</a> oder als Petition ein. Unser Ziel je Projekt: <strong>220 Unterstützerinnen und Unterstützer</strong>.</p>
 <p class="notice">Die ersten Anliegen werden gerade mit Nachbarinnen und Nachbarn gesammelt. Sie haben ein Thema? Schreiben Sie uns.</p>
-<h2>3 · Selbst ein Anliegen starten</h2>
-<ol><li>Problem in zwei Sätzen beschreiben – wo, was, für wen.</li><li>Uns schreiben; wir prüfen, ob Stadt, Ortsbeirat oder Land zuständig ist.</li><li>Gemeinsam Text und Fotos fertig machen und einreichen.</li></ol>
+<section aria-labelledby="h-ablauf-anliegen"><h2 id="h-ablauf-anliegen">3 · Selbst ein Anliegen starten</h2><ol class="steps" role="list"><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">1</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#pen-line"/></svg></span></span><h3>Beschreiben</h3><p>Problem in zwei Sätzen beschreiben – wo, was, für wen.</p></li><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">2</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#search"/></svg></span></span><h3>Zuständigkeit klären</h3><p>Uns schreiben; wir prüfen, ob Stadt, Ortsbeirat oder Land zuständig ist.</p></li><li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">3</span><span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#send"/></svg></span></span><h3>Einreichen</h3><p>Gemeinsam Text und Fotos fertig machen und einreichen.</p></li></ol></section>
 <p class="notice">Kontaktadresse wird vor dem Start ergänzt.</p>
 <p class="small">Unterschriften sammeln wir nicht auf dieser Seite – Ihre politische Meinung bleibt bei der Plattform, auf der Sie unterschreiben.</p>
 
@@ -38,7 +43,7 @@
 <div class="wrap">
 <p><strong>Nordstern Frankfurt</strong> – Sozial. Informiert. Vernetzt. – für den Frankfurter Norden und die ganze Stadt.</p>
 <p>Betrieben von André Schwarz · Copy &amp; Code Agency. Der Verein „Nachbarschaftshilfe Frankfurter Norden e.V. (in Gründung)“ ist eigenständig und parteipolitisch neutral.</p>
-<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · Stand: November 2026</p>
+<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="bildnachweise.html">Bildnachweise</a> · <a href="standpunkte.html">Standpunkte (gekennzeichneter Partei-Bereich)</a> · Stand: November 2026</p>
 <p class="small">Ohne Tracker, ohne Cookies, ohne Fremd-Schriften. Keine Rechts- oder Steuerberatung.</p>
 </div>
 </footer>

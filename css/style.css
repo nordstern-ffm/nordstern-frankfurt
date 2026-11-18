@@ -12,7 +12,7 @@
 }
 @media (prefers-color-scheme:light){
   :root{--bg:#F5F3EC; --bg2:#E9E4D4; --text:#0F1E3D; --muted:#3A4A6B; --card:#FFFFFF; --line:#CFC7AE;
-    --gold:#8A6A10; --gold-soft:#B8901E; --link:#1F4E91; --btn-bg:#132A4E; --btn-text:#FFFFFF; --callout:#FFF6DA; --focus:#1F4E91}
+    --gold:#8A6A10; --gold-soft:#8A6A10; --link:#1F4E91; --btn-bg:#132A4E; --btn-text:#FFFFFF; --callout:#FFF6DA; --focus:#1F4E91}
 }
 *{box-sizing:border-box}
 html{font-size:112.5%}
@@ -93,8 +93,127 @@ main{padding-bottom:3rem}
 @media (max-width:30rem){.ticker{padding-top:3.4rem}}
 .termine{padding-left:1.3rem}
 .termine li{margin:.2rem 0}
+/* Bilder mit Nachweis (data/bilder.json) und Bildnachweis-Tabelle */
+figure{margin:1.2rem 0} figure img{display:block;max-width:100%;height:auto;border-radius:.8rem}
+figcaption{margin-top:.4rem}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:Fraunces,Georgia,serif}
+/* Icons: Lucide-Sprite assets/icons.svg, Strichstärke wie Original, Farbe erbt vom Text */
+.icon{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav a{gap:.4rem} nav a .icon{width:1.1em;height:1.1em}
+.btn .icon{margin-right:.5rem}
+.card-icon{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;margin-top:.9rem;border-radius:50%;background:var(--bg2);color:var(--gold)}
+.card-icon .icon{width:1.5rem;height:1.5rem}
+/* Kennzahl-Kacheln (data/zahlen.json): Zahl groß, Quelle + Stand klein darunter */
+.stats{list-style:none;margin:1.5rem 0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.stat{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:1rem;padding:1rem 1.2rem}
+.stat-wert{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:2.4rem;line-height:1.1;color:var(--gold-soft)}
+.stat-text{font-weight:700;margin:.3rem 0 .6rem}
+.stat-quelle{margin-top:auto;font-size:.85rem;color:var(--muted)}
+/* Hellmodus: gold-soft = #8A6A10 (5,06:1 auf Weiß, 4,56:1 auf --bg); früher #B8901E nur 2,68–2,98:1. Stern-Inneres bleibt hell (Deko). */
+@media (prefers-color-scheme:light){.star-inner{fill:#B8901E}}
+/* Ablauf-Diagramm steps(): <ol> trägt die Reihenfolge, Nummer + Icon nur visuell; mobil untereinander */
+.steps{list-style:none;margin:1rem 0 1.5rem;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+.step{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.2rem}
+.step-kopf{display:flex;align-items:center;gap:.7rem}
+.step-nr{display:inline-flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--btn-bg);color:var(--btn-text);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.15rem}
+.step-icon{color:var(--gold)} .step-icon .icon{width:1.7rem;height:1.7rem}
+.step h3{margin:.7rem 0 .3rem} .step p{margin:0}
+h2[id]{scroll-margin-top:1rem}
+/* Zeitleiste timeline(): Linie + Punkte, Status steht als Text da (nicht nur Farbe) */
+.timeline{list-style:none;margin:1rem 0 1.5rem .6rem;padding:0 0 0 1.6rem;border-left:3px solid var(--line)}
+.tl{position:relative;padding:0 0 1.3rem}
+.tl::before{content:"";position:absolute;left:calc(-1.6rem - 11px);top:.35rem;width:19px;height:19px;box-sizing:border-box;border-radius:50%;border:3px solid var(--gold);background:var(--bg)}
+.tl-erledigt::before{background:var(--gold)}
+.tl-in-arbeit::before{background:linear-gradient(90deg,var(--gold) 50%,var(--bg) 50%)}
+.tl-status{margin:0} .status{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tl h3{margin:.1rem 0 .2rem} .tl p{margin:0}
+/* Blog: Rubrik-Chips als Sprungmarken (ohne JS), Rubrik-Abschnitte, geplante Themen */
+.chips{list-style:none;margin:1rem 0 1.5rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.chips a{display:inline-flex;align-items:center;gap:.45rem;min-height:44px;padding:.4rem 1rem;border:2px solid var(--gold);border-radius:2rem;color:var(--text);text-decoration:none;font-weight:700}
+.chips a:hover{background:var(--bg2)}
+.rubrik{border-top:1px solid var(--line);margin-top:2rem}
+.rubrik h2{display:flex;align-items:center;gap:.7rem}
+.rubrik h2 .card-icon{margin-top:0}
+.geplant{list-style:none;padding:0} .geplant li{margin:.4rem 0}
+.geplant .status{display:inline-block;margin-right:.4rem;padding:0 .5rem;border:1px solid var(--line);border-radius:.4rem}
+/* Schaubild „Wer entscheidet?“ (Inline-SVG, Farben aus den Themen-Variablen → hell und dunkel) */
+.schaubild-rahmen{margin:1rem 0}
+.schaubild{display:block;width:100%;max-width:30rem;height:auto;margin:0 auto}
+.sb-box{fill:var(--card);stroke:var(--line);stroke-width:2}
+.sb-oben{stroke:var(--gold)} .sb-unten{fill:var(--callout);stroke:var(--gold)}
+.sb-titel{fill:var(--text);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:17px}
+.sb-text{fill:var(--text);font-size:14px}
+.sb-label{fill:var(--muted);font-size:13px;font-weight:700}
+.sb-linie{stroke:var(--gold);stroke-width:2.5}
+.sb-spitze{fill:var(--gold)}
+.sb-lang{font-size:15px}
 /* Tabellen in Beiträgen: auf dem Handy waagerecht scrollbar statt abgeschnitten */
 .tabelle{overflow-x:auto;margin:1rem 0}
 .tabelle table{border-collapse:collapse;min-width:32rem;width:100%}
 .tabelle th,.tabelle td{border:1px solid var(--line);padding:.5rem .7rem;text-align:left;vertical-align:top}
 .tabelle thead th{background:var(--bg2)}
+/* ===== Optik-Paket 1 (18.11.2026): Skalen, Handy-Menü ohne JS, Hero-Illustration, Abschnittsbänder ===== */
+:root{--s-1:.5rem;--s-2:.75rem;--s-3:1rem;--s-4:1.5rem;--s-5:2.5rem;--s-6:4rem;--lese:42rem;--band:#0F1E40;--band-hell:#13264D}
+@media (prefers-color-scheme:light){:root{--band:#ECE7D6;--band-hell:#FFF6DA}}
+body{overflow-x:hidden;overflow-x:clip} /* Vollbreite-Bänder ragen per Schatten über den Rand */
+h1{font-size:clamp(2rem,5.2vw,3.1rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.45rem,3.4vw,1.9rem)}
+main p,main li{max-width:var(--lese)}
+main .card p,main .card li,main .stat *,main .callout p,main .callout li,.ticker *{max-width:none}
+main{padding-bottom:var(--s-6)}
+
+/* Menü: Checkbox-Klapp (ohne JS). Unter 58rem als Aufklapp-Karte, darüber als Zeile */
+.menue{position:relative}
+.menue-an{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+.menue-btn{display:inline-flex;align-items:center;gap:.65rem;min-height:44px;padding:.4rem 1.1rem;border:2px solid var(--gold);border-radius:2rem;font-weight:700;cursor:pointer;color:var(--text)}
+.menue-btn:hover{background:var(--bg2)}
+.menue-an:focus-visible+.menue-btn{outline:3px solid var(--focus);outline-offset:3px}
+.menue-balken{display:block;width:1.15rem;height:2px;background:currentColor;box-shadow:0 -6px currentColor,0 6px currentColor;border-radius:1px}
+.menue ul{display:none;position:absolute;right:0;top:calc(100% + .5rem);z-index:20;flex-direction:column;flex-wrap:nowrap;gap:.15rem;min-width:min(17rem,calc(100vw - 2rem));padding:.5rem;background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:0 12px 36px rgba(0,0,0,.35)}
+.menue-an:checked~ul{display:flex}
+.menue-an:checked+.menue-btn{background:var(--gold);color:#0B1630}
+.menue li{width:100%} .menue li a{width:100%}
+@media (min-width:58rem){
+  .menue-btn,.menue-an{display:none}
+  .menue ul{display:flex;position:static;flex-direction:row;flex-wrap:wrap;gap:.3rem;min-width:0;padding:0;background:none;border:0;box-shadow:none}
+  .menue li,.menue li a{width:auto}
+}
+
+/* Hero: Text + eigene Illustration (hero_svg in build.py), mobil untereinander */
+.hero{display:grid;gap:var(--s-4);padding:var(--s-5) 0 var(--s-3)}
+.hero-art{border-radius:1.25rem;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 44px rgba(0,0,0,.28)}
+.hero-art svg{display:block;width:100%;height:auto}
+@media (min-width:58rem){.hero{grid-template-columns:1.08fr .92fr;align-items:center;gap:var(--s-5)}}
+.hero-hinten{fill:#1c3770}.hero-vorn{fill:#08142b}
+.hero-fenster{fill:url(#hero-raster);opacity:.5}
+.hero-funke{fill:#F4D98A}
+.hero-stern{fill:#E0B84A}.hero-stern-innen{fill:#F4D98A}
+.hero-halo{fill:none;stroke:#E0B84A;stroke-width:7;stroke-linejoin:round;opacity:.3}
+.hero-glanz{fill:#E0B84A;opacity:.3}
+@media (prefers-reduced-motion:no-preference){
+  .hero-funke{animation:funkeln 4s ease-in-out infinite}
+  .hero-halo{animation:pulsieren 6s ease-in-out infinite}
+  @keyframes funkeln{50%{opacity:.2}}
+  @keyframes pulsieren{50%{opacity:.5}}
+  .card{transition:transform .2s ease,border-color .2s ease}
+  .card:hover{transform:translateY(-3px)}
+}
+
+/* Abschnittsbänder: volle Breite, abwechselnd getönt */
+.band{padding:var(--s-5) 0;margin:var(--s-5) 0;background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.band-hell{background:var(--band-hell);box-shadow:0 0 0 100vmax var(--band-hell)}
+.band>h2:first-child,.band>section>h2:first-child{margin-top:0}
+/* Handy: Logo und Menü-Knopf in einer Zeile */
+@media (max-width:34rem){
+  .head{flex-wrap:nowrap;gap:.5rem}
+  .brand{font-size:1.1rem;gap:.5rem;min-width:0}
+  .brand small{font-size:.68rem}
+  .star{width:2.1rem;height:2.1rem}
+  .menue-btn{padding:.4rem .85rem;gap:.5rem}
+}
+/* Desktop: Menüzeile kompakter, damit sieben Punkte in eine Zeile passen */
+@media (min-width:58rem){.menue a{padding:.4rem .6rem;font-size:.88rem}}
+@media (prefers-color-scheme:light){.menue-an:checked+.menue-btn{background:#132A4E;color:#FFFFFF}} /* Gold #8A6A10 + Navy nur 2,4:1 */

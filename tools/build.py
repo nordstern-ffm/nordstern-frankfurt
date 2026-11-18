@@ -7,7 +7,7 @@ Blog-Vorschau:                 python3 tools/build.py --entwuerfe <ordner außer
 Kein Framework, kein npm, kein JavaScript, keine externen Abrufe.
 Läuft in Termux (python3) und Git Bash gleich.
 """
-import datetime, glob, html, json, os, shutil, sys
+import datetime, glob, html, json, os, re, shutil, sys
 sys.dont_write_bytecode = True  # kein tools/__pycache__ im Repo
 import beitraege
 
@@ -26,6 +26,10 @@ PET = load("petitionen.json")
 STAND = load("standpunkte.json")
 LINKS = load("links.json")["links"]
 ZAHLUNG = load("zahlung.json")
+BILDER = {b["datei"]: b for b in load("bilder.json")["bilder"]}
+ZAHLEN = load("zahlen.json")["zahlen"]
+ABL = load("ablaeufe.json")
+BLOG = load("blog.json")
 LIVE = SITE["launch"] and SITE["domain_bestaetigt"]
 B = SITE["betreiber"]
 
@@ -44,16 +48,16 @@ KOMMEND = [t for t in TERMINE["termine"] if t["datum"] >= HEUTE]
 VEROEFF = sorted((b for b in BEITRAEGE if b["meta"]["status"] == "veroeffentlicht"),
                  key=lambda b: b["meta"]["datum"], reverse=True)
 
+# Menü: höchstens 7 Punkte (R2). Blog und Ortsbezirke teilen sich einen Punkt (Nutzer, 17.11.2026);
+# Standpunkte steht im Footer (E21).
 NAV = [
-    ("index.html", "Start"),
-    ("nachbarschaft.html", "Nachbarschaft"),
-    ("frankfurt.html", "Frankfurt-Info"),
-    ("ortsbezirke/index.html", "Ortsbezirke"),
-    ("mitmachen.html", "Melden & Petitionen"),
-    ("dienste.html", "Vermittlung"),
-    ("standpunkte.html", "Standpunkte"),
-    ("lernen/index.html", "Lernen"),
-    ("agentur.html", "Für Vereine & Firmen"),
+    ("index.html", "Start", "house"),
+    ("nachbarschaft.html", "Nachbarschaft", "hand-heart"),
+    ("frankfurt.html", "Frankfurt-Info", "landmark"),
+    ("ortsbezirke/index.html", "Ortsbezirke & Blog", "map-pinned"),
+    ("mitmachen.html", "Melden & Petitionen", "megaphone"),
+    ("dienste.html", "Vermittlung", "handshake"),
+    ("agentur.html", "Für Vereine & Firmen", "briefcase"),
 ]
 
 STAR = ('<svg class="star" viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
@@ -61,52 +65,136 @@ STAR = ('<svg class="star" viewBox="0 0 64 64" aria-hidden="true" focusable="fal
         '<path class="star-inner" d="M32 14 L35 29 L50 32 L35 35 L32 50 L29 35 L14 32 L29 29 Z"/></svg>')
 
 
-def link(key):
-    """Bestätigte Links als <a>, unbestätigte nur als Text (keine ungeprüfte URL online)."""
+with open(os.path.join(ROOT, "assets", "icons.svg"), encoding="utf-8") as f:
+    ICONS = set(re.findall(r'<symbol id="([a-z0-9-]+)"', f.read()))
+
+
+def icon(name, label=""):
+    """Lucide-Icon aus assets/icons.svg. Ohne label = Deko (aria-hidden), mit label = Bild mit Namen."""
+    if name not in ICONS:
+        raise SystemExit(f"FEHLER: Icon „{name}“ fehlt in assets/icons.svg – in tools/icons.py ergänzen.")
+    a = f'role="img" aria-label="{E(label)}"' if label else 'aria-hidden="true" focusable="false"'
+    return f'<svg class="icon" {a}><use href="assets/icons.svg#{name}"/></svg>'
+
+
+def link(key, text=None):
+    """Bestätigte Links als <a>, unbestätigte nur als Text (keine ungeprüfte URL online).
+    text = eigener (bereits maskierter) Linktext, sonst der Titel aus links.json."""
     if key not in LINKS:
         sys.exit("Unbekannter Link-Schlüssel: " + key + " (fehlt in data/links.json)")
     l = LINKS[key]
+    t = text or E(l["titel"])
     if l.get("bestaetigt"):
-        return f'<a href="{E(l["url"])}" rel="noopener">{E(l["titel"])}</a>'
-    return f'{E(l["titel"])} <span class="small">(Link wird nach Prüfung ergänzt)</span>'
+        return f'<a href="{E(l["url"])}" rel="noopener">{t}</a>'
+    return f'{t} <span class="small">(Link wird nach Prüfung ergänzt)</span>'
+
+
+def nachweis(b):
+    """Bildnachweis nach TULLU: Titel, Urheber, Lizenz (Link), Quelle (Link), Änderungen."""
+    t = f'<a href="{E(b["quelle_url"])}" rel="noopener">{E(b["titel"])}</a> · {E(b["autor"])} · '
+    t += f'<a href="{E(b["lizenz_url"])}" rel="noopener license">{E(b["lizenz"])}</a>'
+    if b["geaendert"] != "nein":
+        t += f' · geändert: {E(b["geaendert"])}'
+    return t
+
+
+def bild(datei, cls=""):
+    """Bild nur mit Eintrag in data/bilder.json – fehlt er, bricht der Build ab."""
+    if datei not in BILDER:
+        raise SystemExit(f"FEHLER: {datei} fehlt in data/bilder.json – Bild nicht eingebunden.")
+    b = BILDER[datei]
+    c = f' class="{cls}"' if cls else ""
+    return (f'<figure{c}><img src="{E(datei)}" alt="{E(b["alt"])}" loading="lazy" decoding="async">'
+            f'<figcaption class="small">{nachweis(b)}</figcaption></figure>')
+
+
+def kacheln(ids, titel="Zahlen, die zählen"):
+    """Kennzahl-Kacheln aus data/zahlen.json – jede mit Quelle (Link nur wenn bestätigt) und Stand."""
+    li = ""
+    for k in ids:
+        z = ZAHLEN[k]
+        l = LINKS[z["link"]]
+        q = f'<a href="{E(l["url"])}" rel="noopener">{E(z["quelle"])}</a>' if l.get("bestaetigt") else E(z["quelle"])
+        li += (f'<li class="stat"><span class="stat-wert">{E(z["wert"])}</span> <span class="stat-text">{E(z["text"])}</span>'
+               f'<span class="stat-quelle">Quelle: {q} · Stand: {E(z["stand"])}</span></li>')
+    return f'<section aria-label="{E(titel)}"><ul class="stats">{li}</ul></section>'
+
+
+def ziel_text(s):
+    """{ziel} aus petitionen.json einsetzen – die Zahl steht nur dort (E3)."""
+    return E(s).replace("{ziel}", str(PET["ziel_unterstuetzer"]))
+
+
+def steps(key, titel=None):
+    """Ablauf-Diagramm: <ol> = Reihenfolge für Screenreader, Nummer und Icon nur visuell."""
+    a = ABL["ablaeufe"][key]
+    hid = f"h-ablauf-{key}"
+    li = ""
+    for n, s in enumerate(a["schritte"], 1):
+        t = f'<a href="{E(s["ziel"])}">{E(s["titel"])}</a>' if s.get("ziel") else E(s["titel"])
+        li += (f'<li class="step"><span class="step-kopf"><span class="step-nr" aria-hidden="true">{n}</span>'
+               f'<span class="step-icon">{icon(s["icon"])}</span></span><h3>{t}</h3><p>{ziel_text(s["text"])}</p></li>')
+    hinweis = f'<p class="notice">{E(a["hinweis"])}</p>' if a["hinweis"] else ""
+    return (f'<section aria-labelledby="{hid}"><h2 id="{hid}">{E(titel or a["titel"])}</h2>{hinweis}'
+            f'<ol class="steps" role="list">{li}</ol></section>')
+
+
+def timeline():
+    """Zeitleiste: Status als Text (nicht nur Farbe), Datum nur wenn in den Daten bestätigt."""
+    z = ABL["zeitleiste"]
+    li = ""
+    for e in z["eintraege"]:
+        cls = "tl-" + e["status"].lower().replace(" ", "-")
+        wann = f' · <span class="tl-wann">{E(e["wann"])}</span>' if e["wann"] else ""
+        li += (f'<li class="tl {cls}"><p class="tl-status"><span class="status">{E(e["status"])}</span>{wann}</p>'
+               f'<h3>{E(e["titel"])}</h3><p>{ziel_text(e["text"])}</p></li>')
+    return (f'<section aria-labelledby="h-zeitleiste"><h2 id="h-zeitleiste">{E(z["titel"])}</h2>'
+            f'<ol class="timeline" role="list">{li}</ol></section>')
 
 
 def kontakt_zeile():
     if B["email"]:
-        return f'<a class="btn btn-primary" href="mailto:{E(B["email"])}">E-Mail schreiben</a>'
+        return f'<a class="btn btn-primary" href="mailto:{E(B["email"])}">{icon("mail")}E-Mail schreiben</a>'
     return '<p class="notice">Kontaktadresse wird vor dem Start ergänzt.</p>'
 
 
-def page(path, title, desc, body, out=ROOT, aktiv=None):
-    """path relativ zum Ausgabeordner; Unterordner (frankfurt/…) bekommen ../ vor allen internen Pfaden."""
-    cur = ' aria-current="page"'
-    pre = "../" * path.count("/")
+def page(path, title, desc, body, aktiv=None, out=ROOT):
+    """Schreibt eine Seite nach out/path. Links im HTML sind vom Hauptordner aus gedacht; für Seiten in
+    Unterordnern (frankfurt/, ortsbezirke/) werden alle relativen href/src am Ende mit ../ ergänzt.
+    aktiv = markierter Menüpunkt; out = anderer Ausgabeordner (Entwurfs-Vorschau, E10)."""
     aktiv = aktiv or path
+    cur = ' aria-current="page"'
     nav = "".join(
-        f'<li><a href="{pre}{h}"{cur if h == aktiv else ""}>{l}</a></li>'
-        for h, l in NAV)
+        f'<li><a href="{h}"{cur if h == aktiv else ""}>{icon(i)}<span>{l}</span></a></li>'
+        for h, l, i in NAV)
     robots = "" if LIVE else '<meta name="robots" content="noindex, nofollow">\n'
-    canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{"" if path == "index.html" else path}">\n' if LIVE else ""
+    url = re.sub(r"(^|/)index\.html$", r"\1", path)
+    canon = f'<link rel="canonical" href="https://{SITE["domain"]}/{url}">\n' if LIVE else ""
     entwurf = "" if LIVE else '<div class="draft" role="note">Vorschau – noch nicht offiziell gestartet.</div>'
     doc = f"""<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{E(title)} – {E(SITE["marke"])}</title>
 <meta name="description" content="{E(desc)}">
 {robots}{canon}<meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0B1630">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23E0B84A' d='M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="{pre}css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 {entwurf}
 <header class="site-header">
 <div class="wrap head">
-<a class="brand" href="{pre}index.html">{STAR}<span>{E(SITE["marke"])}<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
-<nav aria-label="Hauptmenü"><ul>{nav}</ul></nav>
+<a class="brand" href="index.html">{STAR}<span>{E(SITE["marke"])}<small>Frankfurter Norden · Frankfurt am Main</small></span></a>
+<nav aria-label="Hauptmenü" class="menue">
+<input type="checkbox" id="menue-an" class="menue-an" aria-label="Menü ein- oder ausklappen">
+<label for="menue-an" class="menue-btn"><span class="menue-balken" aria-hidden="true"></span>Menü</label>
+<ul>{nav}</ul></nav>
 </div>
 </header>
 <main id="inhalt" class="wrap">
@@ -116,31 +204,39 @@ def page(path, title, desc, body, out=ROOT, aktiv=None):
 <div class="wrap">
 <p><strong>{E(SITE["marke"])}</strong> – {E(SITE["claim"])}</p>
 <p>Betrieben von {E(B["name"])} · {E(B["firma"])}. Der Verein „{E(SITE["verein"]["name"])}“ ist eigenständig und parteipolitisch neutral.</p>
-<p><a href="{pre}impressum.html">Impressum</a> · <a href="{pre}datenschutz.html">Datenschutz</a> · Stand: {E(SITE["stand"])}</p>
+<p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="bildnachweise.html">Bildnachweise</a> · <a href="standpunkte.html">Standpunkte (gekennzeichneter Partei-Bereich)</a> · Stand: {E(SITE["stand"])}</p>
 <p class="small">Ohne Tracker, ohne Cookies, ohne Fremd-Schriften. Keine Rechts- oder Steuerberatung.</p>
 </div>
 </footer>
 </body>
 </html>
 """
+    tiefe = path.count("/")
+    if tiefe:
+        doc = re.sub(r'\b(href|src)="(?!https?:|mailto:|data:|#|/)', lambda m: f'{m.group(1)}="' + "../" * tiefe, doc)
     ziel = os.path.join(out, path)
     os.makedirs(os.path.dirname(ziel), exist_ok=True)
     with open(ziel, "w", encoding="utf-8") as f:
         f.write(doc)
 
 
-def card(t, body, extra=""):
-    return f'<article class="card{extra}"><h3>{t}</h3>{body}</article>'
+def card(ico, t, body, extra=""):
+    """Karte mit Deko-Icon als visuellem Anker (UX-KONZEPT: Bild vor Text)."""
+    return f'<article class="card{extra}"><span class="card-icon">{icon(ico)}</span><h3>{t}</h3>{body}</article>'
 
 
-# ------------------------------------------------------- Termine-Helfer
+def datum_de(iso):
+    j, m, t = iso.split("-")
+    return f"{t}.{m}.{j}"
+
+
+# ------------------------------------------------------- Termine-Helfer (E12)
 WOCHENTAG = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
 
 
-def datum_text(t, lang=False):
+def datum_text(t):
     d = datetime.date.fromisoformat(t["datum"])
-    tag = WOCHENTAG[d.weekday()]
-    return tag + " " + d.strftime("%d.%m.%Y") + ", " + t["zeit"] + " Uhr"
+    return WOCHENTAG[d.weekday()] + " " + d.strftime("%d.%m.%Y") + ", " + t["zeit"] + " Uhr"
 
 
 def naechster(pred):
@@ -191,29 +287,80 @@ def kalender_ticker():
             f'<ol class="ticker-list">{li}</ol></section>')
 
 
+def hero_svg():
+    """Eigene Illustration (Nachthimmel, Nordstern, stilisierte Skyline am Fluss) – reine Deko, aria-hidden.
+    Keine erkennbaren Einzelgebäude, keine Fremdvorlage; Herkunft: bildnachweise.html (eigene Zeichnung)."""
+    # (x, Breite, Höhe) der Türme; vorne dunkler, hinten heller; Grundlinie y = 270
+    hinten = [(14, 34, 96), (60, 28, 128), (98, 40, 80), (150, 30, 150), (196, 36, 110), (246, 32, 140),
+              (292, 42, 90), (340, 30, 120), (384, 38, 100), (430, 36, 70)]
+    vorn = [(0, 40, 70), (34, 30, 104), (72, 46, 150), (126, 28, 90), (164, 38, 190), (212, 32, 120),
+            (252, 44, 170), (304, 30, 100), (342, 40, 140), (390, 30, 90), (426, 54, 120)]
+    y0 = 270
+
+    def tuerme(liste, cls):
+        return "".join(f'<rect class="{cls}" x="{x}" y="{y0 - h}" width="{w}" height="{h}"/>' for x, w, h in liste)
+
+    fenster = "".join(f'<rect class="hero-fenster" x="{x}" y="{y0 - h}" width="{w}" height="{h}"/>'
+                      for x, w, h in vorn if h >= 100)
+    spitzen = ('<path class="hero-vorn" d="M176 80 L183 40 L190 80 Z"/>'      # Dach des höchsten Turms
+               '<path class="hero-vorn" d="M266 100 L270 62 L274 100 Z"/>'    # Antenne/Spitze
+               '<rect class="hero-vorn" x="269" y="46" width="2" height="22"/>')
+    sterne = "".join(f'<circle class="hero-funke" style="animation-delay:{d}s" cx="{x}" cy="{y}" r="{r}"/>'
+                     for x, y, r, d in [(40, 36, 1.4, 0), (92, 70, 1, 1.2), (140, 28, 1.2, 2.1), (210, 52, 1, .6),
+                                        (258, 24, 1.3, 1.7), (310, 80, 1, 2.6), (366, 22, 1.1, .9), (424, 64, 1.4, 1.9),
+                                        (456, 30, 1, 3.1), (64, 120, 1, 2.4)]) 
+    fluss = "".join(f'<rect class="hero-glanz" x="{x}" y="{y}" width="{w}" height="1.6" rx=".8"/>'
+                    for x, y, w in [(60, 282, 70), (170, 292, 110), (300, 284, 80), (120, 302, 60), (250, 310, 120), (30, 318, 90)])
+    stern = ('<g transform="translate(332 34) scale(2.1)">'
+             '<path class="hero-halo" d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/>'
+             '<path class="hero-stern" d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"/>'
+             '<path class="hero-stern-innen" d="M32 14 L35 29 L50 32 L35 35 L32 50 L29 35 L14 32 L29 29 Z"/></g>')
+    return ('<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 480 340" focusable="false" aria-hidden="true">'
+            '<defs>'
+            '<linearGradient id="hero-himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070f23"/>'
+            '<stop offset=".7" stop-color="#16306a"/><stop offset="1" stop-color="#24498f"/></linearGradient>'
+            '<radialGradient id="hero-leuchten" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E0B84A" stop-opacity=".55"/>'
+            '<stop offset="1" stop-color="#E0B84A" stop-opacity="0"/></radialGradient>'
+            '<linearGradient id="hero-wasser" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16306a"/>'
+            '<stop offset="1" stop-color="#0b1a3a"/></linearGradient>'
+            '<pattern id="hero-raster" width="9" height="12" patternUnits="userSpaceOnUse">'
+            '<rect x="2.5" y="3" width="3" height="4" fill="#F4D98A"/></pattern>'
+            '</defs>'
+            '<rect width="480" height="340" fill="url(#hero-himmel)"/>'
+            f'<circle cx="364" cy="68" r="86" fill="url(#hero-leuchten)"/>{sterne}{stern}'
+            f'<g>{tuerme(hinten, "hero-hinten")}{tuerme(vorn, "hero-vorn")}{spitzen}{fenster}</g>'
+            f'<rect x="0" y="{y0}" width="480" height="{340 - y0}" fill="url(#hero-wasser)"/>{fluss}'
+            '</svg></div>')
+
+
 # ------------------------------------------------------------------ Start
-pillars = "".join(card(f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for h, t, d in [
-    ("nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
-    ("frankfurt.html", "Frankfurt verstehen", "Wie Stadt und Ortsbeirat funktionieren, wo man was meldet und was Bürgerinnen und Bürger wirklich brauchen."),
-    ("mitmachen.html", "Melden & bewegen", "Mängel direkt an die Stadt melden. Anliegen bündeln – Ziel: 220 Unterstützer je Projekt."),
-    ("dienste.html", "Vermittlung", "Personal, Hotel, Taxi, Massage, Nähen: Wir vermitteln an Menschen und Betriebe, die wir kennen."),
+pillars = "".join(card(i, f'<a href="{h}">{t}</a>', f"<p>{d}</p>") for i, h, t, d in [
+    ("hand-heart", "nachbarschaft.html", "Nachbarschaftshilfe", "Einkaufen, Begleitung, Gesellschaft, kleine Reparaturen – für ältere Menschen im Frankfurter Norden. Ein Verein in Gründung."),
+    ("landmark", "frankfurt.html", "Frankfurt verstehen", "Wie Stadt und Ortsbeirat funktionieren, wo man was meldet und was Bürgerinnen und Bürger wirklich brauchen."),
+    ("megaphone", "mitmachen.html", "Melden & bewegen", "Mängel direkt an die Stadt melden. Anliegen bündeln – Ziel: 220 Unterstützer je Projekt."),
+    ("handshake", "dienste.html", "Vermittlung", "Personal, Hotel, Taxi, Massage, Nähen: Wir vermitteln an Menschen und Betriebe, die wir kennen."),
 ])
 page("index.html", "Start",
      "Nordstern Frankfurt: Nachbarschaftshilfe, Stadt-Infos, Mängelmelder und Petitionen für den Frankfurter Norden – plus persönliche Vermittlung.",
      f"""
 {kalender_ticker()}
 <section class="hero">
+<div class="hero-text">
 <p class="eyebrow">Frankfurter Norden · Preungesheim und Nachbarschaft</p>
 <h1>Ein Stern für den Norden.<br><span>Damit niemand allein durch Frankfurt muss.</span></h1>
 <p class="lead">Nordstern verbindet Nachbarschaftshilfe, verständliche Infos über unsere Stadt und kurze Wege zu Menschen, die anpacken.</p>
 <div class="buttons"><a class="btn btn-primary" href="nachbarschaft.html">Hilfe &amp; Mitmachen</a><a class="btn" href="mitmachen.html">Mangel melden</a></div>
+</div>
+{hero_svg()}
 </section>
-<section aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
-<section aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
-{card(link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
-{card(link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
-{card(f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
+{kacheln(["einwohner_preungesheim", "einwohner_frankfurt", "entlastungsbetrag"])}
+<section class="band" aria-labelledby="h-saeulen"><h2 id="h-saeulen">Vier Wege, ein Ziel</h2><div class="grid grid-2">{pillars}</div></section>
+<section class="band band-hell" aria-labelledby="h-familie"><h2 id="h-familie">Die Nordstern-Familie</h2><div class="grid">
+{card("languages", link("bangla_hilfe"), "<p>Visum, FSJ und Bundesfreiwilligendienst – erklärt auf Bangla und Deutsch.</p>")}
+{card("route", link("wege_nach_frankfurt"), "<p>Geschichten von Menschen aus Eritrea, Thailand und Laos, die in Frankfurt angekommen sind.</p>")}
+{card("users", f'<a href="{E(SITE["verein"]["website"])}" rel="noopener">Nachbarschaftshilfe Preungesheim</a>', "<p>Die Initiative für praktische Alltagshilfe – eigenständig und parteipolitisch neutral.</p>")}
 </div></section>
+<div class="band">{timeline()}</div>
 <section class="callout"><h2>So arbeiten wir</h2>
 <ul><li><strong>Ehrlich:</strong> Was noch in Planung ist, steht auch so da.</li>
 <li><strong>Getrennt:</strong> Ehrenamt, Politik und Geschäft laufen in eigenen Bereichen mit eigener Verantwortung.</li>
@@ -227,31 +374,80 @@ page("nachbarschaft.html", "Nachbarschaftshilfe",
 <h1>Nachbarschaftshilfe im Frankfurter Norden</h1>
 <p class="lead">Wir ersetzen niemanden. Wir übernehmen die praktische Hilfe zu Hause, die es in Preungesheim noch nicht gibt.</p>
 <p><span class="badge">Verein in Gründung</span></p>
+{kacheln(["einwohner_preungesheim", "entlastungsbetrag"])}
+<h2>Auf einen Blick</h2>
 <div class="grid">
-{card("Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
-{card("Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
+{card("shopping-basket", "Was geplant ist", "<ul><li>Einkaufen und Botengänge</li><li>Begleitung zu Arzt und Behörde</li><li>Spaziergang und Gesellschaft</li><li>Hilfe mit Post und Handy</li><li>Kleine Handwerksarbeiten (keine Strom-, Gas-, Wasserinstallation)</li></ul>")}
+{card("user-search", "Wen wir suchen", "<ul><li><strong>Eine Fachkraft</strong> (Pflege, Sozialarbeit, Pädagogik) für wenige Stunden im Monat – auch im Ruhestand</li><li>Gründungsmitglieder (sieben werden gebraucht)</li><li>Helfende aus der Nachbarschaft</li></ul>")}
 </div>
+{steps("nachbarschaft")}
 <p>Alle Details, Fachkraft-Ausschreibung und Blog: <a href="{E(SITE["verein"]["website"])}" rel="noopener">Website der Initiative</a>.</p>
 <div class="callout"><h2>Warum hier getrennt?</h2><p>Der Verein soll gemeinnützig werden. Gemeinnützige Vereine dürfen keine Partei unterstützen und kein Geschäft für Dritte machen. Darum hat der Verein eine eigene Seite, und Nordstern verlinkt nur dorthin.</p></div>
 """)
 
 # -------------------------------------------------------------- Frankfurt
-blog_hinweis = ('<p><a class="btn" href="frankfurt/index.html">Alle Beiträge aus dem Frankfurter Norden</a></p>'
-                if VEROEFF else "") + ("\n" if VEROEFF else "")
+SB = load("schaubild.json")
+
+
+def schaubild():
+    """Schaubild „Wer entscheidet?“ als Inline-SVG (hochkant, lesbar ab 390 px) + Tabelle als Text-Alternative (Aufgabe 5)."""
+    k, pf = SB["kasten"], SB["pfeile"]
+
+    def kasten(x, y, w, zeilen, cls=""):
+        h = 30 + 20 * len(zeilen)
+        t = "".join(f'<text x="{x + 14}" y="{y + 30 + 20 * i}" class="{("sb-titel sb-lang" if len(z) > 20 else "sb-titel") if i == 0 else "sb-text"}">{E(z)}</text>'
+                    for i, z in enumerate(zeilen))
+        return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" class="sb-box {cls}"/>{t}'
+
+    def pfeil(x, y1, y2, label, lx, ly, drehen=False):
+        t = "".join(f'<tspan x="{lx}" dy="{0 if i == 0 else 16}">{E(z)}</tspan>' for i, z in enumerate(label))
+        dreh = f' transform="rotate(-90 {lx} {ly})"' if drehen else ""
+        return (f'<line x1="{x}" y1="{y1}" x2="{x}" y2="{y2 + 8}" class="sb-linie" marker-end="url(#sb-spitze)"/>'
+                f'<text x="{lx}" y="{ly}" class="sb-label"{dreh}>{t}</text>')
+
+    svg = ('<svg class="schaubild" viewBox="0 0 360 660" role="img" aria-label="Schaubild: Die Bürgerinnen und Bürger wählen '
+           'Stadtverordnetenversammlung, Ortsbeiräte und Oberbürgermeister/in. Die Stadtverordnetenversammlung wählt die Stadträte '
+           'und kontrolliert den Magistrat. Die Ortsbeiräte machen Vorschläge. Details in der Tabelle darunter.">'
+           '<defs><marker id="sb-spitze" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
+           '<path d="M0 0 L10 5 L0 10 z" class="sb-spitze"/></marker></defs>'
+           + kasten(20, 20, 320, k["magistrat"], "sb-oben")
+           + kasten(60, 200, 280, k["stvv"])
+           + kasten(185, 380, 155, k["ortsbeiraete"])
+           + kasten(20, 540, 320, k["buerger"], "sb-unten")
+           + pfeil(210, 200, 130, pf["stvv_magistrat"], 218, 158)
+           + pfeil(265, 380, 310, pf["ortsbeirat_stvv"], 273, 352)
+           + pfeil(125, 540, 310, pf["buerger_stvv"], 133, 440)
+           + pfeil(265, 540, 490, pf["buerger_ortsbeirat"], 273, 520)
+           + pfeil(40, 540, 130, pf["buerger_ob"], 33, 400, drehen=True)
+           + '</svg>')
+    zeilen = "".join(f'<tr><th scope="row">{E(r["organ"])}</th><td>{E(r["wer"])}</td><td>{E(r["wahl"])}</td>'
+                     f'<td>{E(r["aufgabe"])}</td><td>{E(r["beleg"])}</td></tr>' for r in SB["tabelle"])
+    quellen = " · ".join(link(q) for q in SB["quellen"])
+    return (f'<section aria-labelledby="h-schaubild"><h2 id="h-schaubild">{E(SB["titel"])}</h2>'
+            f'<figure class="schaubild-rahmen">{svg}<figcaption class="small">Vereinfachte Darstellung. {E(SB["stand"])}.</figcaption></figure>'
+            '<div class="table-wrap"><table><caption class="small">Das Schaubild als Tabelle</caption>'
+            '<thead><tr><th scope="col">Organ</th><th scope="col">Wer gehört dazu</th><th scope="col">Wie gewählt</th>'
+            f'<th scope="col">Aufgabe</th><th scope="col">Beleg</th></tr></thead><tbody>{zeilen}</tbody></table></div>'
+            f'<p class="small">Quellen: {quellen}</p></section>')
+
+
 page("frankfurt.html", "Frankfurt-Info",
      "Frankfurt einfach erklärt: Stadtverordnete, Ortsbeiräte, Bürgerbeteiligung und wo Bürger welche Hilfe finden.",
      f"""
 <h1>Frankfurt verstehen</h1>
 <p class="lead">Wer entscheidet was in unserer Stadt – und wo kann ich mitreden?</p>
+{schaubild()}
+<h2>Mitreden</h2>
 <div class="grid">
-{card("Stadtverordnetenversammlung", "<p>Das Parlament der Stadt. Es beschließt Haushalt, Satzungen und große Vorhaben. Gewählt bei der Kommunalwahl, zuletzt am 15. März 2026, für fünf Jahre.</p>")}
-{card("Ortsbeiräte", "<p>Frankfurt hat 16 Ortsbeiräte. Sie beraten über alles, was den eigenen Stadtteil betrifft – Verkehr, Spielplätze, Grünflächen. Preungesheim gehört zum Ortsbezirk 10. Die Sitzungen sind öffentlich, Bürgerinnen und Bürger dürfen in der Bürgerfragestunde sprechen.</p>")}
-{card("Beteiligung online", f"<p>{link('ffm_start')}: Mängel melden, Ideen einreichen, Vorhaben unterstützen.</p>")}
+{card("map-pinned", "Ortsbezirk 10", f"<p>{E(SB['ortsbezirk10']['text'])}</p><p class='small'>Quelle: {link('stvv_broschuere')}</p>")}
+{card("users", "Bürgerfragestunde", f"<p>In der Bürgerfragestunde einer Ortsbeiratssitzung können Bürgerinnen und Bürger Fragen, Wünsche und Beschwerden direkt vorbringen.</p><p class='small'>Quelle: {link('stvv_broschuere')}</p>")}
+{card("laptop", "Beteiligung online", f"<p>{link('ffm_start')}: Mängel melden, Ideen einreichen, Vorhaben unterstützen.</p>")}
 </div>
 <h2>Was Bürgerinnen und Bürger brauchen</h2>
 <p>Unsere Themen, über die wir hier regelmäßig schreiben:</p>
 <ul class="topics"><li>Bezahlbares Wohnen und Hilfe bei Wohnungssuche</li><li>Behördengänge verständlich erklärt – auch auf Bengalisch, Tigrinya, Thai und Lao (siehe {link("bangla_hilfe")} und {link("wege_nach_frankfurt")})</li><li>Sichere Wege für Ältere, Kinder und Rollstuhl</li><li>Pflege zu Hause und Entlastung für Angehörige</li><li>Arbeit finden im Frankfurter Norden</li></ul>
-{blog_hinweis}<p class="small">Wir schreiben parteiunabhängig. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a> und sind dort als solche gekennzeichnet.</p>
+{'<p><a class="btn" href="ortsbezirke/index.html#h-blog">Zum Blog: Beiträge aus dem Frankfurter Norden</a></p>' if VEROEFF else ''}
+<p class="small">Wir schreiben parteiunabhängig. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a> und sind dort als solche gekennzeichnet.</p>
 """)
 
 # ------------------------------------------------- Mängel & Petitionen
@@ -259,7 +455,7 @@ pets = [p for p in PET["eintraege"] if p["veroeffentlicht"]]
 ziel = PET["ziel_unterstuetzer"]
 if pets:
     pet_html = '<div class="grid">' + "".join(card(
-        E(p["titel"]),
+        "megaphone", E(p["titel"]),
         f'<p>{E(p["anliegen"])}</p><p class="small">{E(p["stadtteil"])}</p>'
         f'<div class="meter" role="img" aria-label="{p["unterstuetzer"]} von {ziel} Unterstützern">'
         f'<span style="width:{min(100, round(p["unterstuetzer"] * 100 / ziel))}%"></span></div>'
@@ -272,33 +468,171 @@ page("mitmachen.html", "Melden & Petitionen",
      f"Mängel in Frankfurt direkt an die Stadt melden und Anliegen bündeln – Ziel {ziel} Unterstützer je Projekt.",
      f"""
 <h1>Melden. Bündeln. Bewegen.</h1>
-<h2>1 · Mangel sehen – direkt melden</h2>
-<p>Kaputte Laterne, Schlagloch, wilder Müll: Melden Sie es dort, wo die Stadt es bearbeitet – beim offiziellen {link('maengelmelder')}. Ein eigener Melder auf dieser Seite würde nur Umwege erzeugen.</p>
-<h2>2 · Anliegen bündeln – {ziel} Stimmen</h2>
+{steps("melden")}
+<h2 id="melden">1 · Mangel sehen – direkt melden</h2>
+<p>Kaputte Laterne, Schlagloch, wilder Müll? Melden Sie es direkt beim offiziellen {link('maengelmelder')}.</p>
+<h2 id="buendeln">2 · Anliegen bündeln – {ziel} Stimmen</h2>
 <p>Größere Wünsche brauchen viele Unterstützer. Wir helfen beim Formulieren, sammeln im Stadtteil und reichen es auf der {link('ideenplattform')} oder als Petition ein. Unser Ziel je Projekt: <strong>{ziel} Unterstützerinnen und Unterstützer</strong>.</p>
 {pet_html}
-<h2>3 · Selbst ein Anliegen starten</h2>
-<ol><li>Problem in zwei Sätzen beschreiben – wo, was, für wen.</li><li>Uns schreiben; wir prüfen, ob Stadt, Ortsbeirat oder Land zuständig ist.</li><li>Gemeinsam Text und Fotos fertig machen und einreichen.</li></ol>
+{steps("anliegen", "3 · Selbst ein Anliegen starten")}
 {kontakt_zeile()}
 <p class="small">Unterschriften sammeln wir nicht auf dieser Seite – Ihre politische Meinung bleibt bei der Plattform, auf der Sie unterschreiben.</p>
 """)
 
 # ---------------------------------------------------------- Vermittlung
-dienst_html = "".join(card(E(d["titel"]), f'<p>{E(d["kurz"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["punkte"]) + "</ul>") for d in DIENSTE)
+dienst_html = "".join(card(d["icon"], E(d["titel"]), f'<p>{E(d["kurz"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["punkte"]) + "</ul>") for d in DIENSTE)
 page("dienste.html", "Vermittlung",
      "Persönliche Vermittlung in Frankfurt: Personal, Hotelzimmer, Taxi, Massage und Nähen – im kleinen Kreis.",
      f"""
 <h1>Vermittlung im kleinen Kreis</h1>
 <p class="lead">Kein Portal, kein Algorithmus. Wir kennen die Menschen, die wir empfehlen.</p>
+<h2>Was wir vermitteln</h2>
 <div class="grid">{dienst_html}</div>
 {kontakt_zeile()}
 <p class="small">Gewerbliches Angebot von {E(B["firma"])}. Nicht Teil des Vereins. Wir befördern, beherbergen und behandeln nicht selbst, sondern vermitteln an Fachbetriebe und Fachkräfte.</p>
 """)
 
+# ------------------------------------------- Blog (E10) + Ortsbezirke & Blog (E11, E12, E21)
+RUBRIKEN = {r["id"]: r for r in BLOG["rubriken"]}
+
+
+def beitrag_html(b):
+    """Beitrag nach E10. Optional im Kopf: rubrik (E21), bild (Titelbild mit Nachweis, E14),
+    links (= Quellenliste), beschreibung."""
+    m = b["meta"]
+    teile = [f'<a href="{obr_seite(m["ortsbezirk"])}">Ortsbezirk {E(m["ortsbezirk"])}</a>']
+    if m.get("rubrik") in RUBRIKEN:
+        teile.insert(0, f'<a href="ortsbezirke/index.html#{E(m["rubrik"])}">{E(RUBRIKEN[m["rubrik"]]["titel"])}</a>')
+    if isinstance(m.get("stadtteile"), list):
+        teile.append(E(", ".join(m["stadtteile"])))
+    minuten = max(1, round(len(re.findall(r"\w+", b["body"])) / 200))
+    kopf = f'<p class="small">{datum_de(m["datum"])} · {" · ".join(teile)} · {minuten} Min. Lesezeit</p>'
+    if m.get("bild"):
+        kopf += "\n" + bild(m["bild"], "titelbild")
+    rumpf = beitraege.markdown(b["body"], link, bild)
+    # Kopfzeile und Titelbild direkt unter die h1 (die h1 steht im Beitragstext)
+    rumpf = rumpf.replace("</h1>", "</h1>\n" + kopf, 1) if "</h1>" in rumpf else kopf + "\n" + rumpf
+    quellen = ""
+    if isinstance(m.get("links"), list) and m["links"]:
+        li = "".join("<li>" + link(k) + (f' · abgerufen am {datum_de(LINKS[k]["bestaetigt"])}' if LINKS[k].get("bestaetigt") else "")
+                     + "</li>" for k in m["links"])
+        quellen = f'<section aria-labelledby="h-quellen"><h2 id="h-quellen">Quellen</h2><ul>{li}</ul></section>'
+    return (f'<article class="beitrag">\n{rumpf}\n{quellen}\n</article>\n'
+            f'<p class="small">Information, keine Rechtsberatung. Stand: {datum_de(m["datum"])}.</p>\n'
+            '<p><a href="frankfurt/index.html">Alle Beiträge</a> · <a href="ortsbezirke/index.html">Ortsbezirke &amp; Blog</a></p>')
+
+
+def beitrag_seite(b, out=ROOT):
+    m = b["meta"]
+    page("frankfurt/" + m["slug"] + ".html", m["titel"], m.get("beschreibung") or m["titel"],
+         beitrag_html(b), aktiv="ortsbezirke/index.html", out=out)
+
+
+def beitrag_karte(b):
+    m = b["meta"]
+    return card("newspaper", f'<a href="frankfurt/{E(m["slug"])}.html">{E(m["titel"])}</a>',
+                f'<p class="small">{datum_de(m["datum"])}' + (f' · {E(m["beschreibung"])}' if m.get("beschreibung") else "") + "</p>")
+
+
+BLOG_ORDNER = os.path.join(ROOT, "frankfurt")
+soll = {"index.html"} if VEROEFF else set()
+for b in VEROEFF:
+    beitrag_seite(b)
+    soll.add(b["meta"]["slug"] + ".html")
+if VEROEFF:
+    page("frankfurt/index.html", "Alle Beiträge",
+         "Neutrale Beiträge über Stadt, Ortsbeirat 10 und Alltag im Frankfurter Norden.",
+         f'<h1>Alle Beiträge</h1><h2>Neueste zuerst</h2><div class="grid">{"".join(beitrag_karte(b) for b in VEROEFF)}</div>'
+         '<p><a href="ortsbezirke/index.html">Zu den Rubriken und Ortsbezirken</a></p>', aktiv="ortsbezirke/index.html")
+# Veraltete Blog-Seiten entfernen (z. B. Beitrag zurück auf "entwurf")
+if os.path.isdir(BLOG_ORDNER):
+    for alt in glob.glob(os.path.join(BLOG_ORDNER, "*.html")):
+        if os.path.basename(alt) not in soll:
+            os.remove(alt)
+    if not os.listdir(BLOG_ORDNER):
+        os.rmdir(BLOG_ORDNER)
+
+
+def rubriken_html():
+    """Blog-Rubriken mit Sprungmarken-Chips (ohne JS), veröffentlichten Beiträgen und geplanten Themen als Fragen (E21)."""
+    rub = BLOG["rubriken"]
+    chips = "".join(f'<li><a href="#{E(r["id"])}">{icon(r["icon"])}<span>{E(r["titel"])}</span></a></li>' for r in rub)
+    teile = [f'<nav aria-label="Rubriken"><ul class="chips">{chips}</ul></nav>']
+    for r in rub:
+        posts = [b for b in VEROEFF if b["meta"].get("rubrik") == r["id"]]
+        liste = (f'<div class="grid">{"".join(beitrag_karte(b) for b in posts)}</div>' if posts
+                 else '<p class="notice">Erster Beitrag kommt bald.</p>')
+        geplant = "".join(f'<li><span class="status">geplant</span> {E(g)}</li>' for g in r["geplant"])
+        teile.append(f'<section class="rubrik" aria-labelledby="{E(r["id"])}"><h3 id="{E(r["id"])}"><span class="card-icon">{icon(r["icon"])}</span>{E(r["titel"])}</h3>'
+                     f'<p>{E(r["kurz"])}</p><p class="small">{E(r["umfasst"])}</p>{liste}'
+                     + (f'<h4>Geplante Themen</h4><ul class="geplant">{geplant}</ul>' if geplant else "") + '</section>')
+    return "\n".join(teile)
+
+
+def obr_karte(o):
+    t = naechster(lambda x: x["ortsbezirk"] == o["nr"])
+    nxt = f'<p>Nächste Sitzung: <strong>{datum_text(t)}</strong></p>' if t else "<p>Keine geplanten Sitzungen im Kalender.</p>"
+    status = '<span class="badge">betreut</span>' if o["status"] == "aktiv" else '<span class="small">noch ohne Betreuung</span>'
+    return card("map-pinned", f'<a href="{obr_seite(o["nr"])}">{o["nr"]} · {E(o["name"])}</a>',
+                f'<p class="small">{E(", ".join(o["stadtteile"]))}</p>{nxt}{status}')
+
+
+page("ortsbezirke/index.html", "Ortsbezirke & Blog",
+     "Blog aus dem Frankfurter Norden und alle 16 Frankfurter Ortsbezirke: Rubriken, nächste Ortsbeiratssitzungen, Neues aus dem Stadtteil.",
+     f"""<h1>Ortsbezirke &amp; Blog</h1>
+<p class="lead">Neues aus dem Frankfurter Norden, Hintergründe aus der Stadt – und die nächsten Sitzungen aller 16 Ortsbeiräte.</p>
+<section aria-labelledby="h-blog"><h2 id="h-blog">Blog</h2>
+{rubriken_html()}
+{'<p><a class="btn" href="frankfurt/index.html">Alle Beiträge</a></p>' if VEROEFF else ''}
+<p class="small">Wir schreiben parteiunabhängig und mit Primärquellen. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a>.</p>
+</section>
+<section aria-labelledby="h-lernen"><h2 id="h-lernen">Lernen</h2>
+<p>Kostenlose Lernseiten für Deutsch, mit Erklärungen in der Muttersprache – fürs Handy, ohne Anmeldung.</p>
+<p><a class="btn" href="lernen/index.html">Zu den Lernseiten</a></p>
+</section>
+<section aria-labelledby="h-obr"><h2 id="h-obr">Die 16 Ortsbezirke</h2>
+<p>Frankfurt hat 16 Ortsbeiräte. Hier stehen die nächsten Sitzungen und Neues aus jedem Bezirk.</p>
+<div class="grid">{"".join(obr_karte(o) for o in ORTSBEZIRKE)}</div>
+{termin_hinweis()}
+</section>
+<section aria-labelledby="h-stadtweit"><h2 id="h-stadtweit">Stadtweit</h2>
+<ul>{"".join(f'<li>{lab}: {datum_text(t)}</li>' for lab, t in [
+    ("Stadtverordnetenversammlung", naechster(lambda x: x["typ"] == "stvv")),
+    ("KAV – Kommunale Ausländerinnen- und Ausländervertretung", naechster(lambda x: x["typ"] == "kav"))] if t)}</ul>
+<p class="small">Stadtteilzuordnung wird vor dem offiziellen Start noch einmal mit der Stadt abgeglichen.</p>
+</section>
+""", aktiv="ortsbezirke/index.html")
+
+for o in ORTSBEZIRKE:
+    nr = o["nr"]
+    news = [b for b in VEROEFF if str(b["meta"].get("ortsbezirk")) == str(nr)]
+    if news:
+        news_html = '<div class="grid">' + "".join(beitrag_karte(b) for b in news) + "</div>"
+    elif o["status"] == "aktiv":
+        news_html = '<p class="notice">Der nächste Beitrag aus diesem Ortsbezirk ist in Arbeit.</p>'
+    else:
+        news_html = ('<p class="notice">Für diesen Ortsbezirk suchen wir noch jemanden, der ihn betreut – '
+                     'erst dann erscheinen hier eigene Beiträge.</p>')
+    sitzungen = [t for t in KOMMEND if t["ortsbezirk"] == nr][:6]
+    termin_html = ('<ol class="termine">' + "".join(f"<li>{datum_text(t)}</li>" for t in sitzungen) + "</ol>"
+                   if sitzungen else "<p>Keine geplanten Sitzungen im Kalender.</p>")
+    page(obr_seite(nr), f"Ortsbezirk {nr} – {o['name']}",
+         f"Ortsbezirk {nr} ({', '.join(o['stadtteile'])}): nächste Ortsbeiratssitzungen und Neues aus dem Stadtteil.",
+         f"""<p class="eyebrow">Ortsbezirk {nr}</p>
+<h1>{E(o["name"])}</h1>
+<p class="lead">{E(", ".join(o["stadtteile"]))}</p>
+<section aria-labelledby="h-news"><h2 id="h-news">Neues aus dem Ortsbezirk</h2>{news_html}</section>
+<section aria-labelledby="h-termine"><h2 id="h-termine">Nächste Sitzungen des Ortsbeirats {nr}</h2>
+{termin_html}
+{termin_hinweis()}
+<p>Die Sitzungen sind öffentlich. In der Bürgerfragestunde können Anwohnerinnen und Anwohner Fragen stellen.</p></section>
+<p><a class="btn" href="ortsbezirke/index.html">Alle 16 Ortsbezirke</a></p>
+""", aktiv="ortsbezirke/index.html")
+
 # ---------------------------------------------------------- Standpunkte
 frei = [s for s in STAND["eintraege"] if s.get("freigegeben")]
 if frei:
-    sp = '<div class="grid">' + "".join(card(E(s["titel"]), f'<p>{E(s["teaser"])}</p><p class="small">Quelle: {E(s["quelle"])}</p>') for s in frei) + "</div>"
+    sp = '<div class="grid">' + "".join(card("flag", E(s["titel"]), f'<p>{E(s["teaser"])}</p><p class="small">Quelle: {E(s["quelle"])}</p>') for s in frei) + "</div>"
 else:
     sp = f'<p class="notice">{len(STAND["eintraege"])} Positionen sind vorbereitet und erscheinen nach Freigabe durch den Vorstand der {E(STAND["herausgeber"])}.</p>'
 page("standpunkte.html", "Standpunkte",
@@ -316,7 +650,7 @@ def pakete_html():
     ps = [p for p in ZAHLUNG["pakete"] if p["aktiv"] and p["preis"] and p["zahl_link"]]
     if not ps:
         return ""
-    return '<h2>Pakete</h2><div class="grid">' + "".join(card(E(p["titel"]),
+    return '<h2>Pakete</h2><div class="grid">' + "".join(card("package", E(p["titel"]),
         f'<p class="small">Für {E(p["fuer"])}</p><ul>' + "".join(f"<li>{E(x)}</li>" for x in p["leistung"])
         + f'</ul><p><strong>{E(p["preis"])}</strong></p><a class="btn btn-primary" href="{E(p["zahl_link"])}" rel="noopener">Jetzt buchen</a>')
         for p in ps) + '</div><p class="small">Die Zahlung läuft über eine gesicherte Zahlungsseite unseres Zahlungsdienstleisters. Wir sehen keine Kartendaten.</p>'
@@ -327,10 +661,11 @@ page("agentur.html", "Für Vereine & Firmen",
      f"""
 <h1>Diese Seite gibt es auch für Ihren Stadtteil</h1>
 <p class="lead">Nordstern ist unser Schaufenster. {E(B["firma"])} baut so etwas für Vereine, Initiativen und kleine Betriebe – schnell, barrierearm, ohne Tracker.</p>
+<h2>Was wir anbieten</h2>
 <div class="grid">
-{card("Stadtteil-Seite", "<p>Info-Seite für Verein oder Initiative: Inhalte aus einer Datei, Pflege ohne Programmierkenntnisse, Hosting fast kostenlos.</p>")}
-{card("Texte, die ankommen", "<p>Websites, Anträge, Flyer, Bewerbungen und politische Texte – klar, prüfbar, in einfacher Sprache auf Wunsch.</p>")}
-{card("Digitale Werkzeuge", "<p>Koordinations-Apps für Nachbarschaftshilfe, Hotel-Werkzeuge, mehrsprachige Info-Portale. Rechte bleiben klar geregelt.</p>")}
+{card("layout-template", "Stadtteil-Seite", "<p>Info-Seite für Verein oder Initiative: Inhalte aus einer Datei, Pflege ohne Programmierkenntnisse, Hosting fast kostenlos.</p>")}
+{card("pen-line", "Texte, die ankommen", "<p>Websites, Anträge, Flyer, Bewerbungen und politische Texte – klar, prüfbar, in einfacher Sprache auf Wunsch.</p>")}
+{card("wrench", "Digitale Werkzeuge", "<p>Koordinations-Apps für Nachbarschaftshilfe, Hotel-Werkzeuge, mehrsprachige Info-Portale. Rechte bleiben klar geregelt.</p>")}
 </div>
 {pakete_html()}
 <h2>Referenzen aus eigener Arbeit</h2>
@@ -361,111 +696,47 @@ page("datenschutz.html", "Datenschutz", "Datenschutzerklärung von Nordstern Fra
 <h2>Ihre Rechte</h2><p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit.</p>
 """)
 
+if BILDER:
+    zeilen = "".join(
+        f'<tr><td><a href="{E(d)}">{E(b["titel"])}</a></td><td>{E(b["autor"])}</td>'
+        f'<td><a href="{E(b["lizenz_url"])}" rel="noopener license">{E(b["lizenz"])}</a></td>'
+        f'<td><a href="{E(b["quelle_url"])}" rel="noopener">Original</a></td>'
+        f'<td>{E(b["geaendert"])}</td><td>{E(b["geprueft"])}</td></tr>'
+        for d, b in sorted(BILDER.items()))
+    bn = ('<div class="table-wrap"><table><caption class="small">Alle Bilder und Grafiken dieser Website</caption>'
+          '<thead><tr><th scope="col">Titel</th><th scope="col">Urheber</th><th scope="col">Lizenz</th>'
+          '<th scope="col">Quelle</th><th scope="col">Änderungen</th><th scope="col">Lizenz geprüft</th></tr></thead>'
+          f'<tbody>{zeilen}</tbody></table></div>')
+else:
+    bn = '<p class="notice">Derzeit verwendet diese Website keine Fotos oder fremden Grafiken. Stern-Symbol und Gestaltung sind eigene Arbeit.</p>'
+page("bildnachweise.html", "Bildnachweise", "Urheber, Lizenzen und Quellen aller Bilder auf Nordstern Frankfurt.", f"""
+<h1>Bildnachweise</h1>
+<p class="lead">Jedes Bild steht hier mit Urheber, Lizenz und Quelle. Die Lizenz wurde jeweils am Original geprüft.</p>
+{bn}
+<p class="small">Schriften: Fraunces und Atkinson Hyperlegible, lokal eingebunden unter der SIL Open Font License (Lizenztexte im Ordner <code>fonts/</code>).</p>
+<h2>Eigene Grafiken und Symbole</h2>
+<ul>
+<li><strong>Eigene Zeichnungen:</strong> Stern-Symbol, Illustration auf der Startseite (Nachthimmel, Nordstern, stilisierte Skyline) und das Schaubild „Wer entscheidet in Frankfurt?“ wurden für Nordstern Frankfurt gezeichnet. Die Skyline zeigt keine erkennbaren Einzelgebäude.</li>
+<li><strong>Symbole:</strong> {link('lucide')}, ISC-Lizenz, lokal eingebunden (Lizenztext: <code>assets/LICENSE-icons.txt</code>).</li>
+</ul>
+""")
+
 # ---------------------------------------------------------------- Lernen (E13)
 # Übersicht wird gebaut; die Lernseiten selbst (lernen/*.html außer index) sind handgepflegt
 # und dürfen als einzige Ausnahme Inline-JavaScript enthalten (kein CDN, keine Datenübertragung).
-page("lernen/index.html", "Lernen", "Kostenlose Lernseiten für Deutsch – mit Erklärungen in der Muttersprache.", """
+page("lernen/index.html", "Lernen", "Kostenlose Lernseiten für Deutsch – mit Erklärungen in der Muttersprache.", f"""
 <p class="eyebrow">Lernen</p>
 <h1>Deutsch lernen im Frankfurter Norden</h1>
 <p class="lead">Kostenlose Übungsseiten fürs Handy. Ohne Anmeldung, in deinem Tempo.</p>
+<h2>Die Lernseiten</h2>
 <div class="grid">
-<article class="card"><h3><a href="deutsch-lao.html">Deutsch selbst lernen – für Lao-Sprechende</a></h3>
-<p lang="lo">ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ</p>
-<p>Dativ und Akkusativ in 10 Lektionen: Einstiegstest, Regeln auf Deutsch und Laotisch, Übungsfragen, Hör-Diktat, Lückentext, Abschlusstest.</p></article>
-<article class="card"><h3><a href="deutsch-lao-mama.html">Teil 2: Deutsch im Alltag – für Mütter in Frankfurt</a></h3>
-<p lang="lo">ພາສາເຢຍລະມັນໃນຊີວິດປະຈຳວັນ – ສຳລັບແມ່ໃນແຟຣັງເຟີດ</p>
-<p>8 Lückentexte (B1): Schule, Kinderarzt, Elternabend, Markt, Familienkasse, U-Bahn, Spielplatz, E-Mail an die Lehrerin. Mit Tipps bei Fehlern, Fehler-Training, Abschlusstest und Druckansicht.</p></article>
+{card("languages", '<a href="lernen/deutsch-lao.html">Deutsch selbst lernen – für Lao-Sprechende</a>', '<p lang="lo">ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ</p><p>Dativ und Akkusativ in 10 Lektionen: Einstiegstest, Regeln auf Deutsch und Laotisch, Übungsfragen, Hör-Diktat, Lückentext, Abschlusstest.</p>')}
+{card("hand-heart", '<a href="lernen/deutsch-lao-mama.html">Teil 2: Deutsch im Alltag – für Mütter in Frankfurt</a>', '<p lang="lo">ພາສາເຢຍລະມັນໃນຊີວິດປະຈຳວັນ – ສຳລັບແມ່ໃນແຟຣັງເຟີດ</p><p>8 Lückentexte (B1): Schule, Kinderarzt, Elternabend, Markt, Familienkasse, U-Bahn, Spielplatz, E-Mail an die Lehrerin. Mit Tipps bei Fehlern, Fehler-Training, Abschlusstest und Druckansicht.</p>')}
 </div>
 <div class="callout"><h2>Gut zu wissen</h2><p>Die Lernseiten nutzen JavaScript für Übungen und Vorlesen. Dein Fortschritt bleibt nur in deinem Browser gespeichert und wird nicht übertragen. Die laotischen Texte werden noch von einer Muttersprachlerin gegengelesen.</p></div>
 """)
 
 page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist kein Stern.</h1><p><a class="btn btn-primary" href="index.html">Zur Startseite</a></p>')
-
-# ------------------------------------------------------------------ Blog
-def beitrag_html(b, pre):
-    m = b["meta"]
-    kopf = (f'<p class="small">{E(m["datum"])} · <a href="{pre}{obr_seite(m["ortsbezirk"])}">Ortsbezirk {E(m["ortsbezirk"])}</a>'
-            + (" · " + E(", ".join(m["stadtteile"])) if isinstance(m.get("stadtteile"), list) else "")
-            + "</p>")
-    rumpf = beitraege.markdown(b["body"], link)
-    zurueck = f'<p><a href="{pre}frankfurt/index.html">Alle Beiträge</a></p>' if b in VEROEFF else ""
-    return f'<article class="beitrag">{kopf}\n{rumpf}\n</article>\n{zurueck}'
-
-
-def beitrag_seite(b, out=ROOT):
-    m = b["meta"]
-    page("frankfurt/" + m["slug"] + ".html", m["titel"], m.get("beschreibung") or m["titel"],
-         beitrag_html(b, "../"), out=out, aktiv="frankfurt.html")
-
-
-BLOG = os.path.join(ROOT, "frankfurt")
-soll = {"index.html"} if VEROEFF else set()
-for b in VEROEFF:
-    beitrag_seite(b)
-    soll.add(b["meta"]["slug"] + ".html")
-if VEROEFF:
-    liste = "".join(card(f'<a href="{E(b["meta"]["slug"])}.html">{E(b["meta"]["titel"])}</a>',
-                         f'<p class="small">{E(b["meta"]["datum"])}</p>') for b in VEROEFF)
-    page("frankfurt/index.html", "Beiträge aus dem Frankfurter Norden",
-         "Neutrale Beiträge über Stadt, Ortsbeirat 10 und Alltag im Frankfurter Norden.",
-         f'<h1>Beiträge aus dem Frankfurter Norden</h1><div class="grid">{liste}</div>', aktiv="frankfurt.html")
-# Veraltete Blog-Seiten entfernen (z. B. Beitrag zurück auf "entwurf")
-if os.path.isdir(BLOG):
-    for alt in glob.glob(os.path.join(BLOG, "*.html")):
-        if os.path.basename(alt) not in soll:
-            os.remove(alt)
-    if not os.listdir(BLOG):
-        os.rmdir(BLOG)
-
-# ----------------------------------------------------------- Ortsbezirke
-def obr_karte(o):
-    t = naechster(lambda x: x["ortsbezirk"] == o["nr"])
-    nxt = f'<p>Nächste Sitzung: <strong>{datum_text(t)}</strong></p>' if t else "<p>Keine geplanten Sitzungen im Kalender.</p>"
-    status = '<span class="badge">betreut</span>' if o["status"] == "aktiv" else '<span class="small">noch ohne Betreuung</span>'
-    return card(f'<a href="ortsbezirk-{o["nr"]}.html">{o["nr"]} · {E(o["name"])}</a>',
-                f'<p class="small">{E(", ".join(o["stadtteile"]))}</p>{nxt}{status}')
-
-
-page("ortsbezirke/index.html", "Ortsbezirke",
-     "Alle 16 Frankfurter Ortsbezirke: Stadtteile, nächste Ortsbeiratssitzungen und Neues aus dem Stadtteil.",
-     f"""<h1>Die 16 Ortsbezirke</h1>
-<p class="lead">Frankfurt hat 16 Ortsbeiräte. Hier stehen die nächsten Sitzungen und Neues aus jedem Bezirk.</p>
-<div class="grid">{"".join(obr_karte(o) for o in ORTSBEZIRKE)}</div>
-{termin_hinweis()}
-<h2>Stadtweit</h2>
-<ul>{"".join(f'<li>{lab}: {datum_text(t)}</li>' for lab, t in [
-    ("Stadtverordnetenversammlung", naechster(lambda x: x["typ"] == "stvv")),
-    ("KAV – Kommunale Ausländerinnen- und Ausländervertretung", naechster(lambda x: x["typ"] == "kav"))] if t)}</ul>
-<p class="small">Stadtteilzuordnung wird vor dem offiziellen Start noch einmal mit der Stadt abgeglichen.</p>
-""", aktiv="ortsbezirke/index.html")
-
-for o in ORTSBEZIRKE:
-    nr = o["nr"]
-    news = [b for b in VEROEFF if str(b["meta"].get("ortsbezirk")) == str(nr)]
-    if news:
-        news_html = '<div class="grid">' + "".join(card(
-            f'<a href="../frankfurt/{E(b["meta"]["slug"])}.html">{E(b["meta"]["titel"])}</a>',
-            f'<p class="small">{E(b["meta"]["datum"])}</p>') for b in news) + "</div>"
-    elif o["status"] == "aktiv":
-        news_html = '<p class="notice">Der nächste Beitrag aus diesem Ortsbezirk ist in Arbeit.</p>'
-    else:
-        news_html = ('<p class="notice">Für diesen Ortsbezirk suchen wir noch jemanden, der ihn betreut – '
-                     'erst dann erscheinen hier eigene Beiträge.</p>')
-    sitzungen = [t for t in KOMMEND if t["ortsbezirk"] == nr][:6]
-    termin_html = ("<ol class=\"termine\">" + "".join(f"<li>{datum_text(t)}</li>" for t in sitzungen) + "</ol>"
-                   if sitzungen else "<p>Keine geplanten Sitzungen im Kalender.</p>")
-    page(obr_seite(nr), f"Ortsbezirk {nr} – {o['name']}",
-         f"Ortsbezirk {nr} ({', '.join(o['stadtteile'])}): nächste Ortsbeiratssitzungen und Neues aus dem Stadtteil.",
-         f"""<p class="eyebrow">Ortsbezirk {nr}</p>
-<h1>{E(o["name"])}</h1>
-<p class="lead">{E(", ".join(o["stadtteile"]))}</p>
-<section aria-labelledby="h-news"><h2 id="h-news">Neues aus dem Ortsbezirk</h2>{news_html}</section>
-<section aria-labelledby="h-termine"><h2 id="h-termine">Nächste Sitzungen des Ortsbeirats {nr}</h2>
-{termin_html}
-{termin_hinweis()}
-<p>Die Sitzungen sind öffentlich. In der Bürgerfragestunde können Anwohnerinnen und Anwohner Fragen stellen.</p></section>
-<p><a class="btn" href="index.html">Alle 16 Ortsbezirke</a></p>
-""", aktiv="ortsbezirke/index.html")
 
 if "--entwuerfe" in sys.argv:
     i = sys.argv.index("--entwuerfe")
@@ -474,9 +745,10 @@ if "--entwuerfe" in sys.argv:
     vz = os.path.abspath(sys.argv[i + 1])
     if vz == ROOT or vz.startswith(ROOT + os.sep):
         sys.exit("Vorschau-Ordner muss außerhalb des Repos liegen (sonst landet der Entwurf im Commit).")
-    for d in ("css", "fonts"):
+    for d in ("css", "fonts", "assets", "img"):
         shutil.rmtree(os.path.join(vz, d), ignore_errors=True)
-        shutil.copytree(os.path.join(ROOT, d), os.path.join(vz, d))
+        if os.path.isdir(os.path.join(ROOT, d)):
+            shutil.copytree(os.path.join(ROOT, d), os.path.join(vz, d))
     for b in BEITRAEGE:
         beitrag_seite(b, out=vz)
     print(f"Vorschau: {len(BEITRAEGE)} Beitrag/Beiträge in {vz}/frankfurt/ (Navigation führt dort ins Leere)")
@@ -490,4 +762,4 @@ if LIVE:
         f.write(SITE["domain"] + "\n")
 elif os.path.exists(cname):
     os.remove(cname)
-print(f"Gebaut: {len(NAV) + 3 + len(soll) + len(ORTSBEZIRKE)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")
+print(f"Gebaut: {len(NAV) + 5 + len(soll) + len(ORTSBEZIRKE)} Seiten · Modus: {'LIVE ' + SITE['domain'] if LIVE else 'Vorschau (noindex, kein CNAME)'}")

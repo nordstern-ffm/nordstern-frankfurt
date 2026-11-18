@@ -1,0 +1,42 @@
+{
+  "_regel": "Abläufe (steps) und Zeitleiste (timeline). Nur Aussagen, die an anderer Stelle der Seite oder in den Daten belegt sind. Geplantes als geplant kennzeichnen. Zeitleiste: 'wann' nur mit bestätigtem Datum, sonst leer lassen. {ziel} wird durch ziel_unterstuetzer aus petitionen.json ersetzt (E3). status: erledigt | in Arbeit | geplant. icon = Name aus assets/icons.svg.",
+  "ablaeufe": {
+    "nachbarschaft": {
+      "titel": "So soll die Hilfe funktionieren",
+      "hinweis": "Geplanter Ablauf – der Verein ist in Gründung und vermittelt noch keine Hilfe.",
+      "schritte": [
+        {"icon": "message-circle", "titel": "Melden", "text": "Ältere Menschen oder Angehörige sagen, wobei sie Hilfe brauchen – zum Beispiel beim Einkauf oder auf dem Weg zum Arzt."},
+        {"icon": "user-search", "titel": "Passende Hilfe finden", "text": "Der Verein sucht eine Helferin oder einen Helfer aus der Nachbarschaft, die oder der Zeit hat und in der Nähe wohnt."},
+        {"icon": "hand-heart", "titel": "Helfen", "text": "Die Hilfe kommt nach Hause oder begleitet unterwegs – praktische Hilfe im Alltag, keine Strom-, Gas- oder Wasserinstallation."}
+      ]
+    },
+    "melden": {
+      "titel": "In drei Schritten zum Ziel",
+      "hinweis": "",
+      "schritte": [
+        {"icon": "eye", "titel": "Sehen", "text": "Kaputte Laterne, Schlagloch, wilder Müll – oder ein größerer Wunsch für den Stadtteil.", "ziel": "#melden"},
+        {"icon": "megaphone", "titel": "Melden", "text": "Mängel direkt beim offiziellen Mängelmelder der Stadt melden.", "ziel": "#melden"},
+        {"icon": "users", "titel": "Bündeln", "text": "Größere Anliegen gemeinsam mit Unterstützerinnen und Unterstützern einreichen.", "ziel": "#buendeln"}
+      ]
+    },
+    "anliegen": {
+      "titel": "Selbst ein Anliegen starten",
+      "hinweis": "",
+      "schritte": [
+        {"icon": "pen-line", "titel": "Beschreiben", "text": "Problem in zwei Sätzen beschreiben – wo, was, für wen."},
+        {"icon": "search", "titel": "Zuständigkeit klären", "text": "Uns schreiben; wir prüfen, ob Stadt, Ortsbeirat oder Land zuständig ist."},
+        {"icon": "send", "titel": "Einreichen", "text": "Gemeinsam Text und Fotos fertig machen und einreichen."}
+      ]
+    }
+  },
+  "zeitleiste": {
+    "titel": "Was als Nächstes kommt",
+    "eintraege": [
+      {"status": "in Arbeit", "wann": "", "titel": "Nordstern-Website", "text": "Diese Seite ist eine Vorschau. Offizieller Start, sobald Impressum und Domain stehen."},
+      {"status": "geplant", "wann": "", "titel": "Verein gründen", "text": "Für die Nachbarschaftshilfe werden sieben Gründungsmitglieder gebraucht."},
+      {"status": "geplant", "wann": "", "titel": "Fachkraft gewinnen", "text": "Eine Fachkraft aus Pflege, Sozialarbeit oder Pädagogik für wenige Stunden im Monat."},
+      {"status": "geplant", "wann": "", "titel": "Erste Anliegen bündeln", "text": "Anliegen aus dem Stadtteil sammeln – Ziel: {ziel} Unterstützerinnen und Unterstützer je Projekt."},
+      {"status": "geplant", "wann": "", "titel": "Ratgeber „Ortsbeirat 10 in 5 Minuten“", "text": "Erster Beitrag im Ratgeber: wie der Ortsbeirat arbeitet und wie man mitredet."}
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Mockup Sprachraum Diktat-Weg – Nordstern</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.path{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.stop{width:3.2rem;height:3.2rem;border-radius:50%;display:grid;place-items:center;font-weight:700;border:3px solid var(--line);background:var(--card)}
+.stop.done{background:var(--gold);color:#0B1630;border-color:var(--gold)}.stop.now{border-color:var(--gold);box-shadow:0 0 0 6px rgba(224,184,74,.2)}
+.gap{display:inline-block;min-width:5.5rem;border-bottom:3px solid var(--soft);padding:0 .3rem;text-align:center}
+.gap.ok{border-color:var(--ok);color:var(--ok)}.gap.bad{border-color:var(--bad);color:var(--bad)}
+.word{display:inline-block;border-radius:.6rem;padding:.35rem .7rem;margin:.2rem;font-weight:700}
+.der{background:#1F3B6E}.die{background:#5B2333}.das{background:#1E4D3A}
+</style></head>
+<body><div class="wrap">
+<p class="small muted">MOCKUP · Sprachraum · Prinzip „10 Diktate von Anfang bis Ende“ (aus Sousse übernommen, Inhalte Deutsch)</p>
+
+<div class="zone"><span class="tag">A · LERNWEG A1 – 10 DIKTATE</span>
+<h1>Deutsch A1 · Dein Weg durch Frankfurt</h1>
+<div class="path" aria-label="Fortschritt: Diktat 3 von 10">
+<span class="stop done">1</span><span class="stop done">2</span><span class="stop now">3</span><span class="stop">4</span><span class="stop">5</span><span class="stop">6</span><span class="stop">7</span><span class="stop">8</span><span class="stop">9</span><span class="stop">10</span>
+<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><path fill="#E0B84A" d="M23 2 l5 16 16 5 -16 5 -5 16 -5 -16 -16 -5 16 -5z"/></svg></div>
+<p class="small muted">1 Bus & Bahn · 2 Beim Bäcker · <strong style="color:var(--text)">3 Im Bürgeramt</strong> · 4 Beim Arzt · 5 Wohnung · 6 Kita · 7 Jobsuche · 8 Erster Arbeitstag · 9 Telefonieren · 10 Fest am Main</p>
+<p class="small muted">Fortschritt nur zum Abhaken/Ausdrucken – keine Konten, keine gespeicherten Daten.</p></div>
+
+<div style="display:grid;grid-template-columns:1fr 17rem;gap:1rem">
+<div>
+<div class="zone"><span class="tag">B · SZENE + KANN-SATZ</span>
+<svg viewBox="0 0 640 170" aria-label="Illustration: Nisha am Schalter im Bürgeramt"><rect width="640" height="170" rx="14" fill="#122247"/>
+<rect x="360" y="40" width="240" height="110" rx="8" fill="#14264D" stroke="#2E4778" stroke-width="3"/><rect x="380" y="58" width="80" height="12" rx="6" fill="#2E4778"/><text x="520" y="70" fill="#E0B84A" font-size="18" font-family="Atkinson Hyperlegible">Nr. 042</text>
+<circle cx="200" cy="70" r="26" fill="#F4D98A"/><rect x="170" y="98" width="60" height="62" rx="20" fill="#7FD1C7"/>
+<rect x="250" y="40" width="100" height="40" rx="12" fill="#EEF2FA"/><text x="300" y="66" text-anchor="middle" font-size="16" fill="#0B1630" font-family="Atkinson Hyperlegible">Guten Tag!</text></svg>
+<p style="margin:.6rem 0 0"><span class="pill">Ich kann …</span> mich im Bürgeramt anmelden und nach einem Termin fragen.</p></div>
+
+<div class="zone"><span class="tag">C · DIKTAT HÖREN + SCHREIBEN</span>
+<div class="card" style="display:flex;gap:1rem;align-items:center"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#E0B84A"/><path d="M22 17 L40 28 L22 39Z" fill="#0B1630"/></svg>
+<div><strong>Diktat 3 anhören</strong> · 1:20 Min · <span class="muted">langsam · normal</span><br><span class="small muted">Eigene Aufnahme (Muttersprachler), Transkript unten</span></div></div>
+<p class="small muted">Im Kurs: Lehrkraft liest vor, Lernende schreiben auf Papier. Allein: Audio hören, ins Heft schreiben.</p></div>
+
+<div class="zone"><span class="tag">D · LÜCKENTEXT · SELBST PRÜFEN</span>
+<p>Nisha geht <span class="gap ok">ins</span> Bürgeramt. Sie zieht eine <span class="gap ok">Nummer</span> und wartet. Die Frau am Schalter fragt: „Haben Sie <span class="gap bad">die Pass</span>?“ Nisha gibt <span class="gap">______</span> den Pass.</p>
+<div style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn" href="#">Prüfen</a><a class="btn o" href="#">Wörter zeigen</a><a class="btn o" href="#">Lösung</a><a class="btn o" href="#">Nochmal</a></div>
+<div class="card" style="margin-top:.8rem;border-left:6px solid var(--bad)"><strong>Fehler gefunden:</strong> „<s>die</s> Pass“ → <strong>den Pass</strong> (der Pass, Akkusativ). <a href="#" style="color:var(--soft)">→ Grammatik-Karte: Akkusativ</a></div>
+<p class="small muted">Ohne JavaScript: Lösungen per Aufklappen. Mit kleinem lokalem Skript: sofortiges Grün/Rot + Fehlererklärung (Entscheidung E15).</p></div>
+</div>
+
+<aside>
+<div class="zone"><span class="tag">E · WORTKARTEN</span>
+<span class="word der">der Pass</span><span class="word die">die Nummer</span><span class="word das">das Formular</span><span class="word der">der Termin</span><span class="word die">die Unterschrift</span>
+<p class="small muted">Farbe = Artikel (blau der, rot die, grün das) + Text, nie nur Farbe.</p></div>
+<div class="zone"><span class="tag">F · QR FÜR DEN KURSRAUM</span>
+<svg viewBox="0 0 120 120" width="120" aria-label="QR-Code Platzhalter"><rect width="120" height="120" fill="#fff"/><g fill="#0B1630"><rect x="8" y="8" width="30" height="30"/><rect x="82" y="8" width="30" height="30"/><rect x="8" y="82" width="30" height="30"/><rect x="50" y="50" width="20" height="20"/><rect x="82" y="82" width="12" height="12"/><rect x="50" y="14" width="10" height="10"/><rect x="96" y="60" width="10" height="10"/></g></svg>
+<p class="small muted">Druckblatt je Diktat mit QR zum Lückentext (lokal erzeugt, kein Fremddienst).</p></div>
+<div class="zone"><span class="tag">G · FRANKFURT-MOMENT</span>
+<p class="small"><strong>Wusstest du?</strong> Das Wort für Apfelwein-Krug ist „Bembel“. <span class="muted">Ein Wort pro Lektion – Kultur, Feste, Religionen der Nachbarn.</span></p></div>
+<div class="zone"><span class="tag">H · WEITER LERNEN (INTERN)</span>
+<p class="small">→ Ratgeber: Anmeldung Schritt für Schritt<br>→ Grammatik: Akkusativ<br>→ Diktat 4: Beim Arzt</p></div>
+</aside></div>
+
+<div class="zone"><span class="tag">I · LEHRKRAFT-ECKE</span>
+<div class="grid"><div class="card"><strong>Kursplan</strong><br><span class="small muted">10 Sitzungen · je 1 Grammatikthema + 1 Diktat</span></div><div class="card"><strong>Einstiegstest</strong><br><span class="small muted">Sitzung 1 und 10 vergleichen = Lernfortschritt</span></div><div class="card"><strong>Druckpaket</strong><br><span class="small muted">Diktattexte, Lückentexte, QR-Karten (später Paket)</span></div></div></div>
+</div></body></html>

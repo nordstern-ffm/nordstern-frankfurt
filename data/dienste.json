@@ -1,91 +1,91 @@
 {
-  "_hinweis": "Gewerbliche Vermittlung im kleinen Kreis. Getrennt vom gemeinnützigen Verein. 'pruefen' = vor Launch rechtlich/organisatorisch klären, wird nicht öffentlich angezeigt.",
+  "_hinweis": "Gewerbliche Vermittlung im kleinen Kreis. Getrennt vom gemeinnützigen Verein. Interne Prüfpunkte je Dienst liegen lokal in data/intern/dienste-pruefen.json (nicht im Repo).",
   "dienste": [
     {
       "id": "personal",
       "titel": "Personalvermittlung",
+      "icon": "users",
       "kurz": "Wir bringen Frankfurter Betriebe mit Menschen zusammen, die wir persönlich kennen: Rezeption, Housekeeping, Service, Helfer- und Einstiegsjobs.",
       "punkte": [
         "Persönliches Erstgespräch statt Massen-Bewerbung",
         "Bewerbungsunterlagen auf Wunsch von uns getextet",
         "Honorar nur bei Erfolg, vom Arbeitgeber"
       ],
-      "pruefen": "Gewerbeanmeldung 'private Arbeitsvermittlung'. Keine Zeitarbeit ohne AÜG-Erlaubnis. Vermittlungsgutscheine (AVGS) nur mit AZAV-Zulassung.",
       "aktiv": true
     },
     {
       "id": "hotel",
       "titel": "Hotel & Gäste",
+      "icon": "bed-double",
       "kurz": "Zimmer für Monteure, Messegäste und Besuch von Familie: Wir kennen die Häuser und fragen für Sie an.",
       "punkte": [
         "Anfrage bei Partnerhäusern in Frankfurt",
         "Gruppen und Langzeitaufenthalte",
         "Kein Buchungsportal – persönliche Absprache"
       ],
-      "pruefen": "Provisionsvereinbarung schriftlich mit jedem Partnerhaus. Interessenkonflikt mit eigenem Arbeitgeber vorab offenlegen und genehmigen lassen.",
       "aktiv": true
     },
     {
       "id": "taxi",
       "titel": "Taxi & Fahrten",
+      "icon": "car-taxi-front",
       "kurz": "Feste Fahrten zum Arzt, zum Flughafen oder für Gäste – vermittelt an konzessionierte Frankfurter Taxiunternehmen.",
       "punkte": [
         "Nur konzessionierte Unternehmen",
         "Regelfahrten für Ältere planbar",
         "Abrechnung direkt mit dem Fahrer"
       ],
-      "pruefen": "Wir befördern nicht selbst (PBefG). Partnerliste mit Konzessionsnachweis führen.",
       "aktiv": true
     },
     {
       "id": "massage",
       "titel": "Massage & Wellness",
+      "icon": "sparkles",
       "kurz": "Entspannungs- und Sportmassage durch ausgebildete Masseur:innen und Physiotherapeut:innen – mobil oder in der Praxis.",
       "punkte": [
         "Nur Fachpersonal mit Berufsnachweis",
         "Mobil für Ältere und Hotelgäste",
         "Klar getrennt von Heilbehandlung auf Rezept"
       ],
-      "pruefen": "Berufsnachweis jeder Fachkraft ablegen. Keine Heilversprechen. Strikt getrennt vom Projekt STAFF.",
       "aktiv": true
     },
     {
       "id": "naehen",
       "titel": "Nähen & Ändern",
+      "icon": "scissors",
       "kurz": "Hosen kürzen, Reißverschluss tauschen, Vorhänge nähen – von Näherinnen aus der Nachbarschaft.",
       "punkte": [
         "Abholung im Frankfurter Norden möglich",
         "Festpreis vor Auftrag",
         "Faire Bezahlung der Näherinnen"
       ],
-      "pruefen": "Status der Näherinnen klären (eigenes Gewerbe oder Minijob), sonst Scheinselbstständigkeit.",
       "aktiv": true
     },
     {
       "id": "energie",
       "aktiv": false,
       "titel": "Strom & Gas",
+      "icon": "zap",
       "kurz": "Wir prüfen Ihren Strom- und Gastarif und vermitteln einen passenden Vertrag – auf Wunsch zu Hause erklärt.",
       "punkte": [
         "Tarifvergleich mit Ihrer letzten Abrechnung",
         "Wechsel ohne Versorgungslücke",
         "Wir sagen offen, dass wir Provision erhalten"
       ],
-      "partner": "TeleSon (Vermittlung von Strom- und Gasverträgen)",
-      "pruefen": "Vertragsform mit TeleSon klären (selbstständiger Handelsvertreter §§ 84 ff. HGB?), Gewerbeanmeldung erweitern, Provision offenlegen, Markenname nur mit Freigabe nennen."
+      "partner": "TeleSon (Vermittlung von Strom- und Gasverträgen)"
     },
     {
       "id": "amway",
       "aktiv": false,
       "titel": "Gesundheit & Haushalt (Amway)",
+      "icon": "shopping-bag",
       "kurz": "Produkte für Ernährung, Körperpflege und Haushalt – persönlich beraten von einem unabhängigen Amway-Geschäftspartner.",
       "punkte": [
         "Beratung und Bestellung ohne Abo-Zwang",
         "Produkte zum Kennenlernen",
         "Auch als Geschäftsidee – ehrlich erklärt"
       ],
-      "partner": "Amway GmbH (unabhängiger Geschäftspartner)",
-      "pruefen": "Amway-Richtlinien für Websites/Social Media der Geschäftspartner einhalten (Markennutzung, Pflichtangaben), keine Einkommens- oder Heilversprechen, als unabhängiger Geschäftspartner kennzeichnen."
+      "partner": "Amway GmbH (unabhängiger Geschäftspartner)"
     }
   ]
 }

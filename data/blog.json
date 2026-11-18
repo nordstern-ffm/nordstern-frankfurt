@@ -1,0 +1,50 @@
+{
+  "_regel": "Blog-Rubriken (E21). Parteiunabhängig: Wertungen von Parteien nur unter standpunkte.html. 'geplant' = Themen als Frage, ohne Tatsachenbehauptung, bis ein Beitrag mit Primärquelle und 'stand' existiert. Beiträge selbst kommen mit R1 nach data/beitraege/*.md. Redaktionsregeln: docs/REDAKTION.md. Beiträge: data/beitraege/*.md (Vorlage docs/REDAKTION.md), gebaut nach /<rubrik>/<slug>/.",
+  "rubriken": [
+    {
+      "id": "ratgeber",
+      "titel": "Ratgeber",
+      "icon": "briefcase",
+      "kurz": "Schritt für Schritt: Arbeit, Gründen, Behörden – mit Gesetzestext, Quelle und Stand.",
+      "umfasst": "Arbeit & Vermittlung · Gründen · Ankommen in Frankfurt",
+      "geplant": []
+    },
+    {
+      "id": "stadtpolitik",
+      "titel": "Stadtpolitik",
+      "icon": "landmark",
+      "kurz": "Was im Römer und im Ortsbeirat 10 beschlossen wird – in fünf Sätzen, mit der Frage: Was heißt das für den Frankfurter Norden?",
+      "umfasst": "Aus dem Römer · Aus dem Ortsbeirat 10 · Bürgerdialog",
+      "geplant": [
+        "Ortsbeirat 10 in 5 Minuten: Wer sitzt da, was entscheidet er, wie rede ich mit?",
+        "Aus dem Römer: Was die Stadtverordnetenversammlung diese Woche beschlossen hat",
+        "Bürgerdialog: Was im Frankfurter Norden auf ffm.de gemeldet und vorgeschlagen wird"
+      ]
+    },
+    {
+      "id": "politik",
+      "titel": "Politik",
+      "icon": "scale",
+      "kurz": "Land, Bund und Europa aus Frankfurter Sicht: Was ändert sich für die Menschen hier – sachlich erklärt, ohne Parteibrille.",
+      "umfasst": "Gesetze und Entscheidungen mit Folgen für Frankfurt",
+      "geplant": [
+        "Stadt, Land, Bund: Wer ist in Frankfurt eigentlich wofür zuständig?",
+        "Neue Regeln, die Frankfurter Haushalte betreffen – jeweils mit Gesetzestext und Stand"
+      ]
+    },
+    {
+      "id": "ki-und-stadt",
+      "titel": "KI & Stadt",
+      "icon": "cpu",
+      "kurz": "Gute Ideen aus anderen Städten: Wie funktioniert es, was kostet es – und ginge das auch in Frankfurt?",
+      "umfasst": "Jeder Beitrag nach demselben Muster: Beispiel mit Quelle · So funktioniert es (Schaubild) · Kosten laut Quelle · Gibt es das in Frankfurt schon? · Was bräuchte Frankfurt dafür?",
+      "geplant": [
+        "Zebrastreifen, die auffallen: 3D-Markierung, LED, Solar – was andere Städte ausprobieren und was Frankfurt dazu sagt",
+        "Ampeln, die mitdenken: Wie andere Städte den Verkehr mit KI steuern – und was das kostet",
+        "Das digitale Rathaus: Was kann man in Frankfurt schon online erledigen, was geht anderswo?",
+        "Mängel schneller beheben: Wie Städte Meldungen mit KI sortieren und weiterleiten"
+      ]
+    }
+  ],
+  "beitraege": []
+}
