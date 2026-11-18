@@ -8,7 +8,7 @@ Unterstützt genau das, was die Beiträge nutzen:
   einfache Tabellen (| Kopf | … | + Trennzeile | --- | … |)
   Links nur als Platzhalter [[link:schluessel]] → Eintrag aus data/links.json,
   mit eigenem Text: [[link:schluessel|Text]] · interne Seite: [[seite:pfad.html|Text]] (Pfad ab Hauptordner).
-  Zeile nur aus [[bild:img/…]] → Bild mit Nachweis aus data/bilder.json (E13) · Zeilen mit "> " → Hinweiskasten.
+  Zeile nur aus [[bild:img/…]] → Bild mit Nachweis aus data/bilder.json (E14) · Zeilen mit "> " → Hinweiskasten.
 Alles andere wird als Text ausgegeben (HTML-escaped). Rohe URLs werden nie zu Links.
 """
 import glob, html, os, re

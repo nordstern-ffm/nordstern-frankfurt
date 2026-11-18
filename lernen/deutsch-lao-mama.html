@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!-- Ausnahme E13: Lernseite mit eigenem JavaScript (nur inline, keine Fremd-Ressourcen).
+     Handgepflegt, NICHT von tools/build.py erzeugt. Teil 2 zu deutsch-lao.html (18.11.2026). -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deutsch im Alltag – für Mütter in Frankfurt – Nordstern Frankfurt</title>
+<meta name="description" content="8 Lückentexte aus dem Alltag einer Mutter in Frankfurt: Schule, Kinderarzt, Markt, Familienkasse. Mit Erklärungen auf Laotisch.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark light">
+<style>
+@font-face{font-family:"Fraunces";font-weight:500;src:url("../fonts/fraunces-latin-500-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Fraunces";font-weight:700;src:url("../fonts/fraunces-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:400;src:url("../fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:700;src:url("../fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Noto Sans Lao";font-weight:400;src:url("../fonts/noto-sans-lao-lao-400-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Noto Sans Lao";font-weight:600;src:url("../fonts/noto-sans-lao-lao-600-normal.woff2") format("woff2");font-display:swap}
+/* Nordstern-Farben: Nachtblau + Gold, Dark als Standard */
+:root{
+  --bg:#0B1630; --card:#14264D; --line:#2E4778; --ink:#EEF2FA; --muted:#B9C5DD;
+  --gold:#E0B84A; --gold-soft:#F4D98A; --btn-bg:#E0B84A; --btn-ink:#0B1630;
+  --akk:#9DBDF7; --akk-soft:#1E3260; --dat:#F4C77A; --dat-soft:#3B3020; --lo:#7FDCCB; --lo-soft:#12333A;
+  --ok:#7FD6A0; --ok-soft:#163626; --bad:#F59A92; --bad-soft:#3F1F22; --warn:#F4D98A; --warn-soft:#3A3218;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#F5F3EC; --card:#FFFFFF; --line:#CFC7AE; --ink:#0F1E3D; --muted:#3A4A6B;
+    --gold:#8A6A10; --gold-soft:#7A5C0A; --btn-bg:#132A4E; --btn-ink:#FFFFFF;
+    --akk:#1F4FA3; --akk-soft:#E2EAF8; --dat:#8A5600; --dat-soft:#F6ECD9; --lo:#16695E; --lo-soft:#E0F2EE;
+    --ok:#22683F; --ok-soft:#E3F2E8; --bad:#A3221B; --bad-soft:#FBE7E5; --warn:#7A5600; --warn-soft:#FFF4D6}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 "Atkinson Hyperlegible",system-ui,sans-serif;
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+main{max-width:46rem;margin:0 auto;padding:1rem 1.1rem 4rem}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.15;margin:0;font-weight:700}
+h1{font-size:clamp(1.9rem,7vw,2.8rem)} h2{font-size:1.6rem} h3{font-size:1.2rem;margin:1.8rem 0 .5rem}
+p{margin:.55rem 0} a{color:var(--gold-soft)}
+@media (prefers-color-scheme:light){a{color:#1F4E91}}
+.lo{font-family:"Noto Sans Lao","Phetsarath OT",sans-serif;color:var(--lo);line-height:1.9}
+.muted{color:var(--muted)} .small{font-size:.9rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.92rem}
+.top a{display:inline-flex;align-items:center;min-height:44px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--gold);margin:.8rem 0 .2rem}
+.btnrow{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:1rem}
+.btn,.ghost{font:inherit;font-size:.98rem;padding:.55rem 1.05rem;border-radius:2rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.btn{border:0;background:var(--btn-bg);color:var(--btn-ink);font-weight:700}
+.ghost{border:2px solid var(--line);background:transparent;color:var(--ink)}
+.btn:disabled,.ghost:disabled{opacity:.4;cursor:default}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.05rem 1.1rem;margin-top:.9rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:.6rem .8rem;font-size:.88rem}
+.stats b{display:block;font-family:"Fraunces",Georgia,serif;font-size:1.5rem;color:var(--gold-soft)}
+@media (prefers-color-scheme:light){.stats b{color:var(--ink)}}
+.list{list-style:none;padding:0;margin:.8rem 0 0;display:grid;gap:.5rem}
+.list a{display:flex;align-items:center;gap:.85rem;padding:.7rem 1rem;background:var(--card);border:1px solid var(--line);border-radius:.8rem;text-decoration:none;color:var(--ink);min-height:44px}
+.list a:hover{border-color:var(--gold)}
+.list .n{font-family:"Fraunces",Georgia,serif;font-size:1.35rem;color:var(--gold);min-width:1.4em}
+.list .t{font-weight:700;display:block}
+.list .st{margin-left:auto;font-size:.85rem;font-weight:700;white-space:nowrap;color:var(--muted)}
+.list .st.ok{color:var(--ok)}
+.rule{background:var(--lo-soft);border-radius:.8rem;padding:.85rem 1rem;margin-top:.8rem}
+.rule p{margin:.25rem 0}
+.akk{color:var(--akk);font-weight:700} .dat{color:var(--dat);font-weight:700}
+.goal{border-left:4px solid var(--gold);padding-left:.8rem;margin-top:.8rem}
+.text{font-size:1.1rem;line-height:2.4}
+.text input{font:inherit;font-size:1rem;padding:.05rem .35rem;border:0;border-bottom:2px solid var(--akk);background:var(--akk-soft);color:var(--ink);border-radius:.3rem .3rem 0 0;text-align:center;min-height:2rem}
+.text input.ok{border-color:var(--ok);background:var(--ok-soft)}
+.text input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.text input.near{border-color:var(--warn);background:var(--warn-soft)}
+.text .letter{white-space:pre-line}
+.hint{display:block;font-size:.88rem;line-height:1.45;margin:.15rem 0 .5rem;padding:.35rem .6rem;border-radius:.4rem;background:var(--bad-soft);color:var(--ink)}
+.hint.near{background:var(--warn-soft)}
+.hint b{color:var(--bad)} .hint.near b{color:var(--warn)}
+.fix{color:var(--ok);font-weight:700;font-size:.9rem;margin-left:.2rem}
+.score{font-weight:700;min-height:1.5em;margin-top:.8rem}
+.bank{background:var(--dat-soft);border-radius:.6rem;padding:.6rem .9rem;margin-bottom:.8rem;font-size:.96rem}
+.bank span{display:inline-block;margin:.15rem .3rem .15rem 0;padding:.05rem .5rem;background:var(--card);border-radius:.3rem}
+.player{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:.8rem}
+.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.qtext{font-size:1.15rem;line-height:2.2;margin:.4rem 0}
+.mist{list-style:none;padding:0;margin:.6rem 0}
+.mist li{padding:.45rem 0;border-bottom:1px solid var(--line);font-size:.96rem}
+.pager{display:flex;justify-content:space-between;margin-top:1.5rem;font-size:.95rem}
+.pager a{min-height:44px;display:inline-flex;align-items:center}
+.foot{max-width:46rem;margin:0 auto;padding:0 1.1rem 2rem;font-size:.88rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold-soft);outline-offset:2px}
+[hidden]{display:none!important}
+@media (max-width:480px){.stats{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--ink:#000;--muted:#333;--line:#999;--akk-soft:#fff;--lo:#000;--lo-soft:#f3f3f3}
+  .top,.btnrow,.player,.pager,.foot,.noprint,.score,.hint,.fix,.bank{display:none!important}
+  .text input{border-bottom:1px solid #000;background:#fff;color:transparent}
+  .card{border:0;padding:0}
+}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="index.html">‹ Nordstern · Lernen</a><span class="muted">Vorschau · Teil 2</span></div>
+<noscript><p class="card">Diese Lernseite braucht JavaScript für Lückentexte und Vorlesen. Bitte im Browser einschalten.</p></noscript>
+
+<!-- START -->
+<section id="v-home">
+  <p class="eyebrow">Teil 2 · B1</p>
+  <h1>Deutsch im Alltag – für Mütter in Frankfurt</h1>
+  <p class="lo" lang="lo">ພາສາເຢຍລະມັນໃນຊີວິດປະຈຳວັນ – ສຳລັບແມ່ໃນແຟຣັງເຟີດ</p>
+  <p class="muted">Noy lebt mit ihren Kindern Kham (7) und Mali (4) in Frankfurt. Begleite sie durch 8 Situationen: Schule, Kinderarzt, Markt, Familienkasse und mehr. In jedem Text fehlen Wörter.</p>
+  <div class="stats">
+    <div>Texte geschafft<b id="stDone">0/8</b></div>
+    <div>Offene Fehler<b id="stErr">0</b></div>
+    <div>Abschlusstest<b id="stTest">–</b></div>
+  </div>
+  <div class="card">
+    <h2 style="font-size:1.25rem">So lernst du hier</h2>
+    <ol style="padding-left:1.2rem;margin:.4rem 0">
+      <li>Einen Text pro Woche. Erst lesen oder vorlesen lassen.</li>
+      <li>Lücken füllen, dann <b>Prüfen</b>. Bei Fehlern steht ein Tipp unter dem Text – verbessere selbst.</li>
+      <li>Gelb heißt: fast richtig, nur groß oder klein falsch.</li>
+      <li>Deine Fehler sammeln sich im <b>Fehler-Training</b>. Wiederhole sie, bis die Liste leer ist.</li>
+      <li>Zum Schluss: <b>Abschlusstest</b> mit 20 Sätzen aus allen Texten.</li>
+    </ol>
+    <p class="lo" lang="lo">ໜຶ່ງເລື່ອງຕໍ່ອາທິດ. ຕື່ມຄຳທີ່ຂາດ, ກົດ „Prüfen“, ອ່ານຄຳແນະນຳ ແລະ ແກ້ໄຂດ້ວຍຕົນເອງ. ສີເຫຼືອງ = ເກືອບຖືກ (ຕົວໃຫຍ່ ຫຼື ຕົວນ້ອຍ).</p>
+    <p class="small muted">Tipp: Du kannst jeden Text drucken und mit dem Stift üben.</p>
+  </div>
+  <h3>Texte <span class="lo" lang="lo">ເລື່ອງ</span></h3>
+  <ul class="list" id="sceneList"></ul>
+  <div class="btnrow">
+    <a class="btn" href="#training">Fehler-Training <span class="lo" lang="lo" style="color:inherit;margin-left:.4rem">ຝຶກຂໍ້ຜິດ</span></a>
+    <a class="ghost" href="#test">Abschlusstest <span class="lo" lang="lo" style="margin-left:.4rem">ທົດສອບສຸດທ້າຍ</span></a>
+  </div>
+  <div class="btnrow"><a class="ghost" href="deutsch-lao.html">‹ Teil 1: Dativ &amp; Akkusativ</a><button class="ghost" id="resetAll">Fortschritt löschen</button></div>
+</section>
+
+<!-- SZENE -->
+<section id="v-scene" hidden>
+  <a href="#" class="small" style="display:inline-flex;min-height:44px;align-items:center">‹ Alle Texte</a>
+  <p class="eyebrow" id="sNum"></p>
+  <h2 id="sTitle"></h2>
+  <p class="lo" lang="lo" id="sTitleLo"></p>
+  <p class="goal" id="sGoal"></p>
+  <div class="rule" id="sRule"></div>
+
+  <h3>Hören <span class="lo" lang="lo">ຟັງ</span></h3>
+  <div class="card noprint">
+    <div class="player">
+      <button class="btn" id="play">▶ Satz hören</button>
+      <button class="ghost" id="nextS">Nächster Satz</button>
+      <button class="ghost" id="slow">Langsam: an</button>
+      <span class="small muted" id="spos"></span>
+    </div>
+    <p class="small muted" id="noVoice" hidden>Dein Gerät hat keine deutsche Stimme. Lies den Text leise.</p>
+  </div>
+
+  <h3>Lückentext <span class="lo" lang="lo">ຕື່ມຄຳທີ່ຂາດ</span></h3>
+  <div class="card">
+    <div class="bank" id="bank" hidden></div>
+    <div class="text" id="text"></div>
+    <div id="hints" aria-live="polite"></div>
+    <p class="score" id="score" aria-live="polite"></p>
+    <div class="btnrow">
+      <button class="btn" id="check">Prüfen</button>
+      <button class="ghost" id="hintBtn">Wörter zeigen</button>
+      <button class="ghost" id="solve">Lösungen</button>
+      <button class="ghost" id="reset">Neu</button>
+      <button class="ghost" id="print">Drucken</button>
+    </div>
+  </div>
+  <div class="pager"><a id="prev" href="#"></a><a id="next" href="#"></a></div>
+</section>
+
+<!-- QUIZ (Fehler-Training / Abschlusstest) -->
+<section id="v-quiz" hidden>
+  <a href="#" class="small" style="display:inline-flex;min-height:44px;align-items:center">‹ Start</a>
+  <h2 id="qTitle"></h2>
+  <p class="lo" lang="lo" id="qTitleLo"></p>
+  <p class="muted" id="qIntro"></p>
+  <div class="card" id="quiz"></div>
+</section>
+</main>
+<footer class="foot">
+<p>Ein Angebot von Nordstern Frankfurt · <a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></p>
+<p>Alle Personen sind erfunden. Dein Fortschritt wird nur in diesem Browser gespeichert (localStorage) und nie übertragen. Laotische Texte: Gegenlesen durch Muttersprachlerin ausstehend.</p>
+</footer>
+
+<script>
+/* ---------- Inhalte ----------
+   Lücke: [[Lösung|Tipp]] · mehrere richtige Lösungen: [[a/b|Tipp]]
+   Groß-/Kleinschreibung wird geprüft (gelb = nur Schreibweise falsch). */
+const S=[
+{t:"Morgens: Schule und Kindergarten",lo:"ຕອນເຊົ້າ: ໂຮງຮຽນ ແລະ ອະນຸບານ",
+ goal:"Ziel: Wo? und Wohin? sicher unterscheiden.",
+ rule:"<p><b>Wohin?</b> (Bewegung) → <span class='akk'>Akkusativ</span>: Ich lege das Heft <b>auf den</b> Tisch.</p><p><b>Wo?</b> (Ort) → <span class='dat'>Dativ</span>: Das Heft liegt <b>auf dem</b> Tisch.</p><p class='lo' lang='lo'>ໄປໃສ? → Akkusativ. ຢູ່ໃສ? → Dativ.</p>",
+ d:"Um sieben Uhr weckt Noy [[ihre|Wen weckt sie? Akkusativ Plural: die Kinder → ihre Kinder.]] Kinder. Kham ist sieben, Mali ist vier. Noy legt die Kleidung auf [[das|Wohin legt sie die Kleidung? Bewegung → Akkusativ. das Bett (neutral) → das.]] Bett. Mali sucht [[ihren|Wen sucht Mali? Akkusativ maskulin: der Schuh → ihren Schuh.]] Schuh. Er liegt unter [[dem|Wo liegt er? Ort → Dativ. der Tisch → dem Tisch.]] Tisch. Um acht bringt Noy Kham in [[die|Wohin? Akkusativ. die Schule (feminin) bleibt die.]] Schule und Mali in [[den|Wohin? Akkusativ. der Kindergarten (maskulin) → den.]] Kindergarten. Die Erzieherin gibt [[ihr|Wem gibt sie den Zettel? Empfängerin Noy → Dativ: ihr.]] einen Zettel. Morgen fahren die Kinder in [[den|Wohin? Akkusativ. der Zoo → den Zoo.]] Zoo. Noy muss [[ihn|Wen oder was unterschreibt sie? der Zettel → Akkusativ: ihn.]] unterschreiben."},
+{t:"Beim Kinderarzt",lo:"ໄປຫາທ່ານໝໍເດັກ",
+ goal:"Ziel: Modalverben (können, dürfen, sollen) und Verben mit Dativ.",
+ rule:"<p>Das Modalverb steht auf <b>Platz 2</b>, das andere Verb ganz <b>am Ende</b>: Kham <b>darf</b> nicht in die Schule <b>gehen</b>.</p><p>können = es ist möglich · dürfen = es ist erlaubt · sollen = jemand rät es</p><p class='lo' lang='lo'>Modalverb ຢູ່ຕຳແໜ່ງທີສອງ, ຄຳກິລິຍາຫຼັກຢູ່ທ້າຍປະໂຫຍກ.</p>",
+ d:"Kham hat Fieber. Noy ruft in [[der|Wo ruft sie an? Ort → Dativ. die Praxis → der Praxis.]] Praxis an. „Guten Tag, mein Sohn ist krank. [[Können|Frage nach einer Möglichkeit: können. Am Satzanfang groß.]] wir heute noch kommen?“ Die Arzthelferin antwortet [[ihr|antworten braucht immer Dativ: Noy → ihr.]]: „Sie [[können|Möglichkeit, Person Sie → können.]] um elf Uhr kommen. Bringen Sie bitte die Versichertenkarte und das Vorsorgeheft mit.“ In der Praxis untersucht die Ärztin [[den|Wen untersucht sie? Akkusativ maskulin: der Junge → den Jungen.]] Jungen. Der Hals tut [[ihm|weh tun + Dativ: Wem tut der Hals weh? Kham → ihm.]] weh. Kham [[darf|Erlaubnis → dürfen. er darf.]] drei Tage nicht in die Schule gehen. Er [[soll|Die Ärztin rät es → sollen. er soll.]] viel trinken und schlafen. Noy dankt [[der|danken + Dativ. die Ärztin → der Ärztin.]] Ärztin."},
+{t:"Elternabend in der Schule",lo:"ກອງປະຊຸມພໍ່ແມ່ຢູ່ໂຮງຮຽນ",
+ goal:"Ziel: Perfekt und Nebensätze mit weil, dass, ob.",
+ rule:"<p><b>Perfekt:</b> haben oder sein auf Platz 2, Partizip II am Ende: Sie <b>ist</b> mit dem Rad <b>gefahren</b>. Bewegung von A nach B → meist <b>sein</b>.</p><p><b>weil, dass, ob:</b> Das Verb geht ans Ende: …, weil die Lehrerin schnell <b>gesprochen hat</b>.</p><p class='lo' lang='lo'>Perfekt: haben/sein + Partizip II ຢູ່ທ້າຍ. ຫຼັງ weil/dass/ob: ຄຳກິລິຍາຢູ່ທ້າຍປະໂຫຍກ.</p>",
+ d:"Gestern [[war|Vergangenheit von sein (Präteritum): ich war, sie war.]] Noy beim Elternabend in [[der|Wo? Ort → Dativ. die Schule → der Schule.]] Schule. Sie [[ist|fahren ist Bewegung → Perfekt mit sein: sie ist …]] mit dem Fahrrad [[gefahren|Partizip II von fahren: gefahren.]]. Die Lehrerin [[hat|sprechen → Perfekt mit haben: sie hat …]] über die Klassenfahrt [[gesprochen|Partizip II von sprechen: gesprochen.]]. Noy hat nicht alles verstanden, [[weil|Hier kommt ein Grund → weil. Das Verb steht dann am Ende.]] die Lehrerin sehr schnell gesprochen hat. Danach hat sie gefragt, [[ob|Eine Ja-/Nein-Frage im Nebensatz → ob.]] die Fahrt viel kostet. Die Lehrerin hat gesagt, [[dass|Eine Aussage im Nebensatz → dass.]] es Hilfe für Familien gibt. Noy hat [[sich|sich freuen ist reflexiv: sie freut sich, sie hat sich gefreut.]] sehr gefreut."},
+{t:"Samstag auf dem Markt",lo:"ວັນເສົາຢູ່ຕະຫຼາດ",
+ goal:"Ziel: Adjektive nach ein / eine / die im Akkusativ.",
+ rule:"<p>Akkusativ nach <b>ein-</b>: einen frisch<b>en</b> Salat (m) · eine groß<b>e</b> Papaya (f) · ein klein<b>es</b> Brot (n).</p><p>Nach <b>die</b> im Plural: die rot<b>en</b> Erdbeeren.</p><p class='lo' lang='lo'>ທ້າຍຄຳຄຸນນາມປ່ຽນຕາມ der / die / das.</p>",
+ d:"Am Samstag geht Noy mit [[den|mit + Dativ. Plural: die Kinder → den Kindern.]] Kindern zum Markt an der Konstablerwache. Sie kauft einen [[frischen|einen + maskulin im Akkusativ → Adjektiv mit -en.]] Salat, eine [[große|eine + feminin → Adjektiv mit -e.]] Papaya und ein [[kleines|ein + neutral im Akkusativ → Adjektiv mit -es.]] Brot. Kham möchte [[einen|Was möchte er? Akkusativ maskulin: der Apfel → einen Apfel.]] Apfel. Die Verkäuferin schenkt [[ihm|schenken: Wem? Kham → Dativ: ihm.]] einen. Mali zeigt auf die [[roten|Nach die im Plural → Adjektiv mit -en.]] Erdbeeren. „Die sind aber teuer!“, sagt Noy. Zu Hause kocht sie [[eine|Was kocht sie? Akkusativ feminin: die Suppe → eine Suppe.]] scharfe Suppe."},
+{t:"Anruf bei der Familienkasse",lo:"ໂທຫາຫ້ອງການເງິນອຸດໜູນເດັກ",
+ goal:"Ziel: höflich fragen mit hätte, könnte, würde.",
+ rule:"<p>Höflich am Telefon: Ich <b>hätte</b> eine Frage. <b>Könnten</b> Sie mir helfen? Ich <b>würde</b> gern …</p><p>Höfliche Anrede: <b>Sie, Ihnen, Ihr</b> – immer groß.</p><p class='lo' lang='lo'>ເວົ້າສຸພາບ: hätte, könnte, würde. Sie / Ihnen / Ihr ຂຽນຕົວໃຫຍ່ສະເໝີ.</p>",
+ d:"Noy hat einen Brief von der Familienkasse bekommen. Sie versteht ihn nicht genau. Darum ruft sie an: „Guten Tag, ich [[hätte|Höflich statt „ich habe“: Konjunktiv II → ich hätte.]] eine Frage zum Kindergeld. [[Könnten|Höfliche Bitte: Konjunktiv II von können → Könnten. Am Satzanfang groß.]] Sie mir das bitte erklären?“ Der Mitarbeiter sagt: „Sie müssen uns die Geburtsurkunde von [[Ihrer|von + Dativ, höfliche Anrede: Ihre Tochter → von Ihrer Tochter. Groß!]] Tochter schicken.“ Noy fragt: „Bis wann [[muss|müssen, Person ich → ich muss.]] ich das schicken?“ – „Innerhalb von vier Wochen.“ Noy sagt: „Ich [[würde|Höflicher Wunsch: würde + gern + Verb am Ende.]] die Unterlagen gern online schicken.“ – „Das geht. Ich gebe [[Ihnen|Wem gebe ich die Adresse? Höflich, Dativ → Ihnen. Groß!]] die Adresse.“"},
+{t:"Mit der U-Bahn in die Stadt",lo:"ຂີ່ລົດໄຟໃຕ້ດິນເຂົ້າເມືອງ",
+ goal:"Ziel: Präpositionen mit festem Fall und Wo?/Wohin?",
+ rule:"<p><span class='dat'>Immer Dativ:</span> mit, zu, bei, von, aus, nach, seit.</p><p><span class='akk'>Immer Akkusativ:</span> durch, für, ohne, gegen, um.</p><p>neben, zwischen, auf, über …: Wo? → <span class='dat'>Dativ</span>, Wohin? → <span class='akk'>Akkusativ</span>.</p><p class='lo' lang='lo'>mit, zu → Dativ ສະເໝີ. durch → Akkusativ ສະເໝີ. ໄປໃສ? → Akkusativ. ຢູ່ໃສ? → Dativ.</p>",
+ d:"Am Sonntag fährt Noy mit [[der|mit + Dativ. die U-Bahn → der U-Bahn.]] U-Bahn in die Stadt. Die Kinder sitzen neben [[ihr|Wo sitzen sie? neben + Dativ: sie → ihr.]]. Kham stellt den Rucksack zwischen [[die|Wohin stellt er ihn? Akkusativ Plural: die Füße.]] Füße. An der Hauptwache steigen sie aus. Sie gehen durch [[die|durch + Akkusativ. die Zeil (feminin) bleibt die.]] Zeil bis zum Römer. Danach laufen sie über [[den|Wohin laufen sie? Akkusativ. der Steg → den Eisernen Steg.]] Eisernen Steg. Am Ufer setzen sie sich auf [[eine|Wohin setzen sie sich? Akkusativ. die Bank → eine Bank.]] Bank. Jetzt sitzen sie auf [[der|Wo sitzen sie jetzt? Dativ. die Bank → der Bank.]] Bank und schauen auf den Main."},
+{t:"Mit der Nachbarin auf dem Spielplatz",lo:"ໄປສະໜາມເດັກຫຼິ້ນກັບເພື່ອນບ້ານ",
+ goal:"Ziel: trennbare Verben und sich-Verben.",
+ rule:"<p><b>Trennbare Verben:</b> an|rufen → Sie <b>ruft</b> mich <b>an</b>. Der erste Teil geht ans Satzende.</p><p><b>sich-Verben:</b> ich freue <b>mich</b>, sie freut <b>sich</b>, wir unterhalten <b>uns</b>.</p><p class='lo' lang='lo'>ຄຳກິລິຍາແຍກ: ສ່ວນທຳອິດຢູ່ທ້າຍປະໂຫຍກ.</p>",
+ d:"Am Nachmittag [[ruft|anrufen ist trennbar: Teil „ruft“ auf Platz 2.]] die Nachbarin Frau Becker [[an|Der zweite Teil von anrufen kommt ans Ende: an.]]. Sie fragt, ob Noy mit [[ihr|mit + Dativ: sie → ihr.]] auf den Spielplatz kommt. Noy [[zieht|anziehen ist trennbar: zieht … an.]] den Kindern die Jacken [[an|Teil von anziehen am Ende: an.]]. Auf dem Spielplatz unterhalten die Frauen [[sich|sich unterhalten, Plural sie → sich.]]. Frau Becker erzählt von [[ihrem|von + Dativ. der Enkel (maskulin) → ihrem Enkel.]] Enkel. Noy freut [[sich|sich freuen, Person sie → sich.]], dass sie Deutsch üben kann. Um fünf [[holt|abholen ist trennbar: holt … ab.]] der Vater die Familie mit dem Auto [[ab|Teil von abholen am Ende: ab.]]."},
+{t:"Eine E-Mail an die Lehrerin",lo:"ຂຽນອີເມວຫາຄູ",
+ goal:"Ziel: eine kurze, höfliche Entschuldigung für die Schule schreiben.",
+ rule:"<p>Anfang: <b>Sehr geehrte Frau …,</b> · Ende: <b>Mit freundlichen Grüßen</b></p><p>Höflich: Könnten Sie … ? · <b>Sie, Ihnen, Ihre</b> immer groß.</p><p class='lo' lang='lo'>ຈົດໝາຍທາງການ: ເລີ່ມດ້ວຍ „Sehr geehrte …“, ຈົບດ້ວຍ „Mit freundlichen Grüßen“.</p>",
+ letter:true,
+ d:"Sehr geehrte Frau Schneider,\nmein Sohn Kham [[kann|Möglichkeit, Person er → kann. Mit „leider nicht“: er kann nicht.]] heute leider nicht in die Schule kommen, [[weil|Grund → weil, Verb am Ende.]] er Bauchschmerzen hat. Ich [[habe|telefonieren → Perfekt mit haben: ich habe … telefoniert.]] heute Morgen mit [[dem|mit + Dativ. der Kinderarzt → dem Kinderarzt.]] Kinderarzt telefoniert. Kham [[soll|Der Arzt rät es → sollen.]] zwei Tage zu Hause bleiben. [[Könnten|Höfliche Bitte → Könnten. Am Satzanfang groß.]] Sie [[mir|Wem schicken Sie die Hausaufgaben? ich → Dativ: mir.]] bitte die Hausaufgaben schicken? Vielen Dank für [[Ihre|für + Akkusativ, höflich: die Hilfe → Ihre Hilfe. Groß!]] Hilfe.\nMit freundlichen Grüßen\nNoy"}
+];
+
+/* ---------- Parser ---------- */
+// Jede Szene → parts (Text/Lücke) und sentences (für Vorlesen und Test)
+const GAPS=[]; // alle Lücken: {s,i,ans:[..],tip}
+S.forEach((sc,si)=>{
+  sc.parts=[];sc.gaps=[];let k=0;
+  sc.d.split(/(\[\[[^\]]*\]\])/).forEach(p=>{
+    const m=p.match(/^\[\[([^|\]]*)\|([^\]]*)\]\]$/);
+    if(m){const g={s:si,i:k++,ans:m[1].split("/"),tip:m[2]};sc.gaps.push(g);GAPS.push(g);sc.parts.push(g)}
+    else if(p)sc.parts.push(p)});
+  // Sätze: Platzhalter §n§ statt Lücken, dann an Satzenden trennen
+  const flat=sc.parts.map(p=>typeof p==="string"?p:"§"+p.i+"§").join("");
+  sc.sent=flat.split(/(?<=[.!?“:,]\n|[.!?“])\s+(?=[A-ZÄÖÜ„–§]|Mit )|\n/).map(x=>x.trim()).filter(Boolean);
+  sc.plain=sc.parts.map(p=>typeof p==="string"?p:p.ans[0]).join("");
+});
+const fill=(s,sc)=>s.replace(/§(\d+)§/g,(_,n)=>sc.gaps[+n].ans[0]);
+
+/* ---------- Speicher (nur auf diesem Gerät) ---------- */
+const KEY="dl-lao-mama";
+let P={best:{},done:[],err:[],test:null};
+try{const v=localStorage.getItem(KEY);if(v)P=Object.assign(P,JSON.parse(v))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){}};
+const gid=g=>g.s+":"+g.i;
+const addErr=g=>{if(!P.err.includes(gid(g)))P.err.push(gid(g))};
+const delErr=g=>{P.err=P.err.filter(x=>x!==gid(g))};
+
+const $=id=>document.getElementById(id);
+const shuffle=a=>{for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// Bewertung: ok / near (nur Groß-/Kleinschreibung) / bad / empty
+function grade(v,g){v=v.trim().replace(/\s+/g," ");if(!v)return"empty";
+  if(g.ans.includes(v))return"ok";if(g.ans.some(a=>a.toLowerCase()===v.toLowerCase()))return"near";return"bad"}
+
+/* ---------- Start ---------- */
+function renderHome(){
+  $("stDone").textContent=P.done.length+"/"+S.length;$("stErr").textContent=P.err.length;$("stTest").textContent=P.test||"–";
+  const ul=$("sceneList");ul.innerHTML="";
+  S.forEach((sc,i)=>{const li=document.createElement("li");const b=P.best[i];
+    li.innerHTML='<a href="#text-'+(i+1)+'"><span class="n">'+(i+1)+'</span><span><span class="t"></span><span class="lo small" lang="lo"></span></span><span class="st'+(P.done.includes(i)?' ok':'')+'">'+(P.done.includes(i)?'✓ ':'')+(b!=null?b+'/'+sc.gaps.length:'')+'</span></a>';
+    li.querySelector(".t").textContent=sc.t;li.querySelector(".lo").textContent=sc.lo;ul.appendChild(li)});
+}
+$("resetAll").addEventListener("click",()=>{if(confirm("Allen Fortschritt löschen?")){P={best:{},done:[],err:[],test:null};save();renderHome()}});
+
+/* ---------- Szene ---------- */
+let cur=0,inputs=[];
+function renderScene(n){
+  cur=n;const sc=S[n];
+  $("sNum").textContent="Text "+(n+1)+" von "+S.length;$("sTitle").textContent=sc.t;$("sTitleLo").textContent=sc.lo;
+  $("sGoal").textContent=sc.goal;$("sRule").innerHTML=sc.rule;
+  const box=$("text");box.innerHTML="";box.className="text"+(sc.letter?" letter":"");inputs=[];
+  sc.parts.forEach(p=>{
+    if(typeof p==="string"){box.appendChild(document.createTextNode(p));return}
+    const inp=document.createElement("input");inp.type="text";inp.autocomplete="off";inp.autocapitalize="off";inp.spellcheck=false;
+    inp.size=Math.max(4,Math.max(...p.ans.map(a=>a.length))+1);inp.setAttribute("aria-label","Lücke "+(p.i+1));
+    inp.addEventListener("input",()=>{inp.classList.remove("ok","bad","near");const f=inp.nextSibling;if(f&&f.className==="fix")f.remove()});
+    box.appendChild(inp);inputs.push(inp)});
+  $("bank").innerHTML="<b>Wörter:</b> "+shuffle(sc.gaps.map(g=>g.ans[0])).map(w=>"<span>"+esc(w)+"</span>").join("");
+  $("bank").hidden=true;$("hintBtn").textContent="Wörter zeigen";$("hints").innerHTML="";$("score").textContent="";
+  sents=sc.sent.map(s=>fill(s,sc));si=0;updPos();if(synth)synth.cancel();checkVoice();
+  $("prev").hidden=n===0;$("prev").href="#text-"+n;$("prev").textContent="‹ Text "+n;
+  $("next").hidden=n===S.length-1;$("next").href="#text-"+(n+2);$("next").textContent="Text "+(n+2)+" ›";
+}
+$("check").addEventListener("click",()=>{
+  const sc=S[cur];let r=0;const tips=[];
+  inputs.forEach((inp,k)=>{const g=sc.gaps[k],res=grade(inp.value,g);inp.classList.remove("ok","bad","near");
+    if(res==="ok"){inp.classList.add("ok");r++;delErr(g)}
+    else if(res==="near"){inp.classList.add("near");tips.push('<span class="hint near"><b>Lücke '+(k+1)+':</b> Fast! Achte auf Groß- und Kleinschreibung.</span>')}
+    else if(res==="bad"){inp.classList.add("bad");addErr(g);tips.push('<span class="hint"><b>Lücke '+(k+1)+':</b> '+esc(g.tip)+'</span>')}
+});
+  $("hints").innerHTML=tips.join("");
+  const leer=inputs.filter(i=>!i.value.trim()).length;
+  P.best[cur]=Math.max(P.best[cur]||0,r);if(r===sc.gaps.length&&!P.done.includes(cur))P.done.push(cur);save();
+  $("score").textContent=r+" / "+sc.gaps.length+(r===sc.gaps.length?" – perfekt! ດີຫຼາຍ!":leer?" – noch "+leer+" Lücke(n) leer.":" – lies die Tipps und verbessere die farbigen Wörter.");
+});
+$("solve").addEventListener("click",()=>{const sc=S[cur];inputs.forEach((inp,k)=>{const g=sc.gaps[k];if(grade(inp.value,g)==="ok"){inp.classList.add("ok");return}
+  addErr(g);inp.classList.remove("near");inp.classList.add("bad");const nx=inp.nextSibling;if(!(nx&&nx.className==="fix")){const f=document.createElement("span");f.className="fix";f.textContent=g.ans[0];inp.after(f)}});
+  save();$("score").textContent="Lösungen in Grün. Diese Lücken kommen ins Fehler-Training.";});
+$("reset").addEventListener("click",()=>renderScene(cur));
+$("hintBtn").addEventListener("click",()=>{const b=$("bank");b.hidden=!b.hidden;$("hintBtn").textContent=b.hidden?"Wörter zeigen":"Wörter verbergen"});
+$("print").addEventListener("click",()=>window.print());
+
+/* ---------- Vorlesen ---------- */
+let sents=[],si=0,slow=true;
+const synth=window.speechSynthesis;
+const voiceDe=()=>synth?synth.getVoices().find(v=>/^de/i.test(v.lang))||null:null;
+function speak(){if(!synth)return;synth.cancel();const u=new SpeechSynthesisUtterance(sents[si]);u.lang="de-DE";const v=voiceDe();if(v)u.voice=v;u.rate=slow?.75:.95;synth.speak(u)}
+function updPos(){$("spos").textContent="Satz "+(si+1)+" von "+sents.length}
+$("play").addEventListener("click",speak);
+$("nextS").addEventListener("click",()=>{if(si<sents.length-1){si++;updPos();speak()}});
+$("slow").addEventListener("click",()=>{slow=!slow;$("slow").textContent="Langsam: "+(slow?"an":"aus")});
+function checkVoice(){$("noVoice").hidden=!!synth&&(synth.getVoices().length===0||!!voiceDe());["play","nextS","slow"].forEach(id=>$(id).disabled=!synth)}
+if(synth&&"onvoiceschanged" in synth)synth.onvoiceschanged=checkVoice;
+
+/* ---------- Satz-Quiz: Fehler-Training und Abschlusstest ---------- */
+// Ein Satz mit genau einer Lücke; übrige Lücken im Satz sind ausgefüllt
+function item(g){const sc=S[g.s];const s=sc.sent.find(x=>x.includes("§"+g.i+"§"));return{g,sc,s}}
+let qs=[],qi=0,qr=0,qm=[],mode="";
+function startQuiz(list,m){qs=list;qi=0;qr=0;qm=[];mode=m;showQ()}
+function showQ(){
+  const box=$("quiz");
+  if(!qs.length){box.innerHTML='<p>Keine offenen Fehler. Super! <span class="lo" lang="lo">ບໍ່ມີຂໍ້ຜິດ. ດີຫຼາຍ!</span></p><div class="btnrow"><a class="btn" href="#">Zum Start</a></div>';return}
+  if(qi>=qs.length)return endQuiz();
+  const it=qs[qi],[a,b]=it.s.split("§"+it.g.i+"§");
+  box.innerHTML='<div class="bar"><i style="width:'+(qi/qs.length*100)+'%"></i></div><p class="small muted">Satz '+(qi+1)+' von '+qs.length+' · aus Text '+(it.g.s+1)+'</p><p class="qtext"></p><div id="qfb" aria-live="polite"></div><div class="btnrow"><button class="btn" id="qCheck">Prüfen</button><button class="ghost" id="qNext" hidden>Weiter</button></div>';
+  const qt=box.querySelector(".qtext"),inp=document.createElement("input");
+  inp.type="text";inp.autocomplete="off";inp.autocapitalize="off";inp.spellcheck=false;inp.size=Math.max(5,Math.max(...it.g.ans.map(x=>x.length))+2);inp.setAttribute("aria-label","Lücke");
+  inp.style.cssText="font:inherit;font-size:1rem;padding:.05rem .35rem;border:0;border-bottom:2px solid var(--akk);background:var(--akk-soft);color:var(--ink);border-radius:.3rem .3rem 0 0;text-align:center";
+  qt.append(fill(a,it.sc).replace(/\n/g," "),inp,fill(b,it.sc).replace(/\n/g," "));
+  let tries=0,done=false;
+  const fin=ok=>{done=true;if(ok){qr++;delErr(it.g)}else{qm.push(it);addErr(it.g)}save();$("qCheck").hidden=true;$("qNext").hidden=false;$("qNext").focus()};
+  const check=()=>{if(done)return;const res=grade(inp.value,it.g);
+    if(res==="empty")return;
+    if(res==="ok"){inp.style.borderColor="var(--ok)";$("qfb").innerHTML='<span class="hint" style="background:var(--ok-soft)"><b style="color:var(--ok)">Richtig.</b> <span class="lo" lang="lo">ຖືກຕ້ອງ</span></span>';fin(tries===0)}
+    else if(mode==="training"&&tries===0){tries++;inp.style.borderColor=res==="near"?"var(--warn)":"var(--bad)";
+      $("qfb").innerHTML='<span class="hint'+(res==="near"?' near':'')+'"><b>Noch einmal:</b> '+(res==="near"?"Achte auf Groß- und Kleinschreibung.":esc(it.g.tip))+'</span>'}
+    else{inp.style.borderColor="var(--bad)";$("qfb").innerHTML='<span class="hint"><b>Richtig ist: '+esc(it.g.ans[0])+'</b><br>'+esc(it.g.tip)+'</span>';fin(false)}};
+  $("qCheck").addEventListener("click",check);
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();done?$("qNext").click():check()}});
+  $("qNext").addEventListener("click",()=>{qi++;showQ()});
+  inp.focus();
+}
+function endQuiz(){
+  const box=$("quiz"),score=qr+" / "+qs.length;
+  if(mode==="test"){P.test=score;save()}
+  let h='<p style="font-family:Fraunces,Georgia,serif;font-size:2rem;margin:.2rem 0">'+score+'</p>';
+  if(mode==="training")h+='<p>Noch offene Fehler: <b>'+P.err.length+'</b></p>';
+  if(qm.length)h+='<p>Das übst du noch: <span class="lo" lang="lo">ຂໍ້ທີ່ຕ້ອງຝຶກອີກ</span></p><ul class="mist">'+qm.map(it=>'<li><b>'+esc(fill(it.s,it.sc).replace(/\n/g," "))+'</b><br><span class="small">'+esc(it.g.tip)+'</span></li>').join("")+'</ul>';
+  else h+='<p>Alles richtig! <span class="lo" lang="lo">ຖືກທັງໝົດ!</span></p>';
+  h+='<div class="btnrow">'+(P.err.length?'<a class="btn" href="#training" id="qT">Fehler-Training</a>':'')+'<button class="ghost" id="qAgain">Noch einmal</button><a class="ghost" href="#">Zum Start</a></div>';
+  box.innerHTML=h;
+  $("qAgain").addEventListener("click",()=>route(true));
+  const t=$("qT");if(t&&location.hash==="#training")t.addEventListener("click",e=>{e.preventDefault();route(true)});
+}
+function trainingList(){return shuffle(P.err.map(id=>{const[s,i]=id.split(":").map(Number);return S[s]&&S[s].gaps[i]}).filter(Boolean).map(item)).slice(0,15)}
+function testList(){return shuffle([...GAPS]).slice(0,20).map(item)}
+
+/* ---------- Routing ---------- */
+function route(){
+  if(synth)synth.cancel();
+  const h=location.hash,m=h.match(/^#text-(\d+)$/);
+  ["v-home","v-scene","v-quiz"].forEach(id=>$(id).hidden=true);
+  if(m&&+m[1]>=1&&+m[1]<=S.length){$("v-scene").hidden=false;renderScene(+m[1]-1)}
+  else if(h==="#training"){$("v-quiz").hidden=false;$("qTitle").textContent="Fehler-Training";$("qTitleLo").textContent="ຝຶກຂໍ້ຜິດ";
+    $("qIntro").textContent="Bis zu 15 Sätze mit deinen Fehlern. Du hast zwei Versuche. Richtige Antworten verschwinden aus der Liste.";startQuiz(trainingList(),"training")}
+  else if(h==="#test"){$("v-quiz").hidden=false;$("qTitle").textContent="Abschlusstest";$("qTitleLo").textContent="ການທົດສອບສຸດທ້າຍ";
+    $("qIntro").textContent="20 Sätze aus allen 8 Texten. Ein Versuch pro Satz. Ohne Tipps – erst danach siehst du die Lösung.";startQuiz(testList(),"test")}
+  else{$("v-home").hidden=false;renderHome()}
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",()=>route());route();
+</script>
+</body>
+</html>

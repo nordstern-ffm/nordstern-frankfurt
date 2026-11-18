@@ -80,3 +80,20 @@ Format: Symptom · Ursache · Fix · Lehre · Datum. Einmal gemachte Fehler hier
 - **„Claude GitHub App“ im Play Store gesucht** · Lehre: Das ist eine GitHub-Integration (github.com/apps/claude, im Browser), keine Handy-App.
 - **Merge-Kasten im mobilen GitHub lud nicht** · Lehre: neu laden oder Desktop-Ansicht; notfalls am PC `git fetch origin pull/N/head` und Fast-Forward.
 - **Repo nur unter dem verbundenen Konto gesucht** · Lehre: bei unbekanntem Repo zuerst die GitHub-Suche nutzen.
+
+## 18.11.2026 – Blog-Beitrag Laab
+- **`gh pr create` aus Claude Code abgelehnt (HTTP 403, GraphQL gesperrt)** · Claude-Code-Sitzungen erlauben nur die GitHub-REST-API · PR per `gh api repos/nordstern-ffm/nordstern-frankfurt/pulls -f base=main -f head=<branch> -f title=… -f body=…` angelegt (#12) · Lehre: In Claude Code PRs immer über `gh api …/pulls` erstellen, nicht über `gh pr create`.
+- **`xxd` fehlt in der Cloud-Umgebung** · Datei-Ende-Prüfung aus dem Log (`tail -c 2 | xxd`) brach ab · `tail -c 2 Datei | od -c` nutzen · Lehre: Prüfbefehle mit Standardwerkzeugen (`od`) schreiben.
+
+## 18.11.2026 – Lernseite Deutsch für Lao-Sprechende
+- **„Repo Deutschlernen für Laos“ nicht gefunden** · Lernseite existierte nur als Claude-Artefakt, nie als Repo · über Chat-Suche gefunden und nach `lernen/deutsch-lao.html` übernommen · Lehre: Bei „Repo nicht gefunden“ zuerst Claude-Artefakte und frühere Chats prüfen; fertige Artefakte zeitnah in ein Repo übernehmen.
+- **Artefakt verstieß gegen zwei Muss-Regeln** (JavaScript, Google Fonts per CDN) · Schriften lokal (Noto Sans Lao neu), JS als begrenzte Ausnahme E13, `check.py` erzwingt die Grenze · Lehre: Fremdes HTML vor dem Übernehmen gegen die Muss-Regeln prüfen, nicht nur `check.py` laufen lassen – `check.py` erkannte Inline-JS bis heute gar nicht.
+- **Teil 2: leere Lücken landeten im Fehler-Training** · beim Prüfen wurden auch unausgefüllte Lücken als Fehler gespeichert (1 Fehler + 6 leere = 7) · nur falsch ausgefüllte Lücken zählen, leere nicht · gefunden per Klick-Test (puppeteer-core + Chrome) vor dem Commit · Lehre: Lernseiten nicht nur ansehen, sondern einmal durchklicken – Zähler an einem bekannten Fall nachrechnen.
+- **`git checkout main` scheiterte an offenen Änderungen, Befehlskette lief trotzdem weiter** · neue Branch entstand vom alten (bereits gemergten) Branch statt von `main` · hier harmlos, PR zeigte nur die neuen Dateien · Lehre: Neue Branch immer vor dem Ändern anlegen, und Ketten mit `&&` statt `;` verbinden, damit ein Fehler alles stoppt.
+
+## 18.11.2026 – zweite Zusammenführung (PR #12–#14)
+- **Entscheidungsnummer E13 zum zweiten Mal doppelt** · ein vierter Chat arbeitete weiter auf `main` (Laab-Rezept, Lernseiten) und vergab E13 · meine Nummern erneut um 1 verschoben (jetzt E14–E26) · Lehre: Der Stopp-Text an alle anderen Chats muss vor dem Zusammenführen bestätigt sein; `git fetch` und Nummernkontrolle direkt vor jedem Merge.
+- **Meine Sicherheitsregeln (E19) schlugen auf die Lernseiten an** (Skript, CSP, Sprungmarken per JS erzeugt) · Ausnahme genau für `lernen/deutsch-*.html`, dafür eigene CSP mit `connect-src 'none'` (E27) · Lehre: Ausnahmen immer mit einer Ersatzschranke beantworten, nicht nur mit einer Lockerung.
+- **Seiten in Unterordnern bekamen doppelte `../`** (`lernen/index.html` verlinkte `../deutsch-lao.html`) · `page()` ergänzt `../` selbst, die Übersicht schrieb schon relative Pfade · Pfade ab Hauptordner (`lernen/…`) · Lehre: In `page()`-Texten immer Pfade ab Hauptordner schreiben.
+- **Testgerüst löschte die echte `lernen/index.html` der Testkopie** (Testfall überschrieb und entfernte sie) · Originale werden jetzt gesichert und zurückgespielt · Lehre: Ein Testgerüst darf nur wegräumen, was es selbst angelegt hat.
+- **Geprüft: Token im Klartext in `Frankfurt_FW`** (Hinweis aus Chat 3) · vorhanden, Wert nicht ausgegeben; André widerruft und setzt die Remote-URL ohne Token.

@@ -38,6 +38,9 @@ for p in pages:
             fehler.append(f"{p}: externes Stylesheet {m}")
     if re.search(r"<script[^>]+src=", t) or "fonts.googleapis" in t:
         fehler.append(f"{p}: externes Skript/Google Fonts")
+    # 1b. JavaScript nur als Ausnahme E13: inline, nur in handgepflegten Lernseiten lernen/*.html
+    if re.search(r"<script", t, re.I) and not (p.startswith("lernen/") and p != "lernen/index.html"):
+        fehler.append(f"{p}: JavaScript außerhalb der Ausnahme E13 (nur lernen/, nicht index)")
     # 2. Interne Links und Dateien existieren (auch aus Unterordnern, ../ wird aufgelöst)
     for m in re.findall(r'(?:href|src)="(?!https?:|mailto:|data:|#)([^"]+)"', t):
         z = aufloesen(p, m)
@@ -132,7 +135,7 @@ for p in pages:
             fehler.append(f"{p}: Kennzahl ohne Quelle/Stand: {re.sub('<[^>]+>', ' ', s)[:40]}")
 
 # 8. Sicherheit für ALLE veröffentlichten Dateien (GitHub Pages + .nojekyll veröffentlicht das ganze Repo,
-#    auch docs/mockups/*.html): keine Skripte (E15-Freigabe kommt mit P3/W4), keine Fremdabrufe, keine Formulare
+#    auch docs/mockups/*.html): keine Skripte (E16-Freigabe kommt mit P3/W4), keine Fremdabrufe, keine Formulare
 alle_html, alle_css = [], []
 for wurzel, ordner, dateien in os.walk(ROOT):
     ordner[:] = [o for o in ordner if o != ".git"]
@@ -142,10 +145,19 @@ for wurzel, ordner, dateien in os.walk(ROOT):
             alle_html.append(rel)
         elif d.endswith(".css"):
             alle_css.append(rel)
+def lernseite(p):
+    """Handgepflegte Lernseiten (E13): einzige Ausnahme für Inline-JavaScript, eigene strengere CSP (E27)."""
+    return p.startswith("lernen/") and p != "lernen/index.html"
+
+
 for p in sorted(alle_html):
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
-    if re.search(r"<script\b", t, re.I):
-        fehler.append(f"{p}: <script> gefunden (kein JavaScript, E4/E15)")
+    if re.search(r"<script\b", t, re.I) and not lernseite(p):
+        fehler.append(f"{p}: <script> gefunden (kein JavaScript, E4/E13/E16)")
+    if lernseite(p) and re.search(r"<script[^>]+\bsrc\s*=", t, re.I):
+        fehler.append(f"{p}: Lernseite lädt ein externes Skript – nur Inline-JavaScript erlaubt (E13)")
+    if lernseite(p) and re.search(r"\b(fetch|XMLHttpRequest|sendBeacon|WebSocket)\b", t):
+        fehler.append(f"{p}: Lernseite mit Netzwerk-Aufruf (fetch/XHR/Beacon) – Daten dürfen das Gerät nicht verlassen (E13)")
     if re.search(r"<[a-z][^>]*\son[a-z]+\s*=", t, re.I):
         fehler.append(f"{p}: Inline-Event-Handler (on…=) gefunden")
     if re.search(r'(?:href|src|action)\s*=\s*"\s*javascript:', t, re.I):
@@ -169,9 +181,12 @@ for c in sorted(alle_css):
 # 9. Seitenstruktur der Hauptseiten: CSP, Referrer, Sprache, Titel, genau eine H1, keine Ebenen-Sprünge,
 #    eindeutige IDs, Sprungmarken mit Ziel
 CSP = "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
+# Lernseiten (E13/E27): Inline-Skripte ja, aber keinerlei Netzverbindung (connect-src 'none'), keine Fremdquellen
+CSP_LERN = "default-src 'self'; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
 for p in pages:
     t = open(os.path.join(ROOT, p), encoding="utf-8").read()
-    if f'http-equiv="Content-Security-Policy" content="{CSP}"' not in t:
+    soll_csp = CSP_LERN if lernseite(p) else CSP
+    if f'http-equiv="Content-Security-Policy" content="{soll_csp}"' not in t:
         fehler.append(f"{p}: Content-Security-Policy fehlt oder weicht ab")
     if '<meta name="referrer" content="no-referrer">' not in t:
         fehler.append(f"{p}: Referrer-Policy fehlt")
@@ -182,6 +197,8 @@ for p in pages:
     ebenen = [int(h) for h in re.findall(r"<h([1-6])\b", t)]
     if ebenen.count(1) != 1:
         fehler.append(f"{p}: {ebenen.count(1)}× <h1> (genau 1 erwartet)")
+    if lernseite(p):
+        continue  # Überschriften, IDs und Sprungmarken entstehen dort teils per Skript – hier nicht statisch prüfbar
     for a, b in zip(ebenen, ebenen[1:]):
         if b > a + 1:
             fehler.append(f"{p}: Überschriften-Sprung h{a} → h{b}")
@@ -204,7 +221,7 @@ for k, l in links.items():
     if not l["url"].startswith("https://"):
         fehler.append(f"links.json: {k} – URL muss mit https:// beginnen")
 
-# 11. Repo ist öffentlich (E19): keine internen Prüfnotizen in data/*.json, Intern-Ordner bleiben ignoriert
+# 11. Repo ist öffentlich (E20): keine internen Prüfnotizen in data/*.json, Intern-Ordner bleiben ignoriert
 def schluessel(o):
     if isinstance(o, dict):
         for k, v in o.items():
@@ -220,13 +237,13 @@ for d in sorted(os.listdir(os.path.join(ROOT, "data"))):
         except ValueError:
             continue  # schon in Abschnitt 10 gemeldet
         if {"pruefen", "intern", "notiz_intern"} & set(schluessel(inhalt)):
-            fehler.append(f"data/{d}: internes Feld (pruefen/intern) – gehört nach data/intern/ (E19)")
+            fehler.append(f"data/{d}: internes Feld (pruefen/intern) – gehört nach data/intern/ (E20)")
 ignore = open(os.path.join(ROOT, ".gitignore"), encoding="utf-8").read() if os.path.isfile(os.path.join(ROOT, ".gitignore")) else ""
 for o in ("docs/intern/", "data/intern/"):
     if o not in ignore.split():
-        fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E19)")
+        fehler.append(f".gitignore: {o} fehlt – interne Notizen würden veröffentlicht (E20)")
 
-# 12. Blog-Beiträge (E10): Frontmatter, Status, Link-Platzhalter; dazu Rubrik (E20), Bilder (E13), interne Seiten
+# 12. Blog-Beiträge (E10): Frontmatter, Status, Link-Platzhalter; dazu Rubrik (E21), Bilder (E14), interne Seiten
 STATUS = beitraege.STATUS
 try:
     posts = beitraege.laden(ROOT)

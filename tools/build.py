@@ -49,7 +49,7 @@ VEROEFF = sorted((b for b in BEITRAEGE if b["meta"]["status"] == "veroeffentlich
                  key=lambda b: b["meta"]["datum"], reverse=True)
 
 # Menü: höchstens 7 Punkte (R2). Blog und Ortsbezirke teilen sich einen Punkt (Nutzer, 17.11.2026);
-# Standpunkte steht im Footer (E20).
+# Standpunkte steht im Footer (E21).
 NAV = [
     ("index.html", "Start", "house"),
     ("nachbarschaft.html", "Nachbarschaft", "hand-heart"),
@@ -440,12 +440,12 @@ page("dienste.html", "Vermittlung",
 <p class="small">Gewerbliches Angebot von {E(B["firma"])}. Nicht Teil des Vereins. Wir befördern, beherbergen und behandeln nicht selbst, sondern vermitteln an Fachbetriebe und Fachkräfte.</p>
 """)
 
-# ------------------------------------------- Blog (E10) + Ortsbezirke & Blog (E11, E12, E20)
+# ------------------------------------------- Blog (E10) + Ortsbezirke & Blog (E11, E12, E21)
 RUBRIKEN = {r["id"]: r for r in BLOG["rubriken"]}
 
 
 def beitrag_html(b):
-    """Beitrag nach E10. Optional im Kopf: rubrik (E20), bild (Titelbild mit Nachweis, E13),
+    """Beitrag nach E10. Optional im Kopf: rubrik (E21), bild (Titelbild mit Nachweis, E14),
     links (= Quellenliste), beschreibung."""
     m = b["meta"]
     teile = [f'<a href="{obr_seite(m["ortsbezirk"])}">Ortsbezirk {E(m["ortsbezirk"])}</a>']
@@ -502,7 +502,7 @@ if os.path.isdir(BLOG_ORDNER):
 
 
 def rubriken_html():
-    """Blog-Rubriken mit Sprungmarken-Chips (ohne JS), veröffentlichten Beiträgen und geplanten Themen als Fragen (E20)."""
+    """Blog-Rubriken mit Sprungmarken-Chips (ohne JS), veröffentlichten Beiträgen und geplanten Themen als Fragen (E21)."""
     rub = BLOG["rubriken"]
     chips = "".join(f'<li><a href="#{E(r["id"])}">{icon(r["icon"])}<span>{E(r["titel"])}</span></a></li>' for r in rub)
     teile = [f'<nav aria-label="Rubriken"><ul class="chips">{chips}</ul></nav>']
@@ -533,6 +533,10 @@ page("ortsbezirke/index.html", "Ortsbezirke & Blog",
 {rubriken_html()}
 {'<p><a class="btn" href="frankfurt/index.html">Alle Beiträge</a></p>' if VEROEFF else ''}
 <p class="small">Wir schreiben parteiunabhängig und mit Primärquellen. Positionen einzelner Parteien stehen ausschließlich unter <a href="standpunkte.html">Standpunkte</a>.</p>
+</section>
+<section aria-labelledby="h-lernen"><h2 id="h-lernen">Lernen</h2>
+<p>Kostenlose Lernseiten für Deutsch, mit Erklärungen in der Muttersprache – fürs Handy, ohne Anmeldung.</p>
+<p><a class="btn" href="lernen/index.html">Zu den Lernseiten</a></p>
 </section>
 <section aria-labelledby="h-obr"><h2 id="h-obr">Die 16 Ortsbezirke</h2>
 <p>Frankfurt hat 16 Ortsbeiräte. Hier stehen die nächsten Sitzungen und Neues aus jedem Bezirk.</p>
@@ -632,7 +636,7 @@ page("impressum.html", "Impressum", "Impressum von Nordstern Frankfurt.", f"""
 """)
 page("datenschutz.html", "Datenschutz", "Datenschutzerklärung von Nordstern Frankfurt.", f"""
 <h1>Datenschutz</h1>
-<p><strong>Kurz:</strong> Diese Seite setzt keine Cookies, nutzt keine Tracker, lädt keine Schriften oder Skripte von Dritten und hat keine Formulare.</p>
+<p><strong>Kurz:</strong> Diese Seite setzt keine Cookies, nutzt keine Tracker, lädt keine Schriften oder Skripte von Dritten und hat keine Formulare. Ausnahme Lernseiten (<code>lernen/</code>): Sie speichern den Lernfortschritt nur im eigenen Browser (localStorage); nichts davon wird an uns oder Dritte übertragen.</p>
 <h2>Verantwortlich</h2><p>Siehe <a href="impressum.html">Impressum</a>.</p>
 <h2>Hosting</h2><p>Die Seite wird über GitHub Pages (GitHub Inc., USA) ausgeliefert. Dabei verarbeitet GitHub technisch notwendige Daten wie die IP-Adresse. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Hinweis des Betreibers: Ein Umzug zu einem Hoster in der EU ist geplant.</p>
 <h2>E-Mail</h2><p>Wenn Sie uns schreiben, nutzen wir Ihre Angaben nur zur Beantwortung und löschen sie, wenn der Vorgang erledigt ist.</p>
@@ -658,6 +662,21 @@ page("bildnachweise.html", "Bildnachweise", "Urheber, Lizenzen und Quellen aller
 <p class="lead">Jedes Bild steht hier mit Urheber, Lizenz und Quelle. Die Lizenz wurde jeweils am Original geprüft.</p>
 {bn}
 <p class="small">Schriften: Fraunces und Atkinson Hyperlegible, lokal eingebunden unter der SIL Open Font License (Lizenztexte im Ordner <code>fonts/</code>).</p>
+""")
+
+# ---------------------------------------------------------------- Lernen (E13)
+# Übersicht wird gebaut; die Lernseiten selbst (lernen/*.html außer index) sind handgepflegt
+# und dürfen als einzige Ausnahme Inline-JavaScript enthalten (kein CDN, keine Datenübertragung).
+page("lernen/index.html", "Lernen", "Kostenlose Lernseiten für Deutsch – mit Erklärungen in der Muttersprache.", f"""
+<p class="eyebrow">Lernen</p>
+<h1>Deutsch lernen im Frankfurter Norden</h1>
+<p class="lead">Kostenlose Übungsseiten fürs Handy. Ohne Anmeldung, in deinem Tempo.</p>
+<h2>Die Lernseiten</h2>
+<div class="grid">
+{card("languages", '<a href="lernen/deutsch-lao.html">Deutsch selbst lernen – für Lao-Sprechende</a>', '<p lang="lo">ຮຽນພາສາເຢຍລະມັນດ້ວຍຕົນເອງ</p><p>Dativ und Akkusativ in 10 Lektionen: Einstiegstest, Regeln auf Deutsch und Laotisch, Übungsfragen, Hör-Diktat, Lückentext, Abschlusstest.</p>')}
+{card("hand-heart", '<a href="lernen/deutsch-lao-mama.html">Teil 2: Deutsch im Alltag – für Mütter in Frankfurt</a>', '<p lang="lo">ພາສາເຢຍລະມັນໃນຊີວິດປະຈຳວັນ – ສຳລັບແມ່ໃນແຟຣັງເຟີດ</p><p>8 Lückentexte (B1): Schule, Kinderarzt, Elternabend, Markt, Familienkasse, U-Bahn, Spielplatz, E-Mail an die Lehrerin. Mit Tipps bei Fehlern, Fehler-Training, Abschlusstest und Druckansicht.</p>')}
+</div>
+<div class="callout"><h2>Gut zu wissen</h2><p>Die Lernseiten nutzen JavaScript für Übungen und Vorlesen. Dein Fortschritt bleibt nur in deinem Browser gespeichert und wird nicht übertragen. Die laotischen Texte werden noch von einer Muttersprachlerin gegengelesen.</p></div>
 """)
 
 page("404.html", "Seite nicht gefunden", "Seite nicht gefunden.", '<h1>Hier ist kein Stern.</h1><p><a class="btn btn-primary" href="index.html">Zur Startseite</a></p>')

@@ -1,5 +1,5 @@
 {
-  "_regel": "Spaß-Quiz (W4, E15). Positive Frankfurt-Sterne, keine Diagnosen, kein psychologischer Test. Inspiration: Typenmodelle (Enneagramm-Stil), frei übertragen – keine Quelle zitiert, weil keine belegt ist. Jede Antwort gibt genau zwei Sternen je einen Punkt; check.py prüft, dass jeder Stern gleich oft vorkommt. Nichts wird gespeichert.",
+  "_regel": "Spaß-Quiz (W4, E16). Positive Frankfurt-Sterne, keine Diagnosen, kein psychologischer Test. Inspiration: Typenmodelle (Enneagramm-Stil), frei übertragen – keine Quelle zitiert, weil keine belegt ist. Jede Antwort gibt genau zwei Sternen je einen Punkt; check.py prüft, dass jeder Stern gleich oft vorkommt. Nichts wird gespeichert.",
   "titel": "Welcher Frankfurt-Stern bist du?",
   "hinweis": "Zum Schmunzeln: kein psychologischer Test, keine Diagnose. Nichts wird gespeichert oder verschickt.",
   "typen": [

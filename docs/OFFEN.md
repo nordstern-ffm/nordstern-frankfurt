@@ -19,7 +19,7 @@ Regel (CLAUDE-CODE-AUFTRAG.md, Punkt 4): Jede Zahl, Rechtsaussage und jeder Link
 Erledigt am 15.11.2026: Hellmodus-Kontrast von `--gold-soft` (siehe FEHLER-LOG, Aufgabe 3).
 
 ## Sicherheit / Datenschutz – Entscheidung André
-Erledigt am 15.11.2026 (E19): interne Prüfnotizen, Vornamen Dritter und das Repo-Audit liegen nur noch lokal in `docs/intern/` und `data/intern/` (per `.gitignore` ausgeschlossen).
+Erledigt am 15.11.2026 (E20): interne Prüfnotizen, Vornamen Dritter und das Repo-Audit liegen nur noch lokal in `docs/intern/` und `data/intern/` (per `.gitignore` ausgeschlossen).
 **Offen:** Die Git-Historie (bis Commit 147d551) und damit GitHub enthält die alten Fassungen weiterhin. Entfernen ginge nur durch Umschreiben der Historie und erzwungenen Push (`git filter-repo`, danach `--force`) – nicht umkehrbar, Forks/Kopien bleiben. Alternative: Repo privat stellen (Pages braucht dann einen bezahlten Plan) oder neues, sauberes Repo nur mit dem aktuellen Stand anlegen. Entscheidung André.
 
 ## Blog / Artikel Personalvermittlung (15.11.2026)
@@ -40,3 +40,9 @@ Erledigt am 15.11.2026 (E19): interne Prüfnotizen, Vornamen Dritter und das Rep
 - OBR-Termine im Claude-Doc vom 16.11. stammen aus einem früheren Lauf; mit `data/termine.json` (PARLIS-Export) abgleichen.
 - Ungeprüfte Recherche (Wohngeld, Mietpreisbremse, Haushalt, Glasfaser, Weihnachtsmärkte): `docs/recherche/2026-11-uebergabe-chat2.md`.
 - **Datenschutz, Entscheidung André:** Die Verbindung der Konten `intelligentresponder-max` ↔ `nordstern-ffm` ist öffentlich sichtbar (Fork, PR #1, Collaborator, Fehler-Log); Commits enthalten Links zu claude.ai-Sitzungen; das Claude-Doc „Ortsbeiräte Frankfurt – Recherche Nov/Dez 2026“ ist für alle mit Link lesbar. Bewusst so lassen oder ändern?
+
+## Aus Chat 3 „nh-preungesheim“ (Stand 18.11.2026) – Übergabe
+- Gearbeitet wurde **nicht** in diesem Repo, sondern im lokalen Ordner `C:/Users/Holy New/Desktop/nh-preungesheim` (kein Git, nichts committet): Prototyp `app/index.html` (Rollen, Matching, Einsatznachweis), `app/config.json`, `vorlagen/strassen_beispiel.csv` (fiktive Daten).
+- Offen dort: Prototyp im echten Browser prüfen · Ordner versionieren (eigenes Repo oder Übernahme) · Löschfristen und Zugriffsprotokoll · Konfiguration (Logo, Farben, Tätigkeiten) · Adressprüfung · später PWA mit Datenbank, EU-Hosting, echte Rollen mit Zwei-Faktor (Rollen sind nur im Browser simuliert).
+- Ungeprüfte Fakten (aus dem alten Briefing übernommen): BGW-Unfallversicherung, Freibeträge 960 € / 3.300 €, Abtretung durch Pflegekassen, Entlastungsbetrag 131 € (am 15.11. an § 45b SGB XI geprüft), Hessen-Höchstsätze 25 €/30 €, Führungszeugnis 13 €, IPot-Studie (Hochschule Kempten).
+- **Sicherheit:** Im Projekt `Frankfurt_FW` steht ein GitHub-Zugangstoken im Klartext in der Remote-URL → bei GitHub widerrufen, Remote-URL ohne Token setzen (Befehl in der Antwort an André).

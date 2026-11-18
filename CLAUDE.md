@@ -20,7 +20,7 @@ Umfang siehe docs/ENTSCHEIDUNGEN.md (E11, Variante A) und docs/BETREUUNG.md.
 
 ## Muss-Regeln
 - Bilder/Grafiken nur mit vollständigem Eintrag in `data/bilder.json` (Lizenz am Original geprüft).
-- Kein JavaScript, kein CDN, keine Tracker, keine Formulare mit personenbezogenen Daten.
+- Kein JavaScript (einzige Ausnahme: handgepflegte Lernseiten `lernen/*.html`, siehe E13), kein CDN, keine Tracker, keine Formulare mit personenbezogenen Daten.
 - Externe Links nur aus `data/links.json` mit Datum `bestaetigt`.
 - Verein-Bereich parteipolitisch neutral; Partei-Inhalte nur unter `standpunkte.html`, nur `freigegeben: true`.
 - `launch`/`domain_bestaetigt` in `data/site.json` nur umstellen, wenn `check.py --launch` 0 Fehler meldet.

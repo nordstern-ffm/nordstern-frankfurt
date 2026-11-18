@@ -1,5 +1,5 @@
 {
-  "_regel": "Blog-Rubriken (E20). Parteiunabhängig: Wertungen von Parteien nur unter standpunkte.html. 'geplant' = Themen als Frage, ohne Tatsachenbehauptung, bis ein Beitrag mit Primärquelle und 'stand' existiert. Beiträge selbst kommen mit R1 nach data/beitraege/*.md. Redaktionsregeln: docs/REDAKTION.md. Beiträge: data/beitraege/*.md (Vorlage docs/REDAKTION.md), gebaut nach /<rubrik>/<slug>/.",
+  "_regel": "Blog-Rubriken (E21). Parteiunabhängig: Wertungen von Parteien nur unter standpunkte.html. 'geplant' = Themen als Frage, ohne Tatsachenbehauptung, bis ein Beitrag mit Primärquelle und 'stand' existiert. Beiträge selbst kommen mit R1 nach data/beitraege/*.md. Redaktionsregeln: docs/REDAKTION.md. Beiträge: data/beitraege/*.md (Vorlage docs/REDAKTION.md), gebaut nach /<rubrik>/<slug>/.",
   "rubriken": [
     {
       "id": "ratgeber",

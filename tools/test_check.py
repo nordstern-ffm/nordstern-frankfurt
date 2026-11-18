@@ -14,6 +14,11 @@ EINTRAG = {"datei": "img/test.webp", "titel": "Testbild", "autor": "Testautor",
            "lizenz_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.de",
            "geaendert": "nein", "geprueft": "2026-11-15", "alt": "Testbild"}
 CSP = "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
+CSP_LERN = "default-src 'self'; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
+LERNSEITE = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
+             '<meta http-equiv="Content-Security-Policy" content="' + CSP_LERN + '">'
+             '<meta name="referrer" content="no-referrer"><title>Lernen</title>'
+             '<meta name="robots" content="noindex, nofollow"></head><body><h1>Lernen</h1>{}</body></html>')
 SEITE = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
          '<meta http-equiv="Content-Security-Policy" content="' + CSP + '">'
          '<meta name="referrer" content="no-referrer"><title>Test</title>'
@@ -37,15 +42,24 @@ def lauf(tmp, bilder=None, datei=False, seite=None, roh=None, extra=None):
             f.write(roh or SEITE.format(seite))
     elif os.path.exists(t):
         os.remove(t)
-    for pfad, inhalt in (extra or {}).items():  # weitere Dateien, nach dem Lauf wieder entfernt
-        os.makedirs(os.path.dirname(os.path.join(tmp, pfad)), exist_ok=True)
-        with open(os.path.join(tmp, pfad), "w", encoding="utf-8") as f:
+    gesichert = {}
+    for pfad, inhalt in (extra or {}).items():  # weitere Dateien, nach dem Lauf wieder entfernt bzw. Original zurück
+        ziel = os.path.join(tmp, pfad)
+        if os.path.exists(ziel):
+            with open(ziel, "rb") as f:
+                gesichert[pfad] = f.read()
+        os.makedirs(os.path.dirname(ziel), exist_ok=True)
+        with open(ziel, "w", encoding="utf-8") as f:
             f.write(inhalt)
     r = subprocess.run([sys.executable, os.path.join(tmp, "tools", "check.py")],
                        capture_output=True, text=True, encoding="utf-8",
                        env=dict(os.environ, PYTHONIOENCODING="utf-8"))  # Windows-Konsole sonst cp1252
     for pfad in extra or {}:
-        os.remove(os.path.join(tmp, pfad))
+        if pfad in gesichert:
+            with open(os.path.join(tmp, pfad), "wb") as f:
+                f.write(gesichert[pfad])
+        else:
+            os.remove(os.path.join(tmp, pfad))
     return r.returncode, r.stdout
 
 
@@ -73,6 +87,15 @@ FAELLE = [
      {"seite": '<li class="stat"><span class="stat-wert">1</span> Quelle: X</li>'}),
     # Sicherheit (alle HTML/CSS im Repo, auch Unterordner)
     ("Inline-Skript", 1, "<script> gefunden", {"seite": "<script>alert(1)</script>"}),
+    # Lernseiten (E13/E27): Inline-JS erlaubt, aber nur dort und ohne Netzwerk
+    ("Lernseite mit Skript erlaubt", 0, "0 Fehler",
+     {"extra": {"lernen/zz.html": LERNSEITE.format("<script>var a = 1;</script>")}}),
+    ("Lernseite mit fetch", 1, "Netzwerk-Aufruf",
+     {"extra": {"lernen/zz.html": LERNSEITE.format("<script>fetch('x');</script>")}}),
+    ("Lernseite mit externem Skript", 1, "externes Skript",
+     {"extra": {"lernen/zz.html": LERNSEITE.format('<script src="x.js"></script>')}}),
+    ("Skript in lernen/index", 1, "<script> gefunden",
+     {"extra": {"lernen/index.html": LERNSEITE.format("<script>var a = 1;</script>")}}),
     ("Event-Handler", 1, "Inline-Event-Handler", {"seite": '<p onclick="x()">Text</p>'}),
     ("javascript:-Link", 1, "javascript:-Link", {"seite": '<a href="javascript:void(0)">x</a>'}),
     ("Formular", 1, "<form> nicht erlaubt", {"seite": '<form action="mailto:x"></form>'}),
@@ -87,7 +110,7 @@ FAELLE = [
     ("zweite h1", 1, "2× <h1>", {"seite": "<h1>Noch eine</h1>"}),
     ("Sprungmarke ohne Ziel", 1, "Sprungmarke #fehlt ohne Ziel", {"seite": '<a href="#fehlt">x</a>'}),
     ("doppelte id", 1, "doppelte id", {"seite": '<p id="a">1</p><p id="a">2</p>'}),
-    # Datenschutz (E19)
+    # Datenschutz (E20)
     ("internes Feld in Daten", 1, "internes Feld (pruefen/intern)",
      {"extra": {"data/zz.json": '{"dienste": [{"id": "x", "pruefen": "intern"}]}'}}),
     # Blog-Beiträge (E10-Format) und Seiten in Unterordnern
